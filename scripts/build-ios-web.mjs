@@ -1,0 +1,32 @@
+import {build} from 'vite';
+import {readFile,writeFile,readdir,mkdir} from 'node:fs/promises';
+import {resolve,relative,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+
+const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),output=resolve(root,'dist-ios');
+process.chdir(root);
+await build({mode:'ios'});
+const manifest={id:'./',name:'毛的遗产 · 人生档案',short_name:'毛的遗产',description:'从2020年开始，记录每个月的生活。',lang:'zh-CN',start_url:'./',scope:'./',display:'standalone',background_color:'#f3f0e8',theme_color:'#202c25',icons:[{src:'./apple-touch-icon.png',sizes:'1254x1254',type:'image/png',purpose:'any'}]};
+await writeFile(resolve(output,'manifest.webmanifest'),JSON.stringify(manifest,null,2)+'\n');
+async function files(dir){const found=[];for(const e of await readdir(dir,{withFileTypes:true})){const path=resolve(dir,e.name);if(e.isDirectory())found.push(...await files(path));else found.push(path);}return found.sort();}
+const sources=await files(output),assets=[];
+let privateDefaults={};try{privateDefaults=JSON.parse((await readFile(resolve(root,'.private/settings.json'),'utf8')).replace(/^\uFEFF/,''));}catch{}
+const secrets=[privateDefaults.apiKey,...Object.values(privateDefaults.providers||{}).map(p=>p.apiKey)].filter(v=>typeof v==='string'&&v.length>8);
+for(const file of sources){
+  const path=relative(output,file).replaceAll('\\','/'),data=await readFile(file);
+  if(/(?:^|\/)(?:\.private|\.cache|node_modules)(?:\/|$)|mod-corpus|\.p12$|settings\.json$/i.test(path))throw new Error('Private or audit-only file in iPhone build');
+  if(secrets.some(secret=>data.includes(Buffer.from(secret))))throw new Error('A private default credential entered the iPhone build');
+  assets.push({path,sha256:createHash('sha256').update(data).digest('hex'),bytes:data.length});
+}
+const template=await readFile(resolve(root,'scripts/pwa-worker-template.js'),'utf8');
+// Include worker behavior so a worker-only update cannot delete the active cache on failure.
+const version=createHash('sha256').update(JSON.stringify(assets)).update(template).digest('hex').slice(0,16);
+const htmlPath=resolve(output,'index.html');
+const html=(await readFile(htmlPath,'utf8')).replace('</head>',`<meta name="mao-life-release" content="${version}"/></head>`);
+await writeFile(htmlPath,html);
+Object.assign(assets.find(a=>a.path==='index.html'),{sha256:createHash('sha256').update(html).digest('hex'),bytes:Buffer.byteLength(html)});
+await writeFile(resolve(output,'sw.js'),template.replace('__BUILD_VERSION__',JSON.stringify(version)).replace('__PRECACHE_ASSETS__',JSON.stringify(assets)));
+await mkdir(resolve(root,'release'),{recursive:true});
+await writeFile(resolve(root,'release/ios-web-verification.json'),JSON.stringify({version,appVersion:JSON.parse(await readFile(resolve(root,'package.json'),'utf8')).version,assetCount:assets.length,precacheBytes:assets.reduce((sum,a)=>sum+a.bytes,0),privateDefaultsExcluded:true,assets},null,2)+'\n');
+console.log(JSON.stringify({output,version,assetCount:assets.length,precacheBytes:assets.reduce((sum,a)=>sum+a.bytes,0),privateDefaultsExcluded:true}));

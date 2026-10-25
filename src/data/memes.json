@@ -1,0 +1,602 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "kun_basketball",
+      "term": "蔡徐坤篮球二创",
+      "availableFrom": "2019-12",
+      "startMonth": -1,
+      "aliases": [
+        "蔡徐坤",
+        "坤坤",
+        "鸡你太美",
+        "唱跳rap篮球",
+        "ikun"
+      ],
+      "meaning": "2019年已流行的舞台篮球片段二次创作及空耳称呼。",
+      "usage": "可以理解为音乐视频和弹幕文化；不把嘲讽转写为真实人物的私生活或违法事实。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [
+        "蔡徐坤"
+      ],
+      "sourceRefs": [
+        "kun"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "kun_revival",
+      "term": "坤系二创再流行",
+      "availableFrom": "2022-10",
+      "startMonth": 33,
+      "aliases": [
+        "小黑子",
+        "露出鸡脚",
+        "食不食油饼",
+        "香精煎鱼"
+      ],
+      "meaning": "相关二次创作在2022年再次集中流行。",
+      "usage": "只把这些当网友用语，不倒置到2020年，也不将人身攻击写成事实。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [
+        "蔡徐坤"
+      ],
+      "sourceRefs": [
+        "kun"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "sun_6324",
+      "term": "孙笑川与6324",
+      "availableFrom": "2018-08",
+      "startMonth": -17,
+      "aliases": [
+        "孙笑川",
+        "6324",
+        "带带大师兄",
+        "抽象工作室"
+      ],
+      "meaning": "直播及其观众社群中形成的反讽、重复和谐音表达。",
+      "usage": "理解用户提及的社群背景即可；传言、冒名归责和人身攻击不是孙笑川真实经历。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 16,
+      "people": [
+        "孙笑川"
+      ],
+      "sourceRefs": [
+        "sun"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "zhenxiang",
+      "term": "真香",
+      "availableFrom": "2018-12",
+      "startMonth": -13,
+      "aliases": [
+        "真香"
+      ],
+      "meaning": "先前拒绝、后来又认可或享用时的自嘲。",
+      "usage": "适合轻松的饮食或购物谈话，不在伤亡和严肃求助中强加笑料。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "zhenxiang"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "foxi",
+      "term": "佛系",
+      "availableFrom": "2018-12",
+      "startMonth": -13,
+      "aliases": [
+        "佛系"
+      ],
+      "meaning": "用来形容不争抢、比较随和的生活态度。",
+      "usage": "这是日常用语，不据此推断本人宗教信仰。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2018"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "jinli",
+      "term": "锦鲤",
+      "availableFrom": "2018-12",
+      "startMonth": -13,
+      "aliases": [
+        "锦鲤",
+        "锦鲤附体"
+      ],
+      "meaning": "网友表达好运愿望或戏称幸运者。",
+      "usage": "可写朋友玩笑，不把好运当超自然能力。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2018"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "lemon",
+      "term": "柠檬精",
+      "availableFrom": "2019-12",
+      "startMonth": -1,
+      "aliases": [
+        "柠檬精",
+        "我酸了"
+      ],
+      "meaning": "带自嘲意味地表示羡慕。",
+      "usage": "理解羡慕情绪，不据此固定人物性格。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2019"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "hardcore",
+      "term": "硬核",
+      "availableFrom": "2019-12",
+      "startMonth": -1,
+      "aliases": [
+        "硬核"
+      ],
+      "meaning": "赞叹技能、技术或做事方式有实力。",
+      "usage": "与当前具体能力有关时可理解。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2019"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "996",
+      "term": "996",
+      "availableFrom": "2019-12",
+      "startMonth": -1,
+      "aliases": [
+        "996"
+      ],
+      "meaning": "用数字概括早九晚九、一周六天的高强度工时。",
+      "usage": "这是劳动处境的讨论；不能把所有职业都设为同样工时。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 16,
+      "people": [],
+      "sourceRefs": [
+        "2019"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "difficult",
+      "term": "我太难了",
+      "availableFrom": "2019-12",
+      "startMonth": -1,
+      "aliases": [
+        "我太难了",
+        "我太南了"
+      ],
+      "meaning": "对生活不易的口语化自嘲。",
+      "usage": "先回应实际困难，不把用户求助仅当笑话。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "difficult"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "backwave",
+      "term": "后浪",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "后浪"
+      ],
+      "meaning": "2020年公共讨论中对年轻一代的形象称呼。",
+      "usage": "只能作为当时已存在的文化表达，不替年轻人预设共同立场。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2020"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "worker",
+      "term": "打工人",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "打工人"
+      ],
+      "meaning": "劳动者对日常谋生状态的自称和调侃。",
+      "usage": "可以接住自嘲，同时写具体工作。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 16,
+      "people": [],
+      "sourceRefs": [
+        "2020"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "involution",
+      "term": "内卷",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "内卷"
+      ],
+      "meaning": "形容竞争投入不断增加、获得感未同步增加。",
+      "usage": "用于本人明确提及的学业或工作处境，不机械概括所有生活。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2020"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "versailles",
+      "term": "凡尔赛文学",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "凡尔赛文学",
+        "凡尔赛了"
+      ],
+      "meaning": "用看似抱怨或平淡的表达展示优越条件。",
+      "usage": "须按说话语境理解，不能由此猜测真实财富。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2020"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "youthreturns",
+      "term": "爷青回",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "爷青回"
+      ],
+      "meaning": "看到熟悉旧作品或记忆重新出现时的怀旧感叹。",
+      "usage": "素材是否真实存在仍要符合时间。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2020net"
+      ],
+      "datePolicy": "年度榜单明确记载该年已有，保守取该年12月；不是声称首创月份"
+    },
+    {
+      "id": "flat",
+      "term": "躺平",
+      "availableFrom": "2021-12",
+      "startMonth": 23,
+      "aliases": [
+        "躺平"
+      ],
+      "meaning": "对过度竞争和生活压力作出降低期待的表达。",
+      "usage": "区分休息、自嘲与具体困难，不把用词当心理诊断。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 16,
+      "people": [],
+      "sourceRefs": [
+        "2021"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "defense",
+      "term": "破防",
+      "availableFrom": "2021-12",
+      "startMonth": 23,
+      "aliases": [
+        "破防"
+      ],
+      "meaning": "形容防备被打破、受到触动或情绪失守。",
+      "usage": "可以承接感动或难过，不强加网络口吻。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2021"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "yyds",
+      "term": "YYDS",
+      "availableFrom": "2021-12",
+      "startMonth": 23,
+      "aliases": [
+        "yyds",
+        "永远的神"
+      ],
+      "meaning": "对喜欢的人、表现或作品的夸张赞叹。",
+      "usage": "作为口语赞美，不写成神力或宗教事实。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2021"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "emo",
+      "term": "我emo了",
+      "availableFrom": "2021-12",
+      "startMonth": 23,
+      "aliases": [
+        "emo"
+      ],
+      "meaning": "在中文网络语境中表达低落情绪。",
+      "usage": "需回应情绪，不因用词假定精神疾病。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "emo"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "pickle",
+      "term": "电子榨菜",
+      "availableFrom": "2022-12",
+      "startMonth": 35,
+      "aliases": [
+        "电子榨菜"
+      ],
+      "meaning": "吃饭时搭配观看的轻松视频或节目。",
+      "usage": "只是观看习惯，不虚构本人看过未发行作品。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2022"
+      ],
+      "datePolicy": "年度榜单明确记载该年已有，保守取该年12月；不是声称首创月份"
+    },
+    {
+      "id": "icecream",
+      "term": "雪糕刺客",
+      "availableFrom": "2022-12",
+      "startMonth": 35,
+      "aliases": [
+        "雪糕刺客"
+      ],
+      "meaning": "对结账时才发现雪糕价格出乎预期的调侃。",
+      "usage": "写具体消费感受，不发明当时商品价格。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2022"
+      ],
+      "datePolicy": "年度榜单明确记载该年已有，保守取该年12月；不是声称首创月份"
+    },
+    {
+      "id": "tour",
+      "term": "特种兵式旅游",
+      "availableFrom": "2023-12",
+      "startMonth": 47,
+      "aliases": [
+        "特种兵式旅游",
+        "特种兵旅游"
+      ],
+      "meaning": "在短时间内密集游览的旅行方式。",
+      "usage": "它指旅行安排，不意味着军事训练或真实参军。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 16,
+      "people": [],
+      "sourceRefs": [
+        "2023"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "obvious",
+      "term": "显眼包",
+      "availableFrom": "2023-12",
+      "startMonth": 47,
+      "aliases": [
+        "显眼包"
+      ],
+      "meaning": "对言行引人注意者的口语称呼。",
+      "usage": "有亲昵或调侃之别，结合人物关系判断。",
+      "regions": [
+        "china"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "2023"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "hello",
+      "term": "是在哈啰",
+      "availableFrom": "2019-10",
+      "startMonth": -3,
+      "aliases": [
+        "是在哈啰",
+        "是在哈囉"
+      ],
+      "meaning": "台湾网络语境中对不合情理言行表示困惑或吐槽。",
+      "usage": "只在熟悉语境的谈话中自然理解，不普遍套用到正式公文。",
+      "regions": [
+        "taiwan"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "hello"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    },
+    {
+      "id": "threecs",
+      "term": "三密",
+      "availableFrom": "2020-12",
+      "startMonth": 11,
+      "aliases": [
+        "三密",
+        "3密",
+        "三つの密"
+      ],
+      "meaning": "日本2020年防疫传播中的密闭、密集、密切接触概括。",
+      "usage": "作为当时的公共卫生用语，不机械替换为大陆封城制度。",
+      "regions": [
+        "japan"
+      ],
+      "minAge": 12,
+      "people": [],
+      "sourceRefs": [
+        "3m"
+      ],
+      "datePolicy": "最迟已见可靠报道的保守可用月份；不是声称首创日期"
+    }
+  ],
+  "sources": {
+    "kun": {
+      "title": "毒眸/界面：时隔3年，为什么“鸡你太美”又火了？",
+      "date": "2022-09",
+      "url": "https://www.jiemian.com/article/8039046.html"
+    },
+    "sun": {
+      "title": "触乐/IT之家：抽象的人：斗鱼6324、嗨粉，以及一个时代的终结和开始",
+      "date": "2018-08-01",
+      "url": "https://www.ithome.com/0/374/005.htm"
+    },
+    "2018": {
+      "title": "人民网：《咬文嚼字》2018十大流行语",
+      "date": "2018-12-04",
+      "url": "https://media.people.com.cn/n1/2018/1204/c40606-30440308.html"
+    },
+    "zhenxiang": {
+      "title": "爱知大学中日大辞典编纂所：日中语汇研究2018年度流行语资料",
+      "date": "2018",
+      "url": "https://leo.aichi-u.ac.jp/~jiten/pdf/word-vol8/13.pdf"
+    },
+    "2019": {
+      "title": "教育部：2019年十大网络用语",
+      "date": "2019-12-02",
+      "url": "https://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/201912/t20191202_410477.html"
+    },
+    "difficult": {
+      "title": "教育部：2019年中国媒体十大流行语",
+      "date": "2019-12-06",
+      "url": "https://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/201912/t20191206_411166.html"
+    },
+    "2020": {
+      "title": "澎湃：《咬文嚼字》2020十大流行语",
+      "date": "2020-12-04",
+      "url": "https://www.thepaper.cn/newsDetail_forward_10264885"
+    },
+    "2020net": {
+      "title": "2020年度网络热词榜单汇集（含语言文字周报榜）",
+      "date": "2021-01-13",
+      "url": "https://www.civiw.com/research/20210113174005"
+    },
+    "2021": {
+      "title": "中国大学生在线：2021年度十大网络用语",
+      "date": "2021-12-07",
+      "url": "https://dxs.moe.gov.cn/zx/a/jj/211207/1739940.shtml"
+    },
+    "emo": {
+      "title": "澎湃：语言文字周报2021年度热词榜",
+      "date": "2021-12",
+      "url": "https://www.thepaper.cn/newsDetail_forward_15782003"
+    },
+    "2022": {
+      "title": "人民日报海外版：汉语盘点2022中的电子榨菜与雪糕刺客",
+      "date": "2023-01-09",
+      "url": "https://paper.people.com.cn/rmrbhwb/images/2023-01/09/05/rmrbhwb2023010905.pdf"
+    },
+    "2023": {
+      "title": "教育部：2023年度十大新词语",
+      "date": "2023-12-18",
+      "url": "https://www.moe.gov.cn/jyb_xwfb/s5147/202312/t20231218_1095016.html"
+    },
+    "hello": {
+      "title": "NOWnews：中文一堆网路新词看不懂，巴西留学生苦笑：是在哈啰",
+      "date": "2019-10-16",
+      "url": "https://www.nownews.com/news/3693652"
+    },
+    "3m": {
+      "title": "中央社：日本2020流行语大奖防疫新词摘冠",
+      "date": "2020-12-01",
+      "url": "https://www.cna.com.tw/news/firstnews/202012010169.aspx"
+    }
+  }
+}

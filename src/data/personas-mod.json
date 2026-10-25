@@ -1,0 +1,2023 @@
+{
+  "version": 1,
+  "asOf": "2020-01-01",
+  "scope": "mod-fiction",
+  "notes": [
+    "人物政治倾向与战时言行属于架空模组；不得作为现实人物指控。",
+    "人物开局生日资料沿用已核实数据库；六名虚构人物缺少完整出生日期，年龄为本作时序适配。",
+    "阶段事件未发生时不导出未来阵营、职位与关系。"
+  ],
+  "personas": [
+    {
+      "id": "hazawa_tsugumi",
+      "name": "羽泽鸫",
+      "aliases": [
+        "羽澤鶇",
+        "羽泽䳟",
+        "Hazawa Tsugumi"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 20,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "Afterglow成员",
+      "occupation": "Afterglow键盘手",
+      "status": "与Afterglow伙伴一起生活、排练和演出",
+      "familyBackground": "家庭成员与家庭收入情况尚未详明。",
+      "backgroundText": "你是Afterglow的键盘手羽泽鸫，与其余四位伙伴一起安排排练和演出。愿意照料身边的人，处理排练联络和共同生活中的事务。你们各自还有生活与家庭事务需要安排。",
+      "points": {
+        "intelligence": 6,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 30,
+        "connections": 50,
+        "funds": 12000,
+        "health": 85,
+        "stress": 15
+      },
+      "notes": [
+        "年龄是按模组台海战时鸫22岁与本作2021开战时序做的约20岁适配；原文未给出完整出生年月日，其余成员同龄为改编。",
+        "家庭与具体出生地点未考证，不照搬现实人物资料。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Hazawa_Tsugumi_char"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "mitake_ran",
+      "name": "美竹兰",
+      "aliases": [
+        "美竹蘭",
+        "Mitake Ran"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 20,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "Afterglow成员",
+      "occupation": "Afterglow主唱与吉他手",
+      "status": "与Afterglow伙伴一起生活、排练和演出",
+      "familyBackground": "家庭成员与家庭收入情况尚未详明。",
+      "backgroundText": "你是Afterglow的主唱与吉他手美竹兰，与其余四位伙伴一起安排排练和演出。重视乐队伙伴和自己表达的内容，面对演出要求会直接说明立场。你们各自还有生活与家庭事务需要安排。",
+      "points": {
+        "intelligence": 6,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 30,
+        "connections": 50,
+        "funds": 12000,
+        "health": 85,
+        "stress": 15
+      },
+      "notes": [
+        "年龄是按模组台海战时鸫22岁与本作2021开战时序做的约20岁适配；原文未给出完整出生年月日，其余成员同龄为改编。",
+        "家庭与具体出生地点未考证，不照搬现实人物资料。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Ran_char"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "aoba_moca",
+      "name": "青叶摩卡",
+      "aliases": [
+        "青葉摩卡",
+        "Aoba Moca"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 20,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "Afterglow成员",
+      "occupation": "Afterglow吉他手",
+      "status": "与Afterglow伙伴一起生活、排练和演出",
+      "familyBackground": "家庭成员与家庭收入情况尚未详明。",
+      "backgroundText": "你是Afterglow的吉他手青叶摩卡，与其余四位伙伴一起安排排练和演出。与伙伴一起排练和演出，遇到生活困难时参与商量安排。你们各自还有生活与家庭事务需要安排。",
+      "points": {
+        "intelligence": 6,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 30,
+        "connections": 50,
+        "funds": 12000,
+        "health": 85,
+        "stress": 15
+      },
+      "notes": [
+        "年龄是按模组台海战时鸫22岁与本作2021开战时序做的约20岁适配；原文未给出完整出生年月日，其余成员同龄为改编。",
+        "家庭与具体出生地点未考证，不照搬现实人物资料。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Moka_char"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "uehara_himari",
+      "name": "上原绯玛丽",
+      "aliases": [
+        "上原緋瑪麗",
+        "上原绯玛莉",
+        "Uehara Himari"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 20,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "Afterglow成员",
+      "occupation": "Afterglow贝斯手",
+      "status": "与Afterglow伙伴一起生活、排练和演出",
+      "familyBackground": "家庭成员与家庭收入情况尚未详明。",
+      "backgroundText": "你是Afterglow的贝斯手上原绯玛丽，与其余四位伙伴一起安排排练和演出。留意成员的相处与现场气氛，愿意联络听众和参与集体活动。你们各自还有生活与家庭事务需要安排。",
+      "points": {
+        "intelligence": 6,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 30,
+        "connections": 50,
+        "funds": 12000,
+        "health": 85,
+        "stress": 15
+      },
+      "notes": [
+        "年龄是按模组台海战时鸫22岁与本作2021开战时序做的约20岁适配；原文未给出完整出生年月日，其余成员同龄为改编。",
+        "家庭与具体出生地点未考证，不照搬现实人物资料。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Himari_char"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "udagawa_tomoe",
+      "name": "宇田川巴",
+      "aliases": [
+        "Udagawa Tomoe"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 20,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "Afterglow成员",
+      "occupation": "Afterglow鼓手",
+      "status": "与Afterglow伙伴一起生活、排练和演出",
+      "familyBackground": "家庭成员与家庭收入情况尚未详明。",
+      "backgroundText": "你是Afterglow的鼓手宇田川巴，与其余四位伙伴一起安排排练和演出。习惯帮助同伴处理眼前困难，与伙伴一起承担行程和演出事务。你们各自还有生活与家庭事务需要安排。",
+      "points": {
+        "intelligence": 6,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 30,
+        "connections": 50,
+        "funds": 12000,
+        "health": 85,
+        "stress": 15
+      },
+      "notes": [
+        "年龄是按模组台海战时鸫22岁与本作2021开战时序做的约20岁适配；原文未给出完整出生年月日，其余成员同龄为改编。",
+        "家庭与具体出生地点未考证，不照搬现实人物资料。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Tomoe_char"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "toyokawa_sakiko",
+      "name": "丰川祥子",
+      "aliases": [
+        "豐川祥子",
+        "豊川祥子",
+        "Toyokawa Sakiko"
+      ],
+      "fictional": true,
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "openingAgeEstimate": 13,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "丰川家与音乐经历",
+      "occupation": "学习音乐的丰川家成员",
+      "status": "生活在丰川家族关系中，尚未成为紧急委员会主席",
+      "familyBackground": "丰川家的长辈与金融、产业界保持联系；家庭收入与完整亲属履历尚未详明。",
+      "backgroundText": "你是丰川祥子，生活在日本，音乐和家族关系占据日常。家族长辈对未来有自己的安排，你开始形成自己的判断。",
+      "points": {
+        "intelligence": 8,
+        "family": 9,
+        "fitness": 4,
+        "appearance": 6
+      },
+      "stats": {
+        "influence": 25,
+        "connections": 60,
+        "funds": 16000,
+        "health": 80,
+        "stress": 25
+      },
+      "notes": [
+        "年龄按模组台海开战后15岁与本作2021开战倒推，2020开局约13岁；无可靠完整生日，不伪造出生年份。",
+        "财阀形成、掌权和与Afterglow的对立只能随已发生经历形成。"
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "JAP_REV_UI_skdie_TOOLTIP_DELAYED"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_event_l_simp_chinese.yml",
+          "key": "PRC_MAO5.51.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_event_l_simp_chinese.yml",
+          "key": "PRC_MAO5.52.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.61.d"
+        }
+      ],
+      "sourceUrls": [],
+      "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    }
+  ],
+  "actors": [
+    {
+      "id": "hazawa_tsugumi",
+      "name": "羽泽鸫",
+      "region": "japan",
+      "ideology": "尚未形成明确政治纲领",
+      "priorities": [
+        "维持乐队合作",
+        "照顾伙伴与听众",
+        "保留独立表达"
+      ],
+      "stages": [
+        {
+          "role": "Afterglow键盘手",
+          "influence": 30,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_records"
+          ],
+          "role": "在台湾记录战时生活的音乐人",
+          "ideology": "接触台湾左翼与劳动议题",
+          "influence": 40,
+          "region": "taiwan"
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_departure"
+          ],
+          "role": "从台湾返日的音乐人与公共发言者",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_afterglow_home"
+          ],
+          "role": "返日后参与公共讨论的音乐人",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_hazawa_toyokawa_war"
+          ],
+          "role": "日本民主联合军领导人",
+          "ideology": "羽泽鸫主义：马列毛主义、群众组织与国际主义",
+          "influence": 92
+        },
+        {
+          "requires": [
+            "jp_hazawa_end"
+          ],
+          "role": "战后左翼联合阵线成员",
+          "ideology": "羽泽鸫主义：基层组织、劳动权利和革命文化",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Hazawa_Tsugumi_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "Tsuguism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "美竹兰",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "青叶摩卡",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "上原绯玛丽",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "宇田川巴",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "陈信行",
+          "type": "mentor",
+          "detail": "在台湾接待并建议记录战争经历，政治认识由这些接触逐步形成。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "丰川祥子",
+          "type": "political-opponent",
+          "detail": "拒绝宣传合作后，与财阀和紧急委员会产生政治对立。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mitake_ran",
+      "name": "美竹兰",
+      "region": "japan",
+      "ideology": "尚未形成明确政治纲领",
+      "priorities": [
+        "维持乐队合作",
+        "照顾伙伴与听众",
+        "保留独立表达"
+      ],
+      "stages": [
+        {
+          "role": "Afterglow主唱与吉他手",
+          "influence": 30,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_records"
+          ],
+          "role": "在台湾记录战时生活的音乐人",
+          "ideology": "接触台湾左翼与劳动议题",
+          "influence": 40,
+          "region": "taiwan"
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_departure"
+          ],
+          "role": "从台湾返日的音乐人与公共发言者",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_afterglow_home"
+          ],
+          "role": "返日后参与公共讨论的音乐人",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_hazawa_toyokawa_war"
+          ],
+          "role": "日本民主联合军成员",
+          "ideology": "羽泽鸫主义：马列毛主义、群众组织与国际主义",
+          "influence": 70
+        },
+        {
+          "requires": [
+            "jp_hazawa_end"
+          ],
+          "role": "战后左翼联合阵线成员",
+          "ideology": "羽泽鸫主义：基层组织、劳动权利和革命文化",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Ran_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "Tsuguism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "青叶摩卡",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "上原绯玛丽",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "宇田川巴",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "陈信行",
+          "type": "mentor",
+          "detail": "在台湾接待并建议记录战争经历，政治认识由这些接触逐步形成。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "丰川祥子",
+          "type": "political-opponent",
+          "detail": "拒绝宣传合作后，与财阀和紧急委员会产生政治对立。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "aoba_moca",
+      "name": "青叶摩卡",
+      "region": "japan",
+      "ideology": "尚未形成明确政治纲领",
+      "priorities": [
+        "维持乐队合作",
+        "照顾伙伴与听众",
+        "保留独立表达"
+      ],
+      "stages": [
+        {
+          "role": "Afterglow吉他手",
+          "influence": 30,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_records"
+          ],
+          "role": "在台湾记录战时生活的音乐人",
+          "ideology": "接触台湾左翼与劳动议题",
+          "influence": 40,
+          "region": "taiwan"
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_departure"
+          ],
+          "role": "从台湾返日的音乐人与公共发言者",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_afterglow_home"
+          ],
+          "role": "返日后参与公共讨论的音乐人",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_hazawa_toyokawa_war"
+          ],
+          "role": "日本民主联合军成员",
+          "ideology": "羽泽鸫主义：马列毛主义、群众组织与国际主义",
+          "influence": 70
+        },
+        {
+          "requires": [
+            "jp_hazawa_end"
+          ],
+          "role": "战后左翼联合阵线成员",
+          "ideology": "羽泽鸫主义：基层组织、劳动权利和革命文化",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Moka_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "Tsuguism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "美竹兰",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "上原绯玛丽",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "宇田川巴",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "陈信行",
+          "type": "mentor",
+          "detail": "在台湾接待并建议记录战争经历，政治认识由这些接触逐步形成。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "丰川祥子",
+          "type": "political-opponent",
+          "detail": "拒绝宣传合作后，与财阀和紧急委员会产生政治对立。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "uehara_himari",
+      "name": "上原绯玛丽",
+      "region": "japan",
+      "ideology": "尚未形成明确政治纲领",
+      "priorities": [
+        "维持乐队合作",
+        "照顾伙伴与听众",
+        "保留独立表达"
+      ],
+      "stages": [
+        {
+          "role": "Afterglow贝斯手",
+          "influence": 30,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_records"
+          ],
+          "role": "在台湾记录战时生活的音乐人",
+          "ideology": "接触台湾左翼与劳动议题",
+          "influence": 40,
+          "region": "taiwan"
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_departure"
+          ],
+          "role": "从台湾返日的音乐人与公共发言者",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_afterglow_home"
+          ],
+          "role": "返日后参与公共讨论的音乐人",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_hazawa_toyokawa_war"
+          ],
+          "role": "日本民主联合军成员",
+          "ideology": "羽泽鸫主义：马列毛主义、群众组织与国际主义",
+          "influence": 70
+        },
+        {
+          "requires": [
+            "jp_hazawa_end"
+          ],
+          "role": "战后左翼联合阵线成员",
+          "ideology": "羽泽鸫主义：基层组织、劳动权利和革命文化",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Himari_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "Tsuguism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "美竹兰",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "青叶摩卡",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "宇田川巴",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "陈信行",
+          "type": "mentor",
+          "detail": "在台湾接待并建议记录战争经历，政治认识由这些接触逐步形成。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "丰川祥子",
+          "type": "political-opponent",
+          "detail": "拒绝宣传合作后，与财阀和紧急委员会产生政治对立。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "udagawa_tomoe",
+      "name": "宇田川巴",
+      "region": "japan",
+      "ideology": "尚未形成明确政治纲领",
+      "priorities": [
+        "维持乐队合作",
+        "照顾伙伴与听众",
+        "保留独立表达"
+      ],
+      "stages": [
+        {
+          "role": "Afterglow鼓手",
+          "influence": 30,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_records"
+          ],
+          "role": "在台湾记录战时生活的音乐人",
+          "ideology": "接触台湾左翼与劳动议题",
+          "influence": 40,
+          "region": "taiwan"
+        },
+        {
+          "requires": [
+            "rs_tw_afterglow_departure"
+          ],
+          "role": "从台湾返日的音乐人与公共发言者",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_afterglow_home"
+          ],
+          "role": "返日后参与公共讨论的音乐人",
+          "ideology": "由战地经历形成的左翼倾向",
+          "influence": 50
+        },
+        {
+          "requires": [
+            "jp_hazawa_toyokawa_war"
+          ],
+          "role": "日本民主联合军成员",
+          "ideology": "羽泽鸫主义：马列毛主义、群众组织与国际主义",
+          "influence": 70
+        },
+        {
+          "requires": [
+            "jp_hazawa_end"
+          ],
+          "role": "战后左翼联合阵线成员",
+          "ideology": "羽泽鸫主义：基层组织、劳动权利和革命文化",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.85.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.97.d"
+        },
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "Tomoe_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "Tsuguism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "美竹兰",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "青叶摩卡",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "上原绯玛丽",
+          "type": "bandmate",
+          "detail": "Afterglow伙伴；彼此有长期排练、演出与共同生活经历。"
+        },
+        {
+          "name": "陈信行",
+          "type": "mentor",
+          "detail": "在台湾接待并建议记录战争经历，政治认识由这些接触逐步形成。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "丰川祥子",
+          "type": "political-opponent",
+          "detail": "拒绝宣传合作后，与财阀和紧急委员会产生政治对立。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "toyokawa_sakiko",
+      "name": "丰川祥子",
+      "region": "japan",
+      "ideology": "开局未形成公开政治纲领",
+      "priorities": [
+        "获得家族认可",
+        "维护自己的音乐与生活安排"
+      ],
+      "stages": [
+        {
+          "role": "丰川家中的年轻成员",
+          "influence": 20,
+          "requires": []
+        },
+        {
+          "requires": [
+            "jp_toyokawa_rise"
+          ],
+          "role": "丰川财阀领导人",
+          "ideology": "财阀主导的秩序与国家优先",
+          "influence": 85,
+          "priorities": [
+            "扩大财阀的经济与政治控制",
+            "要求文化团体配合政府宣传",
+            "维持社会秩序"
+          ]
+        },
+        {
+          "requires": [
+            "jp_emergency_committee"
+          ],
+          "role": "日本安全紧急最高委员会主席",
+          "ideology": "财阀与安全机关主导的威权统治",
+          "influence": 95,
+          "incumbent": true,
+          "priorities": [
+            "统一行政与安全调度",
+            "压制武装反对力量",
+            "保住产业与交通体系"
+          ]
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "JAP_REV_UI_skdie_TOOLTIP_DELAYED"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_event_l_simp_chinese.yml",
+          "key": "PRC_MAO5.51.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_event_l_simp_chinese.yml",
+          "key": "PRC_MAO5.52.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.61.d"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "political-opponent",
+          "detail": "与Afterglow宣传合作破裂后的政治对手。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        },
+        {
+          "name": "美竹兰",
+          "type": "political-opponent",
+          "detail": "兰拒绝按照政府需求创作作品。",
+          "requires": [
+            "jp_toyokawa_rise"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_习近平",
+      "name": "习近平",
+      "region": "china",
+      "ideology": "市场毛主义；修正主义主席独裁制",
+      "priorities": [
+        "维持党政权威",
+        "推动国家整合与产业建设",
+        "控制政治风险"
+      ],
+      "stages": [
+        {
+          "role": "中共中央领导人",
+          "influence": 98,
+          "requires": [],
+          "incumbent": true,
+          "blockAfter": [
+            "cn_zhang_coup"
+          ]
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_PRC.txt",
+          "key": "PRC_xi_jinping"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_XI_JINPING_DESC"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "market_socialism_1_desc"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_蔡英文",
+      "name": "蔡英文",
+      "region": "taiwan",
+      "ideology": "台湾进步主义、社会自由主义",
+      "priorities": [
+        "维持民进党执政",
+        "加强防务及对外联系",
+        "保持对政府的公众支持"
+      ],
+      "stages": [
+        {
+          "role": "民进党籍总统",
+          "influence": 90,
+          "requires": [],
+          "incumbent": true,
+          "blockAfter": [
+            "rs_tw_tsai_resignation",
+            "tw_martial_protest",
+            "tw_four_factions"
+          ]
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_tsai_ing_wen_char"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_CHI_l_simp_chinese.yml",
+          "key": "CHI_neoliberalism_desc"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "赖清德",
+          "type": "party-colleague",
+          "detail": "同属民进党，接班与政策合作取决于已发生的政治变化。"
+        },
+        {
+          "name": "韩国瑜",
+          "type": "political-opponent",
+          "detail": "选举和立法议程中的竞争对手。"
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_赖清德",
+      "name": "赖清德",
+      "region": "taiwan",
+      "ideology": "古典自由主义；民进党背景",
+      "priorities": [
+        "维持民进党组织",
+        "应对战争及执政压力"
+      ],
+      "stages": [
+        {
+          "role": "民进党政治人物",
+          "influence": 65,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_tsai_resignation"
+          ],
+          "role": "继任总统",
+          "ideology": "战时紧急状态与集中动员",
+          "influence": 90,
+          "incumbent": true
+        },
+        {
+          "requires": [
+            "tw_martial_protest"
+          ],
+          "role": "维持戒严的总统",
+          "ideology": "战时紧急状态与集中动员",
+          "influence": 90,
+          "incumbent": true
+        },
+        {
+          "requires": [
+            "tw_four_factions"
+          ],
+          "role": "花莲民进党当局领导人",
+          "ideology": "战时民进党管制",
+          "influence": 85
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_lai_ching_te_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.15.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.45.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_韩国瑜",
+      "name": "韩国瑜",
+      "region": "taiwan",
+      "ideology": "台湾宪政主义；国民党背景",
+      "priorities": [
+        "争取民生议题支持",
+        "维持国民党政治空间",
+        "主张较温和的两岸关系"
+      ],
+      "stages": [
+        {
+          "role": "国民党政治人物",
+          "influence": 65,
+          "requires": []
+        },
+        {
+          "requires": [
+            "tw_four_factions"
+          ],
+          "role": "台北国民党临时当局领导人",
+          "ideology": "国民党宪政主张与军方合作",
+          "influence": 85
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_han_kuo_yu_char"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_CHI_l_simp_chinese.yml",
+          "key": "CHI_constitutionalist_desc"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.50.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_陈信行",
+      "name": "陈信行",
+      "region": "taiwan",
+      "ideology": "毛主义、劳动与基层组织",
+      "priorities": [
+        "维护劳动者组织空间",
+        "推动左翼联合",
+        "记录战争与安置受影响民众"
+      ],
+      "stages": [
+        {
+          "role": "左翼学者与活动参与者",
+          "influence": 40,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_left_formation"
+          ],
+          "role": "台湾左翼联盟成员",
+          "ideology": "毛主义与左翼联合",
+          "influence": 65
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_MAO.txt",
+          "key": "chen_xinxing_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.83.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.89.d"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "羽泽鸫",
+          "type": "mentor",
+          "detail": "接待并建议她与伙伴记录战争生活。",
+          "requires": [
+            "rs_tw_afterglow_records"
+          ]
+        },
+        {
+          "name": "吴荣元",
+          "type": "coalition-partner",
+          "detail": "参与台湾左翼联盟合作。",
+          "requires": [
+            "rs_tw_left_formation"
+          ]
+        },
+        {
+          "name": "郑村棋",
+          "type": "coalition-partner",
+          "detail": "参与台湾左翼联盟合作。",
+          "requires": [
+            "rs_tw_left_formation"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_郑村棋",
+      "name": "郑村棋",
+      "region": "taiwan",
+      "ideology": "左翼劳动政治与社会主义主张",
+      "priorities": [
+        "工会和基层代表参与",
+        "联合左翼团体",
+        "制宪与战后重建"
+      ],
+      "stages": [
+        {
+          "role": "劳工与左翼政治活动参与者",
+          "influence": 35,
+          "requires": []
+        },
+        {
+          "requires": [
+            "tw_four_factions"
+          ],
+          "role": "新竹左翼联盟领导人",
+          "ideology": "左翼联合与社会主义主张",
+          "influence": 80
+        },
+        {
+          "requires": [
+            "tw_left_constituent"
+          ],
+          "role": "制宪会议主持者",
+          "ideology": "参与式制宪与社会主义讨论",
+          "influence": 85
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.83.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.49.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.77.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_吴荣元",
+      "name": "吴荣元",
+      "region": "taiwan",
+      "ideology": "改革社会主义；劳动党背景",
+      "priorities": [
+        "劳动者组织",
+        "左翼团结",
+        "反对政治清算"
+      ],
+      "stages": [
+        {
+          "role": "劳动党政治人物",
+          "influence": 35,
+          "requires": []
+        },
+        {
+          "requires": [
+            "rs_tw_left_formation"
+          ],
+          "role": "台湾左翼联盟成员",
+          "ideology": "改革社会主义与左翼联合",
+          "influence": 60
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_wu_rong_yuan_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO2.83.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_陈奕齐",
+      "name": "陈奕齐",
+      "region": "taiwan",
+      "ideology": "极端民族主义；基进党背景",
+      "priorities": [
+        "地方政治动员",
+        "台湾民族主义",
+        "战争责任与复仇诉求"
+      ],
+      "stages": [
+        {
+          "role": "基进党政治人物",
+          "influence": 35,
+          "requires": []
+        },
+        {
+          "requires": [
+            "tw_four_factions"
+          ],
+          "role": "台南基进党领导人",
+          "ideology": "民族革命与复仇主义",
+          "influence": 80
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_chen_yi_qi_char"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "PRC_MAO3.48.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_张又侠",
+      "name": "张又侠",
+      "region": "china",
+      "ideology": "军事秩序与战后问责",
+      "priorities": [
+        "军队组织与秩序",
+        "战后领导权交接"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_zhang_coup"
+          ],
+          "role": "战后过渡当局主持人",
+          "ideology": "军事秩序与战后问责",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.21.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_陈文清",
+      "name": "陈文清",
+      "region": "china",
+      "ideology": "安全国家与极权统治",
+      "priorities": [
+        "集中安全权力",
+        "限制政治反对组织"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_chen_emergency"
+          ],
+          "role": "安全体制领导人",
+          "ideology": "安全国家与极权统治",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_CHEN_WENQING_DESC"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_胡春华",
+      "name": "胡春华",
+      "region": "china",
+      "ideology": "团派改革；政策重心由实际决策决定",
+      "priorities": [
+        "维持政治联盟",
+        "落实公开承诺"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_hu_inauguration"
+          ],
+          "role": "主持战后政府的团派领导人",
+          "ideology": "团派改革；政策重心由实际决策决定",
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_hu_stability"
+          ],
+          "role": "以稳定为政策重心的领导人",
+          "ideology": "团派稳定优先与民族主义动员",
+          "priorities": [
+            "稳定政治联盟",
+            "借民族主义组织支持"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_hu_reform"
+          ],
+          "role": "推动政治改革的领导人",
+          "ideology": "团派政治改革",
+          "priorities": [
+            "协商改革联盟",
+            "扩大政治参与"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_socialdem"
+          ],
+          "role": "推进社会民主改革的领导人",
+          "ideology": "社会民主主义",
+          "priorities": [
+            "社会保障与民主改革",
+            "国际社会主义合作"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_hu_economy"
+          ],
+          "role": "以经济承诺维持执政的领导人",
+          "ideology": "经济优先的团派务实路线",
+          "priorities": [
+            "兑现就业与经济承诺",
+            "维持社会信任"
+          ],
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_maoyuanxi_events_l_simp_chinese.yml",
+          "key": "PRC_MAO6.70.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction",
+      "inactiveAfter": [
+        "cn_mao_succession",
+        "cn_whn_coup",
+        "cn_bo_elected",
+        "cn_li_elected",
+        "cn_wang_elected",
+        "cn_han_rise",
+        "cn_longmarch_coup"
+      ]
+    },
+    {
+      "id": "mod_韩德强",
+      "name": "韩德强",
+      "region": "china",
+      "ideology": "正道革命、民族主义与毛主义混合",
+      "priorities": [
+        "群众动员",
+        "推动其社会改造方案"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_han_rise"
+          ],
+          "role": "正道革命领导人",
+          "ideology": "正道革命、民族主义与毛主义混合",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_handeqiang_l_simp_chinese.yml",
+          "key": "PRC_MAO.3.t"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_王沪宁",
+      "name": "王沪宁",
+      "region": "china",
+      "ideology": "保守主义与高压秩序",
+      "priorities": [
+        "恢复秩序",
+        "压制政治挑战"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_whn_coup"
+          ],
+          "role": "保守派掌权者",
+          "ideology": "保守主义与高压秩序",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "china.174.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_毛远新",
+      "name": "毛远新",
+      "region": "china",
+      "ideology": "反修毛主义与再社会主义化",
+      "priorities": [
+        "审慎积累组织力量",
+        "再社会主义化改革",
+        "维持与盟友的阶段合作"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_mao_succession"
+          ],
+          "role": "主持新领导班子的毛远新",
+          "ideology": "反修毛主义与再社会主义化",
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_mao_patience"
+          ],
+          "role": "与薄熙来合作的领导人",
+          "ideology": "审慎再社会主义化与反修毛主义",
+          "priorities": [
+            "保住改革空间",
+            "避免过早决裂",
+            "积累组织力量"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_second_cultural"
+          ],
+          "role": "发动第二次文革的领导人",
+          "ideology": "继续革命与群众动员",
+          "priorities": [
+            "发动群众参与政治重组",
+            "重新分配组织与经济权力"
+          ],
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_maoyuanxi_events_l_simp_chinese.yml",
+          "key": "PRC_MAO6.74.d"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "毛泽东",
+          "type": "family",
+          "detail": "毛泽东之侄，家庭历史与政治经历影响公众对他的期待。"
+        },
+        {
+          "name": "薄熙来",
+          "type": "conditional-alliance",
+          "detail": "在再社会主义化和权力问题上合作，各自保留政治打算。",
+          "requires": [
+            "cn_mao_patience"
+          ]
+        },
+        {
+          "name": "韩东方",
+          "type": "political-contact",
+          "detail": "尝试联系劳工与青年组织，合作程度取决于后续承诺。",
+          "requires": [
+            "cn_mao_workers"
+          ]
+        }
+      ],
+      "scope": "mod-fiction",
+      "inactiveAfter": [
+        "cn_mao_assassinated"
+      ]
+    },
+    {
+      "id": "mod_韩东方",
+      "name": "韩东方",
+      "region": "china",
+      "ideology": "劳工组织、泛左翼联合",
+      "priorities": [
+        "组织劳工",
+        "建立政治合作",
+        "维护劳动权利"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_mao_workers"
+          ],
+          "role": "与再社会主义化改革者接触的劳工组织者",
+          "ideology": "劳工政治与左翼联合",
+          "priorities": [
+            "维护劳动者组织",
+            "审视政治合作承诺"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_longmarch_deal"
+          ],
+          "role": "与长征展开合作的劳工组织者",
+          "ideology": "劳工组织、泛左翼联合",
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_front_han_chair"
+          ],
+          "role": "革命阵线选出的主席",
+          "ideology": "劳工参与和左翼重建",
+          "priorities": [
+            "安置战后劳动者",
+            "重建代表与生产制度"
+          ],
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_MAO1.67.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_薄熙来",
+      "name": "薄熙来",
+      "region": "china",
+      "ideology": "民粹动员与个人权威",
+      "priorities": [
+        "扩大群众支持",
+        "集中政治领导权"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_mao_patience"
+          ],
+          "role": "与毛远新结盟的政治人物",
+          "ideology": "个人权威与阶段性左翼合作",
+          "priorities": [
+            "扩大自身组织基础",
+            "参与权力与经济重组"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_bo_elected"
+          ],
+          "role": "新领导班子的核心人物",
+          "ideology": "民粹动员与个人权威",
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_bo_deity"
+          ],
+          "role": "推行现人神政治工程的领导人",
+          "ideology": "技术支撑的个人崇拜与个人统治",
+          "priorities": [
+            "扩大技术系统对社会的控制",
+            "加强个人权威"
+          ],
+          "influence": 90
+        },
+        {
+          "requires": [
+            "cn_bo_war_leader"
+          ],
+          "role": "接掌内战指挥的领导人",
+          "ideology": "个人权威与战时动员",
+          "priorities": [
+            "维持军政指挥",
+            "取得战争胜利"
+          ],
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gqtpai_l_simp_chinese.yml",
+          "key": "PRC_MAO9.6.d"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "毛远新",
+          "type": "conditional-alliance",
+          "detail": "阶段合作伴随权力和路线上的分歧。",
+          "requires": [
+            "cn_mao_patience"
+          ]
+        }
+      ],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_李作成",
+      "name": "李作成",
+      "region": "china",
+      "ideology": "军队秩序与军事统治",
+      "priorities": [
+        "结束战斗",
+        "建立军事管治"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_li_stopwar"
+          ],
+          "role": "叫停内战的军方领导人",
+          "ideology": "军队秩序与军事统治",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_maoyuanxi_events_l_simp_chinese.yml",
+          "key": "PRC_MAO6.96.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_李克强",
+      "name": "李克强",
+      "region": "china",
+      "ideology": "自由派合作与对外强权政策",
+      "priorities": [
+        "经济调整",
+        "外交联盟与对外影响"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_li_elected"
+          ],
+          "role": "自由派合作政府领导人",
+          "ideology": "自由派合作与对外强权政策",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_MAO5.23.t"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_汪洋",
+      "name": "汪洋",
+      "region": "china",
+      "ideology": "自由派合作与对外强权政策",
+      "priorities": [
+        "经济调整",
+        "外交联盟与对外影响"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_wang_elected"
+          ],
+          "role": "自由派合作政府领导人",
+          "ideology": "自由派合作与对外强权政策",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.19.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_张宏良",
+      "name": "张宏良",
+      "region": "china",
+      "ideology": "大众民主与左翼民粹主义",
+      "priorities": [
+        "群众政治参与",
+        "推动大众民主制度"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_zhang_hongliang"
+          ],
+          "role": "大众民主政治人物",
+          "ideology": "大众民主与左翼民粹主义",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_tuanpai_33"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_秦晖",
+      "name": "秦晖",
+      "region": "china",
+      "ideology": "制宪后的制度改革；具体选择由当前政策决定",
+      "priorities": [
+        "执行选举承诺",
+        "处理国家制度与经济争论"
+      ],
+      "stages": [
+        {
+          "requires": [
+            "cn_qin_elected"
+          ],
+          "role": "中华共和国领导人",
+          "ideology": "制宪后的制度改革；具体选择由当前政策决定",
+          "influence": 90
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_MAO1.54.d"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_安倍晋三",
+      "name": "安倍晋三",
+      "region": "japan",
+      "ideology": "自民党保守主义与议会民主",
+      "priorities": [
+        "维持内阁与执政联盟",
+        "经济与防务政策",
+        "应对公共卫生压力"
+      ],
+      "stages": [
+        {
+          "role": "自民党籍首相",
+          "influence": 90,
+          "requires": [],
+          "incumbent": true,
+          "blockAfter": [
+            "civic_vote",
+            "mil_crisis",
+            "rep_crisis",
+            "jp_emergency_committee"
+          ]
+        }
+      ],
+      "sourceRefs": [
+        {
+          "file": "history/countries/JAP - Japan.txt",
+          "key": "recruit_character"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_abe"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    },
+    {
+      "id": "mod_毛泽东",
+      "name": "毛泽东",
+      "region": "china",
+      "ideology": "毛主义；复活后的主张取决于亲身行动",
+      "priorities": [
+        "了解当前社会",
+        "恢复与外界的联系",
+        "判断是否参与公共事务"
+      ],
+      "stages": [],
+      "sourceRefs": [
+        {
+          "file": "user-setting",
+          "key": "mao_resurrection"
+        }
+      ],
+      "relationships": [],
+      "scope": "mod-fiction"
+    }
+  ]
+}

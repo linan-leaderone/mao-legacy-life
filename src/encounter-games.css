@@ -1,0 +1,10 @@
+.encounter-dialog{width:min(1040px,calc(100vw - 28px));max-width:1040px;max-height:calc(100dvh - 28px);padding:22px;overflow:auto;border:1px solid var(--line,#d3d4c7);border-radius:18px;background:var(--paper,#f7f6ef);color:var(--ink,#25332e)}
+.encounter-dialog::backdrop{background:#10231fcc;backdrop-filter:blur(4px)}
+.encounter-instructions{font-size:14px;line-height:1.65;margin:12px 0;color:var(--muted,#626e60)}
+.encounter-hud{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap;font-size:14px;margin:12px 0;font-variant-numeric:tabular-nums}
+.encounter-canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:10px;touch-action:none;outline-offset:3px;background:#26363e}
+.encounter-actions,.encounter-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.encounter-actions button{flex:1;min-width:95px;min-height:44px;touch-action:manipulation}
+.encounter-buttons{justify-content:flex-end}.encounter-buttons button{min-height:44px}
+.encounter-status{min-height:1.5em;margin:10px 0;font-size:14px;color:var(--muted,#626e60)}
+@media(max-width:600px){.encounter-dialog{padding:14px;width:calc(100vw - 12px);max-height:calc(100dvh - 12px)}.encounter-hud{font-size:12px;gap:7px}.encounter-instructions{font-size:12px}.encounter-actions{gap:6px}.encounter-actions button{min-width:calc(50% - 6px);font-size:13px}.encounter-buttons{gap:6px}.encounter-buttons button{font-size:12px;padding:10px}.encounter-dialog h2{font-size:23px}}

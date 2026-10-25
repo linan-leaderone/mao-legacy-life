@@ -1,0 +1,2061 @@
+{
+  "asOf": "2020-01-01",
+  "personas": [
+    {
+      "id": "mao_yuanxin",
+      "name": "毛远新",
+      "aliases": [
+        "毛遠新"
+      ],
+      "birthDate": "1941-02-14",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "新疆迪化（今乌鲁木齐）",
+      "place": "新疆",
+      "startLocation": "上海",
+      "occupation": "退休人员，曾任辽宁省革命委员会副主任",
+      "status": "已离开政治职务，过退休生活",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "毛泽民与朱旦华之子，毛泽东的侄子。",
+      "biography": "毕业于哈尔滨军事工程学院，曾在辽宁任职。1976年后失去原有职务，1990年代刑满后在上海生活。",
+      "notes": [
+        "公开资料给出完整生日；开局取退休生活，不把MOD中的后续掌权情节写成2020年事实。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 65,
+        "connections": 75,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "毛泽民与朱旦华之子，毛泽东的侄子。\n毕业于哈尔滨军事工程学院，曾在辽宁任职。1976年后失去原有职务，1990年代刑满后在上海生活。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%AF%9B%E8%BF%9C%E6%96%B0",
+        "https://crt.com.cn/news2007/news/YYTXHDEJ/131031232640FJ8JFGEIGE9DB93BF3A2.html"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "wang_huning",
+      "name": "王沪宁",
+      "aliases": [
+        "王滬寧"
+      ],
+      "birthDate": "1955-10",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "上海",
+      "place": "上海",
+      "startLocation": "北京",
+      "occupation": "中共中央政治局常委、中央书记处书记、中央政策研究室主任",
+      "status": "在中央任职，参与政策与理论工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "家庭成员的可靠公开信息有限，不推定家庭资产。",
+      "biography": "曾在复旦大学从事国际政治教学研究，1995年进入中央政策研究室，2017年进入中央政治局常委会。",
+      "notes": [
+        "官方简历仅确认出生年月，未采用百科的未经官方交叉核实日数。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 96,
+        "connections": 85,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "家庭成员的可靠公开信息有限，不推定家庭资产。\n曾在复旦大学从事国际政治教学研究，1995年进入中央政策研究室，2017年进入中央政治局常委会。",
+      "sourceUrls": [
+        "https://19th.cpcnews.cn/n100/2017/1025/c150-1011.html",
+        "https://zh.wikipedia.org/wiki/%E7%8E%8B%E6%B2%AA%E5%AE%81"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "zhang_youxia",
+      "name": "张又侠",
+      "aliases": [
+        "張又俠"
+      ],
+      "birthDate": "1950-07",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "北京",
+      "place": "北京",
+      "startLocation": "北京",
+      "occupation": "中共中央政治局委员、中央军委副主席、陆军上将",
+      "status": "在中央军委任职",
+      "background": "military",
+      "backgroundLabel": "军旅经历",
+      "familyBackground": "父亲张宗逊为中国人民解放军上将。",
+      "biography": "1968年入伍，经历基层指挥和军区工作，曾任沈阳军区司令员、总装备部部长，2017年任中央军委副主席。",
+      "notes": [
+        "开局职务以2017—2020履历为准；检索页上的2026年信息不回填。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 7,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 70,
+        "appearance": 50,
+        "influence": 95,
+        "connections": 85,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲张宗逊为中国人民解放军上将。\n1968年入伍，经历基层指挥和军区工作，曾任沈阳军区司令员、总装备部部长，2017年任中央军委副主席。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E5%BC%A0%E5%8F%88%E4%BE%A0",
+        "https://paper.people.com.cn/hqrw/html/2016-07/06/content_1726022.htm"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "li_zuocheng",
+      "name": "李作成",
+      "aliases": [],
+      "birthDate": "1953-10",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "湖南安化",
+      "place": "湖南",
+      "startLocation": "北京",
+      "occupation": "中央军委委员、中央军委联合参谋部参谋长、陆军上将",
+      "status": "在联合参谋部任职",
+      "background": "military",
+      "backgroundLabel": "军旅经历",
+      "familyBackground": "出身湖南安化农村家庭。",
+      "biography": "1970年入伍，经历部队作战与抗洪救灾，2015年任陆军首任司令员，2017年任中央军委联合参谋部参谋长。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 7,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 70,
+        "appearance": 50,
+        "influence": 90,
+        "connections": 78,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出身湖南安化农村家庭。\n1970年入伍，经历部队作战与抗洪救灾，2015年任陆军首任司令员，2017年任中央军委联合参谋部参谋长。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%8E%E4%BD%9C%E6%88%90",
+        "https://mil.sohu.com/20160104/n433366307.shtml"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "li_zhanliang",
+      "name": "李占良",
+      "aliases": [
+        "良子"
+      ],
+      "birthDate": "1992-02-15",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "河北任丘",
+      "place": "河北",
+      "startLocation": "河北·任丘",
+      "occupation": "短视频创作者",
+      "status": "尝试拍摄和发布短视频",
+      "background": "ordinary",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "没有足够可靠的公开家庭资料，不推定父母职业、婚姻或财产。",
+      "biography": "网名良子，公开人物资料记载其在2017年前后开始尝试短视频创作。2020年初按早期创作者的生活起步。",
+      "notes": [
+        "用户明确指认该姓名对应河北任丘博主良子。",
+        "生日与早期经历来自二手百科，未找到可独立核验月日的一手出生记录，日期可信度有限。",
+        "2025—2026年的传播热度、外号、奖项、身体数据不回填2020。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 25,
+        "connections": 30,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "没有足够可靠的公开家庭资料，不推定父母职业、婚姻或财产。\n网名良子，公开人物资料记载其在2017年前后开始尝试短视频创作。2020年初按早期创作者的生活起步。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%8D%A0%E8%89%AF"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "gong_yuanhao",
+      "name": "龚源浩",
+      "aliases": [
+        "幺幺",
+        "龔源浩",
+        "幺幺（龚源浩）",
+        "幺幺(龚源浩)"
+      ],
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "birthDateConfidence": "unverified",
+      "birthPlace": "出生地未核实（故事起点：四川自贡荣县）",
+      "place": "四川",
+      "startLocation": "四川·自贡荣县",
+      "occupation": "幼儿",
+      "status": "由家人照料，日常围绕吃饭、玩耍和学习说话展开",
+      "background": "ordinary",
+      "backgroundLabel": "家庭照料中的幼儿",
+      "familyBackground": "乳名幺幺，父亲为龚俊清。",
+      "biography": "2020年初还是幼儿，生活主要围绕家庭和附近熟悉的环境展开。",
+      "notes": [
+        "此项为用户提供的角色设定，未独立核实真实出生日期、出生医院或家庭档案。",
+        "开局仅估计约3岁；生日保持空值，不能把计算用年龄当作真实生日。",
+        "新浪链接是2026年微博用户内容，不能作为新闻机构独立核实；知乎链接未能访问。",
+        "仅采用用户提供的姓名、乳名、故事起点、父亲称谓；未收录关于死亡、疾病、家庭纠纷或犯罪指控的网络说法。",
+        "故事始于2020，不预设2023年的事件与网络传播。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 3,
+        "family": 5,
+        "fitness": 3,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 30,
+        "family": 50,
+        "fitness": 30,
+        "appearance": 50,
+        "influence": 0,
+        "connections": 5,
+        "funds": 0,
+        "health": 75,
+        "stress": 5
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "乳名幺幺，父亲为龚俊清。\n2020年初还是幼儿，生活主要围绕家庭和附近熟悉的环境展开。",
+      "sourceUrls": [
+        "https://www.sina.cn/news/detail/5311570542069874.html",
+        "https://www.zhihu.com/question/665257642/answer/76720080584"
+      ],
+      "sourceConfidence": "user_supplied",
+      "openingAgeEstimate": 3,
+      "openingAgeEstimateRange": [
+        2,
+        3
+      ],
+      "sourceScope": "user-supplied role setup; linked social posts are unverified"
+    },
+    {
+      "id": "chen_jining",
+      "name": "陈吉宁",
+      "aliases": [
+        "陳吉寧"
+      ],
+      "birthDate": "1964-02",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "辽宁盖县（今盖州）",
+      "place": "辽宁",
+      "startLocation": "北京",
+      "occupation": "北京市市长",
+      "status": "主持北京市政府工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "未有足够可靠公开家庭细节，不推定家庭职业与资产。",
+      "biography": "在清华大学和英国高校从事环境科学研究，曾任清华大学校长、环境保护部部长，2017年到北京市政府任职。",
+      "notes": [
+        "出生地与籍贯区分：出生在辽宁盖县，籍贯吉林梨树。生日仅保留已核实到的月份。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 87,
+        "connections": 78,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "未有足够可靠公开家庭细节，不推定家庭职业与资产。\n在清华大学和英国高校从事环境科学研究，曾任清华大学校长、环境保护部部长，2017年到北京市政府任职。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E9%99%88%E5%90%89%E5%AE%81",
+        "https://politics.people.com.cn/n/2015/0131/c351134-26484805.html"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "jiang_zemin",
+      "name": "江泽民",
+      "aliases": [
+        "江澤民"
+      ],
+      "birthDate": "1926-08-17",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "江苏扬州",
+      "place": "江苏",
+      "startLocation": "上海",
+      "occupation": "退休的党和国家领导人",
+      "status": "已经退休，保留多年形成的社会联系",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "出生于扬州知识分子家庭，江上青是其嗣父，妻子为王冶坪。",
+      "biography": "曾从事电机与工业管理工作，1989年至2002年任中共中央总书记，1993年至2003年任国家主席，至2020年初已退休多年。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 90,
+        "connections": 90,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出生于扬州知识分子家庭，江上青是其嗣父，妻子为王冶坪。\n曾从事电机与工业管理工作，1989年至2002年任中共中央总书记，1993年至2003年任国家主席，至2020年初已退休多年。",
+      "sourceUrls": [
+        "https://www.mod.gov.cn/gfbw/sy/tt_214026/4927445.html?big=fan",
+        "https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%B3%BD%E6%B0%91"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "hu_jintao",
+      "name": "胡锦涛",
+      "aliases": [
+        "胡錦濤"
+      ],
+      "birthDate": "1942-12",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "江苏泰州",
+      "place": "江苏",
+      "startLocation": "北京",
+      "occupation": "退休的党和国家领导人",
+      "status": "已卸任中央领导职务",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "成长于经营茶叶的家庭，妻子为清华大学同学刘永清。",
+      "biography": "毕业于清华大学水利工程系，经历甘肃、贵州、西藏和共青团工作，2002年至2012年任中共中央总书记，2003年至2013年任国家主席。",
+      "notes": [
+        "采用官方资料精度到月；网上具体生日存在来源分歧，未虚构精确日。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 88,
+        "connections": 88,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "成长于经营茶叶的家庭，妻子为清华大学同学刘永清。\n毕业于清华大学水利工程系，经历甘肃、贵州、西藏和共青团工作，2002年至2012年任中共中央总书记，2003年至2013年任国家主席。",
+      "sourceUrls": [
+        "https://cped.nccu.edu.tw/eliteDetail.aspx?pid=1138146",
+        "https://zh.wikipedia.org/wiki/%E8%83%A1%E9%94%A6%E6%B6%9B"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "hu_chunhua",
+      "name": "胡春华",
+      "aliases": [
+        "胡春華"
+      ],
+      "birthDate": "1963-04",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "湖北五峰",
+      "place": "湖北",
+      "startLocation": "北京",
+      "occupation": "中共中央政治局委员、国务院副总理",
+      "status": "在国务院分管相关领域工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "出生于湖北五峰农村家庭，家庭财务情况不作推定。",
+      "biography": "北京大学中文系毕业后赴西藏工作，后任团中央第一书记、河北省长、内蒙古自治区党委书记和广东省委书记，2018年任国务院副总理。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 90,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出生于湖北五峰农村家庭，家庭财务情况不作推定。\n北京大学中文系毕业后赴西藏工作，后任团中央第一书记、河北省长、内蒙古自治区党委书记和广东省委书记，2018年任国务院副总理。",
+      "sourceUrls": [
+        "https://cpc.people.com.cn/n1/2017/1025/c414940-29608827.html",
+        "https://zh.wikipedia.org/wiki/%E8%83%A1%E6%98%A5%E5%8D%8E"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "lu_hao",
+      "name": "陆昊",
+      "aliases": [
+        "陸昊"
+      ],
+      "birthDate": "1967-06",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "陕西西安",
+      "place": "陕西",
+      "startLocation": "北京",
+      "occupation": "自然资源部部长、党组书记",
+      "status": "主持自然资源部工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "公开资料不足以完整还原家庭成员和家庭财务情况。",
+      "biography": "北京大学毕业，曾在工厂、中关村和北京市政府工作，后任团中央第一书记、黑龙江省长，2018年任自然资源部部长。",
+      "notes": [
+        "出生地为陕西西安，籍贯上海，二者不可混写。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 83,
+        "connections": 75,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "公开资料不足以完整还原家庭成员和家庭财务情况。\n北京大学毕业，曾在工厂、中关村和北京市政府工作，后任团中央第一书记、黑龙江省长，2018年任自然资源部部长。",
+      "sourceUrls": [
+        "https://renshi.people.com.cn/n1/2018/0328/c139617-29893104.html",
+        "https://zh.wikipedia.org/wiki/%E9%99%86%E6%98%8A"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "naruhito",
+      "name": "德仁",
+      "aliases": [
+        "徳仁",
+        "Naruhito",
+        "浩宫德仁",
+        "浩宮徳仁"
+      ],
+      "birthDate": "1960-02-23",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本东京",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本天皇",
+      "status": "依宪法履行象征性的国事与皇室事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲明仁、母亲美智子；1993年与雅子结婚，女儿为爱子。",
+      "biography": "曾在学习院大学和牛津大学学习历史，2019年5月1日即位。2020年初的职责不包含直接统领内阁或军队。",
+      "notes": [
+        "天皇为宪法规定的象征性职位；开局不赋予内阁行政权或军事指挥权。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 90,
+        "connections": 85,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲明仁、母亲美智子；1993年与雅子结婚，女儿为爱子。\n曾在学习院大学和牛津大学学习历史，2019年5月1日即位。2020年初的职责不包含直接统领内阁或军队。",
+      "sourceUrls": [
+        "https://www.kunaicho.go.jp/en/learn/about/history/history01.html",
+        "https://www.bpcj.or.jp/program/detail/N00944/"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "han_dongfang",
+      "name": "韩东方",
+      "aliases": [
+        "韓東方"
+      ],
+      "birthDate": "1963",
+      "birthDatePrecision": "year",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "北京",
+      "place": "北京",
+      "startLocation": "香港",
+      "occupation": "中国劳工通讯主任、劳工权益倡导者",
+      "status": "在香港从事劳工权益与工人组织相关工作",
+      "background": "ordinary",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "家庭来自山西，本人出生于北京；其他家庭细节不作推定。",
+      "biography": "曾任北京铁路工人，1989年参与北京工人自治联合会。1994年在香港创办中国劳工通讯，长期关注中国劳动者的处境。",
+      "notes": [
+        "本人访谈说明生于北京、家族来自山西；不把籍贯当出生地。生日仅公开到年。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 65,
+        "connections": 65,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "家庭来自山西，本人出生于北京；其他家庭细节不作推定。\n曾任北京铁路工人，1989年参与北京工人自治联合会。1994年在香港创办中国劳工通讯，长期关注中国劳动者的处境。",
+      "sourceUrls": [
+        "https://minjian-danganguan.org/zh/archive/3680",
+        "https://platformc.kr/2024/02/interview-handongfang",
+        "https://zh.wikipedia.org/wiki/%E9%9F%A9%E4%B8%9C%E6%96%B9"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "han_deqiang",
+      "name": "韩德强",
+      "aliases": [
+        "韓德強"
+      ],
+      "birthDate": "1967-07",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "self_reported",
+      "birthPlace": "浙江绍兴",
+      "place": "浙江",
+      "startLocation": "北京",
+      "occupation": "北京航空航天大学经济管理学院副研究员、评论作者",
+      "status": "从事教学、研究与社会评论",
+      "background": "scholar",
+      "backgroundLabel": "学术与公共写作经历",
+      "familyBackground": "没有足够可靠公开家庭信息，不推定家庭资产或成员职业。",
+      "biography": "在北京航空航天大学学习和任职，研究企业竞争与经济政策，也是乌有之乡网站创办者之一。",
+      "notes": [
+        "出生月份根据其公开访谈自述；北航教师页用于核实任职和研究方向。",
+        "此人与西安交通大学的同名信息融合学者不同。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 55,
+        "connections": 55,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "没有足够可靠公开家庭信息，不推定家庭资产或成员职业。\n在北京航空航天大学学习和任职，研究企业竞争与经济政策，也是乌有之乡网站创办者之一。",
+      "sourceUrls": [
+        "https://teacher.buaa.edu.cn/handeqiang/zh_CN/more/7172/jsjjgd/index.htm",
+        "https://m.wyzxwk.com/index.php/Article/shiping/2013/12/311644.html",
+        "https://zh.wikipedia.org/wiki/%E9%9F%A9%E5%BE%B7%E5%BC%BA"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "kong_qingdong",
+      "name": "孔庆东",
+      "aliases": [
+        "孔慶東",
+        "孔和尚"
+      ],
+      "birthDate": "1964-09-22",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "黑龙江哈尔滨",
+      "place": "黑龙江",
+      "startLocation": "北京",
+      "occupation": "北京大学中文系教授、作家",
+      "status": "从事中国现当代文学教学、研究和写作",
+      "background": "scholar",
+      "backgroundLabel": "学术与公共写作经历",
+      "familyBackground": "祖籍山东费县，成长于哈尔滨；家庭资产不作推定。",
+      "biography": "1983年进入北京大学中文系，研究现当代文学与通俗文学，已出版文学评论、随笔并参与公开文化讨论。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 60,
+        "connections": 55,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "祖籍山东费县，成长于哈尔滨；家庭资产不作推定。\n1983年进入北京大学中文系，研究现当代文学与通俗文学，已出版文学评论、随笔并参与公开文化讨论。",
+      "sourceUrls": [
+        "https://chinese.pku.edu.cn/szdw/zzjs/5183fde1ccc74a15a3797c5bda2b1ca2.htm",
+        "https://news.pku.edu.cn/xwzh/129-74967.htm",
+        "https://zh.wikipedia.org/wiki/%E5%AD%94%E5%BA%86%E4%B8%9C"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "chen_wenqing",
+      "name": "陈文清",
+      "aliases": [
+        "陳文清"
+      ],
+      "birthDate": "1960-01",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "四川仁寿（公开籍贯，出生城市未独立核实）",
+      "place": "四川",
+      "startLocation": "北京",
+      "occupation": "国家安全部部长、党委书记",
+      "status": "主持国家安全部工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "公开家庭资料不足，不推定亲属身份。",
+      "biography": "毕业于西南政法学院，曾在四川公安、国家安全和检察系统任职，后在福建和中央纪委工作，2016年任国家安全部部长。",
+      "notes": [
+        "已知籍贯四川仁寿，独立出生城市资料不足；字段显式注明，不能叙述为已核实出生地。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 88,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "公开家庭资料不足，不推定亲属身份。\n毕业于西南政法学院，曾在四川公安、国家安全和检察系统任职，后在福建和中央纪委工作，2016年任国家安全部部长。",
+      "sourceUrls": [
+        "https://news.sina.com.cn/c/2016-11-07/doc-ifxxmyuk6132326.shtml",
+        "https://zh.wikipedia.org/wiki/%E9%99%88%E6%96%87%E6%B8%85"
+      ],
+      "sourceConfidence": "curated_public_sources",
+      "birthPlaceConfidence": "origin_only"
+    },
+    {
+      "id": "wang_yang",
+      "name": "汪洋",
+      "aliases": [],
+      "birthDate": "1955-03",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "安徽宿州",
+      "place": "安徽",
+      "startLocation": "北京",
+      "occupation": "中共中央政治局常委、全国政协主席",
+      "status": "主持全国政协工作",
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "早年家庭经济条件有限，妻子为祝玛丽。",
+      "biography": "曾从食品厂工人进入地方工作，历任铜陵市长、重庆市委书记、广东省委书记、国务院副总理，2018年任全国政协主席。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 94,
+        "connections": 85,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "早年家庭经济条件有限，妻子为祝玛丽。\n曾从食品厂工人进入地方工作，历任铜陵市长、重庆市委书记、广东省委书记、国务院副总理，2018年任全国政协主席。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%B1%AA%E6%B4%8B_(1955%E5%B9%B4)",
+        "https://cped.nccu.edu.tw/eliteDetail.aspx?pid=1139481"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "zhang_hongliang",
+      "name": "张宏良",
+      "aliases": [
+        "張宏良"
+      ],
+      "birthDate": "1955-07-31",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "山东济南",
+      "place": "山东",
+      "startLocation": "北京",
+      "occupation": "经济评论作者、曾任中央民族大学教师",
+      "status": "继续参与写作与公共讨论",
+      "background": "scholar",
+      "backgroundLabel": "学术与公共写作经历",
+      "familyBackground": "没有足够可靠的公开家庭信息，不推定其私人家庭状况。",
+      "biography": "曾在中央民族大学继续教育学院任教，长期围绕经济、金融与政治议题写作，是乌有之乡和民族复兴网的撰稿人。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 55,
+        "connections": 55,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "没有足够可靠的公开家庭信息，不推定其私人家庭状况。\n曾在中央民族大学继续教育学院任教，长期围绕经济、金融与政治议题写作，是乌有之乡和民族复兴网的撰稿人。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E5%BC%A0%E5%AE%8F%E8%89%AF"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "qin_hui",
+      "name": "秦晖",
+      "aliases": [
+        "秦暉",
+        "卞悟"
+      ],
+      "birthDate": "1953-12",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "广西南宁",
+      "place": "广西",
+      "startLocation": "香港",
+      "occupation": "历史学者、香港中文大学访问教授",
+      "status": "从事历史研究与教学交流",
+      "background": "scholar",
+      "backgroundLabel": "学术与公共写作经历",
+      "familyBackground": "妻子金雁也是历史学者，家庭财务状况不作推定。",
+      "biography": "曾在陕西师范大学、清华大学任教，研究农民史、土地制度和经济史。2018年从清华大学退休后赴香港中文大学访问。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 65,
+        "connections": 60,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "妻子金雁也是历史学者，家庭财务状况不作推定。\n曾在陕西师范大学、清华大学任教，研究农民史、土地制度和经济史。2018年从清华大学退休后赴香港中文大学访问。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E7%A7%A6%E6%99%96",
+        "https://zhikuyun.lwinst.com/Liems/web/profile/detail/935355174946341087"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "ling_jihua",
+      "name": "令计划",
+      "aliases": [
+        "令計劃",
+        "令计划"
+      ],
+      "birthDate": "1956-10",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "山西平陆",
+      "place": "山西",
+      "startLocation": "北京",
+      "occupation": "服刑人员，曾任中央办公厅主任、中央统战部部长",
+      "status": "正在服无期徒刑，行动受监禁限制",
+      "custody": true,
+      "background": "cadre",
+      "backgroundLabel": "公共任职经历",
+      "familyBackground": "妻子谷丽萍；儿子令谷已于2012年去世。",
+      "biography": "曾在共青团和中央办公厅任职，2016年被判无期徒刑，2020年初已经失去原有职务与自由活动条件。",
+      "notes": [
+        "2020年处于服刑状态，开局必须保留拘押约束；没有公开可靠证据确定具体监所，将地点仅记为北京作为叙事行政背景。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 35,
+        "connections": 40,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "妻子谷丽萍；儿子令谷已于2012年去世。\n曾在共青团和中央办公厅任职，2016年被判无期徒刑，2020年初已经失去原有职务与自由活动条件。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E4%BB%A4%E8%A8%88%E5%8A%83",
+        "https://zw.china.com.cn/2016-12/21/content_39955755.htm"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "carrie_lam",
+      "name": "林郑月娥",
+      "aliases": [
+        "林鄭月娥",
+        "Carrie Lam",
+        "郑月娥",
+        "鄭月娥"
+      ],
+      "birthDate": "1957-05-13",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "香港",
+      "place": "香港",
+      "startLocation": "香港",
+      "occupation": "香港特别行政区行政长官",
+      "status": "在任，处理香港公共行政与社会事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "来自香港基层家庭，与林兆波结婚，育有两子。",
+      "biography": "香港大学毕业后加入政府，历任多个政策部门职务，曾任发展局局长、政务司司长，2017年就任行政长官。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 88,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "来自香港基层家庭，与林兆波结婚，育有两子。\n香港大学毕业后加入政府，历任多个政策部门职务，曾任发展局局长、政务司司长，2017年就任行政长官。",
+      "sourceUrls": [
+        "https://www.ceo.gov.hk/archive/5-term/chi/biography.html",
+        "https://hm.people.com.cn/n1/2017/0701/c42272-29376622.html",
+        "https://zh.wikipedia.org/wiki/%E6%9E%97%E9%84%AD%E6%9C%88%E5%A8%A5"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "leung_chun_ying",
+      "name": "梁振英",
+      "aliases": [
+        "CY Leung",
+        "Leung Chun-ying"
+      ],
+      "birthDate": "1954-08-12",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "香港",
+      "place": "香港",
+      "startLocation": "香港",
+      "occupation": "全国政协副主席、香港前行政长官",
+      "status": "已卸任行政长官，继续从事公共事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲为警员，童年在警察宿舍生活，家人曾加工塑料花贴补生活。",
+      "biography": "测量师出身，曾从事物业管理与公共政策工作，2012年至2017年任香港行政长官，2017年起任全国政协副主席。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 82,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲为警员，童年在警察宿舍生活，家人曾加工塑料花贴补生活。\n测量师出身，曾从事物业管理与公共政策工作，2012年至2017年任香港行政长官，2017年起任全国政协副主席。",
+      "sourceUrls": [
+        "https://www.szzx.gov.cn/szzx/zxzt/szkss/content/post_1239030.html",
+        "https://www.cppcc.gov.cn/zxww/2018/03/14/ARTI1521039821512535.shtml",
+        "https://paper.people.com.cn/rmrbhwb/page/2017-03/14/04/rmrbhwb2017031404.pdf"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "donald_tsang",
+      "name": "曾荫权",
+      "aliases": [
+        "曾蔭權",
+        "Donald Tsang"
+      ],
+      "birthDate": "1944-10-07",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "香港",
+      "place": "香港",
+      "startLocation": "香港",
+      "occupation": "退休公共行政人员、香港前行政长官",
+      "status": "已经卸任，2019年原定罪及刑罚被终审法院撤销",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "出身警员家庭，妻子为曾鲍笑薇。",
+      "biography": "1967年加入政府，历任财政司司长、政务司司长，2005年至2012年任行政长官。2020年初处于退休生活。",
+      "notes": [
+        "2019年终审法院已经撤销相关定罪和刑罚，不能在2020开局仍描述为服刑。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 65,
+        "connections": 65,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出身警员家庭，妻子为曾鲍笑薇。\n1967年加入政府，历任财政司司长、政务司司长，2005年至2012年任行政长官。2020年初处于退休生活。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%9B%BE%E8%94%AD%E6%AC%8A",
+        "https://www.doj.gov.hk/sc/notable_judgments/pdf/CACC55_2017sc.pdf"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "tung_chee_hwa",
+      "name": "董建华",
+      "aliases": [
+        "董建華",
+        "Tung Chee-hwa"
+      ],
+      "birthDate": "1937-07-07",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "上海",
+      "place": "上海",
+      "startLocation": "香港",
+      "occupation": "全国政协副主席、香港前行政长官",
+      "status": "已卸任香港行政长官，参与公共事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲董浩云经营航运事业，妻子为赵洪娉。",
+      "biography": "曾经营东方海外航运业务，1997年至2005年任香港首任行政长官，后任全国政协副主席，并参与团结香港基金工作。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 80,
+        "connections": 85,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲董浩云经营航运事业，妻子为赵洪娉。\n曾经营东方海外航运业务，1997年至2005年任香港首任行政长官，后任全国政协副主席，并参与团结香港基金工作。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E8%91%A3%E5%BB%BA%E8%8F%AF"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "ho_iat_seng",
+      "name": "贺一诚",
+      "aliases": [
+        "賀一誠",
+        "Ho Iat Seng"
+      ],
+      "birthDate": "1957-06",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "documented",
+      "birthPlace": "澳门",
+      "place": "澳门",
+      "startLocation": "澳门",
+      "occupation": "澳门特别行政区行政长官",
+      "status": "2019年12月刚就任行政长官",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "出身澳门工商业家庭，家族经营工业企业。",
+      "biography": "长期从事工商业和公共事务，曾任全国人大常委、澳门立法会主席，2019年12月20日就任澳门第五任行政长官。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 85,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出身澳门工商业家庭，家族经营工业企业。\n长期从事工商业和公共事务，曾任全国人大常委、澳门立法会主席，2019年12月20日就任澳门第五任行政长官。",
+      "sourceUrls": [
+        "https://politics.people.com.cn/n/2015/0210/c351134-26542386.html",
+        "https://news.china.com.cn/2019-11/18/content_75418552.htm",
+        "https://yearbook.gcs.gov.mo/uploads/yearbook_pdf/2020/myb2020cBN07.pdf"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "chui_sai_on",
+      "name": "崔世安",
+      "aliases": [
+        "Chui Sai On",
+        "Fernando Chui"
+      ],
+      "birthDate": "1957-01-13",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "澳门",
+      "place": "澳门",
+      "startLocation": "澳门",
+      "occupation": "澳门前行政长官",
+      "status": "2019年12月卸任行政长官",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "成长于澳门崔氏家族，家庭财务规模不作推定。",
+      "biography": "曾学习公共卫生和医务管理，担任澳门社会文化司司长，2009年至2019年任澳门行政长官。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 75,
+        "connections": 75,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "成长于澳门崔氏家族，家庭财务规模不作推定。\n曾学习公共卫生和医务管理，担任澳门社会文化司司长，2009年至2019年任澳门行政长官。",
+      "sourceUrls": [
+        "https://www.zlb.gov.cn/2014-12/10/c_127292179.htm",
+        "https://zh.wikipedia.org/wiki/%E5%B4%94%E4%B8%96%E5%AE%89"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "ma_ying_jeou",
+      "name": "马英九",
+      "aliases": [
+        "馬英九",
+        "Ma Ying-jeou"
+      ],
+      "birthDate": "1950-07-13",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "香港九龙",
+      "place": "香港",
+      "startLocation": "中国台湾·台北",
+      "occupation": "台湾前任领导人、中国国民党政治人物",
+      "status": "已经卸任，继续参与公共活动",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲马鹤凌，妻子周美青，育有两名女儿。",
+      "biography": "1952年随家人赴台湾，学习法律并取得博士学位，曾任法务部门负责人、台北市长，2008年至2016年任台湾地区领导人。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 82,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲马鹤凌，妻子周美青，育有两名女儿。\n1952年随家人赴台湾，学习法律并取得博士学位，曾任法务部门负责人、台北市长，2008年至2016年任台湾地区领导人。",
+      "sourceUrls": [
+        "https://www.president.gov.tw/Page/88",
+        "https://web.cec.gov.tw/api/file/c8dca444-fd01-4f45-9e07-64372e8be080.pdf",
+        "https://ahdas.drnh.gov.tw/docs/zong/080.pdf",
+        "https://zh.wikipedia.org/wiki/%E9%A6%AC%E8%8B%B1%E4%B9%9D"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "chen_shui_bian",
+      "name": "陈水扁",
+      "aliases": [
+        "陳水扁",
+        "阿扁",
+        "Chen Shui-bian"
+      ],
+      "birthDate": "1950-10-12",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "台湾台南官田",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·高雄",
+      "occupation": "台湾前任领导人、律师出身的政治人物",
+      "status": "处于保外就医状态，活动受有关条件限制",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "出身台南农村家庭，妻子吴淑珍，育有一子一女。",
+      "biography": "曾任律师、立法委员与台北市长，2000年至2008年任台湾地区领导人。卸任后因案件服刑，2015年起保外就医。",
+      "notes": [
+        "采用传记所述1950-10-12；部分资料另记户籍登记生日，不混同为第二人。",
+        "开局保留保外就医状态；健康数值只为虚构叙事尺度。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 70,
+        "connections": 60,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出身台南农村家庭，妻子吴淑珍，育有一子一女。\n曾任律师、立法委员与台北市长，2000年至2008年任台湾地区领导人。卸任后因案件服刑，2015年起保外就医。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E9%99%B3%E6%B0%B4%E6%89%81",
+        "https://www.chinanews.com/tw/2015/01-05/6938217.shtml"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "han_kuo_yu",
+      "name": "韩国瑜",
+      "aliases": [
+        "韓國瑜",
+        "Han Kuo-yu"
+      ],
+      "birthDate": "1957-06-17",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "台湾台北县中和（今新北中和）",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·高雄",
+      "occupation": "高雄市长、国民党2020年选举候选人",
+      "status": "市长任内请假参加选举",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "妻子李佳芬，育有两女一子。",
+      "biography": "曾任民意代表与台北农产运销公司总经理，2018年当选高雄市长，2019年获国民党提名参加2020年选举。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 85,
+        "connections": 75,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "妻子李佳芬，育有两女一子。\n曾任民意代表与台北农产运销公司总经理，2018年当选高雄市长，2019年获国民党提名参加2020年选举。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E9%9F%93%E5%9C%8B%E7%91%9C",
+        "https://www.cec.gov.tw/api/file/a0a1c1d1-294c-4142-9b49-168b13e3160f.pdf",
+        "https://votetw.com/data/candidate/宋楚瑜"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "ko_wen_je",
+      "name": "柯文哲",
+      "aliases": [
+        "Ko Wen-je",
+        "柯P"
+      ],
+      "birthDate": "1959-08-06",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "台湾新竹",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·台北",
+      "occupation": "台北市长、台湾民众党主席、医师",
+      "status": "主持台北市政与民众党事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "妻子陈佩琪为医师，育有一子两女。",
+      "biography": "长期从事外科和重症医学，2014年当选台北市长，2018年连任，2019年创立台湾民众党并任主席。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 83,
+        "connections": 75,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "妻子陈佩琪为医师，育有一子两女。\n长期从事外科和重症医学，2014年当选台北市长，2018年连任，2019年创立台湾民众党并任主席。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%9F%AF%E6%96%87%E5%93%B2",
+        "https://www.mirrormedia.mg/story/20181102pol001"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "james_soong",
+      "name": "宋楚瑜",
+      "aliases": [
+        "James Soong",
+        "宋省长",
+        "宋省長"
+      ],
+      "birthDate": "1942",
+      "birthDatePrecision": "year",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "湖南湘潭",
+      "place": "湖南",
+      "startLocation": "中国台湾",
+      "occupation": "亲民党主席、2020年选举候选人",
+      "status": "正在参与2020年选举",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲宋达为军人，妻子陈万水已于2012年去世。",
+      "biography": "曾任新闻局长、国民党秘书长和台湾省长，2000年创立亲民党，2019年登记参加2020年选举。",
+      "notes": [
+        "资料存在户籍日期与农历换算日期差异：部分选举资料列3月16日，传记换算为4月30日。仅锁定出生年，避免错误精确日。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 75,
+        "connections": 75,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲宋达为军人，妻子陈万水已于2012年去世。\n曾任新闻局长、国民党秘书长和台湾省长，2000年创立亲民党，2019年登记参加2020年选举。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E5%AE%8B%E6%A5%9A%E7%91%9C",
+        "https://www.cec.gov.tw/api/file/a0a1c1d1-294c-4142-9b49-168b13e3160f.pdf",
+        "https://authority.dila.edu.tw/person/search.php?aid=A023914",
+        "https://votetw.com/data/candidate/宋楚瑜"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "annette_lu",
+      "name": "吕秀莲",
+      "aliases": [
+        "呂秀蓮",
+        "Annette Lu"
+      ],
+      "birthDate": "1944-06",
+      "birthDatePrecision": "month",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "台湾桃园",
+      "place": "中国台湾",
+      "startLocation": "中国台湾",
+      "occupation": "台湾前副领导人、妇女权益倡导者",
+      "status": "卸任后继续从事社会与国际交流活动",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "成长于桃园家庭，私人家庭财务情况不作推定。",
+      "biography": "学习法律，参与妇女权益运动和民主运动，曾任桃园县长，2000年至2008年担任台湾地区副领导人。",
+      "notes": [
+        "国史馆资料记6月6日，桃园文学馆记6月7日。保存1944-06，明确不在冲突中伪造精确日。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 70,
+        "connections": 65,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "成长于桃园家庭，私人家庭财务情况不作推定。\n学习法律，参与妇女权益运动和民主运动，曾任桃园县长，2000年至2008年担任台湾地区副领导人。",
+      "sourceUrls": [
+        "https://women.nmth.gov.tw/?p=19340",
+        "https://ahdas.drnh.gov.tw/docs/zong/112.pdf",
+        "https://tylm.tycg.gov.tw/tylm/wSite/ct?ctNode=38047&mp=1&xItem=92163"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "su_tseng_chang",
+      "name": "苏贞昌",
+      "aliases": [
+        "蘇貞昌",
+        "Su Tseng-chang"
+      ],
+      "birthDate": "1947-07-28",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "台湾屏东",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·台北",
+      "occupation": "行政院院长、民进党政治人物",
+      "status": "在任，主持行政院工作",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲为公务员、母亲为教师，妻子为詹秀龄。",
+      "biography": "律师出身，曾任屏东县长、台北县长及行政院院长，2019年1月再次出任行政院院长。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 87,
+        "connections": 80,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲为公务员、母亲为教师，妻子为詹秀龄。\n律师出身，曾任屏东县长、台北县长及行政院院长，2019年1月再次出任行政院院长。",
+      "sourceUrls": [
+        "https://history.ey.gov.tw/author/su-tseng-chang-1/",
+        "https://web.cec.gov.tw/api/file/c8dca444-fd01-4f45-9e07-64372e8be080.pdf",
+        "https://zh.wikipedia.org/wiki/%E8%98%87%E8%B2%9E%E6%98%8C"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "eric_chu",
+      "name": "朱立伦",
+      "aliases": [
+        "朱立倫",
+        "Eric Chu"
+      ],
+      "birthDate": "1961-06-07",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "secondary",
+      "birthPlace": "台湾桃园八德",
+      "place": "中国台湾",
+      "startLocation": "中国台湾",
+      "occupation": "国民党政治人物、前新北市长",
+      "status": "已卸任新北市长，继续参与党务与选举活动",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲朱樟兴曾任军官和地方民意代表，妻子高婉倩。",
+      "biography": "曾从事会计与金融教学，历任桃园县长、行政院副院长和新北市长。2018年底卸任，2019年参加国民党初选。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 75,
+        "connections": 75,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲朱樟兴曾任军官和地方民意代表，妻子高婉倩。\n曾从事会计与金融教学，历任桃园县长、行政院副院长和新北市长。2018年底卸任，2019年参加国民党初选。",
+      "sourceUrls": [
+        "https://zh.wikipedia.org/wiki/%E6%9C%B1%E7%AB%8B%E5%80%AB"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "lee_teng_hui",
+      "name": "李登辉",
+      "aliases": [
+        "李登輝",
+        "Lee Teng-hui",
+        "岩里政男"
+      ],
+      "birthDate": "1923-01-15",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "台湾台北三芝",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·台北",
+      "occupation": "退休的台湾前任领导人、农业经济学者",
+      "status": "退休生活中仍关注农业与公共事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲李金龙，妻子曾文惠。",
+      "biography": "农业经济学者出身，曾任台北市长、台湾省主席，1988年至2000年任台湾地区领导人。2020年初仍在世。",
+      "notes": [
+        "2020年1月1日仍在世；不将之后的离世提前写入开局。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 78,
+        "connections": 80,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲李金龙，妻子曾文惠。\n农业经济学者出身，曾任台北市长、台湾省主席，1988年至2000年任台湾地区领导人。2020年初仍在世。",
+      "sourceUrls": [
+        "https://presidentiallth.drnh.gov.tw/index.php?act=Archive%2Frelevant",
+        "https://project.cna.com.tw/20200730-LeeTenghui/timeline"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "akihito",
+      "name": "明仁",
+      "aliases": [
+        "Akihito",
+        "继宫明仁",
+        "継宮明仁"
+      ],
+      "birthDate": "1933-12-23",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本东京",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本上皇",
+      "status": "已于2019年退位，过退休生活",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲裕仁、母亲香淳皇后；妻子美智子，长子德仁已即位。",
+      "biography": "1989年至2019年担任日本天皇，依宪法履行象征性事务，2019年4月30日退位后成为上皇。",
+      "notes": [
+        "2019年已退位，2020年应称上皇；不得仍按在位天皇办理事务。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 85,
+        "connections": 85,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲裕仁、母亲香淳皇后；妻子美智子，长子德仁已即位。\n1989年至2019年担任日本天皇，依宪法履行象征性事务，2019年4月30日退位后成为上皇。",
+      "sourceUrls": [
+        "https://www.kunaicho.go.jp/en/learn/about/history/history02.html"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "masako",
+      "name": "雅子",
+      "aliases": [
+        "小和田雅子",
+        "Masako Owada",
+        "Empress Masako"
+      ],
+      "birthDate": "1963-12-09",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本东京",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本皇后",
+      "status": "陪同天皇履行皇室事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲小和田恒为外交官，丈夫德仁，女儿爱子。",
+      "biography": "曾在哈佛大学学习并在日本外务省工作，1993年与德仁结婚，2019年成为皇后。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 80,
+        "connections": 80,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲小和田恒为外交官，丈夫德仁，女儿爱子。\n曾在哈佛大学学习并在日本外务省工作，1993年与德仁结婚，2019年成为皇后。",
+      "sourceUrls": [
+        "https://www.kunaicho.go.jp/en/learn/about/history/history01.html",
+        "https://kotobank.jp/word/雅子-1595047"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "suga_yoshihide",
+      "name": "菅义伟",
+      "aliases": [
+        "菅義偉",
+        "Suga Yoshihide"
+      ],
+      "birthDate": "1948-12-06",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本秋田县秋之宫村（今汤泽市）",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本内阁官房长官、自民党众议员",
+      "status": "在安倍内阁负责官房工作",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "出生于草莓种植家庭，高中毕业后曾到东京工厂工作。",
+      "biography": "曾任横滨市议员、总务大臣，2012年起任内阁官房长官，2019年宣布新年号令和。2020年初尚未担任首相。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 85,
+        "connections": 78,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "出生于草莓种植家庭，高中毕业后曾到东京工厂工作。\n曾任横滨市议员、总务大臣，2012年起任内阁官房长官，2019年宣布新年号令和。2020年初尚未担任首相。",
+      "sourceUrls": [
+        "https://www.japan.go.jp/kizuna/2020/prime_minister_suga_yoshihide.html",
+        "https://www.sugayoshihide.gr.jp/profile/"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "kishida_fumio",
+      "name": "岸田文雄",
+      "aliases": [
+        "Kishida Fumio"
+      ],
+      "birthDate": "1957-07-29",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本东京",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "自民党政务调查会长、众议员",
+      "status": "在自民党内从事政策协调",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲岸田文武曾任政府官员和众议员，祖父岸田正记曾任众议员。",
+      "biography": "曾在银行工作并担任议员秘书，1993年首次当选众议员，后任外务大臣，2017年起任自民党政务调查会长。2020年初尚未担任首相。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 78,
+        "connections": 80,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲岸田文武曾任政府官员和众议员，祖父岸田正记曾任众议员。\n曾在银行工作并担任议员秘书，1993年首次当选众议员，后任外务大臣，2017年起任自民党政务调查会长。2020年初尚未担任首相。",
+      "sourceUrls": [
+        "https://www.kantei.go.jp/jp/100_kishida/meibo/daijin/kishida_fumio.html",
+        "https://www.japan.go.jp/kizuna/_userdata/pdf/2021/winter2021/prime_minister_kishida_fumio.pdf"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "ishiba_shigeru",
+      "name": "石破茂",
+      "aliases": [
+        "石破 茂",
+        "Ishiba Shigeru"
+      ],
+      "birthDate": "1957-02-04",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本（公开履历出身地为鸟取县八头町，出生城市未独立核实）",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "自民党众议员、前防卫大臣",
+      "status": "从事国会与政党活动",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲石破二朗曾任鸟取县知事；妻子佳子。",
+      "biography": "曾在银行工作，1986年进入众议院，历任防卫大臣、农林水产大臣、自民党干事长等职。2020年初为众议员，尚未担任首相。",
+      "notes": [
+        "首相官邸的Hometown字段为出身地，不足以单独认定出生城市，出生地文本保留这一限制。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 78,
+        "connections": 78,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲石破二朗曾任鸟取县知事；妻子佳子。\n曾在银行工作，1986年进入众议院，历任防卫大臣、农林水产大臣、自民党干事长等职。2020年初为众议员，尚未担任首相。",
+      "sourceUrls": [
+        "https://japan.kantei.go.jp/102_ishiba/meibo/daijin/ishiba_e.html",
+        "https://www.nippon.com/en/japan-data/h02145/",
+        "https://zh.wikipedia.org/wiki/%E7%9F%B3%E7%A0%B4%E8%8C%82"
+      ],
+      "sourceConfidence": "curated_public_sources",
+      "birthPlaceConfidence": "origin_only"
+    },
+    {
+      "id": "hatoyama_yukio",
+      "name": "鸠山由纪夫",
+      "aliases": [
+        "鳩山由紀夫",
+        "鳩山友紀夫",
+        "鸠山友纪夫",
+        "Hatoyama Yukio"
+      ],
+      "birthDate": "1947-02-11",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本东京港区",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本前首相、公共事务与交流活动参与者",
+      "status": "退出国会议员职位后从事公共交流",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "父亲鸠山威一郎曾任外务大臣，祖父鸠山一郎曾任首相，母亲安子来自石桥家族。",
+      "biography": "工程学博士，曾在大学任教并参与创办民主党，2009年至2010年任首相，2012年退出众议院选举。",
+      "notes": [
+        "首相官邸的From为北海道政治选区背景，家族纪念馆明确记载生于东京港区，不混作北海道出生。",
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 5,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 70,
+        "connections": 85,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "父亲鸠山威一郎曾任外务大臣，祖父鸠山一郎曾任首相，母亲安子来自石桥家族。\n工程学博士，曾在大学任教并参与创办民主党，2009年至2010年任首相，2012年退出众议院选举。",
+      "sourceUrls": [
+        "https://www.hatoyamakaikan.com/family/yukio/",
+        "https://www.hatoyama.gr.jp/profile.html",
+        "https://japan.kantei.go.jp/past_cabinet/093.html"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    },
+    {
+      "id": "koike_yuriko",
+      "name": "小池百合子",
+      "aliases": [
+        "Koike Yuriko"
+      ],
+      "birthDate": "1952-07-15",
+      "birthDatePrecision": "day",
+      "birthDateConfidence": "documented",
+      "birthPlace": "日本兵库县",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "东京都知事",
+      "status": "主持东京都政务，正在筹备东京奥运相关事务",
+      "background": "custom",
+      "backgroundLabel": "公开个人经历",
+      "familyBackground": "未收录未经充分核实的私人家庭信息。",
+      "biography": "曾任新闻主播、参众两院议员、环境大臣与防卫大臣，2016年首次当选东京都知事。",
+      "notes": [
+        "起点所在城市按公开工作、生活范围设定，不声称核实了2020年1月1日当天的具体行踪。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 82,
+        "connections": 75,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事用游戏估值，不代表实际智力、健康、外貌测评或本人及家庭财产。资金是虚构的日常可支配起点，职务影响与家庭财产分开。",
+      "backgroundText": "未收录未经充分核实的私人家庭信息。\n曾任新闻主播、参众两院议员、环境大臣与防卫大臣，2016年首次当选东京都知事。",
+      "sourceUrls": [
+        "https://www.metro.tokyo.lg.jp/ja/governor/goaisatsu",
+        "https://www.english.metro.tokyo.lg.jp/governor"
+      ],
+      "sourceConfidence": "curated_public_sources"
+    }
+  ]
+}

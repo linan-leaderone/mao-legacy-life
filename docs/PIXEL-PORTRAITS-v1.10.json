@@ -1,0 +1,129 @@
+{
+  "version": "1.10.0",
+  "tool": "Built-in image_gen (no fallback CLI)",
+  "method": "Identity-preserving style-transfer of existing fixed character assets; original images retained unchanged.",
+  "promptTemplate": "Image 1 is the edit target; image 2 (pixel-mao-zedong) is only the pixel-art technique reference. Preserve identity, age, hairstyle, expression and clothing. Single square head-and-shoulders game avatar, whole hair within margins and large centered face. Authentic hand-placed 96x96 anime pixel-art aesthetic: crisp square pixels and stair-step outlines, compact material palettes, 2-3 cel-shade clusters, readable at 48px. Transparent background. No text, frame, extra people, blurred mosaic, smooth painting or gradients. Blobfish variant shows entire creature with fins inside margins.",
+  "postprocessing": "Generated raster only resized to a maximum 512×512 with nearest-neighbor and encoded as lossless WebP. No programmatic redraw, pixelation of original artwork, or identity replacement.",
+  "assets": [
+    {
+      "source": "public/portraits/mao-zedong.webp",
+      "output": "public/portraits/pixel-mao-zedong.webp",
+      "identity": "mature face, receding forehead, swept-back black hair, mole beneath lower lip, gray Zhongshan suit",
+      "bytes": 153346,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "6b592bfce633909207eed00873f0f7869da7d6f4b1a62ef3548617ace1cec8ab",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/deng-xiaoping.webp",
+      "output": "public/portraits/pixel-deng-xiaoping.webp",
+      "identity": "elderly rounded face, forehead wrinkles, short salt-and-pepper hair, slight smile, navy Zhongshan suit",
+      "bytes": 164154,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "3297ccb8109d13feac2350b3171a3dc37741eb8db20bf31cfe650e190ce996ba",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/xi-jinping.webp",
+      "output": "public/portraits/pixel-xi-jinping.webp",
+      "identity": "broad mature face, swept-back black-and-gray hair, navy suit, white shirt, blue tie",
+      "bytes": 172352,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "d13c2b17b252e971321c8293fd1b1bf1eba7b576b7f4294abb3feb835da70a42",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/mitake-ran.webp",
+      "output": "public/portraits/pixel-mitake-ran.webp",
+      "identity": "black bob with red streak, red eyes, black biker jacket, red shirt, necklace",
+      "bytes": 212614,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "1b73a4727b1df477acc380a4f64cd51614d998a74a8a8746d8f0c1f25e72b267",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/aoba-moca.webp",
+      "output": "public/portraits/pixel-aoba-moca.webp",
+      "identity": "ash beige bob, teal eyes, off-white hooded sweatshirt",
+      "bytes": 215948,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "006869d12416e3bf0ff57ee2f1f4ce830af64b9049e1c16cebdbaa73ebb26e52",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/hazawa-tsugumi.webp",
+      "output": "public/portraits/pixel-hazawa-tsugumi.webp",
+      "identity": "brown shoulder-length bob, brown eyes, white blouse, black collar, magenta bow",
+      "bytes": 237506,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "1005b7f8e444d14f26767fa6540b882084595a52818c7269c1af8d0f916f1bb6",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/toyokawa-sakiko.webp",
+      "output": "public/portraits/pixel-toyokawa-sakiko.webp",
+      "identity": "navy twin tails, black ribbons, golden eyes, solemn expression, navy high collar",
+      "bytes": 241284,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "f724d2a01659b6a9c9baf392886cac2aa0618da44740ede10afee7f81f9a0061",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/udagawa-tomoe.webp",
+      "output": "public/portraits/pixel-udagawa-tomoe.webp",
+      "identity": "long deep-red hair, amber eyes, black tank top, red plaid overshirt, choker",
+      "bytes": 269088,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "2795be61d59add47996eaa576faff62681da00c7063a5032c763badcbf1c8ae5",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/portraits/uehara-himari.webp",
+      "output": "public/portraits/pixel-uehara-himari.webp",
+      "identity": "strawberry-blonde ponytail, black hairband, brown eyes, pale-pink cardigan, white shirt",
+      "bytes": 237622,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "952d386ec1c7638d00c3386156256cbdecbbf01d01087ea826d5ff54734acc36",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    },
+    {
+      "source": "public/characters/deng-blobfish-v17.png",
+      "output": "public/characters/deng-blobfish-pixel.webp",
+      "identity": "pale-pink blobfish with floppy bulbous nose, small dark eyes, drooping thick mouth, rounded body and little fins",
+      "bytes": 139880,
+      "dimensions": [
+        512,
+        512
+      ],
+      "sha256": "904c3486122ed2ed9a02dd317287f19881761fc14330eecf929da9f464e71ace",
+      "verification": "Inspected identity, clothing, pixel-art finish and alpha; source original retained."
+    }
+  ]
+}

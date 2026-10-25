@@ -1,0 +1,538 @@
+{
+  "asOf": "2020-01-01",
+  "personas": [
+    {
+      "id": "cai_xukun",
+      "name": "蔡徐坤",
+      "aliases": [
+        "KUN",
+        "Cai Xukun",
+        "蔡徐坤"
+      ],
+      "birthDate": "1998-08-02",
+      "birthPlace": "浙江温州",
+      "place": "浙江",
+      "startLocation": "中国大陆",
+      "occupation": "歌手、音乐创作人、演员",
+      "status": "从事音乐创作与演艺活动",
+      "background": "ordinary",
+      "backgroundLabel": "公开家庭与演艺经历",
+      "familyBackground": "母亲来自湖南怀化，幼年曾在湖南生活；家庭财务情况未作推定。",
+      "biography": "2018年参加《偶像练习生》并以组合成员身份出道，至2020年初已开展个人音乐与演艺工作。",
+      "notes": [
+        "所在地仅取公开工作活动范围，未把一次采访或演出地点当作2020年1月1日固定居所。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 5,
+        "fitness": 7,
+        "appearance": 8
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 50,
+        "fitness": 70,
+        "appearance": 80,
+        "influence": 70,
+        "connections": 65,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "母亲来自湖南怀化，幼年曾在湖南生活；家庭财务情况未作推定。\n2018年参加《偶像练习生》并以组合成员身份出道，至2020年初已开展个人音乐与演艺工作。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://piaofang.maoyan.com/celebrity/1800407/intro",
+        "https://www.chinaqw.com/zhwh/2019/02-05/214847.shtml",
+        "https://www.people.com.cn/n1/2019/0228/c32306-30907814.html"
+      ]
+    },
+    {
+      "id": "sun_xiaochuan",
+      "name": "孙笑川",
+      "aliases": [
+        "孫笑川",
+        "带带大师兄",
+        "帶帶大師兄",
+        "Sun Xiaochuan",
+        "Mata川"
+      ],
+      "birthDate": "1990-05-12",
+      "birthPlace": "四川成都新津",
+      "place": "四川",
+      "startLocation": "四川·成都新津",
+      "occupation": "网络主播、视频创作者",
+      "status": "以内容创作和网络活动谋生",
+      "background": "ordinary",
+      "backgroundLabel": "普通家庭",
+      "familyBackground": "成长于单亲家庭，母亲经营零食和童装生意。",
+      "biography": "曾从事工地安全监理，2015年起从事网络直播，离开原工作室后在新津继续网络内容工作。",
+      "notes": [
+        "出生年月日采用公开百科履历；未找到可独立核验月日的一手出生记录，日期精度存在不确定性。",
+        "所在地依据触乐2018年实地采访所见工作与生活地区，不表示核实了2020年1月1日实时行踪。"
+      ],
+      "birthDateConfidence": "secondary",
+      "points": {
+        "intelligence": 5,
+        "family": 4,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 50,
+        "family": 40,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 40,
+        "connections": 45,
+        "funds": 8000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "成长于单亲家庭，母亲经营零食和童装生意。\n曾从事工地安全监理，2015年起从事网络直播，离开原工作室后在新津继续网络内容工作。",
+      "sourceUrls": [
+        "https://www.chuapp.com/?a=index&c=Article&id=285712",
+        "https://tech.sina.cn/csj/2019-01-02/doc-ihqhqcis2321099.d.html",
+        "https://bkso.baidu.com/item/孙笑川/24368552"
+      ]
+    },
+    {
+      "id": "li_keqiang",
+      "name": "李克强",
+      "aliases": [
+        "李克強",
+        "Li Keqiang"
+      ],
+      "birthDate": "1955-07-03",
+      "birthPlace": "安徽合肥",
+      "place": "安徽",
+      "startLocation": "北京",
+      "occupation": "国务院总理、中共中央政治局常委",
+      "status": "在任，主持国务院工作",
+      "background": "cadre",
+      "backgroundLabel": "地方干部家庭",
+      "familyBackground": "父亲李奉三曾在安徽地方任职；本人有知青、法律学习、共青团及地方治理经历。",
+      "biography": "2013年起任国务院总理，2018年继续任职；2020年初仍在国务院总理任上。",
+      "notes": [
+        "生日按新华社2023年官方生平的1955年7月3日；不采用早期资料中的7月1日。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 6,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 60,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 94,
+        "connections": 95,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲李奉三曾在安徽地方任职；本人有知青、法律学习、共青团及地方治理经历。\n2013年起任国务院总理，2018年继续任职；2020年初仍在国务院总理任上。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.moe.gov.cn/jyb_xwfb/moe_1946/2023fj/202311/t20231102_1088746.html",
+        "https://cpc.people.com.cn/n1/2017/1025/c414940-29608804.html",
+        "https://www.abc.net.au/chinese/2023-10-27/china-former-primer-li-keqiang-died-aged-68-overview-of-his-life/103030990"
+      ]
+    },
+    {
+      "id": "lee_jaemyung",
+      "name": "李在明",
+      "aliases": [
+        "이재명",
+        "Lee Jae-myung",
+        "Lee Jaemyung",
+        "李在明"
+      ],
+      "birthDate": "1964-12-22",
+      "birthPlace": "韩国庆尚北道安东",
+      "place": "韩国",
+      "startLocation": "韩国·京畿道",
+      "occupation": "京畿道知事",
+      "status": "在任，承担京畿道地方行政工作",
+      "background": "rural",
+      "backgroundLabel": "乡村劳动者家庭",
+      "familyBackground": "出身安东贫困家庭，少年时期进入工厂劳动，后来通过学习取得法律专业资格。",
+      "biography": "曾任城南市长，2018年当选京畿道知事；2020年初不是韩国总统。",
+      "notes": [
+        "年龄按法定登记生日1964年12月22日计算；实际出生日期存在1963年等不同记载，不将法定生日宣称为无争议的实际生日。"
+      ],
+      "birthDateConfidence": "registered",
+      "points": {
+        "intelligence": 8,
+        "family": 3,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 30,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 78,
+        "connections": 80,
+        "funds": 15000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "出身安东贫困家庭，少年时期进入工厂劳动，后来通过学习取得法律专业资格。\n曾任城南市长，2018年当选京畿道知事；2020年初不是韩国总统。",
+      "sourceUrls": [
+        "https://cn.yna.co.kr/view/ACK20250602003100881",
+        "https://www.chosunonline.com/m/svc/article.amp.html?contid=2021101180005",
+        "https://zh.wikipedia.org/wiki/李在明"
+      ]
+    },
+    {
+      "id": "xi_jinping",
+      "name": "习近平",
+      "aliases": [
+        "習近平",
+        "Xi Jinping"
+      ],
+      "birthDate": "1953-06-15",
+      "birthPlace": "北京",
+      "place": "北京",
+      "startLocation": "北京",
+      "occupation": "中共中央总书记、国家主席、中央军委主席",
+      "status": "在任，承担党、国家和军队领导职责",
+      "background": "cadre",
+      "backgroundLabel": "领导干部家庭",
+      "familyBackground": "父亲为习仲勋，母亲为齐心；青年时期曾赴陕西延川插队。",
+      "biography": "2012年起任中共中央总书记，2013年起任国家主席；2020年初在北京履行相关职务。",
+      "notes": [],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 98,
+        "connections": 98,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲为习仲勋，母亲为齐心；青年时期曾赴陕西延川插队。\n2012年起任中共中央总书记，2013年起任国家主席；2020年初在北京履行相关职务。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.mod.gov.cn/gfbw/sy/tt_214026/4807142.html",
+        "https://politics.people.com.cn/n1/2019/0615/c1001-31154120.html",
+        "https://politics.people.com.cn/n1/2018/0220/c1001-29826529.html",
+        "https://zh.wikipedia.org/wiki/习近平"
+      ]
+    },
+    {
+      "id": "bo_xilai",
+      "name": "薄熙来",
+      "aliases": [
+        "薄熙來",
+        "Bo Xilai"
+      ],
+      "birthDate": "1949-07-03",
+      "birthPlace": "北京",
+      "place": "北京",
+      "startLocation": "北京·秦城监狱",
+      "occupation": "原重庆市委书记，服刑人员",
+      "status": "被判无期徒刑，正在服刑，行动与对外接触受监狱管理约束",
+      "custody": true,
+      "background": "cadre",
+      "backgroundLabel": "领导干部家庭",
+      "familyBackground": "父亲为薄一波；有地方及中央行政工作经历。",
+      "biography": "2012年被开除党籍；2013年受贿、贪污、滥用职权案终审维持无期徒刑判决。2020年初仍在监狱服刑。",
+      "notes": [
+        "出生地依据法院判决书为北京，山西定襄为籍贯，二者不混用。"
+      ],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 4,
+        "appearance": 6
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 40,
+        "appearance": 60,
+        "influence": 45,
+        "connections": 50,
+        "funds": 0,
+        "health": 65,
+        "stress": 45
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲为薄一波；有地方及中央行政工作经历。\n2012年被开除党籍；2013年受贿、贪污、滥用职权案终审维持无期徒刑判决。2020年初仍在监狱服刑。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://database.caixin.com/2024-09-16/102237199.html?originReferrer=caixinsearch_wap",
+        "https://news.sina.com.cn/o/2007-01-17/033711016216s.shtml"
+      ]
+    },
+    {
+      "id": "abe_shinzo",
+      "name": "安倍晋三",
+      "aliases": [
+        "安倍晉三",
+        "安倍晋三",
+        "Abe Shinzo",
+        "Shinzo Abe",
+        "あべしんぞう"
+      ],
+      "birthDate": "1954-09-21",
+      "birthPlace": "日本东京",
+      "place": "日本",
+      "startLocation": "日本·东京",
+      "occupation": "日本内阁总理大臣、自由民主党总裁",
+      "status": "在任，领导第四次安倍内阁",
+      "background": "custom",
+      "backgroundLabel": "政治家家庭",
+      "familyBackground": "父亲安倍晋太郎曾任外务大臣，外祖父岸信介曾任首相。",
+      "biography": "2012年再次出任首相，2017年组成第四次安倍内阁；2020年1月仍在首相任上。",
+      "notes": [],
+      "points": {
+        "intelligence": 7,
+        "family": 8,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 70,
+        "family": 80,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 95,
+        "connections": 95,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲安倍晋太郎曾任外务大臣，外祖父岸信介曾任首相。\n2012年再次出任首相，2017年组成第四次安倍内阁；2020年1月仍在首相任上。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.kantei.go.jp/jp/rekidainaikaku/090.html",
+        "https://www.jimin.jp/election/results/sousai18/profile/abe_shinzo.html",
+        "https://www.jimin.jp/news/press/136033.html",
+        "https://shinzoabe.tales.tokyo/life/",
+        "https://abeshinzo-digitalmuseum.com/pdf/20140919_Others.pdf"
+      ]
+    },
+    {
+      "id": "park_geunhye",
+      "name": "朴槿惠",
+      "aliases": [
+        "朴槿恵",
+        "박근혜",
+        "Park Geun-hye",
+        "Park Geunhye"
+      ],
+      "birthDate": "1952-02-02",
+      "birthPlace": "韩国大邱",
+      "place": "韩国",
+      "startLocation": "韩国·京畿道首尔看守所",
+      "occupation": "韩国前总统，服刑人员",
+      "status": "被罢免后遭羁押；2020年初身在首尔看守所，相关案件仍有重审程序",
+      "custody": true,
+      "background": "custom",
+      "backgroundLabel": "政治家家庭",
+      "familyBackground": "父亲为韩国前总统朴正熙，母亲为陆英修。",
+      "biography": "2017年被弹劾罢免并收押；2019年12月出院后重返首尔看守所。2020年初外出与接触外界受到监管限制。",
+      "notes": [
+        "首尔看守所实际位于京畿道义王市；不将机构名称误当首尔市地址。"
+      ],
+      "points": {
+        "intelligence": 6,
+        "family": 8,
+        "fitness": 4,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 60,
+        "family": 80,
+        "fitness": 40,
+        "appearance": 50,
+        "influence": 45,
+        "connections": 50,
+        "funds": 0,
+        "health": 65,
+        "stress": 45
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲为韩国前总统朴正熙，母亲为陆英修。\n2017年被弹劾罢免并收押；2019年12月出院后重返首尔看守所。2020年初外出与接触外界受到监管限制。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.gov.cn/ldhd/2013-02/25/content_2339890.htm",
+        "https://world.kbs.co.kr/service/contents_view.htm?board_seq=50746&id=&lang=c&menu_cate=issues",
+        "https://cn.yna.co.kr/view/ACK20191203002500881",
+        "https://cn.yna.co.kr/view/ACK20121219002100881"
+      ]
+    },
+    {
+      "id": "tsai_ingwen",
+      "name": "蔡英文",
+      "aliases": [
+        "Tsai Ing-wen",
+        "Tsai Ingwen",
+        "蔡英文"
+      ],
+      "birthDate": "1956-08-31",
+      "birthPlace": "台湾台北",
+      "place": "中国台湾",
+      "startLocation": "中国台湾·台北",
+      "occupation": "台湾地区领导人、民进党籍连任候选人",
+      "status": "在任，正参与2020年1月选举竞选",
+      "background": "business",
+      "backgroundLabel": "工商经营家庭",
+      "familyBackground": "父亲从汽车维修行业起步，后来从事经营；本人先后接受法学教育并参与经贸谈判。",
+      "biography": "2016年就任，2020年1月1日仍在第一任期，连任选举尚未投票。",
+      "notes": [],
+      "points": {
+        "intelligence": 8,
+        "family": 7,
+        "fitness": 5,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 70,
+        "fitness": 50,
+        "appearance": 50,
+        "influence": 92,
+        "connections": 92,
+        "funds": 20000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "父亲从汽车维修行业起步，后来从事经营；本人先后接受法学教育并参与经贸谈判。\n2016年就任，2020年1月1日仍在第一任期，连任选举尚未投票。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.cna.com.tw/tag/34904/",
+        "https://presidentialdbs.drnh.gov.tw/index.php?act=ArchivePavp%2Findex",
+        "https://www.dpp.org.tw/media/contents/6597",
+        "https://www.president.gov.tw/File/Doc/0c6c5ceb-024c-4d1d-a9ec-b804fe6d1714"
+      ]
+    },
+    {
+      "id": "lai_chingte",
+      "name": "赖清德",
+      "aliases": [
+        "賴清德",
+        "Lai Ching-te",
+        "Lai Chingte",
+        "William Lai"
+      ],
+      "birthDate": "1959-10-06",
+      "birthPlace": "台湾台北县万里（今新北万里）",
+      "place": "中国台湾",
+      "startLocation": "中国台湾",
+      "occupation": "前行政院长、民进党籍副领导人候选人",
+      "status": "已于2019年卸任行政院长，正搭档蔡英文参加2020年选举",
+      "background": "worker",
+      "backgroundLabel": "矿工家庭",
+      "familyBackground": "出生于万里矿工家庭，父亲早逝，由母亲抚养成长；从医后进入政界。",
+      "biography": "2019年11月获蔡英文邀请搭档参选；截至2020年1月1日仍是候选人，尚未当选及就任副领导人。",
+      "notes": [
+        "取公开政治活动所在地区，不推定2020年1月1日私人居所。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 3,
+        "fitness": 6,
+        "appearance": 6
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 30,
+        "fitness": 60,
+        "appearance": 60,
+        "influence": 80,
+        "connections": 85,
+        "funds": 15000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "出生于万里矿工家庭，父亲早逝，由母亲抚养成长；从医后进入政界。\n2019年11月获蔡英文邀请搭档参选；截至2020年1月1日仍是候选人，尚未当选及就任副领导人。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://www.cna.com.tw/tag/19619/",
+        "https://www.president.gov.tw/Page/5",
+        "https://www.roc-taiwan.org/uploads/sites/122/2024/05/2024%E7%B8%BD%E7%B5%B1%E4%B8%AD%E6%96%87.pdf"
+      ]
+    },
+    {
+      "id": "wen_jiabao",
+      "name": "温家宝",
+      "aliases": [
+        "溫家寶",
+        "Wen Jiabao"
+      ],
+      "birthDate": "1942-09-15",
+      "birthPlace": "天津",
+      "place": "天津",
+      "startLocation": "北京",
+      "occupation": "国务院原总理，退休干部",
+      "status": "已于2013年卸任总理，没有现任总理的行政权限",
+      "background": "research",
+      "backgroundLabel": "教师家庭",
+      "familyBackground": "祖父、父亲及母亲均有教师经历，成长于天津，后来学习地质专业。",
+      "biography": "2003年至2013年任国务院总理；2020年初已退休。",
+      "notes": [
+        "生日由本人《我的母亲》所记1942年9月15日核对；开局地点取退休国家领导人的公开活动城市，不写私人住址或实时行踪。"
+      ],
+      "points": {
+        "intelligence": 8,
+        "family": 5,
+        "fitness": 4,
+        "appearance": 5
+      },
+      "asOf": "2020-01-01",
+      "stats": {
+        "intelligence": 80,
+        "family": 50,
+        "fitness": 40,
+        "appearance": 50,
+        "influence": 65,
+        "connections": 75,
+        "funds": 15000,
+        "health": 75,
+        "stress": 25
+      },
+      "statsBasis": "叙事估值；不代表实际智力、健康测评、容貌评价或本人及家庭财产。资金仅作日常可支配额度的虚构起点。",
+      "backgroundText": "祖父、父亲及母亲均有教师经历，成长于天津，后来学习地质专业。\n2003年至2013年任国务院总理；2020年初已退休。",
+      "birthDateConfidence": "documented",
+      "sourceUrls": [
+        "https://m.creaders.net/news/page/1071224",
+        "https://cpc.people.com.cn/n/2013/1031/c64387-23385786.html",
+        "https://www.infzm.com/contents/88588?source=124&source_1=95533",
+        "https://news.sina.com.cn/o/2009-01-09/053815004688s.shtml"
+      ]
+    }
+  ]
+}

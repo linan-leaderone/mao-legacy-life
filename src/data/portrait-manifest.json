@@ -1,0 +1,146 @@
+{
+  "version": 2,
+  "people": {
+    "hazawa_tsugumi": {
+      "name": "羽泽鸫",
+      "aliases": [
+        "羽澤鶇",
+        "羽泽䳟"
+      ],
+      "src": "./portraits/pixel-hazawa-tsugumi.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/Tsugumi.png",
+      "portraitAge": 20,
+      "originalSrc": "./portraits/hazawa-tsugumi.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "mitake_ran": {
+      "name": "美竹兰",
+      "aliases": [
+        "美竹蘭"
+      ],
+      "src": "./portraits/pixel-mitake-ran.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/Ran.png",
+      "portraitAge": 20,
+      "originalSrc": "./portraits/mitake-ran.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "aoba_moca": {
+      "name": "青叶摩卡",
+      "aliases": [
+        "青葉摩卡"
+      ],
+      "src": "./portraits/pixel-aoba-moca.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/Moka.png",
+      "portraitAge": 20,
+      "originalSrc": "./portraits/aoba-moca.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "uehara_himari": {
+      "name": "上原绯玛丽",
+      "aliases": [
+        "上原緋瑪麗"
+      ],
+      "src": "./portraits/pixel-uehara-himari.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/Himari.png",
+      "portraitAge": 20,
+      "originalSrc": "./portraits/uehara-himari.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "udagawa_tomoe": {
+      "name": "宇田川巴",
+      "src": "./portraits/pixel-udagawa-tomoe.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/Tomoe.png",
+      "portraitAge": 20,
+      "originalSrc": "./portraits/udagawa-tomoe.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "toyokawa_sakiko": {
+      "name": "丰川祥子",
+      "aliases": [
+        "豐川祥子"
+      ],
+      "src": "./portraits/pixel-toyokawa-sakiko.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/MAOYUANXIN/saki.png",
+      "portraitAge": 13,
+      "originalSrc": "./portraits/toyokawa-sakiko.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "mao_zedong": {
+      "name": "毛泽东",
+      "aliases": [
+        "毛澤東",
+        "Mao Zedong"
+      ],
+      "src": "./portraits/pixel-mao-zedong.webp",
+      "sourceType": "photo-reference",
+      "reference": "https://commons.wikimedia.org/wiki/File:Mao_Tse_Tung.jpg",
+      "portraitAge": 56,
+      "originalSrc": "./portraits/mao-zedong.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "deng_xiaoping": {
+      "name": "邓小平",
+      "aliases": [
+        "鄧小平",
+        "Deng Xiaoping"
+      ],
+      "src": "./portraits/pixel-deng-xiaoping.webp",
+      "sourceType": "photo-reference",
+      "reference": "https://commons.wikimedia.org/wiki/File:Deng_Xiaoping.jpg",
+      "portraitAge": 74,
+      "originalSrc": "./portraits/deng-xiaoping.webp",
+      "artworkStyle": "anime-pixel"
+    },
+    "xi_jinping": {
+      "name": "习近平",
+      "aliases": [
+        "習近平",
+        "Xi Jinping"
+      ],
+      "src": "./portraits/pixel-xi-jinping.webp",
+      "sourceType": "mod-reference",
+      "reference": "gfx/Leaders/PRC/PRC_xi_jinping1.png",
+      "portraitAge": 66,
+      "originalSrc": "./portraits/xi-jinping.webp",
+      "artworkStyle": "anime-pixel"
+    }
+  },
+  "originals": [
+    {
+      "id": "original-male",
+      "presentation": "male",
+      "age": "adult",
+      "src": "./portraits/original-male.webp"
+    },
+    {
+      "id": "original-female",
+      "presentation": "female",
+      "age": "adult",
+      "src": "./portraits/original-female.webp"
+    },
+    {
+      "id": "original-neutral",
+      "presentation": "neutral",
+      "age": "adult",
+      "src": "./portraits/original-neutral.webp"
+    },
+    {
+      "id": "original-child-neutral",
+      "presentation": "neutral",
+      "age": "child",
+      "src": "./portraits/original-child-neutral.webp"
+    },
+    {
+      "id": "original-older-neutral",
+      "presentation": "neutral",
+      "age": "older",
+      "src": "./portraits/original-older-neutral.webp"
+    }
+  ]
+}

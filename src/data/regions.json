@@ -1,0 +1,1155 @@
+{
+  "version": 1,
+  "provinces": {
+    "北京": {
+      "region": "china",
+      "zone": "京津冀",
+      "industry": "公共服务、科研、信息服务",
+      "dailyLife": "地铁换乘、胡同菜市与写字楼通勤并存",
+      "pressures": "租住成本、通勤时间与升学机会",
+      "ruralLife": "近郊村镇与山区果园",
+      "neighbors": [
+        "天津",
+        "河北"
+      ],
+      "protestFactor": 1.2,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "天津": {
+      "region": "china",
+      "zone": "京津冀",
+      "industry": "港口物流、装备制造、石化",
+      "dailyLife": "海河两岸的旧街区与滨海新区之间往返",
+      "pressures": "城区与滨海就业距离、工业岗位转型",
+      "ruralLife": "郊区菜田与沿海渔村",
+      "neighbors": [
+        "北京",
+        "河北"
+      ],
+      "protestFactor": 1.05,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "河北": {
+      "region": "china",
+      "zone": "华北",
+      "industry": "钢铁、装备、粮食与港口运输",
+      "dailyLife": "石家庄铁路枢纽、唐山厂区与环京县城各有节奏",
+      "pressures": "跨城通勤与重工业调整",
+      "ruralLife": "华北平原麦田和太行山村",
+      "neighbors": [
+        "北京",
+        "天津",
+        "山东",
+        "河南",
+        "山西",
+        "内蒙古",
+        "辽宁"
+      ],
+      "protestFactor": 0.95,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "山西": {
+      "region": "china",
+      "zone": "华北",
+      "industry": "煤炭、焦化、装备与文旅",
+      "dailyLife": "太原厂区和晋中老街之间，有不同的就业选择",
+      "pressures": "资源行业周期与老工业区再就业",
+      "ruralLife": "黄土丘陵的村庄与旱地",
+      "neighbors": [
+        "河北",
+        "河南",
+        "陕西",
+        "内蒙古"
+      ],
+      "protestFactor": 0.8,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "内蒙古": {
+      "region": "china",
+      "zone": "北方",
+      "industry": "畜牧、能源、乳业与边境贸易",
+      "dailyLife": "呼包鄂城市走廊与远距离旗县交通差异很大",
+      "pressures": "长距离出行、供暖与资源行业周期",
+      "ruralLife": "草原牧区与河套灌区",
+      "neighbors": [
+        "黑龙江",
+        "吉林",
+        "辽宁",
+        "河北",
+        "山西",
+        "陕西",
+        "宁夏",
+        "甘肃"
+      ],
+      "protestFactor": 0.7,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "辽宁": {
+      "region": "china",
+      "zone": "东北",
+      "industry": "装备制造、石化、港口与服务业",
+      "dailyLife": "沈阳工业街区和大连港口城市的生活不同",
+      "pressures": "老工业岗位调整与家庭养老",
+      "ruralLife": "辽河平原农业和沿海渔业",
+      "neighbors": [
+        "吉林",
+        "河北",
+        "内蒙古"
+      ],
+      "protestFactor": 1,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "吉林": {
+      "region": "china",
+      "zone": "东北",
+      "industry": "汽车、粮食、食品与光电",
+      "dailyLife": "长春汽车厂区、大学和县城客运站连接着家庭生活",
+      "pressures": "工业班次、冬季通勤和城乡就业差异",
+      "ruralLife": "黑土地粮田与长白山村镇",
+      "neighbors": [
+        "辽宁",
+        "黑龙江",
+        "内蒙古"
+      ],
+      "protestFactor": 0.85,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "黑龙江": {
+      "region": "china",
+      "zone": "东北",
+      "industry": "粮食、能源、装备与对俄贸易",
+      "dailyLife": "哈尔滨城区与农垦小城之间常需长途列车",
+      "pressures": "冬季供暖、产业调整与农产品价格",
+      "ruralLife": "大豆稻田和林区聚落",
+      "neighbors": [
+        "吉林",
+        "内蒙古"
+      ],
+      "protestFactor": 0.8,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "上海": {
+      "region": "china",
+      "zone": "长三角",
+      "industry": "金融、航运、先进制造与商贸",
+      "dailyLife": "地铁、社区菜场和写字楼构成密集日常",
+      "pressures": "租金、工作节奏与跨区通勤",
+      "ruralLife": "近郊农田与江海沿岸村镇",
+      "neighbors": [
+        "江苏",
+        "浙江"
+      ],
+      "protestFactor": 1.15,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "江苏": {
+      "region": "china",
+      "zone": "长三角",
+      "industry": "制造、软件、港口与农业",
+      "dailyLife": "南京科教、苏锡常厂区与苏北县城经验并不相同",
+      "pressures": "外贸订单、住房与城乡资源差异",
+      "ruralLife": "水网稻田与淮北平原",
+      "neighbors": [
+        "上海",
+        "浙江",
+        "安徽",
+        "山东"
+      ],
+      "protestFactor": 1.1,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "浙江": {
+      "region": "china",
+      "zone": "长三角",
+      "industry": "民营制造、电商、港口与商贸",
+      "dailyLife": "杭州办公园区、宁波港区和义乌市场各有机会",
+      "pressures": "订单波动、小生意现金流和租住成本",
+      "ruralLife": "丘陵茶园与沿海渔村",
+      "neighbors": [
+        "上海",
+        "江苏",
+        "安徽",
+        "江西",
+        "福建"
+      ],
+      "protestFactor": 1,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "安徽": {
+      "region": "china",
+      "zone": "长三角",
+      "industry": "家电、汽车、粮食与科研",
+      "dailyLife": "合肥科教片区、芜湖工厂和县城往来频繁",
+      "pressures": "跨省务工、产业迁入与教育支出",
+      "ruralLife": "江淮农田及皖南山村",
+      "neighbors": [
+        "江苏",
+        "浙江",
+        "江西",
+        "湖北",
+        "河南",
+        "山东"
+      ],
+      "protestFactor": 0.9,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "福建": {
+      "region": "china",
+      "zone": "东南沿海",
+      "industry": "电子、鞋服、茶业与港口",
+      "dailyLife": "福厦沿海城市与山区县城通勤条件不同",
+      "pressures": "外贸订单、海峡航运和家庭小生意",
+      "ruralLife": "山地茶园和海边渔村",
+      "neighbors": [
+        "浙江",
+        "江西",
+        "广东"
+      ],
+      "protestFactor": 1.05,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "江西": {
+      "region": "china",
+      "zone": "中部",
+      "industry": "有色金属、电子、陶瓷与农业",
+      "dailyLife": "南昌街区、赣南县镇和景德镇作坊各有生计",
+      "pressures": "外出务工、厂区招工与家庭照护",
+      "ruralLife": "丘陵村落和鄱阳湖平原",
+      "neighbors": [
+        "安徽",
+        "浙江",
+        "福建",
+        "广东",
+        "湖南",
+        "湖北"
+      ],
+      "protestFactor": 0.8,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "山东": {
+      "region": "china",
+      "zone": "华东",
+      "industry": "装备、化工、食品与港口",
+      "dailyLife": "济南城市通勤、胶东港区和县域工厂并存",
+      "pressures": "行业周期、跨城就业与养老支出",
+      "ruralLife": "平原粮田、果园及沿海渔村",
+      "neighbors": [
+        "河北",
+        "河南",
+        "安徽",
+        "江苏"
+      ],
+      "protestFactor": 1,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "河南": {
+      "region": "china",
+      "zone": "中部",
+      "industry": "粮食、食品加工、制造与物流",
+      "dailyLife": "郑州铁路与仓储网络联系着人口众多的县镇",
+      "pressures": "就业竞争、跨省务工与城乡公共服务",
+      "ruralLife": "黄淮平原麦田与豫西山村",
+      "neighbors": [
+        "河北",
+        "山西",
+        "陕西",
+        "湖北",
+        "安徽",
+        "山东"
+      ],
+      "protestFactor": 1.05,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "湖北": {
+      "region": "china",
+      "zone": "长江中游",
+      "industry": "汽车、光电子、科教与水运",
+      "dailyLife": "武汉三镇的桥梁通勤与周边县城生活相连",
+      "pressures": "城市交通、制造订单与就医安排",
+      "ruralLife": "江汉平原与鄂西山地",
+      "neighbors": [
+        "河南",
+        "安徽",
+        "江西",
+        "湖南",
+        "重庆",
+        "陕西"
+      ],
+      "protestFactor": 1.2,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "湖南": {
+      "region": "china",
+      "zone": "长江中游",
+      "industry": "工程机械、轨道交通、食品与文化服务",
+      "dailyLife": "长株潭往来和湘西山地县城生活差异明显",
+      "pressures": "工业班次、外出务工与家庭教育",
+      "ruralLife": "洞庭湖平原和丘陵稻作村镇",
+      "neighbors": [
+        "湖北",
+        "江西",
+        "广东",
+        "广西",
+        "贵州",
+        "重庆"
+      ],
+      "protestFactor": 0.95,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "广东": {
+      "region": "china",
+      "zone": "珠三角",
+      "industry": "电子制造、外贸、商贸与服务业",
+      "dailyLife": "广深佛莞厂区与粤东西北县城节奏不同",
+      "pressures": "外贸订单、租住和跨城迁移",
+      "ruralLife": "珠江三角洲村镇与山区果园",
+      "neighbors": [
+        "福建",
+        "江西",
+        "湖南",
+        "广西"
+      ],
+      "protestFactor": 1.15,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "广西": {
+      "region": "china",
+      "zone": "华南",
+      "industry": "食品、有色金属、港口与边境贸易",
+      "dailyLife": "南宁城区、北部湾港口与边境县镇联系紧密",
+      "pressures": "物流季节性、务工与山区交通",
+      "ruralLife": "蔗田、喀斯特山村和沿海村落",
+      "neighbors": [
+        "广东",
+        "湖南",
+        "贵州",
+        "云南"
+      ],
+      "protestFactor": 0.8,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "海南": {
+      "region": "china",
+      "zone": "华南",
+      "industry": "旅游、热带农业与港口服务",
+      "dailyLife": "海口常住社区和三亚旅游区有不同的生活成本",
+      "pressures": "旅游淡旺季、台风与岛外交通",
+      "ruralLife": "热带果园、橡胶林和渔村",
+      "neighbors": [
+        "广东",
+        "广西"
+      ],
+      "protestFactor": 0.8,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "重庆": {
+      "region": "china",
+      "zone": "西南",
+      "industry": "汽车、电子、装备与内河物流",
+      "dailyLife": "坡道、轨道换乘与沿江片区影响日常出行",
+      "pressures": "山城通勤、工业班次与家庭迁居",
+      "ruralLife": "三峡库区与山地乡镇",
+      "neighbors": [
+        "四川",
+        "湖北",
+        "湖南",
+        "贵州",
+        "陕西"
+      ],
+      "protestFactor": 1.05,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "四川": {
+      "region": "china",
+      "zone": "西南",
+      "industry": "电子、装备、农业与科教",
+      "dailyLife": "成都平原城区和川西、川东北山区不能混写",
+      "pressures": "城市就业、跨区域交通与照护",
+      "ruralLife": "平原农田和高山峡谷村落",
+      "neighbors": [
+        "重庆",
+        "陕西",
+        "甘肃",
+        "青海",
+        "西藏",
+        "云南",
+        "贵州"
+      ],
+      "protestFactor": 1,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "贵州": {
+      "region": "china",
+      "zone": "西南",
+      "industry": "食品、能源、旅游与电子信息",
+      "dailyLife": "贵阳城区、山地县镇与跨省务工家庭相连",
+      "pressures": "山区交通、就业转移与服务可及性",
+      "ruralLife": "喀斯特山地的村寨与梯田",
+      "neighbors": [
+        "四川",
+        "重庆",
+        "湖南",
+        "广西",
+        "云南"
+      ],
+      "protestFactor": 0.75,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "云南": {
+      "region": "china",
+      "zone": "西南",
+      "industry": "烟草、花卉、旅游与边境贸易",
+      "dailyLife": "昆明市场与滇西滇南城镇有各自生活节奏",
+      "pressures": "旅游淡旺季、山路与跨境货运",
+      "ruralLife": "高原村落、茶园和坝区农田",
+      "neighbors": [
+        "四川",
+        "贵州",
+        "广西",
+        "西藏"
+      ],
+      "protestFactor": 0.75,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "西藏": {
+      "region": "china",
+      "zone": "高原",
+      "industry": "农牧、公共服务、旅游与水电",
+      "dailyLife": "拉萨街区和远距离县乡出行条件差异明显",
+      "pressures": "海拔适应、长途交通与医疗可及性",
+      "ruralLife": "高原牧场与河谷农田",
+      "neighbors": [
+        "新疆",
+        "青海",
+        "四川",
+        "云南"
+      ],
+      "protestFactor": 0.6,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "陕西": {
+      "region": "china",
+      "zone": "西北",
+      "industry": "能源、装备、航空与科教",
+      "dailyLife": "西安高校和厂区、陕北资源城市、陕南小城不同",
+      "pressures": "教育支出、工业周期与南北交通",
+      "ruralLife": "关中农田、黄土丘陵与秦巴山村",
+      "neighbors": [
+        "山西",
+        "河南",
+        "湖北",
+        "重庆",
+        "四川",
+        "甘肃",
+        "宁夏",
+        "内蒙古"
+      ],
+      "protestFactor": 0.9,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "甘肃": {
+      "region": "china",
+      "zone": "西北",
+      "industry": "石化、有色冶金、农业与物流",
+      "dailyLife": "兰州河谷城区与河西走廊城镇距离较长",
+      "pressures": "就业转移、用水与长途运输",
+      "ruralLife": "绿洲农田与陇东黄土村镇",
+      "neighbors": [
+        "陕西",
+        "宁夏",
+        "内蒙古",
+        "新疆",
+        "青海",
+        "四川"
+      ],
+      "protestFactor": 0.7,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "青海": {
+      "region": "china",
+      "zone": "高原",
+      "industry": "盐湖化工、能源、农牧与旅游",
+      "dailyLife": "西宁城区与牧区县乡的服务距离不同",
+      "pressures": "海拔、长途运输和医疗可及性",
+      "ruralLife": "高原牧区与河湟谷地",
+      "neighbors": [
+        "甘肃",
+        "新疆",
+        "西藏",
+        "四川"
+      ],
+      "protestFactor": 0.6,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "宁夏": {
+      "region": "china",
+      "zone": "西北",
+      "industry": "能源、化工、食品与灌溉农业",
+      "dailyLife": "银川平原城镇与南部山区生活条件不同",
+      "pressures": "用水、产业岗位与跨区域就业",
+      "ruralLife": "黄河灌区与南部山地村庄",
+      "neighbors": [
+        "内蒙古",
+        "甘肃",
+        "陕西"
+      ],
+      "protestFactor": 0.7,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    },
+    "新疆": {
+      "region": "china",
+      "zone": "西北",
+      "industry": "能源、棉花、食品与口岸贸易",
+      "dailyLife": "乌鲁木齐、天山南北绿洲城市与乡镇距离很长",
+      "pressures": "长途物流、季节用工与公共服务距离",
+      "ruralLife": "绿洲农田、牧区与山地村落",
+      "neighbors": [
+        "甘肃",
+        "青海",
+        "西藏"
+      ],
+      "protestFactor": 0.65,
+      "sourceRefs": [
+        "china-atlas",
+        "china-2019-stats",
+        "province-industry"
+      ],
+      "authoredScenes": true
+    }
+  },
+  "regions": {
+    "china": {
+      "label": "中国大陆",
+      "institutions": [
+        "人民政府",
+        "人大",
+        "法院",
+        "街道办事处",
+        "居委会",
+        "村委会"
+      ],
+      "terms": [
+        "人民币",
+        "公交",
+        "地铁",
+        "社区",
+        "社保",
+        "高考"
+      ],
+      "government": "中国共产党领导的主席独裁制，党政权力集中于中央主席",
+      "leader": "习近平",
+      "dailyLife": "具体省份、城乡和家庭经历决定生活，不能把一个城市当成全国。",
+      "forbiddenAssumptions": [
+        "不能把每个人都写成党员、干部或政治活动参与者",
+        "不能把少数民族、宗教或省份写成人的固定性格",
+        "未说明具体所在地时不要捏造城市或家庭住址"
+      ],
+      "sourceRefs": [
+        "china-constitution",
+        "china-atlas"
+      ],
+      "ideology": "市场毛主义、修正主义与专制主义",
+      "setting": "mod-fiction",
+      "modSourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_PRC.txt",
+          "key": "PRC_xi_jinping"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_XI_JINPING_DESC"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "market_socialism_1_desc"
+        }
+      ]
+    },
+    "taiwan": {
+      "label": "中国台湾",
+      "institutions": [
+        "总统府",
+        "行政院",
+        "立法院",
+        "县市政府",
+        "区公所",
+        "里办公室",
+        "法院"
+      ],
+      "terms": [
+        "新台币",
+        "捷运",
+        "公车",
+        "便利商店",
+        "健保",
+        "里长",
+        "机车",
+        "学测"
+      ],
+      "government": "民进党执政的总统制国家，行政院、立法院与地方政府承担各自职务",
+      "leader": "蔡英文",
+      "dailyLife": "城市捷运与公车、机车通勤、便利商店、夜市和园区工作；东部与离岛交通另有条件。",
+      "forbiddenAssumptions": [
+        "没有已发生的制度改变时，不写大陆市委、街道党委、单位党支部统辖当地生活",
+        "不能把大陆封城、健康码、核酸安排自动复制到台湾",
+        "内战后不能继续把旧执政者写成当然的现任领导人"
+      ],
+      "sourceRefs": [
+        "taiwan-constitution",
+        "taiwan-2020"
+      ],
+      "ideology": "社会自由主义；民进党台湾进步主义",
+      "setting": "mod-fiction",
+      "modSourceRefs": [
+        {
+          "file": "common/characters/TFR_characters_CHI.txt",
+          "key": "CHI_tsai_ing_wen_char"
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_CHI_l_simp_chinese.yml",
+          "key": "CHI_neoliberalism_desc"
+        }
+      ]
+    },
+    "japan": {
+      "label": "日本",
+      "institutions": [
+        "国会",
+        "内阁",
+        "都道府县厅",
+        "市役所",
+        "区役所",
+        "保健所",
+        "法院"
+      ],
+      "terms": [
+        "日元",
+        "电车",
+        "便利店",
+        "商店街",
+        "国民健康保险",
+        "町内会",
+        "大学入学考试"
+      ],
+      "government": "自民党长期占优势的保守主义议会民主制度，内阁负责行政、天皇为象征",
+      "leader": "安倍晋三",
+      "dailyLife": "电车与公交通勤、商店街、便利店和市役所办理手续；大城市与地方县生活成本不同。",
+      "forbiddenAssumptions": [
+        "天皇不直接主持日常内阁政务",
+        "不套用大陆省委书记、党支部、街道办和高考制度",
+        "不把日本防疫写成大陆同一套封控命令",
+        "左翼胜利后不可仍默认丰川政权或旧内阁在执政"
+      ],
+      "sourceRefs": [
+        "japan-government",
+        "japan-2020"
+      ],
+      "ideology": "自民党保守主义",
+      "setting": "mod-fiction",
+      "modSourceRefs": [
+        {
+          "file": "history/countries/JAP - Japan.txt",
+          "key": "recruit_character"
+        }
+      ]
+    },
+    "hongkong": {
+      "label": "香港",
+      "institutions": [
+        "行政长官",
+        "政府部门",
+        "立法会",
+        "区议会",
+        "法院",
+        "房屋署"
+      ],
+      "terms": [
+        "港元",
+        "港铁",
+        "巴士",
+        "屋邨",
+        "屋苑",
+        "街市",
+        "茶餐厅",
+        "强积金",
+        "文凭试"
+      ],
+      "government": "特别行政区的行政长官、立法会与法院体系",
+      "leader": "林郑月娥",
+      "dailyLife": "港铁、巴士与渡轮接驳，屋邨和私人屋苑并存；住房与跨境往来影响家计。",
+      "forbiddenAssumptions": [
+        "不写成内地普通省市或大陆街道党组织直接管理每户",
+        "不要把内地防控命令视为香港自动同时执行",
+        "不要把澳门的博彩就业特征套到香港"
+      ],
+      "sourceRefs": [
+        "hongkong-basiclaw",
+        "hongkong-2020"
+      ]
+    },
+    "macau": {
+      "label": "澳门",
+      "institutions": [
+        "行政长官",
+        "特区政府",
+        "立法会",
+        "法院",
+        "市政署",
+        "卫生局"
+      ],
+      "terms": [
+        "澳门元",
+        "巴士",
+        "街坊会",
+        "社屋",
+        "口岸",
+        "旅游业",
+        "葡文文件"
+      ],
+      "government": "特别行政区的行政长官、立法会与法院体系",
+      "leader": "贺一诚",
+      "dailyLife": "半岛与离岛巴士往来，旅游、酒店餐饮及公共服务就业，与珠海口岸紧密相连。",
+      "forbiddenAssumptions": [
+        "不写成大陆普通地级市",
+        "不要把香港港铁、区议会制度照搬到澳门",
+        "不能把所有澳门家庭都写成博彩从业者"
+      ],
+      "sourceRefs": [
+        "macau-2020"
+      ]
+    },
+    "korea": {
+      "label": "韩国",
+      "institutions": [
+        "总统府",
+        "国会",
+        "中央部处",
+        "市厅",
+        "区厅",
+        "法院"
+      ],
+      "terms": [
+        "韩元",
+        "地铁",
+        "便利店",
+        "国民健康保险",
+        "修能考试",
+        "居民中心"
+      ],
+      "government": "总统负责行政、国会立法的共和体制",
+      "leader": "文在寅",
+      "dailyLife": "城市地铁、公交与社区商铺；艺人生活须依据公开职业资料，不猜私人住所或关系。",
+      "forbiddenAssumptions": [
+        "不套用日本内阁、台湾里长或大陆党政基层制度",
+        "不得依据国籍猜测个人住址、宗教或家庭秘密"
+      ],
+      "sourceRefs": [
+        "korea-government",
+        "korea-constitution",
+        "korea-2020"
+      ]
+    },
+    "global": {
+      "label": "所在地未详",
+      "institutions": [],
+      "terms": [],
+      "government": "缺少所在地的可靠资料",
+      "leader": null,
+      "dailyLife": "只依据已经说明的所在地和经历描述生活。",
+      "forbiddenAssumptions": [
+        "不要擅自补出具体国家、领导人或住址"
+      ],
+      "sourceRefs": []
+    }
+  },
+  "backgrounds": {
+    "china": [
+      [
+        "普通家庭",
+        "学校、社区与家人的工作构成日常。"
+      ],
+      [
+        "工人家庭",
+        "家人与生产、维修或服务岗位相伴，班次影响家庭安排。"
+      ],
+      [
+        "乡村出身",
+        "乡镇、土地与外出求学务工的亲人连接着生活。"
+      ],
+      [
+        "科研家庭",
+        "家中有人在高校、医院或科研单位工作，职业不等于政治身份。"
+      ],
+      [
+        "干部家庭",
+        "家中有人在党政机关或公共机构任职，职责、级别与影响由具体经历决定。"
+      ],
+      [
+        "商人家庭",
+        "家庭经营店铺或企业，订单、货款和顾客影响生计。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ],
+    "taiwan": [
+      [
+        "普通家庭",
+        "在县市社区成长，家人的工作与学校构成日常。"
+      ],
+      [
+        "劳动家庭",
+        "家人在工厂、运输或服务业工作，工时与劳保影响家计。"
+      ],
+      [
+        "乡镇家庭",
+        "农渔村、镇区学校与返乡亲友连起成长经历。"
+      ],
+      [
+        "学研家庭",
+        "家人在大学、医院或研究机构工作，你接触书本、实验与学术讨论。"
+      ],
+      [
+        "公职家庭",
+        "家中有人在行政机关、县市政府或公共机构任职，不预设其党派。"
+      ],
+      [
+        "经商家庭",
+        "家里经营店面、贸易或企业，与顾客和供应商来往。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ],
+    "japan": [
+      [
+        "普通家庭",
+        "学校、住宅区和家人的工作是生活中心。"
+      ],
+      [
+        "劳动家庭",
+        "家人在制造、物流或服务岗位工作，轮班和通勤影响团聚。"
+      ],
+      [
+        "地方家庭",
+        "地方町村、农渔业与离乡求学的亲友连接着生活。"
+      ],
+      [
+        "学研家庭",
+        "家人在大学、医院或研究机构工作，研究与教学融入日常。"
+      ],
+      [
+        "公務員家庭",
+        "家中有人在中央省厅、地方自治体或公共机构任职，不等于属于某个政党。"
+      ],
+      [
+        "经营者家庭",
+        "家中经营商店、事务所或公司，客户和账期影响生活。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ],
+    "hongkong": [
+      [
+        "普通家庭",
+        "在屋邨或屋苑长大，学校、街市与交通线串起日常。"
+      ],
+      [
+        "劳动家庭",
+        "家人在物流、建筑或服务业轮班，工时和租住开销影响家计。"
+      ],
+      [
+        "乡郊家庭",
+        "新界乡村、离岛或渔业社区与城区的往返贯穿生活。"
+      ],
+      [
+        "学研家庭",
+        "家人在大学、医院或研究机构任职，校园与社区各有联系。"
+      ],
+      [
+        "公务员家庭",
+        "家中有人任职于特区政府部门或公共机构，不预设其政治立场。"
+      ],
+      [
+        "经商家庭",
+        "家里经营小店、贸易或公司，租约、客户和物流影响生计。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ],
+    "macau": [
+      [
+        "普通家庭",
+        "学校、街坊和家人的工作构成城市生活。"
+      ],
+      [
+        "劳动家庭",
+        "家人在酒店、餐饮、运输或其他服务岗位工作，轮班安排影响团聚。"
+      ],
+      [
+        "离岛家庭",
+        "在路环等较低密度社区成长，与半岛的往来连接学校和工作。"
+      ],
+      [
+        "学研家庭",
+        "家人在大学、医院或研究机构任职，研究与教学融入日常。"
+      ],
+      [
+        "公务员家庭",
+        "家中有人在特区政府部门或公共机构任职，不套用内地干部家庭关系。"
+      ],
+      [
+        "经商家庭",
+        "家里经营街坊店铺、旅游服务或贸易业务，客流影响家计。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ],
+    "korea": [
+      [
+        "普通家庭",
+        "学校、住宅社区与家人的工作构成日常。"
+      ],
+      [
+        "劳动家庭",
+        "家人在制造、运输或服务岗位工作，工时影响家庭生活。"
+      ],
+      [
+        "地方家庭",
+        "在地方城镇或农渔村成长，与外地亲友保持往来。"
+      ],
+      [
+        "学研家庭",
+        "家人在大学、医院或研究机构任职，教学研究融入生活。"
+      ],
+      [
+        "公务员家庭",
+        "家中有人在中央部门、地方政府或公共机构任职，不预设党派。"
+      ],
+      [
+        "经商家庭",
+        "家里经营店面、企业或服务业务，顾客和货款影响生计。"
+      ],
+      [
+        "自定义背景",
+        "写下自己的经历、身份、目标与重要关系。"
+      ]
+    ]
+  },
+  "sources": {
+    "china-atlas": {
+      "title": "中国政府网：国情与行政区划",
+      "url": "https://big5.www.gov.cn/gate/big5/www.gov.cn/guoqing/index.htm"
+    },
+    "china-2019-stats": {
+      "title": "中国统计年鉴2020：2019年各省经济社会指标",
+      "url": "https://www.stats.gov.cn/zs/tjwh/tjkw/tjzl/202302/t20230215_1907951.html"
+    },
+    "province-industry": {
+      "title": "商务部各省概览（仅参考地理及2020年前已有产业，不采用后期规划作为开局事实）",
+      "url": "https://fdi.mofcom.gov.cn/come-newzonghe.html?Liindex=2&comeID=8&parentId=161"
+    },
+    "china-constitution": {
+      "title": "中华人民共和国宪法（2018修正）",
+      "url": "https://www.gov.cn/guoqing/2018-03/22/content_5276318.htm"
+    },
+    "taiwan-constitution": {
+      "title": "总统府：宪法与增修条文",
+      "url": "https://english.president.gov.tw/Page/94"
+    },
+    "taiwan-2020": {
+      "title": "本地MOD world_opening：2020民进党连任",
+      "file": "src/data/lore.json#world_opening"
+    },
+    "japan-government": {
+      "title": "日本参议院：国会与内阁关系",
+      "url": "https://www.sangiin.go.jp/eng/guide/relation/"
+    },
+    "japan-2020": {
+      "title": "首相官邸：历代内阁",
+      "url": "https://japan.kantei.go.jp/rekidai/"
+    },
+    "hongkong-basiclaw": {
+      "title": "香港基本法第四章",
+      "url": "https://www.basiclaw.gov.hk/en/basiclaw/chapter4.html"
+    },
+    "hongkong-2020": {
+      "title": "2020年行政长官公开信",
+      "url": "https://www.info.gov.hk/gia/general/202005/29/P2020052800745.htm"
+    },
+    "macau-2020": {
+      "title": "澳门年鉴2020",
+      "url": "https://yearbook.gcs.gov.mo/uploads/yearbook_pdf/2020/myb2020e.pdf"
+    },
+    "korea-government": {
+      "title": "韩国政府：行政、立法和司法",
+      "url": "https://www.korea.net/Government/Constitution-and-Government/Executive-Legislature-and-Judiciary"
+    },
+    "korea-constitution": {
+      "title": "韩国总理室：宪法",
+      "url": "https://www.opm.go.kr/en/government/constitution.do"
+    },
+    "korea-2020": {
+      "title": "日本外务省2020外交蓝皮书记载文在寅2020新年讲话",
+      "url": "https://www.mofa.go.jp/policy/other/bluebook/2020/html/chapter2/c020102.html"
+    }
+  }
+}

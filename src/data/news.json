@@ -1,0 +1,315 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "news_palace",
+      "title": "故宫奔驰照片引发质疑",
+      "earliestMonth": 0,
+      "description": "一组闭馆日驾驶奔驰进入故宫的照片引起广泛议论。故宫方面致歉，照片随后被删除，公众仍在追问车辆为何获准进入、规则是否对所有人一视同仁。办公桌、公交车与家庭饭桌上，都有人谈起这场关于特权的争议。",
+      "art": "palace",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.35.d"
+        }
+      ],
+      "places": [
+        "北京"
+      ],
+      "impact": {
+        "stress": 1
+      }
+    },
+    {
+      "id": "news_wuhan",
+      "title": "武汉的街道与医院",
+      "earliestMonth": 2,
+      "description": "武汉的医院与社区仍在忙碌，防疫工作和患者收治牵动各地关注。中央领导人到访的报道在电视上播出，居民更加关心床位、药品与何时能够安心出门。远方亲友反复拨打电话，确认彼此的近况。",
+      "art": "pandemic",
+      "category": "pandemic",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "china.74.d"
+        }
+      ],
+      "places": [
+        "湖北"
+      ],
+      "impact": {
+        "stress": 2
+      }
+    },
+    {
+      "id": "news_mourning",
+      "title": "清明的三分钟",
+      "earliestMonth": 3,
+      "description": "清明时节，全国举行哀悼活动。警报与汽车喇叭响起，人们停下手里的事情，为疫情中逝去的患者、医护人员与亲友默哀。新闻页面变成黑白，一些未能当面道别的人在手机里翻看旧照片。",
+      "art": "pandemic",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.75.d"
+        }
+      ]
+    },
+    {
+      "id": "news_taiwan_manufacturing",
+      "title": "台湾制造业升级计划",
+      "earliestMonth": 8,
+      "description": "台湾当局公布制造业升级与基础设施安排，试图提高本地产业的抗风险能力。工厂评估更新设备，职校调整课程，小企业则盘算贷款和订单。产业韧性这个词，最终落在许多家庭的工作与开支上。",
+      "art": "science",
+      "category": "technology",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "taiwan_temp_skeleton.5.d"
+        }
+      ],
+      "places": [
+        "中国台湾"
+      ],
+      "adaptation": true,
+      "adaptationNote": "依据国策后续本地化安排在2020年9月；原模组并无该固定月份。"
+    },
+    {
+      "id": "news_green_energy",
+      "title": "绿能投资与地方工程",
+      "earliestMonth": 10,
+      "description": "新的绿能投资计划进入公共讨论，地方工程、供电稳定和资金来源成为争论焦点。支持者期待就业与较少的污染，居民也在询问土地使用、施工噪声和长期电价。政策公告之外，还有许多具体问题等待回答。",
+      "art": "science",
+      "category": "technology",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "taiwan_temp_skeleton.7.d"
+        }
+      ],
+      "places": [
+        "中国台湾"
+      ],
+      "adaptation": true,
+      "adaptationNote": "将绿能国策改编为2020年11月政策新闻，地方生活影响为改编。"
+    },
+    {
+      "id": "news_school_pressure",
+      "title": "病假与升学之间",
+      "earliestMonth": 15,
+      "description": "有关学生带病上课的报道受到关注。家长担忧错过复习，教师承受升学压力，学生则在身体不适与考试安排之间难以抉择。学校开始收到更多关于病假、补课和照护的询问，成绩之外的需要终于被说出口。",
+      "art": "school",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.34.d"
+        }
+      ],
+      "adaptation": true,
+      "adaptationNote": "取原文本的学业与健康冲突，未搬用原文全面放开后的背景，月份为适配安排。"
+    },
+    {
+      "id": "news_zhengzhou_flood",
+      "title": "郑州洪灾牵动人心",
+      "earliestMonth": 18,
+      "description": "强降雨侵袭郑州，地铁与道路积水造成严重伤亡和失联。救援消息、寻人帖和捐助渠道在网络上流传，家属等待核实后的名单。公众追问预警、停运与救援决策，许多人的日常安排被洪水彻底打断。",
+      "art": "flood",
+      "category": "disaster",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.38.d"
+        }
+      ],
+      "places": [
+        "河南"
+      ],
+      "impact": {
+        "stress": 4
+      }
+    },
+    {
+      "id": "news_panda",
+      "title": "大熊猫保护等级调整",
+      "earliestMonth": 18,
+      "description": "生态环境部门宣布，大熊猫的保护状况得到改善，国内保护等级由濒危调整为易危。保护区和长期栖息地维护受到关注，工作人员也提醒，种群恢复仍需要持续投入。连日沉重的新闻中，这条消息让不少人停下来多看了一眼。",
+      "art": "social",
+      "category": "science",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.76.d"
+        }
+      ]
+    },
+    {
+      "id": "news_fuel",
+      "title": "加油站前的长队",
+      "earliestMonth": 20,
+      "description": "燃油供应紧张与国际价格波动推高运输成本，一些加油站前排起长队。货运司机重新计算费用，工厂担心原料迟到，通勤者开始寻找替代办法。远方的动荡通过每一次送货和出行，进入城市与乡镇。",
+      "art": "economy",
+      "category": "economy",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.11.d"
+        }
+      ],
+      "adaptation": true,
+      "adaptationNote": "提炼燃油短缺的民生后果，不强行引入尚未排程的沙特内战。"
+    },
+    {
+      "id": "news_rationing",
+      "title": "米面油开始限量供应",
+      "earliestMonth": 22,
+      "description": "战争持续一个月后，一些地区开始凭配额购买米、面、油等物资。居民提早排队，商店反复调整进货，照护儿童和老人的家庭需要仔细安排用量。保证基本供应的承诺，也面临运输中断与分配效率的考验。",
+      "art": "economy",
+      "category": "economy",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO.51.d"
+        }
+      ],
+      "requires": [
+        "world_strait_war"
+      ]
+    },
+    {
+      "id": "news_blackout",
+      "title": "限电通知贴上楼门",
+      "earliestMonth": 23,
+      "description": "电力供应紧张使一些地区轮流停电。工厂调整生产班次，社区张贴通知，住户开始为照明、取暖与老人照护做准备。屏幕上短短几行停电时段，落到每一户人家却是不同的困难。",
+      "art": "blackout",
+      "category": "economy",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.37.d"
+        }
+      ],
+      "places": [
+        "北京",
+        "天津",
+        "河北",
+        "辽宁",
+        "吉林",
+        "黑龙江"
+      ],
+      "impact": {
+        "stress": 2
+      }
+    },
+    {
+      "id": "news_dong",
+      "title": "丰县董志民事件受到追查",
+      "earliestMonth": 25,
+      "description": "丰县一名女子被铁链束缚的视频引起全国关注，董志民及相关人员受到调查。围绕女子身世、拐卖与虐待的报道不断出现，早先通报中的矛盾受到追问。公众把目光投向农村妇女保护、失踪人口寻访与基层问责，要求给受害者持续的救助。",
+      "art": "dong",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.36.d"
+        }
+      ],
+      "places": [
+        "江苏"
+      ],
+      "impact": {
+        "stress": 2
+      }
+    },
+    {
+      "id": "news_supply_scandal",
+      "title": "物资分配中心被举报",
+      "earliestMonth": 26,
+      "description": "一段视频显示，部分物资分配人员将优质粮油和药品装入私人车辆，而居民领到的物品质量参差。有关部门通报了岗位调整，质疑却没有消失。等待配给的人们要求公开账目，也开始更加仔细地核对清单。",
+      "art": "social",
+      "category": "politics",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO.48.d"
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO.50.d"
+        }
+      ],
+      "requires": [
+        "world_strait_war"
+      ]
+    },
+    {
+      "id": "news_banks",
+      "title": "河南村镇银行取款困难",
+      "earliestMonth": 27,
+      "description": "河南多家村镇银行关闭线上取款与转账渠道，储户的积蓄无法正常支取。有人需要支付医疗费，有人等待工钱周转，监管部门宣布调查。银行网点外开始聚集等待答复的人，账户上的数字突然无法解决眼前的开支。",
+      "art": "bank",
+      "category": "economy",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "china.317.d"
+        }
+      ],
+      "places": [
+        "河南"
+      ],
+      "impact": {
+        "funds": -100,
+        "stress": 2
+      }
+    },
+    {
+      "id": "news_export_factory",
+      "title": "一位宁波厂主的公开信",
+      "earliestMonth": 28,
+      "description": "宁波一位服装厂主公开讲述战争以来的经历：海外订单消失，设备停转，员工遣散，家庭也被债务撕扯。他在信中呼吁结束战争、恢复贸易。信件被不断转发，许多同样失去生计的人在下面留下了自己的故事。",
+      "art": "economy",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "china.237.d"
+        }
+      ],
+      "places": [
+        "浙江"
+      ],
+      "impact": {
+        "stress": 2
+      },
+      "requires": [
+        "world_strait_war"
+      ]
+    },
+    {
+      "id": "news_bank_petition",
+      "title": "储户等待说法",
+      "earliestMonth": 30,
+      "description": "河南储户继续追问被冻结的存款，有人带着病患和孩子来到银行门前。现场出现维持秩序的人员，沟通反复进行，关于兑付与责任的答案仍未令所有人安心。对许多家庭来说，等待本身已经成为难以承受的负担。",
+      "art": "bank",
+      "category": "social",
+      "sourceRefs": [
+        {
+          "file": "localisation/simp_chinese/replace/_jinxianqian_l_simp_chinese.yml",
+          "key": "PRC_MAO2.39.d"
+        }
+      ],
+      "places": [
+        "河南"
+      ],
+      "impact": {
+        "stress": 1
+      },
+      "requires": [
+        "news_banks"
+      ],
+      "adaptation": true,
+      "adaptationNote": "保留储户遭遇与问责诉求，省略原文未核实的细节性指控；月份按2022年7月安排。"
+    }
+  ]
+}

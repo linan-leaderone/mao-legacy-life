@@ -1,0 +1,37 @@
+{
+  "asOf": "2020-01-01",
+  "personas": [
+    {
+      "id": "mao_zedong", "name": "毛泽东", "aliases": ["毛澤東", "毛沢東", "Mao Zedong"],
+      "birthDate": "1893-12-26", "birthDatePrecision": "day", "birthDateConfidence": "documented",
+      "birthPlace": "湖南湘潭韶山冲", "place": "湖南", "startLocation": "北京·毛主席纪念堂",
+      "occupation": "在水晶棺中苏醒的人", "status": "意识刚刚恢复，身体仍在水晶棺内，尚不能自行离开",
+      "background": "custom", "backgroundLabel": "韶山家庭与过往经历",
+      "familyBackground": "出生于湖南韶山的农家，童年与少年时代在家乡生活。",
+      "biography": "你记得过去的政治生涯与亲友。再次有了意识时，外面已经到了2020年，你躺在北京毛主席纪念堂的水晶棺中，身体还不能随意活动。",
+      "backgroundText": "你出生于湖南韶山，记得过去的政治生涯与亲友。2020年1月，意识重新出现，你仍在北京毛主席纪念堂的水晶棺内。能否让别人发现你、让身体恢复活动，是眼前需要处理的事情。",
+      "specialScenario": "mao_resurrection", "asOf": "2020-01-01",
+      "points": {"intelligence":9,"family":5,"fitness":2,"appearance":5},
+      "stats": {"intelligence":90,"family":50,"fitness":20,"appearance":50,"influence":90,"connections":40,"funds":0,"health":35,"stress":25},
+      "statsBasis": "用于这段虚构经历的初始数值，不代表历史人物的实际能力、健康或财产。",
+      "notes": ["出生资料与纪念堂地点来自公开资料；2020年苏醒和复活是用户指定的架空情节。", "所示年数是距出生的时间，不表示在现实中活到2020年。"],
+      "sourceUrls": ["https://www.ssmzd.com/content/645456/63/12852059.html", "https://tamgw.beijing.gov.cn/diqufuwu/zjtam/201912/t20191218_1272027.html"]
+    },
+    {
+      "id": "deng_xiaoping", "name": "邓小平", "aliases": ["鄧小平", "Deng Xiaoping", "邓希贤", "鄧希賢"],
+      "birthDate": "1904-08-22", "birthDatePrecision": "day", "birthDateConfidence": "documented",
+      "birthPlace": "四川广安协兴乡牌坊村", "place": "四川", "startLocation": "太平洋",
+      "occupation": "带着旧日记忆的小鱼", "status": "在太平洋海水中恢复意识，需要寻找食物并避开更大的鱼",
+      "background": "custom", "backgroundLabel": "广安家庭与旧日记忆",
+      "familyBackground": "出生于四川广安，父亲邓绍昌为他取名邓先圣，入私塾后使用学名邓希贤。",
+      "biography": "你还记得留法、革命与改革时期的经历。2020年1月，意识在太平洋的一条小鱼体内出现。你发现吞下食物后，身体能够保留其中一部分特征，并继续发生变化。",
+      "backgroundText": "你出生于四川广安，原名邓先圣，学名邓希贤。2020年1月，旧日记忆在太平洋的一条小鱼体内醒来。这里没有办公桌和随行人员，你需要从觅食开始，靠吞噬获得新的身体能力。",
+      "specialScenario": "deng_ocean", "asOf": "2020-01-01",
+      "points": {"intelligence":9,"family":5,"fitness":2,"appearance":5},
+      "stats": {"intelligence":90,"family":50,"fitness":20,"appearance":50,"influence":0,"connections":0,"funds":0,"health":65,"stress":20},
+      "statsBasis": "用于这段虚构经历的初始数值，不代表历史人物的实际能力、健康或财产。",
+      "notes": ["出生日期、家乡与早年姓名来自公开资料。", "太平洋小鱼、吞噬与进化是用户指定的魔幻情节，不作为历史事实；公开的海葬记录不等于在太平洋复生。"],
+      "sourceUrls": ["https://cpc.people.com.cn/n/2013/0814/c69682-22559800.html", "https://www.guang-an.gov.cn/gasrmzfw/lsrw/pc/content/content_1892469127997616134.html", "https://cpc.people.com.cn/n/2013/0819/c368126-22613075.html"]
+    }
+  ]
+}

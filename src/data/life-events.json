@@ -1,0 +1,3315 @@
+{
+  "events": [
+    {
+      "id": "baby_routine",
+      "title": "一个家的作息",
+      "narrative": "在{location}，{name}的睡眠、进食与哭闹占据了家人许多时间。照护者想把这一月过得更从容，正在调整日常安排。",
+      "category": "family",
+      "minAge": 0,
+      "maxAge": 3,
+      "options": [
+        {
+          "label": "建立固定的睡前仪式",
+          "description": "由照护者减少晚间刺激，慢慢调整节奏。",
+          "delta": {
+            "health": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "一起读图画书",
+          "description": "由家人每天指认几样熟悉的东西。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 1,
+            "funds": -40
+          }
+        },
+        {
+          "label": "轮换照护，让大人休息",
+          "description": "在可靠的家人之间分担照护时间。",
+          "delta": {
+            "connections": 3,
+            "stress": -4
+          }
+        },
+        {
+          "label": "整理安全的活动空间",
+          "description": "收好易碎物品，留出探索和爬行的位置。",
+          "delta": {
+            "health": 2,
+            "knowledge": 1,
+            "funds": -80
+          }
+        },
+        {
+          "label": "记录成长中的小变化",
+          "description": "家人保存观察笔记，在照护咨询时说明情况。",
+          "delta": {
+            "knowledge": 2,
+            "health": 1
+          }
+        }
+      ],
+      "diary": "这个月，家里逐渐熟悉了你的作息。清早有人替你整理衣物，夜里有人听见动静就走到床边。你在熟悉的怀抱里安静下来，也会被门外的脚步声吸引。窗边的光从亮到暗，大人把洗好的小衣服收进柜子，一天就这样过去了。"
+    },
+    {
+      "id": "baby_outdoors",
+      "title": "第一次熟悉街区",
+      "narrative": "家人想带你认识{location}住处附近的环境。天气与照护条件合适时，楼下的一小段路也能带来新的声音和颜色。",
+      "category": "leisure",
+      "minAge": 0,
+      "maxAge": 3,
+      "options": [
+        {
+          "label": "固定去一处安静的绿地",
+          "description": "由照护者陪伴，安排短时间的户外活动。",
+          "delta": {
+            "health": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "观察路上的车辆和树木",
+          "description": "家人用简单的词回应你的注意。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 1
+          }
+        },
+        {
+          "label": "与熟悉的邻居打招呼",
+          "description": "在照护者身边慢慢熟悉新的面孔。",
+          "delta": {
+            "connections": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "在家听声音、玩积木",
+          "description": "按照当天状态安排室内活动。",
+          "delta": {
+            "knowledge": 2,
+            "health": 1,
+            "funds": -30
+          }
+        },
+        {
+          "label": "先把出门用品整理好",
+          "description": "照护者检查衣物与必需品，减少临时忙乱。",
+          "delta": {
+            "health": 2,
+            "stress": -2,
+            "funds": -50
+          }
+        }
+      ],
+      "diary": "天气温和的时候，家人陪你在住处附近待了一会儿。树叶晃动，路过的车子发出低低的声音，你望着这些变化，有时转头寻找熟悉的面孔。回到家后，鞋子被放回门边，窗外的声音渐渐远了。这个月的几次短暂外出，让街区多了些熟悉的气息。"
+    },
+    {
+      "id": "baby_care",
+      "title": "照护的接力",
+      "narrative": "家人发现长期依赖同一个照护者有些吃力。大家在{location}讨论怎样兼顾照护、家务和各自的工作。",
+      "category": "family",
+      "minAge": 0,
+      "maxAge": 3,
+      "options": [
+        {
+          "label": "让熟悉的亲属分担家务",
+          "description": "保持主要照护稳定，先减少家务负担。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "了解正规托育的条件",
+          "description": "家人收集费用、接送和照护方式等信息。",
+          "delta": {
+            "knowledge": 3,
+            "stress": 1
+          }
+        },
+        {
+          "label": "安排固定的亲子时间",
+          "description": "每天留一小段不被家务打断的陪伴。",
+          "delta": {
+            "connections": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "减少不必要的用品购买",
+          "description": "整理已有用品，把家用预算留给需要的地方。",
+          "delta": {
+            "funds": 50,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "请照护咨询人员帮助梳理",
+          "description": "家人讨论睡眠和照护安排，形成可执行的计划。",
+          "delta": {
+            "health": 2,
+            "stress": -3,
+            "funds": -100
+          }
+        }
+      ],
+      "diary": "这个月，照看你的人偶尔换了班。有人负责准备换洗衣物，有人趁家里安静时收拾房间，熟悉的声音始终就在不远处。你用目光和动作寻找回应，也慢慢适应不同的怀抱。忙碌了一天的大人靠在椅背上歇脚，屋里留下洗衣皂和饭菜的气味。"
+    },
+    {
+      "id": "baby_expression",
+      "title": "还说不清的愿望",
+      "narrative": "你开始用动作、声音或简单的词表达喜欢与不喜欢。{name}的家人想更认真地理解这些回应。",
+      "category": "learning",
+      "minAge": 0,
+      "maxAge": 3,
+      "options": [
+        {
+          "label": "多一点耐心回应",
+          "description": "照护者观察你的表情，给你表达的时间。",
+          "delta": {
+            "connections": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "跟着熟悉的歌谣互动",
+          "description": "用节奏、手势和重复的词进行游戏。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "试着自己完成小动作",
+          "description": "在照护者帮助下练习拿放与收拾。",
+          "delta": {
+            "knowledge": 2,
+            "health": 2
+          }
+        },
+        {
+          "label": "用照片认识家人与物品",
+          "description": "把常见的人和物与声音联系起来。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 1
+          }
+        },
+        {
+          "label": "给疲倦的时候留出安静",
+          "description": "缩短密集的活动，照顾当下的状态。",
+          "delta": {
+            "health": 2,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "你伸手够喜欢的东西，也会用声音表达不舒服。家人停下来看看你的神情，慢慢试着理解你的意思。有些时候猜对了，你便安静下来；有些时候还需要多一点耐心。这个月里，几件熟悉的小物品总在眼前出现，你与家人之间的回应比从前多了一些。"
+    },
+    {
+      "id": "child_first_group",
+      "title": "和别人一起玩",
+      "narrative": "你有机会参加{location}附近适龄的集体活动。家人希望你交到朋友，也想尊重你对陌生环境的感受。",
+      "category": "relationships",
+      "minAge": 4,
+      "maxAge": 6,
+      "options": [
+        {
+          "label": "参加一次简单的合作游戏",
+          "description": "从轮流和分享材料开始认识伙伴。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "先在旁边观察再加入",
+          "description": "按自己的节奏熟悉环境。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -2
+          }
+        },
+        {
+          "label": "带一件愿意分享的玩具",
+          "description": "和家人商量后，用共同兴趣打开话题。",
+          "delta": {
+            "connections": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "邀请一个熟悉的朋友来玩",
+          "description": "在更安心的环境里练习相处。",
+          "delta": {
+            "connections": 3,
+            "stress": -2,
+            "funds": -20
+          }
+        },
+        {
+          "label": "把感受画给家人看",
+          "description": "告诉家人哪些活动让你开心或不舒服。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 2
+          }
+        }
+      ],
+      "diary": "这个月，你在家人的陪伴下和几个小朋友待在一起。起初你站在熟悉的大人身边，后来蹲下来看看别人摆弄的积木。有个孩子把一块积木推到你面前，你也把手里的东西放进了大家中间。回家的路上，你还记着活动室里那个颜色鲜亮的小凳子。"
+    },
+    {
+      "id": "child_story",
+      "title": "故事里的问题",
+      "narrative": "一本图画书让你追问：为什么有人拥有很多东西，有人需要帮助？家人愿意陪你从生活中的小事谈起。",
+      "category": "learning",
+      "minAge": 4,
+      "maxAge": 6,
+      "options": [
+        {
+          "label": "请家人讲讲自己的童年",
+          "description": "听懂具体的经历，不急着寻找唯一答案。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "画出自己理想的小街道",
+          "description": "把住房、学校和游玩的地方画在同一张纸上。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1,
+            "funds": -20
+          }
+        },
+        {
+          "label": "一起读不同主题的绘本",
+          "description": "从多个故事认识生活里的差异。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -40
+          }
+        },
+        {
+          "label": "整理愿意分享的旧玩具",
+          "description": "在家人帮助下，把物品交给确实需要的人。",
+          "delta": {
+            "connections": 2,
+            "influence": 1
+          }
+        },
+        {
+          "label": "先去玩，再慢慢思考",
+          "description": "给难懂的问题留点时间，保持轻松的节奏。",
+          "delta": {
+            "health": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "家人陪你翻过一本图画书。你注意到画里有人住得宽敞，有人提着很旧的袋子，便指着它们问个不停。大人从身边的小事讲起，没有把所有事情都讲明白。后来你把书放回原处，吃饭时又想起其中的一页，窗外传来邻居收拾东西的声音。"
+    },
+    {
+      "id": "child_small_money",
+      "title": "一小笔零用钱",
+      "narrative": "家人拿出一小笔钱，让你在陪伴下决定如何使用。对于{name}来说，这是第一次把想要和需要放在一起比较。",
+      "category": "finance",
+      "minAge": 4,
+      "maxAge": 6,
+      "options": [
+        {
+          "label": "存起来并画下储蓄目标",
+          "description": "用直观的办法认识等待与计划。",
+          "delta": {
+            "funds": 20,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "买一本自己选的图画书",
+          "description": "家人陪你比较内容与价格。",
+          "delta": {
+            "knowledge": 3,
+            "funds": -20
+          }
+        },
+        {
+          "label": "买材料做一个小手工作品",
+          "description": "尝试剪贴、拼搭或涂色。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -2,
+            "funds": -15
+          }
+        },
+        {
+          "label": "与家人一起选共享的点心",
+          "description": "考虑自己和别人的喜好。",
+          "delta": {
+            "connections": 3,
+            "stress": -1,
+            "funds": -20
+          }
+        },
+        {
+          "label": "观察商店，暂时不花",
+          "description": "比较包装和实际用途，保留决定的余地。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "家人把一小笔零用钱交给你，又陪你看了几样日常物品的价钱。你数得很认真，中途弄混过一次，于是从头再数。这个月，你把剩下的钱放进固定的小盒子，有时打开看看。想要的东西仍然很多，但纸币和硬币已经不只是颜色不同的小玩意儿了。"
+    },
+    {
+      "id": "child_disagreement",
+      "title": "玩伴之间的小争执",
+      "narrative": "你和一个玩伴都想先使用同一件东西。大人愿意帮忙，但也想给你尝试解决问题的空间。",
+      "category": "relationships",
+      "minAge": 4,
+      "maxAge": 6,
+      "options": [
+        {
+          "label": "提出轮流使用",
+          "description": "在大人帮助下约定每个人的时间。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "换一种能合作的玩法",
+          "description": "把竞争同一件东西变成共同完成任务。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 2
+          }
+        },
+        {
+          "label": "把不开心告诉可信的大人",
+          "description": "练习描述事情，而不只是压住情绪。",
+          "delta": {
+            "connections": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "先离开一会儿再回来",
+          "description": "让自己平静，再决定是否继续玩。",
+          "delta": {
+            "health": 1,
+            "stress": -4
+          }
+        },
+        {
+          "label": "和对方各自选一样新活动",
+          "description": "保留友好，也尊重彼此不同的喜好。",
+          "delta": {
+            "connections": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "你和玩伴曾因为一件东西闹了别扭。两个人都攥着自己的理由，声音比平常大了一些。旁边的大人让你们先缓一缓，再轮流说清楚。后来活动继续了，你们没有立刻忘掉不高兴，也又坐到了一起。那天回家后，你把这件小事讲给家里人听。"
+    },
+    {
+      "id": "pupil_library",
+      "title": "图书馆的一张卡",
+      "narrative": "你在{location}听说了可借阅儿童读物的地方。家人愿意陪你利用这个月探索课堂以外的知识。",
+      "category": "learning",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "挑一本讲科学实验的书",
+          "description": "在成人陪伴下只做安全、适龄的小观察。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -30
+          }
+        },
+        {
+          "label": "读不同地方的生活故事",
+          "description": "认识别人如何上学、吃饭和与家人相处。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 1
+          }
+        },
+        {
+          "label": "参加儿童阅读分享",
+          "description": "练习讲清楚自己的想法，也听别人发言。",
+          "delta": {
+            "connections": 3,
+            "influence": 1
+          }
+        },
+        {
+          "label": "借一本小说慢慢读",
+          "description": "享受阅读本身，不把每次阅读变成任务。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "建立自己的读书记录",
+          "description": "用几句话写下问题，留待之后继续寻找答案。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        }
+      ],
+      "diary": "这个月，你跟着家人去了可以借阅儿童读物的地方。书架间比外面安静，桌角贴着提醒轻声说话的纸条。你翻了几本感兴趣的书，把看不懂的词记在纸上。回家以后，书桌上多了一叠随手抄下的小笔记，有的字写歪了，你又重新描了一遍。"
+    },
+    {
+      "id": "pupil_teamwork",
+      "title": "小组作业的分工",
+      "narrative": "一次小组学习需要大家共同完成展示。有的同学喜欢说话，有的更擅长整理材料，你想找到适合自己的位置。",
+      "category": "learning",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "承担资料整理",
+          "description": "把来源和疑问分开记，做好基础工作。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "尝试当一次展示者",
+          "description": "提前排练，让大家的成果被理解。",
+          "delta": {
+            "influence": 2,
+            "connections": 2,
+            "stress": 2
+          }
+        },
+        {
+          "label": "帮助安排公平的分工",
+          "description": "询问伙伴的意愿，把任务拆成小块。",
+          "delta": {
+            "connections": 4,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "负责画图与制作",
+          "description": "用容易看懂的图表达复杂内容。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1,
+            "funds": -30
+          }
+        },
+        {
+          "label": "向老师说明遇到的困难",
+          "description": "争取适当帮助，不独自承担全部任务。",
+          "delta": {
+            "connections": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "小组作业占去了这个月几次课后的时间。你和同伴一起整理材料，有人负责画图，有人念出找到的内容。纸张一度摊满了桌子，大家又慢慢把重复的部分合在一起。展示结束后，你收好自己的笔，发现一起做完一件小事，比刚开始想象的费心一些。"
+    },
+    {
+      "id": "pupil_screen",
+      "title": "屏幕之外的一个月",
+      "narrative": "视频、游戏和消息不断吸引你的注意。你和家人讨论怎样让屏幕时间与学习、睡眠和朋友相处都留有位置。",
+      "category": "health",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "共同制定可以坚持的时间表",
+          "description": "保留喜欢的内容，也为休息留出空间。",
+          "delta": {
+            "health": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "学习辨认广告与事实",
+          "description": "请家人一起分析几个常见的网络说法。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "约朋友参加户外活动",
+          "description": "用球类、散步或骑行替代一部分独处时间。",
+          "delta": {
+            "health": 3,
+            "connections": 2,
+            "funds": -20
+          }
+        },
+        {
+          "label": "用设备完成一个小作品",
+          "description": "尝试录音、绘图或简单的编程练习。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -40
+          }
+        },
+        {
+          "label": "把烦扰自己的消息告诉家人",
+          "description": "一起调整通知和联系边界。",
+          "delta": {
+            "connections": 2,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "这个月，屏幕依旧常常吸引你的目光，不过家里的晚间作息渐渐有了固定的顺序。写完手头的事情，吃饭，洗漱，再把明天要带的东西放好。有一晚你因为盯着屏幕忘了时间，家人提醒后，你关掉了声音。第二天清早，闹钟仍然准时响起。"
+    },
+    {
+      "id": "pupil_neighborhood",
+      "title": "住处附近的变化",
+      "narrative": "你发现{location}住处附近的公共空间有些地方使用起来不方便。家里的大人建议一起去看看，把遇到的问题记清楚，再讨论可以怎么处理。",
+      "category": "community",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "画一张步行观察图",
+          "description": "记录路口、休息处和容易迷路的位置。",
+          "delta": {
+            "knowledge": 3,
+            "health": 1
+          }
+        },
+        {
+          "label": "询问不同年龄邻居的感受",
+          "description": "在家人陪伴下听听真实的使用体验。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "向管理人员提出一个小建议",
+          "description": "用礼貌而具体的方式表达需求。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "参加适龄的社区整理活动",
+          "description": "在安全范围内清理公共阅读角或分类物品。",
+          "delta": {
+            "connections": 3,
+            "influence": 1
+          }
+        },
+        {
+          "label": "把观察写成学校的小报告",
+          "description": "区分看到的事实与自己的推测。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        }
+      ],
+      "diary": "你在来回经过的路上留意到几处以前没有认真看过的地方。一个台阶比别处高，路口的灯有时显得不够亮。家人陪你站了一会儿，看推着车的人怎样绕过去。这个月，你在本子上画了住处附近的一小段路，熟悉的街道因这些细节有了新的模样。"
+    },
+    {
+      "id": "pupil_friendship",
+      "title": "朋友的新兴趣",
+      "narrative": "一个经常一起玩的朋友迷上了与你不同的活动。你有些失落，也开始想：友谊是否需要每件事都一致。",
+      "category": "relationships",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "陪朋友体验一次新活动",
+          "description": "先理解对方喜欢它的原因。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 1,
+            "funds": -20
+          }
+        },
+        {
+          "label": "坦诚说说自己的感受",
+          "description": "商量仍然愿意一起做的事情。",
+          "delta": {
+            "connections": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "发展一个自己的兴趣",
+          "description": "给自己留出独立探索的时间。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2,
+            "funds": -30
+          }
+        },
+        {
+          "label": "邀请更多同学一起活动",
+          "description": "扩大交往范围，让关系不必只依赖一个人。",
+          "delta": {
+            "connections": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "接受暂时不同的节奏",
+          "description": "保持问候，也把时间留给休息。",
+          "delta": {
+            "health": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "朋友最近总在谈一种你不太熟悉的爱好。你听了一些，也说起自己仍然喜欢的事情。两个人没有每天都待在一起，但遇到有趣的事时，还是会顺口告诉对方。这个月有个普通的下午，你们一起走了一段回家的路，聊的又是彼此都认识的人。"
+    },
+    {
+      "id": "pupil_family_history",
+      "title": "家里的旧照片",
+      "narrative": "家人整理出几张旧照片，里面有搬迁、工作与求学的痕迹。你想知道{location}以外的地方与自己的家庭有什么联系。",
+      "category": "family",
+      "minAge": 7,
+      "maxAge": 12,
+      "options": [
+        {
+          "label": "采访一位愿意讲述的长辈",
+          "description": "把记得与记不清的内容分别记下。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "画出家人的迁居路线",
+          "description": "用地图理解地点与距离。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -20
+          }
+        },
+        {
+          "label": "整理照片并标注日期",
+          "description": "征得家人同意后保存家庭记忆。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 3
+          }
+        },
+        {
+          "label": "做一道家人熟悉的家常菜",
+          "description": "在成人陪伴下参与适龄的准备工作。",
+          "delta": {
+            "connections": 3,
+            "stress": -2,
+            "funds": -30
+          }
+        },
+        {
+          "label": "聊聊自己对未来的愿望",
+          "description": "把自己的愿望讲给愿意倾听的人。",
+          "delta": {
+            "connections": 3,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "整理东西时，家里翻出了几张旧照片。你看见长辈年轻时站过的街道，也看见一间陈设简单的屋子。有人记得拍照那天的天气，有人把年份记岔了，大家边说边核对。这个月，你把几个人名抄在纸背，照片重新装进袋子时，已经多了几段你知道的故事。"
+    },
+    {
+      "id": "teen_exam",
+      "title": "成绩之外的选择",
+      "narrative": "一次学习评估让你重新审视自己的方向。周围人给了许多建议，但这一月能做的，仍然是具体而有限的几件事。",
+      "category": "learning",
+      "minAge": 13,
+      "maxAge": 17,
+      "options": [
+        {
+          "label": "补上最薄弱的一门基础",
+          "description": "请教老师，按每周小目标安排练习。",
+          "delta": {
+            "knowledge": 5,
+            "stress": 2
+          }
+        },
+        {
+          "label": "了解不同升学与职业教育路径",
+          "description": "记录要求、费用和自己的兴趣。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "组成互助学习小组",
+          "description": "与同学交换笔记，讲解彼此不懂的部分。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 3
+          }
+        },
+        {
+          "label": "把休息与运动排进计划",
+          "description": "调整节奏，避免靠熬夜维持进度。",
+          "delta": {
+            "health": 4,
+            "stress": -3
+          }
+        },
+        {
+          "label": "和家人谈谈可承受的期待",
+          "description": "说明自己的愿望与困难，商量现实的安排。",
+          "delta": {
+            "connections": 3,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "这个月，你把最近的学习材料重新整理了一遍。几处反复出错的地方被圈出来，书页边多了些写得很小的批注。身边人的建议各不相同，你仍按日常作息完成眼前的事情。一个晚上，窗外渐渐安静，你收起笔，给第二天需要做的事留了一张简短的便条。"
+    },
+    {
+      "id": "teen_news",
+      "title": "同一条消息的不同版本",
+      "narrative": "你在网络和熟人的聊天里看到同一件事的不同说法。{location}的生活并未因此给出简单答案，你需要决定怎样理解它。",
+      "category": "observation",
+      "minAge": 13,
+      "maxAge": 17,
+      "options": [
+        {
+          "label": "找到原始发布与完整上下文",
+          "description": "把可确认的信息与猜测分开。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "和老师讨论信息判断方法",
+          "description": "把问题落到证据、立场与表达方式上。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "写一篇注明不确定性的观察",
+          "description": "练习表达观点，也保留修正空间。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2
+          }
+        },
+        {
+          "label": "倾听同学为什么这样想",
+          "description": "先弄清每个人实际关心的生活问题。",
+          "delta": {
+            "connections": 4,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "暂停转发，专注自己的日常",
+          "description": "为注意力设边界，把余力留给休息。",
+          "delta": {
+            "health": 1,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "同一条消息在不同地方有着不太一样的说法。你看了原文，也留意到转述里省略的细节，几处暂时弄不明白的地方被记了下来。身边人聊天时各有自己的判断，你听着，没有急着接过每一句话。到了月底，生活仍由上课、吃饭和熟悉的琐事组成。"
+    },
+    {
+      "id": "teen_club",
+      "title": "一个月的小项目",
+      "narrative": "你可以与同龄人做一次小规模的兴趣项目。题目不必宏大，关键在于一个月内能留下具体的作品。",
+      "category": "research",
+      "minAge": 13,
+      "maxAge": 17,
+      "options": [
+        {
+          "label": "整理社区口述故事",
+          "description": "征得同意后记录不同代际的日常经历。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 3
+          }
+        },
+        {
+          "label": "做一个简单的程序或网页",
+          "description": "围绕自己熟悉的小问题练习技术。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -50,
+            "stress": 1
+          }
+        },
+        {
+          "label": "组织一次读书讨论",
+          "description": "选短篇材料，给每个人发言时间。",
+          "delta": {
+            "connections": 3,
+            "influence": 2
+          }
+        },
+        {
+          "label": "制作声音或影像作品",
+          "description": "尊重被记录者意愿，练习剪辑与叙事。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2,
+            "funds": -60
+          }
+        },
+        {
+          "label": "选择个人运动训练计划",
+          "description": "记录进展，和过去的自己比较。",
+          "delta": {
+            "health": 4,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "这个月，你和同龄人围着一件小作品忙过几次。材料不够齐全，最初的想法也比实际能做的复杂，大家于是把步骤缩短。你帮着整理了一部分内容，又在最后核对了一遍。东西做出来时并不精致，但摊在桌面上，已经能够看出最初讨论过的样子。"
+    },
+    {
+      "id": "teen_future_city",
+      "title": "想去另一个地方",
+      "narrative": "求学和生活的想象把你的目光带到{location}之外。家人愿意谈一谈，但真正迁移还需要资格、预算与时间。",
+      "category": "migration",
+      "minAge": 13,
+      "maxAge": 17,
+      "options": [
+        {
+          "label": "比较学校与生活费用",
+          "description": "列出多个选择，避免只凭宣传作决定。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "向有外地学习经历的人请教",
+          "description": "了解住宿、支持网络与适应过程。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "练习需要的语言或基础技能",
+          "description": "把远期愿望拆成这个月的学习计划。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -80
+          }
+        },
+        {
+          "label": "和家人讨论留在本地的机会",
+          "description": "认真比较适合自己的条件与支持。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "写下迁移前必须满足的条件",
+          "description": "为“{goal}”建立可调整的准备清单。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "你利用空闲时间看了看外地求学和生活的资料。地图上的距离很清楚，住宿和交通的费用需要一项项核算。家人听你说起这些地方，也谈到自己当年出门时的经历。这个月，你仍在熟悉的地方生活，桌上的笔记里多了几个还没有确定的地名。"
+    },
+    {
+      "id": "teen_boundaries",
+      "title": "不太容易说出口的话",
+      "narrative": "朋友或家人希望你把更多时间交给他们，而你也有学习与独处的需要。一次小小的不满，让关系里的边界变得具体。",
+      "category": "relationships",
+      "minAge": 13,
+      "maxAge": 17,
+      "options": [
+        {
+          "label": "约一个安静的时候说明需要",
+          "description": "用具体安排替代对彼此的指责。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "共同安排每周固定的相处时间",
+          "description": "让陪伴与自己的计划都能被看见。",
+          "delta": {
+            "connections": 4,
+            "stress": -1
+          }
+        },
+        {
+          "label": "请可信的成年人帮助沟通",
+          "description": "在反复说不清时寻找支持。",
+          "delta": {
+            "connections": 2,
+            "stress": -4
+          }
+        },
+        {
+          "label": "先写下来，再决定怎样开口",
+          "description": "梳理自己的愿望与可退让之处。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "用一项个人爱好恢复状态",
+          "description": "保持适当联系，也允许自己安静一会儿。",
+          "delta": {
+            "health": 2,
+            "stress": -4,
+            "funds": -30
+          }
+        }
+      ],
+      "diary": "这个月，你有几次把自己的时间安排说得比以前具体一些。学习需要安静，疲倦时也想独自待一会儿。身边人并不总能马上理解，不过经过几句解释，彼此慢慢找到了一点余地。晚饭后的一段空闲里，你做完手头的小事，没有再为每一次消息提示立即起身。"
+    },
+    {
+      "id": "adult_income",
+      "title": "一份新的收入机会",
+      "narrative": "熟人向你转来一则短期工作信息。报酬、时间和实际职责都需要核实，它是否适合你，还要与你在{location}的日常安排一起考虑。",
+      "category": "work",
+      "minAge": 18,
+      "maxAge": 69,
+      "options": [
+        {
+          "label": "核实条件后接一部分工作",
+          "description": "选择自己能承担的任务，增加当月收入。",
+          "delta": {
+            "funds": 1200,
+            "stress": 3
+          }
+        },
+        {
+          "label": "先与做过这项工作的人交流",
+          "description": "问清工时、结算和实际困难。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 3
+          }
+        },
+        {
+          "label": "为更适合的岗位整理履历",
+          "description": "把已有经验写成能被理解的成果。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 1,
+            "stress": 1
+          }
+        },
+        {
+          "label": "补一项岗位需要的技能",
+          "description": "投入学习，暂时不急着接受邀约。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -300,
+            "stress": 1
+          }
+        },
+        {
+          "label": "婉拒，守住目前的时间安排",
+          "description": "把精力留给现有工作、家人或恢复身体。",
+          "delta": {
+            "health": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "熟人转来的工作信息在你的消息列表里停留了几天。你问清了大致的时段和职责，把报酬与交通上的花费放在一起算了算。对方的回复并不十分及时，这件事便暂时没有更明确的进展。这个月，你照常处理日常事务，也比从前多留意了一些相近的信息。"
+    },
+    {
+      "id": "adult_budget",
+      "title": "一张需要重算的账单",
+      "narrative": "房租、交通与日常开支占去了不少预算。你想让{location}的生活保持稳定，也希望为“{goal}”留一点余地。",
+      "category": "finance",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "整理支出并取消闲置订阅",
+          "description": "从不影响基本生活的部分节约。",
+          "delta": {
+            "funds": 200,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "安排一项可承受的短期劳务",
+          "description": "用额外工时缓解眼前的现金压力。",
+          "delta": {
+            "funds": 1000,
+            "health": -1,
+            "stress": 3
+          }
+        },
+        {
+          "label": "与共同生活的人协商分担",
+          "description": "把收入、支出与照护劳动一起摊开讨论。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "调整大额计划的执行顺序",
+          "description": "推迟可等待的消费，先稳定日常。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "保留一笔休息与健康预算",
+          "description": "缩减其他非必需支出，避免持续透支自己。",
+          "delta": {
+            "health": 3,
+            "stress": -3,
+            "funds": -150
+          }
+        }
+      ],
+      "diary": "这个月，你把手头几张账单放到一起，重新核对了日常支出。零散的小额付款积少成多，几个固定项目也仍然按期到来。你整理了收据，把不清楚的款项单独记下。月底再看那张纸时，生活并没有突然宽裕起来，但钱花到了哪里，已经比月初清楚一些。"
+    },
+    {
+      "id": "adult_contract",
+      "title": "条款里的细节",
+      "narrative": "一份与工作或服务有关的约定来到你面前。对方很希望尽快定下来，但职责、费用与退出方式还有几处不清楚。",
+      "category": "work",
+      "minAge": 18,
+      "maxAge": 79,
+      "options": [
+        {
+          "label": "逐项整理疑问并书面确认",
+          "description": "花时间把双方理解变成可核对的文字。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "请有经验的人帮助阅读",
+          "description": "听取建议后由自己作决定。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 3,
+            "funds": -100
+          }
+        },
+        {
+          "label": "尝试协商更清晰的时间与报酬",
+          "description": "用具体条件表达自己可以接受的范围。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 2,
+            "stress": 2
+          }
+        },
+        {
+          "label": "先做一个范围明确的小合作",
+          "description": "以有限投入了解对方是否可靠。",
+          "delta": {
+            "connections": 2,
+            "funds": 500,
+            "stress": 1
+          }
+        },
+        {
+          "label": "暂缓签订，继续寻找选择",
+          "description": "接受短期不确定性，给判断留出时间。",
+          "delta": {
+            "stress": -2,
+            "knowledge": 2
+          }
+        }
+      ],
+      "diary": "一份约定让你花了些时间核对细节。日期、费用和需要承担的事情被逐项看过，几处表述含糊的地方，你另行写下来向对方询问。这个月，来回确认的消息夹在日常琐事之间，有些问题得到了回答，有些仍待补充。纸上的条款终于不再只是密密麻麻的一片。"
+    },
+    {
+      "id": "adult_skill",
+      "title": "晚上的学习计划",
+      "narrative": "一门课程或一份自学材料与你长期想做的事有关。你看过课程安排，开始考虑怎样在日常生活中留出可以坚持的学习时间。",
+      "category": "learning",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "制定每周能完成的小练习",
+          "description": "围绕基础问题反复动手。",
+          "delta": {
+            "knowledge": 5,
+            "stress": 2
+          }
+        },
+        {
+          "label": "找一位伙伴互相讲解",
+          "description": "用讨论检验自己是否理解。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 3
+          }
+        },
+        {
+          "label": "选择有反馈的短期课程",
+          "description": "把费用花在明确需要的指导上。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -500
+          }
+        },
+        {
+          "label": "用现有任务练习新技能",
+          "description": "让学习服务于眼前的小问题。",
+          "delta": {
+            "knowledge": 4,
+            "funds": 200,
+            "stress": 1
+          }
+        },
+        {
+          "label": "放慢进度，保留休息日",
+          "description": "用更长的时间换取可以坚持的节奏。",
+          "delta": {
+            "knowledge": 2,
+            "health": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "这个月的几个晚上，你翻开了与兴趣有关的学习材料。进度没有想象中快，有时刚坐下来就被别的事情打断，不过零散的笔记还是积了几页。碰到难懂的地方，你回过头查了基础内容。合上书时屋里已经安静，第二天的日常安排仍然等着你去完成。"
+    },
+    {
+      "id": "adult_research",
+      "title": "一个值得验证的问题",
+      "narrative": "你在日常观察或阅读中发现一个与“{goal}”有关的问题。它可能值得研究，但现有信息还不足以支撑很大的结论。",
+      "category": "research",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "查找已有研究和公开资料",
+          "description": "记录结论、条件与仍未解决的问题。",
+          "delta": {
+            "knowledge": 5,
+            "stress": 1
+          }
+        },
+        {
+          "label": "做一项小规模的观察记录",
+          "description": "保持方法简单，区分样本与整体。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -100
+          }
+        },
+        {
+          "label": "向相关领域的人请教",
+          "description": "准备具体问题，尊重对方的时间。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 3
+          }
+        },
+        {
+          "label": "写成一份可被质疑的初稿",
+          "description": "列出证据和局限，邀请反馈。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2,
+            "stress": 1
+          }
+        },
+        {
+          "label": "先搁置结论，整理后续计划",
+          "description": "承认暂时不知道，把资源留给更紧迫的事。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "一个小问题让你在这个月多查了几份材料。最初看起来相互矛盾的说法，细读以后各自有着不同的前提。你把能确定的部分写在一起，又给尚无根据的猜测留了空白。事情还没有得出完整的答案，不过桌边那几页笔记，已经比最初随手写下的问题具体得多。"
+    },
+    {
+      "id": "adult_automation",
+      "title": "工作里的自动化工具",
+      "narrative": "一种数据处理或自动化工具进入了你能接触的工作与服务场景。演示令人好奇，实际效果仍要看它处理具体问题的能力。",
+      "category": "technology",
+      "minAge": 18,
+      "maxAge": 89,
+      "options": [
+        {
+          "label": "用不敏感的材料做一次试验",
+          "description": "比较结果与人工判断，记录错误。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -100
+          }
+        },
+        {
+          "label": "与使用者交流真实体验",
+          "description": "了解它节省了什么，又增加了什么负担。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "学习相关的数据与操作基础",
+          "description": "为未来转岗或项目储备技能。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -300,
+            "stress": 1
+          }
+        },
+        {
+          "label": "整理人工复核与申诉的需求",
+          "description": "把人的判断和纠错流程写清楚。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "维持熟悉流程，观察一段时间",
+          "description": "不急着替换仍然有效的日常方式。",
+          "delta": {
+            "stress": -3,
+            "knowledge": 1
+          }
+        }
+      ],
+      "diary": "你这个月接触了一种处理日常事务的新工具。演示中的步骤很顺畅，换成自己熟悉的材料后，冒出了格式和细节上的问题。你试着核对了几处结果，也问了问用过它的人。工具的方便与局限都变得具体起来，原先需要人工确认的地方，仍然得花时间仔细看。"
+    },
+    {
+      "id": "adult_microbusiness",
+      "title": "一个小生意的想法",
+      "narrative": "你发现{location}有人需要一项自己或熟人可能提供的服务。把它变成稳定收入之前，需要先弄清需求、成本和自己能投入的时间。",
+      "category": "business",
+      "minAge": 18,
+      "maxAge": 79,
+      "options": [
+        {
+          "label": "用很小的规模测试真实需求",
+          "description": "限制投入，记录每一笔成本与反馈。",
+          "delta": {
+            "knowledge": 4,
+            "funds": -600,
+            "stress": 2
+          }
+        },
+        {
+          "label": "访谈几位潜在使用者",
+          "description": "先问他们如何处理问题，再谈自己的方案。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "接一个范围明确的试单",
+          "description": "在能力范围内完成服务，获得第一笔报酬。",
+          "delta": {
+            "funds": 800,
+            "knowledge": 2,
+            "stress": 3
+          }
+        },
+        {
+          "label": "找一位互补的伙伴商量分工",
+          "description": "先说清投入、收益与退出条件。",
+          "delta": {
+            "connections": 4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "算过账后暂缓投入",
+          "description": "保留记录，把本月用于现有生活。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "一个小生意的念头让你多留意了周围人的日常需要。你问过几个人平时怎样解决类似问题，又记下材料和时间的大致成本。得到的回答不完全一致，有人看重价钱，有人更在意方便。这个月，这些观察暂时留在笔记里，日常生活仍按原有的节奏继续。"
+    },
+    {
+      "id": "adult_housing",
+      "title": "住处与通勤之间",
+      "narrative": "你开始重新考虑住处：费用、空间、通勤和身边的支持网络很难同时满足。{location}的地图上，每个选项都有代价。",
+      "category": "housing",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "比较不同街区的实际生活成本",
+          "description": "走访可达的地点，记录租金之外的开支。",
+          "delta": {
+            "knowledge": 3,
+            "health": 1,
+            "funds": -100
+          }
+        },
+        {
+          "label": "与房东或合住者谈具体问题",
+          "description": "先尝试改善现有住处的安排。",
+          "delta": {
+            "connections": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "整理搬迁预算与必要条件",
+          "description": "只做准备，不在信息不足时承诺迁移。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "改善当前的照明与收纳",
+          "description": "用有限预算提高日常舒适度。",
+          "delta": {
+            "health": 2,
+            "stress": -3,
+            "funds": -300
+          }
+        },
+        {
+          "label": "把时间花在建立邻里联系",
+          "description": "认识附近的服务与可以互相照应的人。",
+          "delta": {
+            "connections": 4,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "这个月，你认真留意了住处周围的环境。日常出门所花的时间、附近买东西的便利程度，还有每天听见的声音，都被放到一起比较。你看过几条别处的居住信息，价格与条件各有取舍。到了月底，熟悉的门锁和楼道仍在迎接你，桌上多了一份更清楚的开支记录。"
+    },
+    {
+      "id": "adult_migration",
+      "title": "远处寄来的招募",
+      "narrative": "一则外地学习或工作信息让你心动。离开{location}也意味着重新安排住处、重要关系和已有承诺。",
+      "category": "migration",
+      "minAge": 18,
+      "maxAge": 79,
+      "options": [
+        {
+          "label": "核实资格、手续与全部费用",
+          "description": "把可查证条件与宣传用语分开。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "联系曾经迁往当地的人",
+          "description": "了解收入之外的生活和支持网络。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "准备语言或专业能力材料",
+          "description": "先完成申请前能做的一小步。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -250
+          }
+        },
+        {
+          "label": "和重要的人商量多种安排",
+          "description": "把远距离相处与照护责任一起考虑。",
+          "delta": {
+            "connections": 4,
+            "stress": -2
+          }
+        },
+        {
+          "label": "寻找本地可替代的机会",
+          "description": "把想获得的成长落实在眼前条件中。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        }
+      ],
+      "diary": "一份外地的信息让你花了几个晚上查找资料。距离、住处和可能需要的证明，都比简短的介绍复杂。你把几个实际问题发给联系人，也同熟悉的人谈起当地生活。这个月尚未发生远行，消息陆续传来，你仍在处理眼前的事情，对那个地方的想象具体了一些。"
+    },
+    {
+      "id": "adult_carework",
+      "title": "家里需要更多照应",
+      "narrative": "一位亲近的人需要额外的陪伴或生活协助。你想认真回应，也知道长期安排不能只依赖某一个人的硬撑。",
+      "category": "family",
+      "minAge": 18,
+      "maxAge": 89,
+      "options": [
+        {
+          "label": "和家人列出轮流分担的安排",
+          "description": "把看得见和看不见的照护工作都写清楚。",
+          "delta": {
+            "connections": 4,
+            "stress": -2
+          }
+        },
+        {
+          "label": "了解附近可用的照护服务",
+          "description": "比较费用、条件与对方真正需要的帮助。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "用一部分预算购买可靠服务",
+          "description": "减少最耗时的重复劳动。",
+          "delta": {
+            "health": 2,
+            "stress": -4,
+            "funds": -800
+          }
+        },
+        {
+          "label": "抽出固定时间陪伴与倾听",
+          "description": "按自己的能力承担一块稳定的责任。",
+          "delta": {
+            "connections": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "先协商自己的时间与精力边界",
+          "description": "争取一份能持续而不透支的安排。",
+          "delta": {
+            "health": 3,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "一位亲近的人这个月需要更多照应。你抽出一些时间陪伴，帮忙整理日常要用的东西，也把容易遗漏的小事写了下来。相互联系的人多了，安排偶尔仍会碰到空缺，大家便再商量着补上。忙完以后，你在回程中歇了一会儿，惦记的都是生活里具体而细小的事情。"
+    },
+    {
+      "id": "adult_relationship",
+      "title": "关系里的下一步",
+      "narrative": "一个重要的人想与你谈谈今后的相处。居住、工作、距离与彼此的期待交织在一起，需要你认真回应。",
+      "category": "relationships",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "约一次不被打断的长谈",
+          "description": "把愿望与担忧都说具体。",
+          "delta": {
+            "connections": 4,
+            "stress": -3
+          }
+        },
+        {
+          "label": "共同做一个短期生活计划",
+          "description": "先尝试一个月，再一起评估。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "安排一次轻松的共同活动",
+          "description": "先找回相处的愉快，再谈难题。",
+          "delta": {
+            "connections": 3,
+            "stress": -4,
+            "funds": -200
+          }
+        },
+        {
+          "label": "坦诚说明暂时无法承担的部分",
+          "description": "保留尊重，也给双方选择的空间。",
+          "delta": {
+            "stress": -3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "请双方认可的人帮助梳理",
+          "description": "获得新的视角，决定仍由当事人作出。",
+          "delta": {
+            "connections": 2,
+            "knowledge": 2,
+            "funds": -150
+          }
+        }
+      ],
+      "diary": "这个月，你和一个重要的人认真聊过几次。谈话从日常安排开始，慢慢说到彼此在意的事情。并不是每一句都能马上得到回应，有些话说出口后，还需要时间消化。后来你们又各自忙碌起来，偶尔的一条问候仍然会到来，让那些尚未说完的话留在关系之中。"
+    },
+    {
+      "id": "adult_community_issue",
+      "title": "公共空间该怎么用",
+      "narrative": "{location}的一处公共空间需要重新安排使用。安静、便利、经营和活动各有支持者，附近居民邀请你谈谈意见。",
+      "category": "community",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "先听取不同使用者的需求",
+          "description": "把老人、孩子和不同作息者的处境放在一起。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 3
+          }
+        },
+        {
+          "label": "整理一个可试行的折中方案",
+          "description": "提出范围和期限，让讨论有具体对象。",
+          "delta": {
+            "influence": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "参与一项实际维护工作",
+          "description": "从清洁、指引或整理公共材料做起。",
+          "delta": {
+            "connections": 4,
+            "influence": 1,
+            "stress": 1
+          }
+        },
+        {
+          "label": "帮助公布清晰的讨论记录",
+          "description": "征得同意后保留争议与尚未解决的问题。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "只反馈与自己直接相关的问题",
+          "description": "投入有限时间，照顾原有生活安排。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "住处附近的一处公共空间引起了几次讨论。有人担心噪音，有人希望出行方便，也有人谈到附近小店的生计。你听过不同的说法，又在平常经过时留意了一下。这个月没有哪一句话能替所有人作答，不过那些看起来抽象的意见，都有了具体的面孔和日常缘由。"
+    },
+    {
+      "id": "adult_public_services",
+      "title": "办事流程中的一处障碍",
+      "narrative": "你在使用一项日常公共服务时遇到信息不清或流程反复。它没有改变整个世界，实实在在地消耗了你的时间。",
+      "category": "politics",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "核对要求，整理完整材料",
+          "description": "把信息来源和办理记录保存好。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "提出具体的流程改进建议",
+          "description": "围绕重复填写、说明和可达性表达需求。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 2,
+            "stress": 1
+          }
+        },
+        {
+          "label": "与有相同经历的人交换信息",
+          "description": "共享经验时去掉不必要的个人资料。",
+          "delta": {
+            "connections": 4,
+            "knowledge": 1
+          }
+        },
+        {
+          "label": "请熟悉流程的正规服务人员协助",
+          "description": "用有限费用减少反复奔波。",
+          "delta": {
+            "stress": -4,
+            "funds": -200
+          }
+        },
+        {
+          "label": "调整办理顺序，先完成急事",
+          "description": "接受部分等待，把精力花在本月可推进的步骤。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "这个月，一件普通的办事手续比预想多花了时间。你核对过通知上的要求，也向工作人员问清了缺少的材料。几次来回之后，手里的纸张终于按顺序放好。等待的时候，你看见别人也在翻找各自的证明，叫号声响过以后，队伍便又缓慢地向前挪了一点。"
+    },
+    {
+      "id": "adult_labor_changes",
+      "title": "工作方式需要重新谈",
+      "narrative": "一项与你有关的工作安排正在调整，可能涉及工时、职责或结算方式。你希望自己付出的时间能被认真对待。",
+      "category": "work",
+      "minAge": 18,
+      "maxAge": 69,
+      "options": [
+        {
+          "label": "记录实际工作量与约定差异",
+          "description": "用可核对的材料支持后续沟通。",
+          "delta": {
+            "knowledge": 3,
+            "stress": 1
+          }
+        },
+        {
+          "label": "和相关人员一起提出可行建议",
+          "description": "寻找共同需求，同时尊重不同处境。",
+          "delta": {
+            "connections": 3,
+            "influence": 2,
+            "stress": 2
+          }
+        },
+        {
+          "label": "与负责人谈一个月的试行方案",
+          "description": "把调整拆成可以评估的小范围改变。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "开始为其他机会做准备",
+          "description": "更新作品与技能清单，联系可靠渠道。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2,
+            "funds": -150
+          }
+        },
+        {
+          "label": "优先安排休息与已有生活责任",
+          "description": "明确自己本月能够承担的范围。",
+          "delta": {
+            "health": 3,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "与你有关的一项工作安排这个月有了新的说法。你核对了之前留下的记录，问清哪些内容已经确定，哪些仍在商量。身边人的顾虑并不相同，有人在意时间，有人在意结算。日常事务照常进行，而那些具体的工时和职责，也终于比最初的几句通知说得更清楚。"
+    },
+    {
+      "id": "adult_market_observation",
+      "title": "市场里的不同账本",
+      "narrative": "在{location}的商店或市场里，你听到经营者与顾客讨论价格和生意。每个人看到的只是生活的一部分，你想多了解一些。",
+      "category": "observation",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "记录几类日用品的实际价格",
+          "description": "持续观察，不凭一次变化作大判断。",
+          "delta": {
+            "knowledge": 4
+          }
+        },
+        {
+          "label": "和小店经营者聊聊成本",
+          "description": "尊重对方不愿公开的信息。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 3
+          }
+        },
+        {
+          "label": "按实际需求调整采购",
+          "description": "比较单位成本，减少闲置和浪费。",
+          "delta": {
+            "funds": 150,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "写一篇有具体细节的生活观察",
+          "description": "区分个人经历、转述与可核实资料。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "把这一月留给熟悉的生活",
+          "description": "不追逐每一条议论，按计划休息与工作。",
+          "delta": {
+            "health": 1,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "这个月去商店和市场时，你多听了几句经营者与顾客的交谈。同一种东西，在不同的地方有着不一样的价钱，进货、租金和熟客的习惯都藏在其中。你照常买齐需要的物品，回家后核对了一下支出。那些宏大的经济说法，此时落在一张张细小的收据上。"
+    },
+    {
+      "id": "adult_creative_work",
+      "title": "想把经历写下来",
+      "narrative": "你积累了一些关于{location}与个人生活的观察。它们可以成为文字、照片、声音或其他作品，但你还没决定要怎样表达。",
+      "category": "culture",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "完成一篇短文或一组小作品",
+          "description": "把规模控制在这个月能完成的范围内。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2,
+            "stress": 1
+          }
+        },
+        {
+          "label": "与可信的朋友交换反馈",
+          "description": "听取不同理解，保留自己的表达方向。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "整理私人记录，暂时不公开",
+          "description": "保存生活的细节，不急着接受评价。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "采访愿意分享经历的人",
+          "description": "明确用途，并尊重对方撤回内容的意愿。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "尝试一种新的创作工具",
+          "description": "用简单练习理解表现方法。",
+          "delta": {
+            "knowledge": 4,
+            "stress": -1,
+            "funds": -200
+          }
+        }
+      ],
+      "diary": "这个月，你把几段关于日常生活的观察留了下来。有的是路上看见的场景，有的是一句没有继续说完的话，零散地散在纸页和备忘录里。整理时，你删去了几句重复的描述，又补上记得的细节。它们还称不上完整的作品，保存住了一些原本很容易忘掉的时刻。"
+    },
+    {
+      "id": "adult_health_rest",
+      "title": "不能总是往后推的休息",
+      "narrative": "最近几周的忙碌让你感到疲倦。你想继续推进“{goal}”，也开始认真考虑怎样让身体和生活节奏支持它。",
+      "category": "health",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "建立可以坚持的睡眠与运动安排",
+          "description": "从低强度、符合自身条件的活动开始。",
+          "delta": {
+            "health": 4,
+            "stress": -3
+          }
+        },
+        {
+          "label": "减少一项不必要的承诺",
+          "description": "把空出来的时间用于恢复。",
+          "delta": {
+            "health": 3,
+            "stress": -4
+          }
+        },
+        {
+          "label": "安排必要的常规健康咨询",
+          "description": "把具体困扰交给合适的专业人员讨论。",
+          "delta": {
+            "health": 3,
+            "stress": -2,
+            "funds": -300
+          }
+        },
+        {
+          "label": "约朋友做一次轻松活动",
+          "description": "把陪伴和休息放在同一个下午。",
+          "delta": {
+            "connections": 3,
+            "health": 2,
+            "stress": -2,
+            "funds": -100
+          }
+        },
+        {
+          "label": "重新拆分长期计划",
+          "description": "降低本月负荷，保留小而稳定的进度。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -4
+          }
+        }
+      ],
+      "diary": "忙碌过后，你在这个月几次明显感到疲倦。手头的事情并没有因此消失，不过吃饭和休息不再总被往后拖。你把日常安排稍稍理顺，能缓一缓时便坐下来歇一会儿。某个清早，窗边的光照进屋里，你整理好要用的东西，再按自己的步子开始新的一天。"
+    },
+    {
+      "id": "adult_mutual_aid",
+      "title": "一份互助名单",
+      "narrative": "有人想在{location}整理邻里之间可交换的帮助：代办小事、借用工具、照顾公共阅读角。你可以选择适合自己的参与程度。",
+      "category": "community",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "每周提供一小段固定时间",
+          "description": "承担范围明确、自己能够完成的事情。",
+          "delta": {
+            "connections": 4,
+            "influence": 1,
+            "stress": 1
+          }
+        },
+        {
+          "label": "整理公开而必要的服务信息",
+          "description": "帮助需要的人找到可靠的正规渠道。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2
+          }
+        },
+        {
+          "label": "提供一件闲置但好用的物品",
+          "description": "先问清需求，再决定如何分享。",
+          "delta": {
+            "connections": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "帮助制定清晰的轮值与退出安排",
+          "description": "让互助不依靠少数人长期透支。",
+          "delta": {
+            "knowledge": 2,
+            "influence": 3
+          }
+        },
+        {
+          "label": "保留联系方式，先照顾自己的生活",
+          "description": "在确有余力时再承担额外责任。",
+          "delta": {
+            "health": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "邻里间流传的一份互助名单，这个月多添了几项具体的小事。有人有闲置工具，有人知道办事的地方，也有人愿意顺路带些东西。你看过大家留下的信息，与熟悉的人核对了联系方式。帮助并不总能立即凑齐，但平日里见面时，彼此多了几件可以说起的话。"
+    },
+    {
+      "id": "senior_daily_rhythm",
+      "title": "重新安排一天的节奏",
+      "narrative": "在{location}，你开始更在意每天怎样使用时间。过去的安排未必永远适合现在，而新的节奏可以由自己慢慢试出来。",
+      "category": "health",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "固定散步与适合自己的活动时间",
+          "description": "根据身体情况保持低负担的规律活动。",
+          "delta": {
+            "health": 4,
+            "stress": -3
+          }
+        },
+        {
+          "label": "参加一次适龄的兴趣交流",
+          "description": "从熟悉的话题认识新的伙伴。",
+          "delta": {
+            "connections": 4,
+            "stress": -2,
+            "funds": -60
+          }
+        },
+        {
+          "label": "整理生活用品与常用联系信息",
+          "description": "让日常所需更容易找到和使用。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "安排安静的阅读或创作",
+          "description": "给独处保留一项自己愿意做的事情。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "和家人谈谈自己希望的生活",
+          "description": "明确需要帮助的部分，也保留自主决定的空间。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        }
+      ],
+      "diary": "这个月，你慢慢调整了每天做事的先后。精神较好的时候处理需要专心的事务，累了便坐下歇歇，不再把所有事情挤在同一段时间。熟悉的人偶尔来打招呼，话题仍离不开天气和日常琐事。到了傍晚，屋里的物品一一归回原处，一天留下的忙碌也渐渐安静。"
+    },
+    {
+      "id": "senior_digital",
+      "title": "手机里的新流程",
+      "narrative": "一项日常服务增加了数字操作步骤。你想弄清它是否方便，也希望在不适应时仍能找到可靠的替代方法。",
+      "category": "technology",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "请可信的人陪着练习完整流程",
+          "description": "由自己操作，不急着记住所有功能。",
+          "delta": {
+            "knowledge": 4,
+            "connections": 1
+          }
+        },
+        {
+          "label": "整理常用操作的纸质提示",
+          "description": "把步骤、求助方式和容易出错的地方记清楚。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "向服务方询问线下办理办法",
+          "description": "选择更适合自己的方式。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -3
+          }
+        },
+        {
+          "label": "与同龄朋友交换使用经验",
+          "description": "一起核实信息，避免把传闻当教程。",
+          "delta": {
+            "connections": 4,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "减少非必要通知和功能",
+          "description": "保留真正有用的工具，让手机安静一些。",
+          "delta": {
+            "stress": -4,
+            "knowledge": 1
+          }
+        }
+      ],
+      "diary": "手机里的一项新流程，让你这个月花了些时间熟悉。你按提示看过几个页面，把容易忘记的步骤写在纸上，也问清了遇到问题时可以找谁。几次操作并不都顺利，重新打开后才找到刚才的位置。后来再看那张说明时，有几个原本陌生的按钮已经认得了。"
+    },
+    {
+      "id": "senior_life_story",
+      "title": "一段愿意讲述的往事",
+      "narrative": "有人对你以前的生活感兴趣。你可以分享，也可以决定哪些经历留给自己；记忆中的空白同样值得被尊重。",
+      "category": "culture",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "讲一个具体的人和一件具体的事",
+          "description": "把亲历与听说的部分分开。",
+          "delta": {
+            "knowledge": 2,
+            "connections": 3
+          }
+        },
+        {
+          "label": "录一段只留给家人的声音",
+          "description": "保存自己的语气和想表达的内容。",
+          "delta": {
+            "connections": 4,
+            "stress": -2
+          }
+        },
+        {
+          "label": "整理照片并标注不确定之处",
+          "description": "不为了完整而补造细节。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "参加小范围的代际交流",
+          "description": "听年轻人的问题，也说自己的疑问。",
+          "delta": {
+            "connections": 3,
+            "influence": 2
+          }
+        },
+        {
+          "label": "婉拒回忆，谈谈现在的爱好",
+          "description": "让相处围绕此刻愿意分享的生活展开。",
+          "delta": {
+            "stress": -4,
+            "connections": 1
+          }
+        }
+      ],
+      "diary": "有人问起从前的生活，你便在这个月的一次闲谈里讲了几段记得清楚的往事。有些名字已经很久没说出口，有些日期还需要翻旧物核对。对方听得认真，你也没有勉强自己补齐记不住的部分。谈话结束后，杯子里的水已经凉了，过去的一小段日子又清晰起来。"
+    },
+    {
+      "id": "senior_support",
+      "title": "怎样接受帮助",
+      "narrative": "亲近的人提出替你安排一些生活事务。你感谢这份关心，也希望重要决定仍然由自己参与。",
+      "category": "family",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "列出希望被帮助的具体事情",
+          "description": "把协助与替自己决定分清楚。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "共同整理一份联络与生活安排",
+          "description": "让需要支持时更容易找到合适的人。",
+          "delta": {
+            "health": 2,
+            "connections": 2,
+            "stress": -1
+          }
+        },
+        {
+          "label": "了解附近的日间活动或支持服务",
+          "description": "比较实际条件，不急着作长期承诺。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 2
+          }
+        },
+        {
+          "label": "保留一项自己愿意独立完成的事务",
+          "description": "根据状态调整难度，维持参与感。",
+          "delta": {
+            "knowledge": 2,
+            "health": 2,
+            "stress": -1
+          }
+        },
+        {
+          "label": "用一次共同活动缓和讨论",
+          "description": "在轻松相处中表达自己的想法。",
+          "delta": {
+            "connections": 4,
+            "stress": -3,
+            "funds": -100
+          }
+        }
+      ],
+      "diary": "亲近的人这个月帮你分担了几件琐事。你把自己习惯的做法说清楚，也说明哪些事情仍想亲自处理。彼此最初有一点误会，后来通过几次简短的交谈慢慢理顺。东西放回熟悉的位置以后，日常生活仍保持着原来的样子，只是有些需要费心的地方多了一双手。"
+    },
+    {
+      "id": "senior_experience",
+      "title": "旧经验的新用途",
+      "narrative": "一个年轻人想请教你熟悉的生活或工作问题。时代与方法都在变化，过去的经验可以是起点，不必成为唯一答案。",
+      "category": "relationships",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "分享曾经有效也曾经失败的方法",
+          "description": "连同当时的条件一起说明。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "陪对方分析当前真正的问题",
+          "description": "先倾听，不急着替别人选路。",
+          "delta": {
+            "connections": 4,
+            "stress": -1
+          }
+        },
+        {
+          "label": "整理一份短小的经验笔记",
+          "description": "只留下仍能验证或值得讨论的部分。",
+          "delta": {
+            "knowledge": 3,
+            "influence": 2
+          }
+        },
+        {
+          "label": "请对方教自己一项新工具",
+          "description": "把单向请教变成互相学习。",
+          "delta": {
+            "knowledge": 4,
+            "connections": 2
+          }
+        },
+        {
+          "label": "约定有限的交流时间",
+          "description": "愿意帮助，也保护自己的休息节奏。",
+          "delta": {
+            "connections": 2,
+            "health": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "一个年轻人向你问起自己遇到的事情，你便讲了几段从前处理相近问题的经历。对方补充了如今的做法，有些与你熟悉的情况已经很不一样。这个月的几次交谈里，你们一边比较，一边把适用的部分挑出来。话说完以后，各自仍要回到自己的生活中慢慢尝试。"
+    },
+    {
+      "id": "senior_budget",
+      "title": "让日子过得更有余地",
+      "narrative": "你想检查固定收入、储蓄与日常开支是否仍然匹配。{location}的生活里，安心既来自账本，也来自可信的支持网络。",
+      "category": "finance",
+      "minAge": 65,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "梳理账单并取消不用的服务",
+          "description": "节约不影响基本生活的开支。",
+          "delta": {
+            "funds": 150,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "把常用支出做成容易查看的记录",
+          "description": "让自己更清楚钱花在何处。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "与可信的家人商量必要的支持",
+          "description": "明确自己的意愿与可接受的安排。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "留出适当的活动与健康预算",
+          "description": "把生活质量纳入计划。",
+          "delta": {
+            "health": 3,
+            "stress": -3,
+            "funds": -200
+          }
+        },
+        {
+          "label": "核实自己可申请的正规公共服务",
+          "description": "通过公开渠道了解条件与办理方式。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 1
+          }
+        }
+      ],
+      "diary": "这个月，你把固定的收支重新核对了一遍。几张票据放到一起，熟悉的项目大致没有变化，零碎的花费仍需要留心。你整理好常用的联系方式，把需要按期处理的事情记在纸上。账本合起来时，窗外还有日常的喧闹，生活的安排比月初稍微清楚了一些。"
+    },
+    {
+      "id": "tw_local_dialogue",
+      "title": "里巷里的公共讨论",
+      "narrative": "在中国台湾的住处附近，人们谈起公共空间、交通与照护。意见并不只沿政党标签分开，许多分歧来自每天怎样生活。",
+      "category": "politics",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "听不同年龄居民讲实际需求",
+          "description": "把抽象立场还原成具体生活问题。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "整理一个与自己相关的小建议",
+          "description": "通过公开渠道询问办理与反馈方式。",
+          "delta": {
+            "influence": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "参加范围明确的社区事务",
+          "description": "从环境整理或活动协助做起。",
+          "delta": {
+            "connections": 4,
+            "influence": 1,
+            "stress": 1
+          }
+        },
+        {
+          "label": "比较不同说法使用的证据",
+          "description": "不因为立场相近就省略核实。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "减少争论，先照顾家中安排",
+          "description": "保留自己的判断，把本月精力留给重要的人。",
+          "delta": {
+            "health": 1,
+            "stress": -4
+          }
+        }
+      ],
+      "places": [
+        "中国台湾"
+      ],
+      "diary": "这个月，住处附近的人又聊起交通和公共空间。有人的日常围着接送家人转，有人担心做生意受到影响，同一件事情因此有了不同的轻重。你听过几场交谈，也在经过那段路时多看了几眼。到了饭点，讨论的人陆续散开，巷子里重新飘起熟悉的饭菜气味。"
+    },
+    {
+      "id": "tw_workshop",
+      "title": "产业新闻与个人选择",
+      "narrative": "你在中国台湾看到半导体、服务业和传统制造的工作信息。产业报道说得很大，自己的选择仍取决于技能、班次、地点与生活。",
+      "category": "work",
+      "minAge": 18,
+      "maxAge": 69,
+      "options": [
+        {
+          "label": "比较不同岗位的真实要求",
+          "description": "把工时、培训和通勤都列入考虑。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "向从业者询问实际工作经验",
+          "description": "了解岗位之间的差异与转换难度。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "学习一项可迁移的基础技能",
+          "description": "优先练习数据处理、语言或设备基础。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -300
+          }
+        },
+        {
+          "label": "接一份范围明确的临时工作",
+          "description": "先增加当月收入，再评估长期适合程度。",
+          "delta": {
+            "funds": 1200,
+            "stress": 3,
+            "health": -1
+          }
+        },
+        {
+          "label": "围绕现有能力寻找本地机会",
+          "description": "保留生活支持网络，逐步调整方向。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        }
+      ],
+      "places": [
+        "中国台湾"
+      ],
+      "diary": "你这个月看过一些产业与工作方面的消息。介绍里谈到的规模很大，实际招募写出的班次、地点和职责很具体。你把能看懂的条件整理了一下，又向熟悉的人问了几句。周围人仍在各自的岗位上忙碌，新闻里那些数字，也逐渐对应上了普通人的通勤和作息。"
+    },
+    {
+      "id": "tw_local_memory",
+      "title": "书店里的地方记忆",
+      "narrative": "你在中国台湾的一处书店或阅读活动里接触到地方史材料。不同作者的叙述各有重点，你想找到与自己生活相连的问题。",
+      "category": "culture",
+      "minAge": 13,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "阅读不同立场的短篇材料",
+          "description": "记录作者依据与自己尚未理解的部分。",
+          "delta": {
+            "knowledge": 4,
+            "stress": 1
+          }
+        },
+        {
+          "label": "和愿意分享的居民聊旧街区",
+          "description": "把个人记忆与可核对资料分别保存。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "用步行认识熟悉街区的细节",
+          "description": "观察建筑、商店与公共空间的使用。",
+          "delta": {
+            "health": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "写一段自己的生活观察",
+          "description": "关注具体的人和事，避免替所有人发言。",
+          "delta": {
+            "knowledge": 2,
+            "influence": 2
+          }
+        },
+        {
+          "label": "选一本与政治无关的书放松",
+          "description": "让阅读也有单纯的愉快。",
+          "delta": {
+            "knowledge": 2,
+            "stress": -4,
+            "funds": -60
+          }
+        }
+      ],
+      "places": [
+        "中国台湾"
+      ],
+      "diary": "一次翻阅地方史材料的经历，让你在这个月记住了几个以前没留意的地名。旧地图上的道路与如今并不完全相同，作者对同一段往事也各有侧重。你抄下想继续了解的内容，离开时又看了看附近的街口。平常经过的地方，因这些文字多了一层缓慢积下来的时间。"
+    },
+    {
+      "id": "jp_neighborhood",
+      "title": "回览板上的通知",
+      "narrative": "在日本住处附近，一张社区通知或公共服务信息让你留意到身边的日常事务。参与多少、怎样参与，都需要与自己的时间相配合。",
+      "category": "community",
+      "minAge": 18,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "确认通知内容与适用范围",
+          "description": "不懂的词和流程向可靠窗口询问。",
+          "delta": {
+            "knowledge": 3,
+            "connections": 1
+          }
+        },
+        {
+          "label": "参与一次可承担的社区活动",
+          "description": "做一项时间与职责都明确的小事。",
+          "delta": {
+            "connections": 4,
+            "influence": 1,
+            "stress": 1
+          }
+        },
+        {
+          "label": "询问居民实际关心的问题",
+          "description": "从垃圾分类、噪音和公共空间的具体经验谈起。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "整理对自己有用的联系信息",
+          "description": "把公开服务与个人生活安排连接起来。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        },
+        {
+          "label": "说明目前无法投入额外时间",
+          "description": "保持礼貌联系，先处理既有责任。",
+          "delta": {
+            "health": 1,
+            "stress": -3
+          }
+        }
+      ],
+      "places": [
+        "日本"
+      ],
+      "diary": "社区的回览板上，这个月又添了几张通知。你仔细看过日期与地点，把与自己生活有关的事项记了下来。邻居交接纸张时说了几句天气，也提醒了其中一处容易看漏的时间。街区照旧有人出门、有人归来，许多不起眼的安排，就这样在一次次短暂的照面中传开。"
+    },
+    {
+      "id": "jp_work_balance",
+      "title": "通勤与工作之间",
+      "narrative": "在日本的生活让你重新考虑通勤、工作安排和自己的时间。选择可能来自调整现有方式，也可能来自了解新的岗位。",
+      "category": "work",
+      "minAge": 18,
+      "maxAge": 69,
+      "options": [
+        {
+          "label": "记录一周实际花在通勤上的时间",
+          "description": "把疲劳与交通费用一起纳入判断。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -1
+          }
+        },
+        {
+          "label": "与相关人员协商时间安排",
+          "description": "提出范围清楚、能够评估的调整方式。",
+          "delta": {
+            "influence": 2,
+            "knowledge": 2,
+            "stress": 1
+          }
+        },
+        {
+          "label": "了解本地其他岗位的条件",
+          "description": "核对资格、职责与报酬，不急着离开现有安排。",
+          "delta": {
+            "connections": 2,
+            "knowledge": 3
+          }
+        },
+        {
+          "label": "利用一段固定时间学习",
+          "description": "以语言、专业基础或职业能力为小目标。",
+          "delta": {
+            "knowledge": 5,
+            "funds": -250,
+            "stress": 1
+          }
+        },
+        {
+          "label": "把一个空闲时段留给生活",
+          "description": "在附近散步、做饭或与朋友相处。",
+          "delta": {
+            "health": 3,
+            "connections": 2,
+            "stress": -3
+          }
+        }
+      ],
+      "places": [
+        "日本"
+      ],
+      "diary": "这个月，你开始留意每天花在路途和工作事务上的时间。几段等待并不长，累积起来占去不少空闲。你核对了日常行程，也看过可以调整的细节。忙完回到住处后，熟悉的灯光仍然亮着，手头的安排没有骤然改变，但一天是怎样过去的，已经比以前清楚一些。"
+    },
+    {
+      "id": "jp_readiness",
+      "title": "平常日子的防灾准备",
+      "narrative": "你在日本看到一份面向居民的日常防灾说明。现在并没有因此确认灾害发生，提前弄清本地安排只是生活准备的一部分。",
+      "category": "preparedness",
+      "minAge": 13,
+      "maxAge": 119,
+      "options": [
+        {
+          "label": "查阅本地公开的避难与联络信息",
+          "description": "记住可靠的信息渠道与需要核实的问题。",
+          "delta": {
+            "knowledge": 4,
+            "stress": -1
+          }
+        },
+        {
+          "label": "和家人商量失联时如何联系",
+          "description": "建立简单、人人理解的约定。",
+          "delta": {
+            "connections": 3,
+            "stress": -3
+          }
+        },
+        {
+          "label": "检查已有用品是否便于取用",
+          "description": "按实际需求整理，不重复囤购。",
+          "delta": {
+            "knowledge": 2,
+            "health": 1,
+            "funds": -80
+          }
+        },
+        {
+          "label": "参加适龄、正规的社区说明活动",
+          "description": "认识工作人员与邻里支持方式。",
+          "delta": {
+            "connections": 3,
+            "knowledge": 2
+          }
+        },
+        {
+          "label": "整理必要文件的个人备份",
+          "description": "注意保管，只保存自己确实需要的信息。",
+          "delta": {
+            "knowledge": 3,
+            "stress": -2
+          }
+        }
+      ],
+      "places": [
+        "日本"
+      ],
+      "diary": "一份居民防灾说明让你这个月多留意了住处附近的标识。你核对过集合地点，检查常用物品放在哪里，也把重要的联系方式记得更清楚。说明里的步骤有些原来并不熟悉，便慢慢读了第二遍。这些准备夹在普通日子之间，收好纸张后，生活仍有自己的琐事要忙。"
+    },
+    {
+      "id": "opportunity_research",
+      "title": "研究室的邀请",
+      "narrative": "你之前整理的技术笔记得到一位研究者的注意。对方来信，希望你参与一个规模不大、但需要耐心与扎实基础的研究项目。",
+      "category": "research",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "intelligence": 70
+      },
+      "options": [
+        {
+          "label": "参加项目的技术讨论",
+          "description": "先核对问题与资料，谈清楚自己能够承担的部分。",
+          "delta": {
+            "intelligence": 3,
+            "connections": 2,
+            "stress": 2
+          }
+        },
+        {
+          "label": "请求在家完成一部分工作",
+          "description": "为照顾现有生活，先从资料和计算开始。",
+          "delta": {
+            "intelligence": 2,
+            "funds": 300
+          }
+        },
+        {
+          "label": "把时间留给原来的计划",
+          "description": "礼貌回信，继续完成手边更紧迫的事情。",
+          "delta": {
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "研究者寄来的邀请，这个月有了更具体的说明。你翻出先前整理的技术笔记，核对其中的出处，并把自己能理解和还不熟悉的部分分别标记。几封往返的信息让问题的边界逐渐清楚。桌上的材料增加了一小叠，而是否承担更长的工作，仍需要双方慢慢了解实际条件。"
+    },
+    {
+      "id": "opportunity_scholarship",
+      "title": "一封资助申请",
+      "narrative": "你近期的学习成果受到肯定，一项面向继续学习者的资助开始接受申请。材料需要具体而诚实，也要说明下一步打算。",
+      "category": "learning",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "intelligence": 60
+      },
+      "options": [
+        {
+          "label": "认真准备并递交申请",
+          "description": "把作品、成绩与生活安排写清楚。",
+          "delta": {
+            "intelligence": 2,
+            "funds": 1000,
+            "stress": 1
+          }
+        },
+        {
+          "label": "请熟悉你的人提出建议",
+          "description": "听完意见后再修改材料。",
+          "delta": {
+            "connections": 3,
+            "intelligence": 1
+          }
+        },
+        {
+          "label": "先完成正在进行的学习",
+          "description": "待成果更完整时再寻找机会。",
+          "delta": {
+            "intelligence": 3,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "这个月，你认真看过一项学习资助的介绍，把申请需要的材料列成清单。以前留下的学习记录被重新整理，几处日期也逐一核对。写到今后的安排时，你尽量用具体的小事说明自己的打算。尚待补充的材料放在另一边，日常学习仍旧在这些准备之外一点点继续。"
+    },
+    {
+      "id": "opportunity_family_business",
+      "title": "亲属的经营计划",
+      "narrative": "家里的积蓄允许大家考虑一笔长期投入。一位亲属带来小规模经营的计划，谈话从预期收入转到租金、用工与最坏情况下能承受的损失。",
+      "category": "business",
+      "minAge": 18,
+      "maxAge": 119,
+      "minStats": {
+        "family": 70
+      },
+      "options": [
+        {
+          "label": "参与前期调查",
+          "description": "亲自了解租金、需求和真实的经营状况。",
+          "delta": {
+            "family": 2,
+            "intelligence": 1,
+            "funds": -600
+          }
+        },
+        {
+          "label": "小额参与并划清责任",
+          "description": "留下生活储备，将合作条件逐项写明。",
+          "delta": {
+            "family": 2,
+            "funds": 1500,
+            "stress": 2
+          }
+        },
+        {
+          "label": "暂时保留家庭储蓄",
+          "description": "先照顾眼前的支出和家人的安排。",
+          "delta": {
+            "stress": -2,
+            "connections": 1
+          }
+        }
+      ],
+      "diary": "家里人这个月谈起一份经营计划，最初热闹的设想渐渐变成租金、材料和时间上的计算。你陪着核对了几笔数字，也听亲属讲到从业者实际遇到的困难。大家没有把预期的收入当成已经到手的钱。纸上的账还需要继续补充，谈话之后，日常的事情仍然照常安排。"
+    },
+    {
+      "id": "opportunity_family_care",
+      "title": "照护的余地",
+      "narrative": "家庭收入暂时稳定，你和家人终于可以讨论如何减轻长期照护的负担。有人希望请人帮忙，也有人愿意轮流陪伴。",
+      "category": "family",
+      "minAge": 18,
+      "maxAge": 119,
+      "minStats": {
+        "family": 60
+      },
+      "options": [
+        {
+          "label": "为家人安排合适的照护",
+          "description": "先了解需要，再核对服务与费用。",
+          "delta": {
+            "health": 2,
+            "funds": -700,
+            "stress": -3
+          }
+        },
+        {
+          "label": "亲自分担一部分家务",
+          "description": "把陪伴落实到每周的安排中。",
+          "delta": {
+            "connections": 3,
+            "fitness": 1
+          }
+        },
+        {
+          "label": "留出应急储蓄",
+          "description": "与家人商量未来几个月的支出。",
+          "delta": {
+            "family": 1,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "收入暂时平稳，让家里这个月有余地重新整理照护安排。你和亲近的人核对过日常需要的帮助，把容易挤在一起的事务错开了一些。讨论里既有费用，也有每个人实际能抽出的时间。几件小事慢慢安排妥当之后，原先总是忙得顾不上休息的人，终于有了片刻空闲。"
+    },
+    {
+      "id": "opportunity_outdoors",
+      "title": "远足前的约定",
+      "narrative": "熟人准备在天气合适时走一段较长的山路。你一向有规律地运动，大家希望你一起参加，并帮忙照顾队伍的节奏。",
+      "category": "leisure",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "fitness": 65
+      },
+      "options": [
+        {
+          "label": "参加远足，提前检查用品",
+          "description": "量力安排路程，和同伴确认联络方式。",
+          "delta": {
+            "fitness": 3,
+            "health": 1,
+            "funds": -180
+          }
+        },
+        {
+          "label": "选择较短的一段同行",
+          "description": "把体力留在舒适的范围内。",
+          "delta": {
+            "fitness": 2,
+            "connections": 2
+          }
+        },
+        {
+          "label": "这个月继续日常训练",
+          "description": "不改变作息，保持规律。",
+          "delta": {
+            "fitness": 2,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "熟人提起一次远足，你这个月便多留意了自己的日常锻炼与休息。大家交流过路程和天气情况，也谈到各自能适应的步调。你检查了一下常用物品，仍按熟悉的节奏活动身体。关于长路的计划还在消息里来回商量，平常经过的街道已经陪你走过了不少个傍晚。"
+    },
+    {
+      "id": "opportunity_team",
+      "title": "训练队的空位",
+      "narrative": "一支业余运动队缺少稳定参加训练的人。你近期的体能和认真态度让组织者留下印象，对方询问你是否愿意跟队练习。",
+      "category": "leisure",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "fitness": 75
+      },
+      "options": [
+        {
+          "label": "参加几次合练",
+          "description": "先熟悉节奏和队友。",
+          "delta": {
+            "fitness": 3,
+            "connections": 2,
+            "stress": 1
+          }
+        },
+        {
+          "label": "帮忙安排训练与联络",
+          "description": "把自己的经验用于照顾大家的日常安排。",
+          "delta": {
+            "influence": 1,
+            "connections": 3
+          }
+        },
+        {
+          "label": "继续独自运动",
+          "description": "把身体状态放在成绩之前。",
+          "delta": {
+            "health": 3,
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "一支业余运动队的邀请，让你这个月了解了他们平常怎样安排训练。你与组织者谈过时间和强度，也看过其他人准备器材、相互配合的样子。日常锻炼仍按自己的节奏进行，疲倦时便好好歇一歇。是否长期一起活动还需要磨合，不过彼此已经多了一点具体的认识。"
+    },
+    {
+      "id": "opportunity_portrait",
+      "title": "社区展览的照片",
+      "narrative": "一位摄影爱好者正在为社区展览拍摄普通人的日常。你清爽的仪态和对镜头的自在给他留下印象，他邀请你带着熟悉的衣物来试拍。",
+      "category": "culture",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "appearance": 65
+      },
+      "options": [
+        {
+          "label": "参加拍摄并讲述自己的日常",
+          "description": "选择愿意公开的片段，与对方确认用途。",
+          "delta": {
+            "appearance": 2,
+            "connections": 2,
+            "influence": 1
+          }
+        },
+        {
+          "label": "邀请家人一起留影",
+          "description": "把这次机会留作共同的纪念。",
+          "delta": {
+            "connections": 3,
+            "funds": -100
+          }
+        },
+        {
+          "label": "婉拒公开拍摄",
+          "description": "照常生活，保留自己的私人空间。",
+          "delta": {
+            "stress": -2
+          }
+        }
+      ],
+      "diary": "摄影爱好者这个月向你介绍了社区展览的想法，也展示了几张已经整理好的照片。你看见镜头里都是熟悉的街道与日常神情，便同对方聊起哪些场景更接近自己的生活。一次简单的试拍留下了几张不同角度的影像，衣物和光线都很平常，保存住了那个普通下午。"
+    },
+    {
+      "id": "opportunity_stage",
+      "title": "一次公开讲述",
+      "narrative": "一场小型分享会需要有人介绍社区近期的工作。你得体的仪态和与人交往的表现让组织者想到你，但准备材料同样需要认真。",
+      "category": "relationships",
+      "minAge": 16,
+      "maxAge": 119,
+      "minStats": {
+        "appearance": 75
+      },
+      "options": [
+        {
+          "label": "接受邀请，仔细准备材料",
+          "description": "用具体经历说明事情，不夸大自己的贡献。",
+          "delta": {
+            "appearance": 1,
+            "influence": 2,
+            "intelligence": 1
+          }
+        },
+        {
+          "label": "请伙伴一起上台",
+          "description": "分担准备，让不同经历都能被听到。",
+          "delta": {
+            "connections": 3,
+            "influence": 1
+          }
+        },
+        {
+          "label": "只承担幕后准备",
+          "description": "把资料与现场安排处理妥当。",
+          "delta": {
+            "intelligence": 2,
+            "stress": -1
+          }
+        }
+      ],
+      "diary": "一场小型分享会的筹备，让你这个月接触了几份社区工作的记录。你帮着核对时间和人物，把容易混淆的细节写得更清楚。组织者谈到现场的安排，也听取了你的意见。材料在几次修改后逐渐整齐，日常交谈中熟悉的事情，变成了一段段可以认真讲明白的经过。"
+    }
+  ],
+  "majorOptions": {
+    "pandemic": [
+      {
+        "label": "核实本地通知，调整这个月的安排",
+        "description": "通过可靠渠道了解实际适用的生活与公共服务安排。",
+        "delta": {
+          "knowledge": 3,
+          "stress": -2
+        }
+      },
+      {
+        "label": "和家人商量照护与联络",
+        "description": "明确需要帮助的人与可分担的日常事务。",
+        "delta": {
+          "connections": 4,
+          "stress": -2
+        }
+      },
+      {
+        "label": "把可远程完成的工作或学习搬到线上",
+        "description": "试着维持有限而具体的进度。",
+        "delta": {
+          "knowledge": 4,
+          "funds": -150,
+          "stress": 1
+        }
+      },
+      {
+        "label": "参与自己能承担的社区互助",
+        "description": "协助整理信息或对接正规服务，避免过度承担。",
+        "delta": {
+          "connections": 4,
+          "influence": 1,
+          "stress": 1
+        }
+      },
+      {
+        "label": "按实际需要补充家庭日用品",
+        "description": "核对已有储备，把预算留给确实缺少的东西。",
+        "delta": {
+          "health": 2,
+          "stress": -3,
+          "funds": -300
+        }
+      },
+      {
+        "label": "记录这段时间的真实生活",
+        "description": "保留可核实的经历与尚不确定的消息。",
+        "delta": {
+          "knowledge": 3,
+          "influence": 2
+        }
+      }
+    ],
+    "protest": [
+      {
+        "label": "先听清不同参与者的具体诉求",
+        "description": "关注工作、生活与公共服务问题，避免只用标签判断。",
+        "delta": {
+          "knowledge": 3,
+          "connections": 2
+        }
+      },
+      {
+        "label": "通过合适的公开渠道表达个人意见",
+        "description": "把诉求写具体，由自己决定愿意公开的范围。",
+        "delta": {
+          "influence": 3,
+          "knowledge": 2,
+          "stress": 2
+        }
+      },
+      {
+        "label": "与家人重新安排出行和联络",
+        "description": "根据可信信息照顾日常需要。",
+        "delta": {
+          "connections": 3,
+          "stress": -3,
+          "funds": -100
+        }
+      },
+      {
+        "label": "核实消息并保留审慎的观察记录",
+        "description": "区分现场见闻、转述与未经确认的说法。",
+        "delta": {
+          "knowledge": 4,
+          "influence": 1,
+          "stress": 1
+        }
+      },
+      {
+        "label": "为受影响的邻里提供有限帮助",
+        "description": "从时间、信息或日常照护中选择自己能承担的一项。",
+        "delta": {
+          "connections": 4,
+          "influence": 1,
+          "funds": -150
+        }
+      },
+      {
+        "label": "暂时减少公共讨论，稳住个人生活",
+        "description": "尊重自己的承受能力，继续工作、学习或休息。",
+        "delta": {
+          "health": 2,
+          "stress": -4
+        }
+      }
+    ],
+    "war": [
+      {
+        "label": "安排家庭联络与必要生活支出",
+        "description": "根据所在地的可靠信息处理眼前事务。",
+        "delta": {
+          "connections": 3,
+          "stress": -2,
+          "funds": -300
+        }
+      },
+      {
+        "label": "核实交通与公共服务的变化",
+        "description": "只采用已确认、与自己确实相关的信息。",
+        "delta": {
+          "knowledge": 4,
+          "stress": -1
+        }
+      },
+      {
+        "label": "向正规救助与公共服务渠道提供协助",
+        "description": "选择信息整理、生活支持等适合自己的工作。",
+        "delta": {
+          "connections": 4,
+          "influence": 1,
+          "stress": 2
+        }
+      },
+      {
+        "label": "调整就业或学习计划，保留收入来源",
+        "description": "把长期目标拆成当前条件下可完成的小步骤。",
+        "delta": {
+          "knowledge": 3,
+          "funds": 400,
+          "stress": 3
+        }
+      },
+      {
+        "label": "记录普通人的生活与愿望",
+        "description": "征得当事人同意，保护不愿公开的身份细节。",
+        "delta": {
+          "knowledge": 3,
+          "influence": 2,
+          "stress": 1
+        }
+      },
+      {
+        "label": "为暂时迁居做资料与预算准备",
+        "description": "核实可行条件后再决定是否行动。",
+        "delta": {
+          "knowledge": 3,
+          "stress": -1,
+          "funds": -150
+        }
+      }
+    ],
+    "politics": [
+      {
+        "label": "阅读新安排的具体内容与执行范围",
+        "description": "先弄清哪些变化真正涉及自己的生活。",
+        "delta": {
+          "knowledge": 4,
+          "stress": 1
+        }
+      },
+      {
+        "label": "与不同立场的熟人认真交谈",
+        "description": "从实际经历出发，保留彼此不同的判断。",
+        "delta": {
+          "connections": 4,
+          "knowledge": 2
+        }
+      },
+      {
+        "label": "围绕一项公共问题表达自己的主张",
+        "description": "提出具体、可讨论的需求，而不替所有人发言。",
+        "delta": {
+          "influence": 3,
+          "knowledge": 2,
+          "stress": 2
+        }
+      },
+      {
+        "label": "参加适合自己的社区与公共事务",
+        "description": "以有限责任了解政策如何落到日常生活。",
+        "delta": {
+          "connections": 3,
+          "influence": 2,
+          "stress": 1
+        }
+      },
+      {
+        "label": "为职业、学业与家庭安排留出余地",
+        "description": "根据实际变化调整计划，保留多种选择。",
+        "delta": {
+          "knowledge": 3,
+          "stress": -2
+        }
+      },
+      {
+        "label": "暂缓站队，把本月留给私人生活",
+        "description": "认真处理眼前的人与事，稍后再评估局势。",
+        "delta": {
+          "health": 2,
+          "stress": -4
+        }
+      }
+    ],
+    "technology": [
+      {
+        "label": "了解技术实际能做什么与不能做什么",
+        "description": "比较演示、证据与应用条件。",
+        "delta": {
+          "knowledge": 5,
+          "stress": 1
+        }
+      },
+      {
+        "label": "用公开、非敏感材料做小规模试用",
+        "description": "记录错误和限制，避免把输出直接当成事实。",
+        "delta": {
+          "knowledge": 4,
+          "funds": -200
+        }
+      },
+      {
+        "label": "研究它对工作与技能要求的影响",
+        "description": "为个人学习或转岗制定一个月的计划。",
+        "delta": {
+          "knowledge": 4,
+          "connections": 1,
+          "funds": -150
+        }
+      },
+      {
+        "label": "关注数据使用、纠错与申诉机制",
+        "description": "提出与普通使用者有关的具体问题。",
+        "delta": {
+          "influence": 3,
+          "knowledge": 3
+        }
+      },
+      {
+        "label": "与不同背景的人讨论使用体验",
+        "description": "同时听取获得便利与受到影响的人。",
+        "delta": {
+          "connections": 4,
+          "knowledge": 2
+        }
+      },
+      {
+        "label": "先维持熟悉的生活方式",
+        "description": "观察后续效果，把精力留给现有安排。",
+        "delta": {
+          "health": 1,
+          "stress": -3
+        }
+      }
+    ],
+    "disaster": [
+      {
+        "label": "确认本地可靠信息与可用公共服务",
+        "description": "区分所在地点的情况与外地传来的消息。",
+        "delta": {
+          "knowledge": 4,
+          "stress": -1
+        }
+      },
+      {
+        "label": "优先安排自己与家人的基本生活",
+        "description": "按实际需要处理照护、联络和生活用品。",
+        "delta": {
+          "health": 2,
+          "connections": 2,
+          "funds": -300
+        }
+      },
+      {
+        "label": "向正规的救助渠道提供有限支持",
+        "description": "选择自己能够持续承担的时间或物资。",
+        "delta": {
+          "connections": 4,
+          "influence": 1,
+          "funds": -200
+        }
+      },
+      {
+        "label": "调整工作与学习的负荷",
+        "description": "保留必要进度，同时给身体与情绪恢复时间。",
+        "delta": {
+          "health": 3,
+          "stress": -4
+        }
+      },
+      {
+        "label": "整理所在地公开的生活资源信息",
+        "description": "核对可用性后帮助身边的人查找服务。",
+        "delta": {
+          "knowledge": 3,
+          "connections": 3
+        }
+      },
+      {
+        "label": "为可能的临时迁居准备条件",
+        "description": "核实接收、交通和预算，暂不作超出信息的决定。",
+        "delta": {
+          "knowledge": 3,
+          "stress": -2,
+          "funds": -100
+        }
+      }
+    ],
+    "civil": [
+      {
+        "label": "先确认家庭成员的联络与生活安排",
+        "description": "根据所在地区实际情况处理必要事务。",
+        "delta": {
+          "connections": 3,
+          "stress": -2,
+          "funds": -200
+        }
+      },
+      {
+        "label": "核实不同信息源的说法",
+        "description": "把已确认的变化与相互冲突的消息分别记录。",
+        "delta": {
+          "knowledge": 4,
+          "stress": 1
+        }
+      },
+      {
+        "label": "维护跨立场的私人关系",
+        "description": "从彼此安全与具体困难谈起，保留意见分歧。",
+        "delta": {
+          "connections": 4,
+          "stress": -1
+        }
+      },
+      {
+        "label": "参与当地可承担的民生互助",
+        "description": "帮助对接日常照护、公开信息与正规服务。",
+        "delta": {
+          "connections": 3,
+          "influence": 2,
+          "stress": 2
+        }
+      },
+      {
+        "label": "重新评估收入、学业与居住的连续性",
+        "description": "准备替代方案，按这个月的条件逐步调整。",
+        "delta": {
+          "knowledge": 3,
+          "funds": -100,
+          "stress": -1
+        }
+      },
+      {
+        "label": "用私人日记保存这段生活",
+        "description": "记录个人经验，暂不承担公开表达的压力。",
+        "delta": {
+          "knowledge": 2,
+          "stress": -3
+        }
+      }
+    ],
+    "default": [
+      {
+        "label": "弄清变化与自己生活的联系",
+        "description": "查阅可靠信息，圈出需要本月处理的问题。",
+        "delta": {
+          "knowledge": 4,
+          "stress": 1
+        }
+      },
+      {
+        "label": "与重要的人商量接下来的安排",
+        "description": "把工作、学习与照护需要放在一起讨论。",
+        "delta": {
+          "connections": 4,
+          "stress": -2
+        }
+      },
+      {
+        "label": "参与一项范围明确的公共事务",
+        "description": "从身边的小事理解时代的变化。",
+        "delta": {
+          "connections": 3,
+          "influence": 2,
+          "stress": 1
+        }
+      },
+      {
+        "label": "把长期目标拆成当前的一步",
+        "description": "依据自己的条件保留学习与行动的进度。",
+        "delta": {
+          "knowledge": 4,
+          "funds": -150
+        }
+      },
+      {
+        "label": "记录个人观察，留出修正判断的余地",
+        "description": "区分自己看到的、听到的与推测的内容。",
+        "delta": {
+          "knowledge": 3,
+          "influence": 2
+        }
+      },
+      {
+        "label": "把本月用于休息和维系日常生活",
+        "description": "不必立刻回应所有消息，先照顾重要的事。",
+        "delta": {
+          "health": 3,
+          "stress": -4
+        }
+      }
+    ]
+  }
+}

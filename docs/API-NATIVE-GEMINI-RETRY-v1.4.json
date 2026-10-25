@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-24T14:10:10.550Z",
+  "results": [
+    {
+      "provider": "gemini",
+      "status": 200,
+      "ok": true,
+      "elapsedMs": 537,
+      "generationOk": false,
+      "generationMs": 2088,
+      "error": "Gemini 服务暂时繁忙，请稍后重试。 本月未推进。"
+    }
+  ]
+}

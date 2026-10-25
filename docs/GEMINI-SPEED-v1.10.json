@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-10-25T13:49:34.283Z",
+  "endpoint": "https://aiapi.shiwuyan.cn/v1beta",
+  "model": "gemini-4-argon",
+  "scenario": "同一个日本开局角色会见美竹兰，保留年龄、地点、月度延续与关系更新校验。",
+  "note": "单组样本；第三方排队及上游路由会波动，不能保证每月相同耗时。不会更换用户选择的服务或模型。",
+  "reports": [
+    {
+      "mode": "legacy",
+      "requests": [
+        {
+          "requestBytes": 59427,
+          "elapsedMs": 37249,
+          "status": 200,
+          "usage": {
+            "promptTokenCount": 13661,
+            "candidatesTokenCount": 540,
+            "totalTokenCount": 14201,
+            "thoughtsTokenCount": 0,
+            "cachedContentTokenCount": 0
+          },
+          "finishReason": "STOP"
+        }
+      ],
+      "elapsedMs": 37256,
+      "outputCharacters": 799,
+      "narrative": "进入二月后，美竹兰把整理好的和弦谱与试听录音发给了你，你立刻按照约定的曲目开始分段练习。为了在进练习室前把节奏磨合到位，你在完成大学课业之余反复对照录音调整指法，记下几处需要当面确认的过渡小节。连续数日兼顾功课与扒谱让精力有些紧绷，你依然按时向电车站附近的音乐工作室确认了预约时段。",
+      "consequence": "你在商店街旁的咖啡店与美竹兰见面，两人围绕吉他编曲、主唱换气和乐队合奏的细节聊了一下午。你们核对了彼此熟悉的作品谱面，当场敲定下个月共同排练的曲目清单与练习室时间，为接下来的合奏做好了准备。",
+      "relationshipUpdates": [
+        {
+          "source": "player",
+          "target": "美竹兰",
+          "status": "排练伙伴",
+          "detail": "在咖啡店见面讨论音乐并互发谱面筹备合奏排练",
+          "strength": 45
+        }
+      ],
+      "ok": true
+    },
+    {
+      "mode": "optimized",
+      "requests": [
+        {
+          "requestBytes": 39363,
+          "elapsedMs": 39814,
+          "status": 200,
+          "usage": {
+            "promptTokenCount": 9384,
+            "candidatesTokenCount": 582,
+            "totalTokenCount": 9966,
+            "thoughtsTokenCount": 0,
+            "cachedContentTokenCount": 0
+          },
+          "finishReason": "STOP"
+        }
+      ],
+      "elapsedMs": 39824,
+      "outputCharacters": 651,
+      "narrative": "美竹兰把整理好的分谱和练习室预约时间发到了你的手机上，你需要尽快熟悉自己负责的乐器声部。课余时间你留在住处反复核对和弦指法，对照她在谱面上标注的换气与重音位置调整速度，遇到衔接生涩的小节就放慢节拍单独拆解。兼顾学校功课与曲目练习让每天的日程排得比较满，搭乘电车往返学校时你也在默记乐谱结构，为即将开始的合练做好准备。",
+      "consequence": "你在商店街旁的咖啡店与美竹兰见面，拿出平时练习的乐谱，同她交流吉他的弹奏习惯与编曲想法。两人针对几首曲子的节奏配合逐段讨论，喝完咖啡前定下曲目清单，约好下个月租用练习室一起排练。",
+      "relationshipUpdates": [
+        {
+          "source": "player",
+          "target": "美竹兰",
+          "status": "约好排练的伙伴",
+          "detail": "在咖啡店见面交流音乐,定下曲目并约好一起排练。",
+          "strength": 45
+        }
+      ],
+      "ok": true
+    }
+  ]
+}

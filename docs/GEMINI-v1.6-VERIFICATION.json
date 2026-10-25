@@ -1,0 +1,41 @@
+[
+  {
+    "provider": "gemini",
+    "model": "gemini-4-argon",
+    "passed": true,
+    "date": "1976 年 01 月",
+    "age": {
+      "years": 25,
+      "months": 0
+    },
+    "narrative": "一月的北京寒风凛冽，胡同里的有线广播每天按时响起。你生旺屋里的煤炉，拿粮票和人民币去国营粮店买回面粉与白菜。现有的证明只能应付眼下，要想长久立足，接下来得去街道革委会办妥户籍，或者找一份有定量供应的工作。",
+    "consequence": "你在2020年1月启动了与熟识的实验室人员共同调试完成的时空折跃装置，带着提前搜集好的七十年代初期流通纸币、旧式衣物和证明材料，以二十五岁的身体与完整记忆抵达1976年1月的北京。落地后你先避开巡查人员，凭着准备好的介绍信在崇文门一带寻到一间大杂院的耳房落脚，向同院住户打听清楚了街道革委会的登记规矩与副食本、粮票的使用办法，顺利在这个年代安顿下来。",
+    "schemaValidation": "passed",
+    "verifiedOn": "2026-10-25",
+    "endpoint": "https://aiapi.shiwuyan.cn/v1beta",
+    "scenario": "我已经穿越时空到1976年1月，保留现在的身体年龄和记忆，抵达北京后找住处并了解当地生活。",
+    "runtimePath": [
+      "api.generateMonth",
+      "gemini.generateMonth",
+      "deepseek.buildPrompt",
+      "engine.validateResponse",
+      "engine.advance"
+    ],
+    "transport": "Production desktopBridge interface with a PowerShell HTTP harness; not an iPhone device test",
+    "requests": 1,
+    "httpStatus": 200,
+    "finishReason": "STOP",
+    "outputTokens": 826,
+    "proseRepairs": 0,
+    "timeoutBudgetMs": 180000,
+    "compatibilityFix": "Relay user message also carries the full system rules and required JSON structure",
+    "priorFailure": {
+      "finishReason": "STOP",
+      "outputTokens": 860,
+      "format": "Markdown prose instead of JSON",
+      "replayRejected": true,
+      "stateMutated": false
+    },
+    "validationScope": "One complete time-travel generation; unit tests cover deadlines, cancellation, malformed output, and isolated credentials. This is not a guarantee of every model response."
+  }
+]

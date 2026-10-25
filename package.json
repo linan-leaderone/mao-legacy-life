@@ -1,0 +1,19 @@
+{
+  "name": "mao-legacy-life",
+  "version": "1.10.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "build:ios": "node scripts/build-ios-web.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "opencc-js": "^1.4.2"
+  }
+}

@@ -1,0 +1,5331 @@
+{
+  "version": 1,
+  "description": "Reviewed local option translations. Source labels retain action semantics; user placeholders are inserted without translation.",
+  "options": {
+    "建立固定的睡前仪式": {
+      "sourceDescription": "由照护者减少晚间刺激，慢慢调整节奏。",
+      "en": {
+        "label": "Establish a regular bedtime routine",
+        "description": "Have your caregiver reduce evening stimulation and gradually settle the rhythm."
+      },
+      "ja": {
+        "label": "決まった寝る前の習慣を作る",
+        "description": "世話をする人が夜の刺激を減らし、少しずつ生活のリズムを整える。"
+      },
+      "ko": {
+        "label": "일정한 잠자리 습관 만들기",
+        "description": "돌보는 사람이 밤의 자극을 줄이고 생활 리듬을 서서히 조절한다."
+      }
+    },
+    "一起读图画书": {
+      "sourceDescription": "由家人每天指认几样熟悉的东西。",
+      "en": {
+        "label": "Read picture books together",
+        "description": "Have family members point out a few familiar things each day."
+      },
+      "ja": {
+        "label": "一緒に絵本を読む",
+        "description": "家族が毎日、身近な物をいくつか指さして教える。"
+      },
+      "ko": {
+        "label": "함께 그림책 읽기",
+        "description": "가족이 매일 익숙한 물건 몇 가지를 가리키며 알려 준다."
+      }
+    },
+    "轮换照护，让大人休息": {
+      "sourceDescription": "在可靠的家人之间分担照护时间。",
+      "en": {
+        "label": "Take turns with care so adults can rest",
+        "description": "Share caregiving time among trusted family members."
+      },
+      "ja": {
+        "label": "世話を交代し、大人も休む",
+        "description": "信頼できる家族で世話の時間を分担する。"
+      },
+      "ko": {
+        "label": "돌봄을 교대해 어른들도 쉬기",
+        "description": "믿을 수 있는 가족끼리 돌봄 시간을 나눈다."
+      }
+    },
+    "整理安全的活动空间": {
+      "sourceDescription": "收好易碎物品，留出探索和爬行的位置。",
+      "en": {
+        "label": "Make a safe space to move around",
+        "description": "Put fragile objects away and leave room for crawling and exploring."
+      },
+      "ja": {
+        "label": "安全に動ける場所を整える",
+        "description": "壊れやすい物を片づけ、探索したりはい回ったりする場所を空ける。"
+      },
+      "ko": {
+        "label": "안전한 활동 공간 마련하기",
+        "description": "깨지기 쉬운 물건을 치우고 탐색하거나 기어 다닐 자리를 마련한다."
+      }
+    },
+    "记录成长中的小变化": {
+      "sourceDescription": "家人保存观察笔记，在照护咨询时说明情况。",
+      "en": {
+        "label": "Keep notes on small changes as you grow",
+        "description": "Have your family record observations to discuss at care consultations."
+      },
+      "ja": {
+        "label": "成長の小さな変化を記録する",
+        "description": "家族が観察の記録を残し、育児相談で様子を伝える。"
+      },
+      "ko": {
+        "label": "성장 과정의 작은 변화 기록하기",
+        "description": "가족이 관찰 기록을 남겨 돌봄 상담 때 상황을 설명한다."
+      }
+    },
+    "固定去一处安静的绿地": {
+      "sourceDescription": "由照护者陪伴，安排短时间的户外活动。",
+      "en": {
+        "label": "Visit the same quiet green space regularly",
+        "description": "Go outdoors for short periods with your caregiver."
+      },
+      "ja": {
+        "label": "決まった静かな緑地へ行く",
+        "description": "世話をする人が付き添い、短時間の外遊びを予定する。"
+      },
+      "ko": {
+        "label": "정해진 조용한 녹지에 가기",
+        "description": "돌보는 사람이 동행해 짧은 야외 활동을 마련한다."
+      }
+    },
+    "观察路上的车辆和树木": {
+      "sourceDescription": "家人用简单的词回应你的注意。",
+      "en": {
+        "label": "Watch the vehicles and trees along the way",
+        "description": "Have family members respond to your curiosity with simple words."
+      },
+      "ja": {
+        "label": "道の車や木々を観察する",
+        "description": "家族があなたの関心に簡単な言葉で応じる。"
+      },
+      "ko": {
+        "label": "길 위의 차량과 나무 관찰하기",
+        "description": "가족이 네가 관심을 보이는 것에 쉬운 말로 반응한다."
+      }
+    },
+    "与熟悉的邻居打招呼": {
+      "sourceDescription": "在照护者身边慢慢熟悉新的面孔。",
+      "en": {
+        "label": "Greet familiar neighbors",
+        "description": "Get used to new faces gradually, with your caregiver beside you."
+      },
+      "ja": {
+        "label": "顔なじみの近所の人に挨拶する",
+        "description": "世話をする人のそばで、新しい顔に少しずつ慣れる。"
+      },
+      "ko": {
+        "label": "익숙한 이웃에게 인사하기",
+        "description": "돌보는 사람 곁에서 새로운 얼굴에 천천히 익숙해진다."
+      }
+    },
+    "在家听声音、玩积木": {
+      "sourceDescription": "按照当天状态安排室内活动。",
+      "en": {
+        "label": "Listen to sounds and play with blocks at home",
+        "description": "Choose indoor activities that suit how you feel that day."
+      },
+      "ja": {
+        "label": "家で音を聞き、積み木で遊ぶ",
+        "description": "その日の調子に合わせて室内の遊びを決める。"
+      },
+      "ko": {
+        "label": "집에서 소리를 듣고 블록 놀이 하기",
+        "description": "그날 상태에 맞춰 실내 활동을 정한다."
+      }
+    },
+    "先把出门用品整理好": {
+      "sourceDescription": "照护者检查衣物与必需品，减少临时忙乱。",
+      "en": {
+        "label": "Prepare the things needed for an outing",
+        "description": "Have your caregiver check clothing and essentials to avoid a last-minute rush."
+      },
+      "ja": {
+        "label": "先に外出用品を整える",
+        "description": "世話をする人が服や必需品を確認し、直前に慌てないようにする。"
+      },
+      "ko": {
+        "label": "외출용품 먼저 챙기기",
+        "description": "돌보는 사람이 옷과 필수품을 확인해 막판에 허둥대는 일을 줄인다."
+      }
+    },
+    "让熟悉的亲属分担家务": {
+      "sourceDescription": "保持主要照护稳定，先减少家务负担。",
+      "en": {
+        "label": "Ask familiar relatives to share the housework",
+        "description": "Keep your main care arrangement stable while reducing the household workload."
+      },
+      "ja": {
+        "label": "親しい親族に家事を分担してもらう",
+        "description": "主な世話の体制は保ち、まず家事の負担を減らす。"
+      },
+      "ko": {
+        "label": "익숙한 친척에게 집안일 나누어 맡기기",
+        "description": "주된 돌봄은 안정적으로 유지하며 집안일 부담부터 줄인다."
+      }
+    },
+    "了解正规托育的条件": {
+      "sourceDescription": "家人收集费用、接送和照护方式等信息。",
+      "en": {
+        "label": "Find out what formal childcare involves",
+        "description": "Have family members check costs, transport and care arrangements."
+      },
+      "ja": {
+        "label": "認可された保育の条件を調べる",
+        "description": "家族が費用、送迎、保育方法などの情報を集める。"
+      },
+      "ko": {
+        "label": "정식 보육시설의 조건 알아보기",
+        "description": "가족이 비용과 등하원, 돌봄 방식 등의 정보를 모은다."
+      }
+    },
+    "安排固定的亲子时间": {
+      "sourceDescription": "每天留一小段不被家务打断的陪伴。",
+      "en": {
+        "label": "Set aside regular time together as a family",
+        "description": "Keep a short period each day free from household interruptions."
+      },
+      "ja": {
+        "label": "決まった親子の時間を設ける",
+        "description": "毎日少しだけ、家事に中断されない時間を共に過ごす。"
+      },
+      "ko": {
+        "label": "정기적인 부모와 자녀의 시간 마련하기",
+        "description": "매일 잠시라도 집안일에 방해받지 않고 함께하는 시간을 둔다."
+      }
+    },
+    "减少不必要的用品购买": {
+      "sourceDescription": "整理已有用品，把家用预算留给需要的地方。",
+      "en": {
+        "label": "Cut back on unnecessary supplies",
+        "description": "Sort what you already have and save the household budget for actual needs."
+      },
+      "ja": {
+        "label": "不要な用品の購入を減らす",
+        "description": "今ある物を整理し、家計を必要なところに回す。"
+      },
+      "ko": {
+        "label": "불필요한 용품 구매 줄이기",
+        "description": "이미 가진 물품을 정리하고 가계 예산을 필요한 곳에 남겨 둔다."
+      }
+    },
+    "请照护咨询人员帮助梳理": {
+      "sourceDescription": "家人讨论睡眠和照护安排，形成可执行的计划。",
+      "en": {
+        "label": "Ask a childcare adviser to help plan",
+        "description": "Have your family discuss sleep and care routines to make a workable plan."
+      },
+      "ja": {
+        "label": "育児相談の担当者に整理を手伝ってもらう",
+        "description": "家族で睡眠と世話の分担を話し合い、実行できる計画を作る。"
+      },
+      "ko": {
+        "label": "돌봄 상담사의 도움으로 계획 정리하기",
+        "description": "가족이 수면과 돌봄 일정을 논의해 실천할 수 있는 계획을 세운다."
+      }
+    },
+    "多一点耐心回应": {
+      "sourceDescription": "照护者观察你的表情，给你表达的时间。",
+      "en": {
+        "label": "Respond with a little more patience",
+        "description": "Have your caregiver watch your expressions and give you time to communicate."
+      },
+      "ja": {
+        "label": "もう少し辛抱強く応じる",
+        "description": "世話をする人が表情を見守り、表現する時間を与える。"
+      },
+      "ko": {
+        "label": "조금 더 인내심 있게 반응하기",
+        "description": "돌보는 사람이 표정을 살피며 표현할 시간을 준다."
+      }
+    },
+    "跟着熟悉的歌谣互动": {
+      "sourceDescription": "用节奏、手势和重复的词进行游戏。",
+      "en": {
+        "label": "Interact through familiar songs",
+        "description": "Play using rhythms, gestures and repeated words."
+      },
+      "ja": {
+        "label": "なじみの歌に合わせて触れ合う",
+        "description": "リズム、身振り、繰り返す言葉を使って遊ぶ。"
+      },
+      "ko": {
+        "label": "익숙한 노래에 맞춰 교감하기",
+        "description": "리듬과 몸짓, 반복되는 말로 놀이한다."
+      }
+    },
+    "试着自己完成小动作": {
+      "sourceDescription": "在照护者帮助下练习拿放与收拾。",
+      "en": {
+        "label": "Try completing small movements yourself",
+        "description": "Practice picking up, putting down and tidying with your caregiver's help."
+      },
+      "ja": {
+        "label": "小さな動作を自分で試す",
+        "description": "世話をする人の手を借り、物を持つ、置く、片づける練習をする。"
+      },
+      "ko": {
+        "label": "작은 동작을 스스로 해 보기",
+        "description": "돌보는 사람의 도움으로 집기, 놓기, 정리하기를 연습한다."
+      }
+    },
+    "用照片认识家人与物品": {
+      "sourceDescription": "把常见的人和物与声音联系起来。",
+      "en": {
+        "label": "Recognize family and objects through photographs",
+        "description": "Connect familiar people and things with their names and sounds."
+      },
+      "ja": {
+        "label": "写真で家族や物を覚える",
+        "description": "よく見る人や物を、声や音と結びつける。"
+      },
+      "ko": {
+        "label": "사진으로 가족과 물건 알아가기",
+        "description": "자주 보는 사람과 물건을 소리와 연결한다."
+      }
+    },
+    "给疲倦的时候留出安静": {
+      "sourceDescription": "缩短密集的活动，照顾当下的状态。",
+      "en": {
+        "label": "Leave quiet time for when you are tired",
+        "description": "Shorten busy activities and attend to how you feel now."
+      },
+      "ja": {
+        "label": "疲れたときは静かに過ごす",
+        "description": "続けて行う活動を短くし、今の調子を大切にする。"
+      },
+      "ko": {
+        "label": "피곤할 때 조용히 쉴 여유 두기",
+        "description": "빽빽한 활동 시간을 줄이고 현재 상태를 돌본다."
+      }
+    },
+    "参加一次简单的合作游戏": {
+      "sourceDescription": "从轮流和分享材料开始认识伙伴。",
+      "en": {
+        "label": "Join a simple cooperative game",
+        "description": "Get to know others by taking turns and sharing materials."
+      },
+      "ja": {
+        "label": "簡単な協力遊びに参加する",
+        "description": "順番を守ったり道具を分け合ったりしながら仲間を知る。"
+      },
+      "ko": {
+        "label": "간단한 협동 놀이에 참여하기",
+        "description": "차례를 지키고 재료를 나누는 것부터 친구를 알아간다."
+      }
+    },
+    "先在旁边观察再加入": {
+      "sourceDescription": "按自己的节奏熟悉环境。",
+      "en": {
+        "label": "Watch from the side before joining in",
+        "description": "Become familiar with the surroundings at your own pace."
+      },
+      "ja": {
+        "label": "そばで見てから参加する",
+        "description": "自分のペースで環境に慣れる。"
+      },
+      "ko": {
+        "label": "옆에서 지켜본 뒤 참여하기",
+        "description": "자기 속도에 맞춰 환경에 익숙해진다."
+      }
+    },
+    "带一件愿意分享的玩具": {
+      "sourceDescription": "和家人商量后，用共同兴趣打开话题。",
+      "en": {
+        "label": "Bring a toy you are happy to share",
+        "description": "Discuss it with your family, then use a shared interest to start talking."
+      },
+      "ja": {
+        "label": "貸してもよいおもちゃを持っていく",
+        "description": "家族と相談し、共通の興味から話を始める。"
+      },
+      "ko": {
+        "label": "함께 써도 좋은 장난감 가져가기",
+        "description": "가족과 상의한 뒤 공통 관심사로 대화를 시작한다."
+      }
+    },
+    "邀请一个熟悉的朋友来玩": {
+      "sourceDescription": "在更安心的环境里练习相处。",
+      "en": {
+        "label": "Invite a familiar friend over to play",
+        "description": "Practice getting along in a place where you feel more comfortable."
+      },
+      "ja": {
+        "label": "親しい友達を一人遊びに誘う",
+        "description": "安心できる場所で、一緒に過ごす練習をする。"
+      },
+      "ko": {
+        "label": "익숙한 친구 한 명을 놀이에 초대하기",
+        "description": "더 편안한 환경에서 어울리는 연습을 한다."
+      }
+    },
+    "把感受画给家人看": {
+      "sourceDescription": "告诉家人哪些活动让你开心或不舒服。",
+      "en": {
+        "label": "Draw your feelings for your family",
+        "description": "Show them which activities make you happy or uncomfortable."
+      },
+      "ja": {
+        "label": "気持ちを絵にして家族に見せる",
+        "description": "楽しい活動や、つらく感じる活動を家族に伝える。"
+      },
+      "ko": {
+        "label": "느낌을 그림으로 그려 가족에게 보여 주기",
+        "description": "어떤 활동이 즐겁거나 불편한지 가족에게 알려 준다."
+      }
+    },
+    "请家人讲讲自己的童年": {
+      "sourceDescription": "听懂具体的经历，不急着寻找唯一答案。",
+      "en": {
+        "label": "Ask family members about their childhoods",
+        "description": "Listen to their specific experiences without rushing to one answer."
+      },
+      "ja": {
+        "label": "家族の子ども時代の話を聞く",
+        "description": "具体的な経験を理解し、一つの答えを急いで求めない。"
+      },
+      "ko": {
+        "label": "가족에게 어린 시절 이야기 부탁하기",
+        "description": "구체적인 경험을 이해하고 하나의 정답을 성급히 찾지 않는다."
+      }
+    },
+    "画出自己理想的小街道": {
+      "sourceDescription": "把住房、学校和游玩的地方画在同一张纸上。",
+      "en": {
+        "label": "Draw your ideal little street",
+        "description": "Put homes, schools and places to play on the same sheet."
+      },
+      "ja": {
+        "label": "理想の小さな街を描く",
+        "description": "家、学校、遊ぶ場所を一枚の紙に描く。"
+      },
+      "ko": {
+        "label": "내가 꿈꾸는 작은 거리 그리기",
+        "description": "집과 학교, 노는 장소를 한 장의 종이에 그린다."
+      }
+    },
+    "一起读不同主题的绘本": {
+      "sourceDescription": "从多个故事认识生活里的差异。",
+      "en": {
+        "label": "Read picture books on different subjects together",
+        "description": "Explore differences in everyday life through several stories."
+      },
+      "ja": {
+        "label": "いろいろな題材の絵本を一緒に読む",
+        "description": "複数の物語から暮らしの違いを知る。"
+      },
+      "ko": {
+        "label": "다양한 주제의 그림책 함께 읽기",
+        "description": "여러 이야기에서 생활 속 차이를 알아간다."
+      }
+    },
+    "整理愿意分享的旧玩具": {
+      "sourceDescription": "在家人帮助下，把物品交给确实需要的人。",
+      "en": {
+        "label": "Sort old toys you would like to share",
+        "description": "With your family's help, give them to people who need them."
+      },
+      "ja": {
+        "label": "譲ってもよい古いおもちゃを整理する",
+        "description": "家族の助けを借り、本当に必要としている人に渡す。"
+      },
+      "ko": {
+        "label": "나누고 싶은 헌 장난감 정리하기",
+        "description": "가족의 도움으로 물건을 정말 필요한 사람에게 전달한다."
+      }
+    },
+    "先去玩，再慢慢思考": {
+      "sourceDescription": "给难懂的问题留点时间，保持轻松的节奏。",
+      "en": {
+        "label": "Play first and think it over later",
+        "description": "Give difficult questions time and keep a relaxed pace."
+      },
+      "ja": {
+        "label": "まず遊んで、ゆっくり考える",
+        "description": "難しい問いには時間をかけ、気楽なペースを保つ。"
+      },
+      "ko": {
+        "label": "먼저 놀고 천천히 생각하기",
+        "description": "어려운 질문에는 시간을 두고 편안한 속도를 유지한다."
+      }
+    },
+    "存起来并画下储蓄目标": {
+      "sourceDescription": "用直观的办法认识等待与计划。",
+      "en": {
+        "label": "Save the money and draw your savings goal",
+        "description": "Use a visible goal to learn about waiting and planning."
+      },
+      "ja": {
+        "label": "貯金して目標を絵に描く",
+        "description": "目で分かる方法で、待つことと計画を学ぶ。"
+      },
+      "ko": {
+        "label": "저축하고 목표를 그림으로 그리기",
+        "description": "눈에 보이는 방식으로 기다림과 계획을 배운다."
+      }
+    },
+    "买一本自己选的图画书": {
+      "sourceDescription": "家人陪你比较内容与价格。",
+      "en": {
+        "label": "Buy a picture book of your own choosing",
+        "description": "Compare the contents and prices with your family."
+      },
+      "ja": {
+        "label": "自分で選んだ絵本を買う",
+        "description": "家族と一緒に内容や値段を比べる。"
+      },
+      "ko": {
+        "label": "직접 고른 그림책 한 권 사기",
+        "description": "가족과 함께 내용과 가격을 비교한다."
+      }
+    },
+    "买材料做一个小手工作品": {
+      "sourceDescription": "尝试剪贴、拼搭或涂色。",
+      "en": {
+        "label": "Buy materials for a small craft project",
+        "description": "Try cutting, pasting, building or coloring."
+      },
+      "ja": {
+        "label": "材料を買って小さな工作をする",
+        "description": "切り貼り、組み立て、色塗りを試す。"
+      },
+      "ko": {
+        "label": "재료를 사서 작은 공예품 만들기",
+        "description": "오려 붙이기, 조립하기, 색칠하기를 해 본다."
+      }
+    },
+    "与家人一起选共享的点心": {
+      "sourceDescription": "考虑自己和别人的喜好。",
+      "en": {
+        "label": "Choose snacks to share with your family",
+        "description": "Think about other people's tastes as well as your own."
+      },
+      "ja": {
+        "label": "家族と一緒に分けるお菓子を選ぶ",
+        "description": "自分とほかの人の好みを考える。"
+      },
+      "ko": {
+        "label": "가족과 함께 나눠 먹을 간식 고르기",
+        "description": "자신과 다른 사람의 취향을 함께 생각한다."
+      }
+    },
+    "观察商店，暂时不花": {
+      "sourceDescription": "比较包装和实际用途，保留决定的余地。",
+      "en": {
+        "label": "Look around the shop without spending yet",
+        "description": "Compare packaging with usefulness and leave yourself time to choose."
+      },
+      "ja": {
+        "label": "店を見て、今は使わない",
+        "description": "包装と実際の用途を比べ、決める余地を残す。"
+      },
+      "ko": {
+        "label": "가게를 둘러보고 당장은 쓰지 않기",
+        "description": "포장과 실제 용도를 비교하며 결정할 여지를 남긴다."
+      }
+    },
+    "提出轮流使用": {
+      "sourceDescription": "在大人帮助下约定每个人的时间。",
+      "en": {
+        "label": "Suggest taking turns",
+        "description": "With an adult's help, agree on how long each person can use it."
+      },
+      "ja": {
+        "label": "交代で使おうと提案する",
+        "description": "大人の助けを借り、それぞれの使う時間を決める。"
+      },
+      "ko": {
+        "label": "번갈아 쓰자고 제안하기",
+        "description": "어른의 도움으로 각자 사용할 시간을 정한다."
+      }
+    },
+    "换一种能合作的玩法": {
+      "sourceDescription": "把竞争同一件东西变成共同完成任务。",
+      "en": {
+        "label": "Try a way of playing that needs cooperation",
+        "description": "Turn competing for one object into completing a task together."
+      },
+      "ja": {
+        "label": "協力できる遊び方に変える",
+        "description": "一つの物の取り合いを、一緒に課題をこなす遊びに変える。"
+      },
+      "ko": {
+        "label": "협동할 수 있는 놀이 방식으로 바꾸기",
+        "description": "같은 물건을 놓고 경쟁하는 대신 함께 과제를 완성한다."
+      }
+    },
+    "把不开心告诉可信的大人": {
+      "sourceDescription": "练习描述事情，而不只是压住情绪。",
+      "en": {
+        "label": "Tell a trusted adult what upset you",
+        "description": "Practice describing what happened instead of keeping your feelings inside."
+      },
+      "ja": {
+        "label": "嫌な気持ちを信頼できる大人に話す",
+        "description": "感情を抑えるだけでなく、出来事を説明する練習をする。"
+      },
+      "ko": {
+        "label": "속상한 마음을 믿을 만한 어른에게 말하기",
+        "description": "감정을 억누르기만 하지 않고 일을 설명하는 연습을 한다."
+      }
+    },
+    "先离开一会儿再回来": {
+      "sourceDescription": "让自己平静，再决定是否继续玩。",
+      "en": {
+        "label": "Step away for a while before returning",
+        "description": "Calm down before deciding whether to keep playing."
+      },
+      "ja": {
+        "label": "少し離れてから戻る",
+        "description": "落ち着いてから、遊びを続けるか決める。"
+      },
+      "ko": {
+        "label": "잠시 자리를 떠났다가 돌아오기",
+        "description": "마음을 진정시킨 뒤 놀이를 계속할지 결정한다."
+      }
+    },
+    "和对方各自选一样新活动": {
+      "sourceDescription": "保留友好，也尊重彼此不同的喜好。",
+      "en": {
+        "label": "Each choose a different new activity",
+        "description": "Stay friendly while respecting your different interests."
+      },
+      "ja": {
+        "label": "それぞれ新しい遊びを一つ選ぶ",
+        "description": "仲よくしながら、互いの異なる好みも尊重する。"
+      },
+      "ko": {
+        "label": "각자 새로운 활동 하나씩 고르기",
+        "description": "우호적인 관계를 유지하며 서로 다른 취향도 존중한다."
+      }
+    },
+    "挑一本讲科学实验的书": {
+      "sourceDescription": "在成人陪伴下只做安全、适龄的小观察。",
+      "en": {
+        "label": "Choose a book about science experiments",
+        "description": "With an adult, make only safe observations suited to your age."
+      },
+      "ja": {
+        "label": "科学実験の本を一冊選ぶ",
+        "description": "大人と一緒に、安全で年齢に合う小さな観察だけをする。"
+      },
+      "ko": {
+        "label": "과학 실험을 다룬 책 한 권 고르기",
+        "description": "어른과 함께 안전하고 나이에 맞는 간단한 관찰만 한다."
+      }
+    },
+    "读不同地方的生活故事": {
+      "sourceDescription": "认识别人如何上学、吃饭和与家人相处。",
+      "en": {
+        "label": "Read stories about life in other places",
+        "description": "Learn how others go to school, eat and live with their families."
+      },
+      "ja": {
+        "label": "いろいろな土地の暮らしの話を読む",
+        "description": "ほかの人の通学、食事、家族との過ごし方を知る。"
+      },
+      "ko": {
+        "label": "여러 지역의 생활 이야기 읽기",
+        "description": "다른 사람들이 어떻게 등교하고 먹고 가족과 지내는지 알아본다."
+      }
+    },
+    "参加儿童阅读分享": {
+      "sourceDescription": "练习讲清楚自己的想法，也听别人发言。",
+      "en": {
+        "label": "Join a children's reading discussion",
+        "description": "Practice explaining your ideas clearly and listening to others."
+      },
+      "ja": {
+        "label": "子どもの読書交流会に参加する",
+        "description": "自分の考えを分かりやすく話し、ほかの人の話も聞く。"
+      },
+      "ko": {
+        "label": "어린이 독서 모임에 참여하기",
+        "description": "자신의 생각을 명확하게 말하고 다른 사람의 발언도 듣는다."
+      }
+    },
+    "借一本小说慢慢读": {
+      "sourceDescription": "享受阅读本身，不把每次阅读变成任务。",
+      "en": {
+        "label": "Borrow a novel and read it slowly",
+        "description": "Enjoy reading without turning every book into a task."
+      },
+      "ja": {
+        "label": "小説を借りてゆっくり読む",
+        "description": "読書そのものを楽しみ、毎回の読書を課題にしない。"
+      },
+      "ko": {
+        "label": "소설 한 권을 빌려 천천히 읽기",
+        "description": "독서 자체를 즐기고 매번 과제로 만들지 않는다."
+      }
+    },
+    "建立自己的读书记录": {
+      "sourceDescription": "用几句话写下问题，留待之后继续寻找答案。",
+      "en": {
+        "label": "Keep your own reading notes",
+        "description": "Write down questions briefly and return to them later."
+      },
+      "ja": {
+        "label": "自分の読書記録を作る",
+        "description": "疑問を短く書き留め、後で答えを探し続ける。"
+      },
+      "ko": {
+        "label": "나만의 독서 기록 만들기",
+        "description": "질문을 몇 문장으로 적고 나중에 계속 답을 찾는다."
+      }
+    },
+    "承担资料整理": {
+      "sourceDescription": "把来源和疑问分开记，做好基础工作。",
+      "en": {
+        "label": "Take responsibility for organizing the research",
+        "description": "Record sources and open questions separately to build a useful foundation."
+      },
+      "ja": {
+        "label": "資料整理を引き受ける",
+        "description": "出典と疑問を分けて記録し、基礎作業をきちんと行う。"
+      },
+      "ko": {
+        "label": "자료 정리 맡기",
+        "description": "출처와 의문점을 따로 기록하며 기초 작업을 충실히 한다."
+      }
+    },
+    "尝试当一次展示者": {
+      "sourceDescription": "提前排练，让大家的成果被理解。",
+      "en": {
+        "label": "Try presenting the group's work",
+        "description": "Rehearse beforehand so others can understand what the group achieved."
+      },
+      "ja": {
+        "label": "一度発表役をやってみる",
+        "description": "事前に練習し、みんなの成果が伝わるようにする。"
+      },
+      "ko": {
+        "label": "발표자 역할을 한 번 해 보기",
+        "description": "미리 연습해 모두의 성과가 잘 이해되도록 한다."
+      }
+    },
+    "帮助安排公平的分工": {
+      "sourceDescription": "询问伙伴的意愿，把任务拆成小块。",
+      "en": {
+        "label": "Help divide the work fairly",
+        "description": "Ask what others want to do and split the task into manageable parts."
+      },
+      "ja": {
+        "label": "公平な役割分担を手伝う",
+        "description": "仲間の希望を聞き、課題を小さく分ける。"
+      },
+      "ko": {
+        "label": "공평한 역할 분담 돕기",
+        "description": "친구들의 의사를 묻고 과제를 작은 단위로 나눈다."
+      }
+    },
+    "负责画图与制作": {
+      "sourceDescription": "用容易看懂的图表达复杂内容。",
+      "en": {
+        "label": "Take care of drawings and making things",
+        "description": "Use clear illustrations to explain complicated ideas."
+      },
+      "ja": {
+        "label": "図や制作を担当する",
+        "description": "分かりやすい図で複雑な内容を表す。"
+      },
+      "ko": {
+        "label": "그림과 제작 담당하기",
+        "description": "알아보기 쉬운 그림으로 복잡한 내용을 표현한다."
+      }
+    },
+    "向老师说明遇到的困难": {
+      "sourceDescription": "争取适当帮助，不独自承担全部任务。",
+      "en": {
+        "label": "Tell your teacher what is difficult",
+        "description": "Ask for appropriate help instead of taking every task on yourself."
+      },
+      "ja": {
+        "label": "困っていることを先生に説明する",
+        "description": "適切な助けを求め、一人で全部を抱え込まない。"
+      },
+      "ko": {
+        "label": "선생님께 어려움을 설명하기",
+        "description": "적절한 도움을 구하고 모든 과제를 혼자 떠맡지 않는다."
+      }
+    },
+    "共同制定可以坚持的时间表": {
+      "sourceDescription": "保留喜欢的内容，也为休息留出空间。",
+      "en": {
+        "label": "Agree on a schedule you can maintain",
+        "description": "Keep activities you enjoy and leave room for rest."
+      },
+      "ja": {
+        "label": "続けられる時間割を一緒に作る",
+        "description": "好きなことを残し、休む時間も確保する。"
+      },
+      "ko": {
+        "label": "함께 지킬 수 있는 시간표 만들기",
+        "description": "좋아하는 활동을 유지하며 쉴 여유도 마련한다."
+      }
+    },
+    "学习辨认广告与事实": {
+      "sourceDescription": "请家人一起分析几个常见的网络说法。",
+      "en": {
+        "label": "Learn to distinguish advertising from facts",
+        "description": "Analyze a few common online claims together with your family."
+      },
+      "ja": {
+        "label": "広告と事実の見分け方を学ぶ",
+        "description": "家族と一緒に、よく見かけるネットの話をいくつか分析する。"
+      },
+      "ko": {
+        "label": "광고와 사실 구별하는 법 배우기",
+        "description": "가족과 함께 인터넷에서 흔히 보이는 주장 몇 가지를 분석한다."
+      }
+    },
+    "约朋友参加户外活动": {
+      "sourceDescription": "用球类、散步或骑行替代一部分独处时间。",
+      "en": {
+        "label": "Invite friends to spend time outdoors",
+        "description": "Replace some time alone with ball games, walking or cycling."
+      },
+      "ja": {
+        "label": "友達を外遊びに誘う",
+        "description": "一人の時間の一部を、球技、散歩、自転車に充てる。"
+      },
+      "ko": {
+        "label": "친구와 야외 활동 약속하기",
+        "description": "혼자 보내는 시간 일부를 공놀이, 산책, 자전거 타기로 바꾼다."
+      }
+    },
+    "用设备完成一个小作品": {
+      "sourceDescription": "尝试录音、绘图或简单的编程练习。",
+      "en": {
+        "label": "Make a small project using your device",
+        "description": "Try recording sound, drawing or simple programming exercises."
+      },
+      "ja": {
+        "label": "機器を使って小さな作品を作る",
+        "description": "録音、絵描き、簡単なプログラミングを試す。"
+      },
+      "ko": {
+        "label": "기기로 작은 작품 만들기",
+        "description": "녹음, 그림 그리기, 간단한 프로그래밍 연습을 해 본다."
+      }
+    },
+    "把烦扰自己的消息告诉家人": {
+      "sourceDescription": "一起调整通知和联系边界。",
+      "en": {
+        "label": "Tell your family about messages that bother you",
+        "description": "Adjust notifications and boundaries around contact together."
+      },
+      "ja": {
+        "label": "気になるメッセージを家族に伝える",
+        "description": "一緒に通知設定や連絡の範囲を調整する。"
+      },
+      "ko": {
+        "label": "나를 괴롭히는 메시지를 가족에게 알리기",
+        "description": "함께 알림과 연락의 경계를 조절한다."
+      }
+    },
+    "画一张步行观察图": {
+      "sourceDescription": "记录路口、休息处和容易迷路的位置。",
+      "en": {
+        "label": "Draw a map from your walks",
+        "description": "Mark intersections, resting places and spots where you might get lost."
+      },
+      "ja": {
+        "label": "散歩で気づいたことを地図にする",
+        "description": "交差点、休める場所、迷いやすい場所を記録する。"
+      },
+      "ko": {
+        "label": "걸으며 관찰한 내용으로 지도 그리기",
+        "description": "교차로와 쉴 곳, 길을 잃기 쉬운 위치를 기록한다."
+      }
+    },
+    "询问不同年龄邻居的感受": {
+      "sourceDescription": "在家人陪伴下听听真实的使用体验。",
+      "en": {
+        "label": "Ask neighbors of different ages about their experiences",
+        "description": "With your family present, listen to how people actually use the area."
+      },
+      "ja": {
+        "label": "いろいろな年齢の近所の人に感想を聞く",
+        "description": "家族と一緒に、実際に使って感じたことを聞く。"
+      },
+      "ko": {
+        "label": "다양한 연령의 이웃에게 느낌 묻기",
+        "description": "가족과 함께 실제 이용 경험을 듣는다."
+      }
+    },
+    "向管理人员提出一个小建议": {
+      "sourceDescription": "用礼貌而具体的方式表达需求。",
+      "en": {
+        "label": "Make a small suggestion to the people in charge",
+        "description": "Explain your needs politely and specifically."
+      },
+      "ja": {
+        "label": "管理者に小さな提案をする",
+        "description": "礼儀正しく、具体的に要望を伝える。"
+      },
+      "ko": {
+        "label": "관리자에게 작은 제안하기",
+        "description": "예의 바르고 구체적인 방식으로 필요한 것을 전달한다."
+      }
+    },
+    "参加适龄的社区整理活动": {
+      "sourceDescription": "在安全范围内清理公共阅读角或分类物品。",
+      "en": {
+        "label": "Join an age-appropriate community tidy-up",
+        "description": "Safely organize a shared reading corner or sort materials."
+      },
+      "ja": {
+        "label": "年齢に合う地域の整理活動に参加する",
+        "description": "安全な範囲で共同の読書コーナーを片づけたり、物を分類したりする。"
+      },
+      "ko": {
+        "label": "나이에 맞는 지역 정리 활동 참여하기",
+        "description": "안전한 범위에서 공동 독서 공간을 정리하거나 물건을 분류한다."
+      }
+    },
+    "把观察写成学校的小报告": {
+      "sourceDescription": "区分看到的事实与自己的推测。",
+      "en": {
+        "label": "Turn your observations into a short school report",
+        "description": "Separate what you saw from what you inferred."
+      },
+      "ja": {
+        "label": "観察を学校の小さなレポートにする",
+        "description": "見た事実と自分の推測を区別する。"
+      },
+      "ko": {
+        "label": "관찰 내용을 학교 보고서로 쓰기",
+        "description": "직접 본 사실과 자신의 추측을 구분한다."
+      }
+    },
+    "陪朋友体验一次新活动": {
+      "sourceDescription": "先理解对方喜欢它的原因。",
+      "en": {
+        "label": "Try a new activity with your friend",
+        "description": "First understand what your friend enjoys about it."
+      },
+      "ja": {
+        "label": "友達と新しい活動を体験する",
+        "description": "まず、相手がそれを好きな理由を理解する。"
+      },
+      "ko": {
+        "label": "친구와 새로운 활동을 체험하기",
+        "description": "먼저 상대가 그것을 좋아하는 이유를 이해한다."
+      }
+    },
+    "坦诚说说自己的感受": {
+      "sourceDescription": "商量仍然愿意一起做的事情。",
+      "en": {
+        "label": "Speak honestly about how you feel",
+        "description": "Discuss what you still want to do together."
+      },
+      "ja": {
+        "label": "自分の気持ちを率直に話す",
+        "description": "これからも一緒にしたいことを相談する。"
+      },
+      "ko": {
+        "label": "자신의 감정을 솔직하게 말하기",
+        "description": "여전히 함께하고 싶은 일들을 의논한다."
+      }
+    },
+    "发展一个自己的兴趣": {
+      "sourceDescription": "给自己留出独立探索的时间。",
+      "en": {
+        "label": "Develop an interest of your own",
+        "description": "Leave time to explore independently."
+      },
+      "ja": {
+        "label": "自分だけの趣味を育てる",
+        "description": "一人で探求する時間を確保する。"
+      },
+      "ko": {
+        "label": "자신만의 관심사 키우기",
+        "description": "독립적으로 탐색할 시간을 마련한다."
+      }
+    },
+    "邀请更多同学一起活动": {
+      "sourceDescription": "扩大交往范围，让关系不必只依赖一个人。",
+      "en": {
+        "label": "Invite more classmates to join in",
+        "description": "Broaden your friendships so they do not depend on one person alone."
+      },
+      "ja": {
+        "label": "もっと多くの同級生を活動に誘う",
+        "description": "交友関係を広げ、一人だけに頼らなくてもよいようにする。"
+      },
+      "ko": {
+        "label": "더 많은 반 친구를 활동에 초대하기",
+        "description": "교류 범위를 넓혀 한 사람에게만 관계를 의존하지 않도록 한다."
+      }
+    },
+    "接受暂时不同的节奏": {
+      "sourceDescription": "保持问候，也把时间留给休息。",
+      "en": {
+        "label": "Accept that your schedules differ for now",
+        "description": "Keep in touch and also make time for rest."
+      },
+      "ja": {
+        "label": "今はペースが違うことを受け入れる",
+        "description": "挨拶は続け、休む時間も大切にする。"
+      },
+      "ko": {
+        "label": "당분간 서로 다른 속도 받아들이기",
+        "description": "안부를 주고받으면서 쉴 시간도 남겨 둔다."
+      }
+    },
+    "采访一位愿意讲述的长辈": {
+      "sourceDescription": "把记得与记不清的内容分别记下。",
+      "en": {
+        "label": "Interview an older relative willing to talk",
+        "description": "Record clear memories separately from uncertain ones."
+      },
+      "ja": {
+        "label": "話してくれる年長者に聞き取りをする",
+        "description": "覚えていることと曖昧なことを分けて記録する。"
+      },
+      "ko": {
+        "label": "이야기를 들려줄 어른 인터뷰하기",
+        "description": "기억나는 내용과 잘 기억나지 않는 내용을 나누어 적는다."
+      }
+    },
+    "画出家人的迁居路线": {
+      "sourceDescription": "用地图理解地点与距离。",
+      "en": {
+        "label": "Map the places your family has moved between",
+        "description": "Use a map to understand locations and distances."
+      },
+      "ja": {
+        "label": "家族の移住の道筋を描く",
+        "description": "地図を使って場所と距離を理解する。"
+      },
+      "ko": {
+        "label": "가족의 이주 경로 그리기",
+        "description": "지도로 장소와 거리를 이해한다."
+      }
+    },
+    "整理照片并标注日期": {
+      "sourceDescription": "征得家人同意后保存家庭记忆。",
+      "en": {
+        "label": "Sort photographs and add dates",
+        "description": "Preserve family memories with your relatives' consent."
+      },
+      "ja": {
+        "label": "写真を整理して日付を添える",
+        "description": "家族の同意を得て、家族の思い出を残す。"
+      },
+      "ko": {
+        "label": "사진을 정리하고 날짜 적기",
+        "description": "가족의 동의를 얻어 가족의 기억을 보존한다."
+      }
+    },
+    "做一道家人熟悉的家常菜": {
+      "sourceDescription": "在成人陪伴下参与适龄的准备工作。",
+      "en": {
+        "label": "Make a familiar family dish",
+        "description": "With an adult, help with preparations suited to your age."
+      },
+      "ja": {
+        "label": "家族になじみのある料理を一品作る",
+        "description": "大人と一緒に、年齢に合う下ごしらえを手伝う。"
+      },
+      "ko": {
+        "label": "가족에게 익숙한 집밥 한 가지 만들기",
+        "description": "어른과 함께 나이에 맞는 준비 작업에 참여한다."
+      }
+    },
+    "聊聊自己对未来的愿望": {
+      "sourceDescription": "把自己的愿望讲给愿意倾听的人。",
+      "en": {
+        "label": "Talk about your hopes for the future",
+        "description": "Share your wishes with someone willing to listen."
+      },
+      "ja": {
+        "label": "将来の願いを話す",
+        "description": "耳を傾けてくれる人に、自分の願いを伝える。"
+      },
+      "ko": {
+        "label": "미래에 대한 바람 이야기하기",
+        "description": "기꺼이 들어주는 사람에게 자신의 바람을 이야기한다."
+      }
+    },
+    "补上最薄弱的一门基础": {
+      "sourceDescription": "请教老师，按每周小目标安排练习。",
+      "en": {
+        "label": "Strengthen the subject where your basics are weakest",
+        "description": "Ask your teacher for help and practice toward small weekly goals."
+      },
+      "ja": {
+        "label": "最も苦手な科目の基礎を補う",
+        "description": "先生に教わり、週ごとの小さな目標で練習する。"
+      },
+      "ko": {
+        "label": "가장 취약한 과목의 기초 보완하기",
+        "description": "선생님께 질문하고 매주 작은 목표에 맞춰 연습한다."
+      }
+    },
+    "了解不同升学与职业教育路径": {
+      "sourceDescription": "记录要求、费用和自己的兴趣。",
+      "en": {
+        "label": "Explore academic and vocational education paths",
+        "description": "Record requirements, costs and your own interests."
+      },
+      "ja": {
+        "label": "進学と職業教育の選択肢を調べる",
+        "description": "条件、費用、自分の興味を書き留める。"
+      },
+      "ko": {
+        "label": "여러 진학 및 직업교육 경로 알아보기",
+        "description": "요건과 비용, 자신의 관심사를 기록한다."
+      }
+    },
+    "组成互助学习小组": {
+      "sourceDescription": "与同学交换笔记，讲解彼此不懂的部分。",
+      "en": {
+        "label": "Form a study support group",
+        "description": "Exchange notes and explain difficult material to one another."
+      },
+      "ja": {
+        "label": "学び合う小さなグループを作る",
+        "description": "同級生とノートを交換し、分からないところを教え合う。"
+      },
+      "ko": {
+        "label": "서로 돕는 학습 모임 만들기",
+        "description": "친구들과 필기를 교환하고 서로 모르는 부분을 설명한다."
+      }
+    },
+    "把休息与运动排进计划": {
+      "sourceDescription": "调整节奏，避免靠熬夜维持进度。",
+      "en": {
+        "label": "Put rest and exercise into your schedule",
+        "description": "Adjust your pace instead of relying on late nights to keep up."
+      },
+      "ja": {
+        "label": "休息と運動も計画に入れる",
+        "description": "ペースを調整し、夜更かしで進度を保たないようにする。"
+      },
+      "ko": {
+        "label": "휴식과 운동을 계획에 넣기",
+        "description": "속도를 조절하고 밤샘에 의존해 진도를 유지하지 않는다."
+      }
+    },
+    "和家人谈谈可承受的期待": {
+      "sourceDescription": "说明自己的愿望与困难，商量现实的安排。",
+      "en": {
+        "label": "Discuss manageable expectations with your family",
+        "description": "Explain your hopes and difficulties and agree on realistic plans."
+      },
+      "ja": {
+        "label": "無理なく応えられる期待を家族と話す",
+        "description": "希望と困難を説明し、現実的な予定を相談する。"
+      },
+      "ko": {
+        "label": "감당할 수 있는 기대를 가족과 이야기하기",
+        "description": "자신의 바람과 어려움을 설명하고 현실적인 계획을 의논한다."
+      }
+    },
+    "找到原始发布与完整上下文": {
+      "sourceDescription": "把可确认的信息与猜测分开。",
+      "en": {
+        "label": "Find the original source and full context",
+        "description": "Separate verifiable information from speculation."
+      },
+      "ja": {
+        "label": "元の発信と前後の文脈を探す",
+        "description": "確認できる情報と推測を分ける。"
+      },
+      "ko": {
+        "label": "원문과 전체 맥락 찾기",
+        "description": "확인할 수 있는 정보와 추측을 구분한다."
+      }
+    },
+    "和老师讨论信息判断方法": {
+      "sourceDescription": "把问题落到证据、立场与表达方式上。",
+      "en": {
+        "label": "Discuss ways to assess information with your teacher",
+        "description": "Examine evidence, viewpoints and how claims are expressed."
+      },
+      "ja": {
+        "label": "情報の判断方法を先生と話し合う",
+        "description": "証拠、立場、表現方法に沿って疑問を考える。"
+      },
+      "ko": {
+        "label": "선생님과 정보 판단 방법 논의하기",
+        "description": "증거와 입장, 표현 방식에 초점을 맞춰 문제를 살핀다."
+      }
+    },
+    "写一篇注明不确定性的观察": {
+      "sourceDescription": "练习表达观点，也保留修正空间。",
+      "en": {
+        "label": "Write an observation that acknowledges uncertainty",
+        "description": "Practice stating your views while leaving room to revise them."
+      },
+      "ja": {
+        "label": "不確かな点を明記して観察を書く",
+        "description": "意見を表す練習をし、修正の余地も残す。"
+      },
+      "ko": {
+        "label": "불확실성을 명시한 관찰문 쓰기",
+        "description": "의견을 표현하는 연습을 하며 수정할 여지도 남긴다."
+      }
+    },
+    "倾听同学为什么这样想": {
+      "sourceDescription": "先弄清每个人实际关心的生活问题。",
+      "en": {
+        "label": "Listen to why classmates think this way",
+        "description": "Find out which everyday concerns matter to each person."
+      },
+      "ja": {
+        "label": "同級生がそう考える理由に耳を傾ける",
+        "description": "まず、それぞれが実際に気にかける暮らしの問題を知る。"
+      },
+      "ko": {
+        "label": "친구들이 그렇게 생각하는 이유 듣기",
+        "description": "먼저 각자가 실제로 걱정하는 생활 문제를 알아본다."
+      }
+    },
+    "暂停转发，专注自己的日常": {
+      "sourceDescription": "为注意力设边界，把余力留给休息。",
+      "en": {
+        "label": "Stop forwarding messages and focus on daily life",
+        "description": "Limit demands on your attention and leave energy for rest."
+      },
+      "ja": {
+        "label": "拡散を止め、自分の日常に集中する",
+        "description": "注意を向ける範囲を決め、残る力を休息に回す。"
+      },
+      "ko": {
+        "label": "공유를 멈추고 자신의 일상에 집중하기",
+        "description": "주의를 기울일 범위를 정하고 남은 힘을 휴식에 쓴다."
+      }
+    },
+    "整理社区口述故事": {
+      "sourceDescription": "征得同意后记录不同代际的日常经历。",
+      "en": {
+        "label": "Collect oral histories from the community",
+        "description": "With permission, record everyday experiences from different generations."
+      },
+      "ja": {
+        "label": "地域の語りを整理する",
+        "description": "同意を得て、異なる世代の日常の経験を記録する。"
+      },
+      "ko": {
+        "label": "지역의 구술 이야기 정리하기",
+        "description": "동의를 얻어 서로 다른 세대의 일상 경험을 기록한다."
+      }
+    },
+    "做一个简单的程序或网页": {
+      "sourceDescription": "围绕自己熟悉的小问题练习技术。",
+      "en": {
+        "label": "Make a simple program or webpage",
+        "description": "Practice technical skills on a small problem you know well."
+      },
+      "ja": {
+        "label": "簡単なプログラムやウェブページを作る",
+        "description": "身近な小さな問題を題材に技術を練習する。"
+      },
+      "ko": {
+        "label": "간단한 프로그램이나 웹페이지 만들기",
+        "description": "익숙한 작은 문제를 중심으로 기술을 연습한다."
+      }
+    },
+    "组织一次读书讨论": {
+      "sourceDescription": "选短篇材料，给每个人发言时间。",
+      "en": {
+        "label": "Organize a reading discussion",
+        "description": "Choose short material and give everyone time to speak."
+      },
+      "ja": {
+        "label": "読書の話し合いを開く",
+        "description": "短い資料を選び、全員に発言の時間を設ける。"
+      },
+      "ko": {
+        "label": "독서 토론 모임 열기",
+        "description": "짧은 자료를 고르고 모두에게 발언 시간을 준다."
+      }
+    },
+    "制作声音或影像作品": {
+      "sourceDescription": "尊重被记录者意愿，练习剪辑与叙事。",
+      "en": {
+        "label": "Create an audio or video piece",
+        "description": "Practice editing and storytelling while respecting participants' wishes."
+      },
+      "ja": {
+        "label": "音や映像の作品を作る",
+        "description": "記録される人の意思を尊重し、編集と物語の組み立てを練習する。"
+      },
+      "ko": {
+        "label": "소리나 영상 작품 만들기",
+        "description": "기록되는 사람의 뜻을 존중하며 편집과 서사를 연습한다."
+      }
+    },
+    "选择个人运动训练计划": {
+      "sourceDescription": "记录进展，和过去的自己比较。",
+      "en": {
+        "label": "Choose an exercise plan for yourself",
+        "description": "Record your progress and compare it with your own past performance."
+      },
+      "ja": {
+        "label": "自分の運動計画を選ぶ",
+        "description": "進歩を記録し、以前の自分と比べる。"
+      },
+      "ko": {
+        "label": "개인 운동 훈련 계획 선택하기",
+        "description": "진전을 기록하고 과거의 자신과 비교한다."
+      }
+    },
+    "比较学校与生活费用": {
+      "sourceDescription": "列出多个选择，避免只凭宣传作决定。",
+      "en": {
+        "label": "Compare education and living costs",
+        "description": "List several options instead of relying only on promotional material."
+      },
+      "ja": {
+        "label": "学校と生活の費用を比べる",
+        "description": "選択肢を複数挙げ、宣伝だけで決めないようにする。"
+      },
+      "ko": {
+        "label": "학교와 생활 비용 비교하기",
+        "description": "여러 선택지를 적고 홍보만 보고 결정하지 않는다."
+      }
+    },
+    "向有外地学习经历的人请教": {
+      "sourceDescription": "了解住宿、支持网络与适应过程。",
+      "en": {
+        "label": "Ask someone who has studied away from home",
+        "description": "Learn about housing, support networks and adjusting to a new place."
+      },
+      "ja": {
+        "label": "他の土地で学んだ人に相談する",
+        "description": "住まい、支援のつながり、慣れるまでの過程を知る。"
+      },
+      "ko": {
+        "label": "다른 지역에서 공부한 사람에게 조언 구하기",
+        "description": "숙소와 지원 관계망, 적응 과정을 알아본다."
+      }
+    },
+    "练习需要的语言或基础技能": {
+      "sourceDescription": "把远期愿望拆成这个月的学习计划。",
+      "en": {
+        "label": "Practice the language or basic skills you will need",
+        "description": "Turn your long-term hopes into a study plan for this month."
+      },
+      "ja": {
+        "label": "必要な言語や基礎技能を練習する",
+        "description": "先の願いを、今月の学習計画に分ける。"
+      },
+      "ko": {
+        "label": "필요한 언어나 기초 기술 연습하기",
+        "description": "장기적인 바람을 이번 달 학습 계획으로 나눈다."
+      }
+    },
+    "和家人讨论留在本地的机会": {
+      "sourceDescription": "认真比较适合自己的条件与支持。",
+      "en": {
+        "label": "Discuss opportunities to stay locally with your family",
+        "description": "Compare the conditions and support that suit you."
+      },
+      "ja": {
+        "label": "地元に残る機会を家族と話す",
+        "description": "自分に合う条件や支援を丁寧に比べる。"
+      },
+      "ko": {
+        "label": "지역에 남는 기회를 가족과 논의하기",
+        "description": "자신에게 맞는 조건과 지원을 진지하게 비교한다."
+      }
+    },
+    "写下迁移前必须满足的条件": {
+      "sourceDescription": "为“{goal}”建立可调整的准备清单。",
+      "en": {
+        "label": "List the conditions needed before moving",
+        "description": "Make an adjustable preparation checklist for “{goal}”."
+      },
+      "ja": {
+        "label": "移住前に満たすべき条件を書く",
+        "description": "「{goal}」に向け、調整できる準備リストを作る。"
+      },
+      "ko": {
+        "label": "이주 전에 충족할 조건 적기",
+        "description": "‘{goal}’을 위한 조정 가능한 준비 목록을 만든다."
+      }
+    },
+    "约一个安静的时候说明需要": {
+      "sourceDescription": "用具体安排替代对彼此的指责。",
+      "en": {
+        "label": "Choose a quiet time to explain your needs",
+        "description": "Discuss specific arrangements instead of blaming one another."
+      },
+      "ja": {
+        "label": "落ち着いて話せる時間に希望を伝える",
+        "description": "互いを責める代わりに、具体的な予定を話す。"
+      },
+      "ko": {
+        "label": "조용한 시간을 정해 필요한 것 말하기",
+        "description": "서로 비난하는 대신 구체적인 계획을 이야기한다."
+      }
+    },
+    "共同安排每周固定的相处时间": {
+      "sourceDescription": "让陪伴与自己的计划都能被看见。",
+      "en": {
+        "label": "Arrange regular time together each week",
+        "description": "Make room for companionship as well as your own plans."
+      },
+      "ja": {
+        "label": "毎週決まった一緒の時間を設ける",
+        "description": "共に過ごすことと、自分の予定の両方を大切にする。"
+      },
+      "ko": {
+        "label": "매주 정해진 함께하는 시간 마련하기",
+        "description": "함께하는 시간과 자신의 계획을 모두 존중한다."
+      }
+    },
+    "请可信的成年人帮助沟通": {
+      "sourceDescription": "在反复说不清时寻找支持。",
+      "en": {
+        "label": "Ask a trusted adult to help you communicate",
+        "description": "Seek support when you keep struggling to explain things."
+      },
+      "ja": {
+        "label": "信頼できる大人に話し合いを助けてもらう",
+        "description": "何度話しても伝わらないときは支えを求める。"
+      },
+      "ko": {
+        "label": "믿을 수 있는 어른에게 소통 도움 받기",
+        "description": "여러 번 말해도 전달되지 않을 때 도움을 구한다."
+      }
+    },
+    "先写下来，再决定怎样开口": {
+      "sourceDescription": "梳理自己的愿望与可退让之处。",
+      "en": {
+        "label": "Write it down before deciding how to speak",
+        "description": "Clarify what you want and where you can compromise."
+      },
+      "ja": {
+        "label": "まず書き出し、話し方を決める",
+        "description": "自分の願いと譲れるところを整理する。"
+      },
+      "ko": {
+        "label": "먼저 적은 뒤 어떻게 말할지 정하기",
+        "description": "자신의 바람과 양보할 수 있는 부분을 정리한다."
+      }
+    },
+    "用一项个人爱好恢复状态": {
+      "sourceDescription": "保持适当联系，也允许自己安静一会儿。",
+      "en": {
+        "label": "Recover your balance through a personal interest",
+        "description": "Stay in appropriate contact while allowing yourself some quiet time."
+      },
+      "ja": {
+        "label": "好きなことをして調子を整える",
+        "description": "適度に連絡を保ちつつ、一人で静かに過ごすことも認める。"
+      },
+      "ko": {
+        "label": "개인 취미로 상태 회복하기",
+        "description": "적절히 연락을 유지하면서 잠시 조용히 지내는 것도 허용한다."
+      }
+    },
+    "核实条件后接一部分工作": {
+      "sourceDescription": "选择自己能承担的任务，增加当月收入。",
+      "en": {
+        "label": "Check the terms and take on part of the work",
+        "description": "Choose manageable tasks to add to this month's income."
+      },
+      "ja": {
+        "label": "条件を確認して仕事を一部引き受ける",
+        "description": "自分にできる仕事を選び、今月の収入を増やす。"
+      },
+      "ko": {
+        "label": "조건을 확인하고 일 일부 맡기",
+        "description": "감당할 수 있는 일을 골라 이번 달 수입을 늘린다."
+      }
+    },
+    "先与做过这项工作的人交流": {
+      "sourceDescription": "问清工时、结算和实际困难。",
+      "en": {
+        "label": "Talk to someone who has done this work first",
+        "description": "Ask about hours, payment and the actual difficulties."
+      },
+      "ja": {
+        "label": "まずその仕事の経験者と話す",
+        "description": "労働時間、支払い、実際の困難を確かめる。"
+      },
+      "ko": {
+        "label": "먼저 그 일을 해 본 사람과 이야기하기",
+        "description": "근무 시간과 정산, 실제 어려움을 명확히 묻는다."
+      }
+    },
+    "为更适合的岗位整理履历": {
+      "sourceDescription": "把已有经验写成能被理解的成果。",
+      "en": {
+        "label": "Prepare a résumé for a more suitable position",
+        "description": "Describe your existing experience in terms others can understand."
+      },
+      "ja": {
+        "label": "より合う仕事に向けて履歴書を整える",
+        "description": "これまでの経験を、伝わる成果として書く。"
+      },
+      "ko": {
+        "label": "더 적합한 자리를 위해 이력서 정리하기",
+        "description": "기존 경험을 이해하기 쉬운 성과로 적는다."
+      }
+    },
+    "补一项岗位需要的技能": {
+      "sourceDescription": "投入学习，暂时不急着接受邀约。",
+      "en": {
+        "label": "Learn a skill the position requires",
+        "description": "Invest in learning before accepting the offer."
+      },
+      "ja": {
+        "label": "仕事に必要な技能を一つ補う",
+        "description": "学習に時間を使い、誘いを急いで受けない。"
+      },
+      "ko": {
+        "label": "직무에 필요한 기술 한 가지 보완하기",
+        "description": "학습에 투자하고 제안을 서둘러 받아들이지 않는다."
+      }
+    },
+    "婉拒，守住目前的时间安排": {
+      "sourceDescription": "把精力留给现有工作、家人或恢复身体。",
+      "en": {
+        "label": "Decline and protect your current schedule",
+        "description": "Keep your energy for work, family or physical recovery."
+      },
+      "ja": {
+        "label": "丁寧に断り、今の予定を守る",
+        "description": "今の仕事、家族、体の回復に力を残す。"
+      },
+      "ko": {
+        "label": "정중히 거절하고 현재 일정 지키기",
+        "description": "기존 일과 가족, 몸 회복을 위해 힘을 남겨 둔다."
+      }
+    },
+    "整理支出并取消闲置订阅": {
+      "sourceDescription": "从不影响基本生活的部分节约。",
+      "en": {
+        "label": "Review expenses and cancel unused subscriptions",
+        "description": "Save on things that do not affect your basic needs."
+      },
+      "ja": {
+        "label": "支出を整理し、使わない定額契約を解約する",
+        "description": "基本的な生活に影響しない部分から節約する。"
+      },
+      "ko": {
+        "label": "지출을 정리하고 안 쓰는 구독 해지하기",
+        "description": "기본 생활에 영향이 없는 부분부터 절약한다."
+      }
+    },
+    "安排一项可承受的短期劳务": {
+      "sourceDescription": "用额外工时缓解眼前的现金压力。",
+      "en": {
+        "label": "Take on manageable short-term paid work",
+        "description": "Use additional hours to ease the immediate cash shortage."
+      },
+      "ja": {
+        "label": "無理のない短期の仕事を入れる",
+        "description": "追加の労働で、目先の資金不足を和らげる。"
+      },
+      "ko": {
+        "label": "감당할 수 있는 단기 노동 마련하기",
+        "description": "추가 근무로 당장의 현금 압박을 덜어 낸다."
+      }
+    },
+    "与共同生活的人协商分担": {
+      "sourceDescription": "把收入、支出与照护劳动一起摊开讨论。",
+      "en": {
+        "label": "Negotiate shared responsibilities at home",
+        "description": "Discuss income, spending and care work together."
+      },
+      "ja": {
+        "label": "同居する人と分担を相談する",
+        "description": "収入、支出、世話の仕事を並べて話し合う。"
+      },
+      "ko": {
+        "label": "함께 사는 사람과 분담 협의하기",
+        "description": "수입과 지출, 돌봄 노동을 모두 펼쳐 놓고 논의한다."
+      }
+    },
+    "调整大额计划的执行顺序": {
+      "sourceDescription": "推迟可等待的消费，先稳定日常。",
+      "en": {
+        "label": "Reorder your larger plans",
+        "description": "Delay purchases that can wait and stabilize everyday life first."
+      },
+      "ja": {
+        "label": "大きな支出の計画の順番を変える",
+        "description": "待てる買い物を延期し、まず日常を安定させる。"
+      },
+      "ko": {
+        "label": "큰돈이 드는 계획의 실행 순서 조절하기",
+        "description": "미룰 수 있는 소비를 늦추고 일상부터 안정시킨다."
+      }
+    },
+    "保留一笔休息与健康预算": {
+      "sourceDescription": "缩减其他非必需支出，避免持续透支自己。",
+      "en": {
+        "label": "Keep a budget for rest and health",
+        "description": "Reduce other optional spending to avoid exhausting yourself."
+      },
+      "ja": {
+        "label": "休息と健康のための予算を残す",
+        "description": "ほかの不要な支出を減らし、無理を続けないようにする。"
+      },
+      "ko": {
+        "label": "휴식과 건강 예산 남겨 두기",
+        "description": "다른 불필요한 지출을 줄여 계속 무리하지 않도록 한다."
+      }
+    },
+    "逐项整理疑问并书面确认": {
+      "sourceDescription": "花时间把双方理解变成可核对的文字。",
+      "en": {
+        "label": "List your questions and get written confirmation",
+        "description": "Take time to turn both sides' understanding into a clear record."
+      },
+      "ja": {
+        "label": "疑問を一つずつ整理し、書面で確かめる",
+        "description": "時間をかけて、双方の理解を確認できる文章にする。"
+      },
+      "ko": {
+        "label": "의문점을 하나씩 정리하고 서면 확인하기",
+        "description": "시간을 들여 양측의 이해를 대조할 수 있는 글로 남긴다."
+      }
+    },
+    "请有经验的人帮助阅读": {
+      "sourceDescription": "听取建议后由自己作决定。",
+      "en": {
+        "label": "Ask an experienced person to read it with you",
+        "description": "Listen to their advice and make your own decision."
+      },
+      "ja": {
+        "label": "経験のある人に読んでもらう",
+        "description": "助言を聞いてから、自分で決める。"
+      },
+      "ko": {
+        "label": "경험 있는 사람에게 검토 도움 받기",
+        "description": "조언을 들은 뒤 스스로 결정한다."
+      }
+    },
+    "尝试协商更清晰的时间与报酬": {
+      "sourceDescription": "用具体条件表达自己可以接受的范围。",
+      "en": {
+        "label": "Negotiate clearer hours and pay",
+        "description": "State specifically which terms you can accept."
+      },
+      "ja": {
+        "label": "時間と報酬をより明確に交渉する",
+        "description": "具体的な条件で、受け入れられる範囲を伝える。"
+      },
+      "ko": {
+        "label": "시간과 보수를 더 명확하게 협의하기",
+        "description": "구체적인 조건으로 받아들일 수 있는 범위를 표현한다."
+      }
+    },
+    "先做一个范围明确的小合作": {
+      "sourceDescription": "以有限投入了解对方是否可靠。",
+      "en": {
+        "label": "Start with a small, clearly defined collaboration",
+        "description": "Limit your initial commitment while assessing the other person's reliability."
+      },
+      "ja": {
+        "label": "まず範囲の明確な小さな協力をする",
+        "description": "投入を限り、相手が信頼できるか確かめる。"
+      },
+      "ko": {
+        "label": "먼저 범위가 명확한 작은 협업하기",
+        "description": "제한된 투입으로 상대를 믿을 수 있는지 알아본다."
+      }
+    },
+    "暂缓签订，继续寻找选择": {
+      "sourceDescription": "接受短期不确定性，给判断留出时间。",
+      "en": {
+        "label": "Delay signing and keep looking",
+        "description": "Accept some short-term uncertainty and give yourself time to judge."
+      },
+      "ja": {
+        "label": "契約を見送り、ほかの選択肢を探す",
+        "description": "短期の不確かさを受け入れ、判断の時間を確保する。"
+      },
+      "ko": {
+        "label": "계약을 미루고 다른 선택지 찾기",
+        "description": "단기적인 불확실성을 받아들이며 판단할 시간을 둔다."
+      }
+    },
+    "制定每周能完成的小练习": {
+      "sourceDescription": "围绕基础问题反复动手。",
+      "en": {
+        "label": "Set small exercises you can finish each week",
+        "description": "Practice the basics repeatedly through hands-on work."
+      },
+      "ja": {
+        "label": "毎週こなせる小さな練習を決める",
+        "description": "基本的な課題を何度も実際に試す。"
+      },
+      "ko": {
+        "label": "매주 마칠 수 있는 작은 연습 정하기",
+        "description": "기초 문제를 중심으로 반복해서 직접 해 본다."
+      }
+    },
+    "找一位伙伴互相讲解": {
+      "sourceDescription": "用讨论检验自己是否理解。",
+      "en": {
+        "label": "Find a partner and explain things to each other",
+        "description": "Use discussion to check your understanding."
+      },
+      "ja": {
+        "label": "仲間を見つけ、互いに説明する",
+        "description": "話し合いで、自分が理解できているか確かめる。"
+      },
+      "ko": {
+        "label": "동료를 찾아 서로 설명하기",
+        "description": "토론으로 자신의 이해를 확인한다."
+      }
+    },
+    "选择有反馈的短期课程": {
+      "sourceDescription": "把费用花在明确需要的指导上。",
+      "en": {
+        "label": "Choose a short course that offers feedback",
+        "description": "Spend on the specific guidance you need."
+      },
+      "ja": {
+        "label": "指導を受けられる短期講座を選ぶ",
+        "description": "必要だと分かっている指導に費用を使う。"
+      },
+      "ko": {
+        "label": "피드백이 있는 단기 강좌 선택하기",
+        "description": "분명히 필요한 지도에 비용을 쓴다."
+      }
+    },
+    "用现有任务练习新技能": {
+      "sourceDescription": "让学习服务于眼前的小问题。",
+      "en": {
+        "label": "Practice a new skill on a current task",
+        "description": "Use learning to solve an immediate, manageable problem."
+      },
+      "ja": {
+        "label": "今の課題で新しい技能を練習する",
+        "description": "学んだことを、目の前の小さな問題に役立てる。"
+      },
+      "ko": {
+        "label": "기존 과제로 새 기술 연습하기",
+        "description": "학습이 당장의 작은 문제에 도움이 되도록 한다."
+      }
+    },
+    "放慢进度，保留休息日": {
+      "sourceDescription": "用更长的时间换取可以坚持的节奏。",
+      "en": {
+        "label": "Slow down and keep rest days",
+        "description": "Allow more time to build a pace you can maintain."
+      },
+      "ja": {
+        "label": "進度を緩め、休みの日を残す",
+        "description": "時間を長めに取り、続けられるペースにする。"
+      },
+      "ko": {
+        "label": "진도를 늦추고 쉬는 날 남기기",
+        "description": "시간을 더 들여 유지할 수 있는 속도를 찾는다."
+      }
+    },
+    "查找已有研究和公开资料": {
+      "sourceDescription": "记录结论、条件与仍未解决的问题。",
+      "en": {
+        "label": "Search existing research and public information",
+        "description": "Record conclusions, their conditions and unresolved questions."
+      },
+      "ja": {
+        "label": "先行研究や公開資料を探す",
+        "description": "結論、条件、未解決の問題を記録する。"
+      },
+      "ko": {
+        "label": "기존 연구와 공개 자료 찾아보기",
+        "description": "결론과 조건, 아직 해결되지 않은 문제를 기록한다."
+      }
+    },
+    "做一项小规模的观察记录": {
+      "sourceDescription": "保持方法简单，区分样本与整体。",
+      "en": {
+        "label": "Keep a small set of observations",
+        "description": "Use a simple method and distinguish your sample from the whole."
+      },
+      "ja": {
+        "label": "小規模な観察記録を取る",
+        "description": "方法を簡単に保ち、標本と全体を区別する。"
+      },
+      "ko": {
+        "label": "소규모 관찰 기록하기",
+        "description": "방법을 단순하게 유지하며 표본과 전체를 구분한다."
+      }
+    },
+    "向相关领域的人请教": {
+      "sourceDescription": "准备具体问题，尊重对方的时间。",
+      "en": {
+        "label": "Ask someone working in the relevant field",
+        "description": "Prepare specific questions and respect their time."
+      },
+      "ja": {
+        "label": "関連分野の人に教えを求める",
+        "description": "具体的な質問を用意し、相手の時間を尊重する。"
+      },
+      "ko": {
+        "label": "관련 분야 사람에게 조언 구하기",
+        "description": "구체적인 질문을 준비하고 상대의 시간을 존중한다."
+      }
+    },
+    "写成一份可被质疑的初稿": {
+      "sourceDescription": "列出证据和局限，邀请反馈。",
+      "en": {
+        "label": "Write a draft that others can challenge",
+        "description": "State your evidence and limitations and invite feedback."
+      },
+      "ja": {
+        "label": "批判を受けられる草稿にまとめる",
+        "description": "証拠と限界を挙げ、意見を求める。"
+      },
+      "ko": {
+        "label": "검토와 비판을 받을 수 있는 초안 쓰기",
+        "description": "증거와 한계를 제시하고 의견을 구한다."
+      }
+    },
+    "先搁置结论，整理后续计划": {
+      "sourceDescription": "承认暂时不知道，把资源留给更紧迫的事。",
+      "en": {
+        "label": "Hold off on conclusions and organize the next steps",
+        "description": "Acknowledge what remains unknown and save resources for urgent matters."
+      },
+      "ja": {
+        "label": "結論を保留し、今後の計画を整理する",
+        "description": "今は分からないと認め、より急ぐことに資源を残す。"
+      },
+      "ko": {
+        "label": "결론을 미루고 후속 계획 정리하기",
+        "description": "아직 모른다는 점을 인정하고 더 급한 일에 자원을 남긴다."
+      }
+    },
+    "用不敏感的材料做一次试验": {
+      "sourceDescription": "比较结果与人工判断，记录错误。",
+      "en": {
+        "label": "Run a trial using non-sensitive material",
+        "description": "Compare the output with human judgment and record errors."
+      },
+      "ja": {
+        "label": "機密性のない資料で試す",
+        "description": "結果を人の判断と比べ、誤りを記録する。"
+      },
+      "ko": {
+        "label": "민감하지 않은 자료로 시험하기",
+        "description": "결과를 사람의 판단과 비교하고 오류를 기록한다."
+      }
+    },
+    "与使用者交流真实体验": {
+      "sourceDescription": "了解它节省了什么，又增加了什么负担。",
+      "en": {
+        "label": "Ask users about their actual experiences",
+        "description": "Find out what effort it saves and what new burdens it creates."
+      },
+      "ja": {
+        "label": "利用者の実体験を聞く",
+        "description": "何が省けて、どんな負担が増えたのかを知る。"
+      },
+      "ko": {
+        "label": "사용자와 실제 경험 나누기",
+        "description": "무엇을 줄여 주고 어떤 부담을 늘렸는지 알아본다."
+      }
+    },
+    "学习相关的数据与操作基础": {
+      "sourceDescription": "为未来转岗或项目储备技能。",
+      "en": {
+        "label": "Learn the related data and operating basics",
+        "description": "Build skills for a future project or change of job."
+      },
+      "ja": {
+        "label": "関連するデータと操作の基礎を学ぶ",
+        "description": "将来の職種変更や事業に備えて技能を身につける。"
+      },
+      "ko": {
+        "label": "관련 데이터와 조작 기초 배우기",
+        "description": "향후 직무 전환이나 프로젝트에 대비해 기술을 쌓는다."
+      }
+    },
+    "整理人工复核与申诉的需求": {
+      "sourceDescription": "把人的判断和纠错流程写清楚。",
+      "en": {
+        "label": "Set out the need for human review and appeals",
+        "description": "Describe clearly how people can judge and correct errors."
+      },
+      "ja": {
+        "label": "人による再確認と異議申立ての要件を整理する",
+        "description": "人の判断と、誤りを直す手順を明確に書く。"
+      },
+      "ko": {
+        "label": "사람의 재검토와 이의 신청 필요 정리하기",
+        "description": "사람의 판단과 오류 수정 절차를 명확히 적는다."
+      }
+    },
+    "维持熟悉流程，观察一段时间": {
+      "sourceDescription": "不急着替换仍然有效的日常方式。",
+      "en": {
+        "label": "Keep the familiar process and observe for a while",
+        "description": "Avoid rushing to replace routines that still work."
+      },
+      "ja": {
+        "label": "なじみの手順を保ち、しばらく観察する",
+        "description": "今も役立つ日常の方法を急いで置き換えない。"
+      },
+      "ko": {
+        "label": "익숙한 절차를 유지하며 잠시 관찰하기",
+        "description": "아직 유효한 일상 방식을 서둘러 바꾸지 않는다."
+      }
+    },
+    "用很小的规模测试真实需求": {
+      "sourceDescription": "限制投入，记录每一笔成本与反馈。",
+      "en": {
+        "label": "Test real demand on a very small scale",
+        "description": "Limit spending and record every cost and response."
+      },
+      "ja": {
+        "label": "ごく小さく試し、実際の需要を確かめる",
+        "description": "投入を抑え、すべての費用と反応を記録する。"
+      },
+      "ko": {
+        "label": "아주 작은 규모로 실제 수요 시험하기",
+        "description": "투입을 제한하고 모든 비용과 반응을 기록한다."
+      }
+    },
+    "访谈几位潜在使用者": {
+      "sourceDescription": "先问他们如何处理问题，再谈自己的方案。",
+      "en": {
+        "label": "Interview a few potential users",
+        "description": "Ask how they handle the problem before presenting your solution."
+      },
+      "ja": {
+        "label": "利用する可能性のある人に数人話を聞く",
+        "description": "自分の案を話す前に、今どう対処しているかを尋ねる。"
+      },
+      "ko": {
+        "label": "잠재 사용자 몇 명 인터뷰하기",
+        "description": "자신의 방안을 말하기 전에 현재 어떻게 문제를 해결하는지 묻는다."
+      }
+    },
+    "接一个范围明确的试单": {
+      "sourceDescription": "在能力范围内完成服务，获得第一笔报酬。",
+      "en": {
+        "label": "Accept a clearly defined trial order",
+        "description": "Provide a service within your abilities and earn your first payment."
+      },
+      "ja": {
+        "label": "範囲の明確な試験注文を受ける",
+        "description": "能力の範囲内で仕事を終え、最初の報酬を得る。"
+      },
+      "ko": {
+        "label": "범위가 명확한 시험 주문 받기",
+        "description": "능력 범위 내에서 서비스를 완수하고 첫 보수를 받는다."
+      }
+    },
+    "找一位互补的伙伴商量分工": {
+      "sourceDescription": "先说清投入、收益与退出条件。",
+      "en": {
+        "label": "Discuss responsibilities with a complementary partner",
+        "description": "Clarify contributions, returns and withdrawal terms first."
+      },
+      "ja": {
+        "label": "強みを補い合える仲間と分担を話す",
+        "description": "まず投入、利益、離脱の条件を明確にする。"
+      },
+      "ko": {
+        "label": "역량을 보완할 동료와 분담 의논하기",
+        "description": "투입과 수익, 탈퇴 조건부터 명확히 한다."
+      }
+    },
+    "算过账后暂缓投入": {
+      "sourceDescription": "保留记录，把本月用于现有生活。",
+      "en": {
+        "label": "Check the figures and postpone investing",
+        "description": "Keep your notes and spend this month on your existing life."
+      },
+      "ja": {
+        "label": "収支を計算し、投入を見送る",
+        "description": "記録を残し、今月は現在の暮らしに充てる。"
+      },
+      "ko": {
+        "label": "계산을 마친 뒤 투입 보류하기",
+        "description": "기록을 남기고 이번 달은 현재 생활에 쓴다."
+      }
+    },
+    "比较不同街区的实际生活成本": {
+      "sourceDescription": "走访可达的地点，记录租金之外的开支。",
+      "en": {
+        "label": "Compare the actual costs of different neighborhoods",
+        "description": "Visit accessible areas and record expenses beyond rent."
+      },
+      "ja": {
+        "label": "街ごとの実際の生活費を比べる",
+        "description": "行ける場所を訪れ、家賃以外の支出を記録する。"
+      },
+      "ko": {
+        "label": "여러 동네의 실제 생활비 비교하기",
+        "description": "갈 수 있는 곳을 방문하고 임대료 외의 지출을 기록한다."
+      }
+    },
+    "与房东或合住者谈具体问题": {
+      "sourceDescription": "先尝试改善现有住处的安排。",
+      "en": {
+        "label": "Discuss specific problems with your landlord or housemates",
+        "description": "First try to improve arrangements in your current home."
+      },
+      "ja": {
+        "label": "大家や同居人と具体的な問題を話す",
+        "description": "まず今の住まいの環境を改善してみる。"
+      },
+      "ko": {
+        "label": "집주인이나 동거인과 구체적인 문제 이야기하기",
+        "description": "현재 거처의 상황부터 개선해 본다."
+      }
+    },
+    "整理搬迁预算与必要条件": {
+      "sourceDescription": "只做准备，不在信息不足时承诺迁移。",
+      "en": {
+        "label": "Prepare a moving budget and a list of requirements",
+        "description": "Prepare without committing to a move before you have enough information."
+      },
+      "ja": {
+        "label": "引っ越しの予算と必要条件を整理する",
+        "description": "準備にとどめ、情報が足りないうちは移住を約束しない。"
+      },
+      "ko": {
+        "label": "이사 예산과 필수 조건 정리하기",
+        "description": "준비만 하고 정보가 부족할 때 이주를 확약하지 않는다."
+      }
+    },
+    "改善当前的照明与收纳": {
+      "sourceDescription": "用有限预算提高日常舒适度。",
+      "en": {
+        "label": "Improve the lighting and storage where you live",
+        "description": "Use a limited budget to make everyday life more comfortable."
+      },
+      "ja": {
+        "label": "今の照明と収納を改善する",
+        "description": "限られた予算で日々の快適さを高める。"
+      },
+      "ko": {
+        "label": "현재 조명과 수납 개선하기",
+        "description": "한정된 예산으로 일상의 편안함을 높인다."
+      }
+    },
+    "把时间花在建立邻里联系": {
+      "sourceDescription": "认识附近的服务与可以互相照应的人。",
+      "en": {
+        "label": "Spend time getting to know your neighbors",
+        "description": "Learn about nearby services and people who can help one another."
+      },
+      "ja": {
+        "label": "近所とのつながりに時間を使う",
+        "description": "近隣のサービスや、互いに助け合える人を知る。"
+      },
+      "ko": {
+        "label": "이웃과 관계 맺는 데 시간 쓰기",
+        "description": "근처 서비스와 서로 보살필 수 있는 사람들을 알아간다."
+      }
+    },
+    "核实资格、手续与全部费用": {
+      "sourceDescription": "把可查证条件与宣传用语分开。",
+      "en": {
+        "label": "Verify eligibility, procedures and all costs",
+        "description": "Separate checkable requirements from promotional language."
+      },
+      "ja": {
+        "label": "資格、手続き、全費用を確認する",
+        "description": "確かめられる条件と宣伝文句を分ける。"
+      },
+      "ko": {
+        "label": "자격과 절차, 전체 비용 확인하기",
+        "description": "확인할 수 있는 조건과 홍보 문구를 구분한다."
+      }
+    },
+    "联系曾经迁往当地的人": {
+      "sourceDescription": "了解收入之外的生活和支持网络。",
+      "en": {
+        "label": "Contact someone who has already moved there",
+        "description": "Learn about everyday life and support networks as well as income."
+      },
+      "ja": {
+        "label": "その土地に移住した人に連絡する",
+        "description": "収入以外の暮らしや支援のつながりを知る。"
+      },
+      "ko": {
+        "label": "그곳으로 이주한 사람에게 연락하기",
+        "description": "소득 외의 생활과 지원 관계망을 알아본다."
+      }
+    },
+    "准备语言或专业能力材料": {
+      "sourceDescription": "先完成申请前能做的一小步。",
+      "en": {
+        "label": "Prepare evidence of language or professional skills",
+        "description": "Complete one manageable step before applying."
+      },
+      "ja": {
+        "label": "語学力や専門能力の資料を準備する",
+        "description": "申請前にできる小さな一歩をまず終える。"
+      },
+      "ko": {
+        "label": "언어나 전문 능력 자료 준비하기",
+        "description": "신청 전에 할 수 있는 작은 단계부터 마친다."
+      }
+    },
+    "和重要的人商量多种安排": {
+      "sourceDescription": "把远距离相处与照护责任一起考虑。",
+      "en": {
+        "label": "Discuss several arrangements with important people",
+        "description": "Consider long-distance relationships and care responsibilities together."
+      },
+      "ja": {
+        "label": "大切な人と複数の案を相談する",
+        "description": "遠距離での付き合いと世話の責任を一緒に考える。"
+      },
+      "ko": {
+        "label": "소중한 사람과 여러 계획 상의하기",
+        "description": "장거리 관계와 돌봄 책임을 함께 고려한다."
+      }
+    },
+    "寻找本地可替代的机会": {
+      "sourceDescription": "把想获得的成长落实在眼前条件中。",
+      "en": {
+        "label": "Look for comparable opportunities locally",
+        "description": "Find ways to grow within your current circumstances."
+      },
+      "ja": {
+        "label": "地元で代わりになる機会を探す",
+        "description": "望む成長を、目の前の条件の中で実現する。"
+      },
+      "ko": {
+        "label": "지역에서 대안이 될 기회 찾기",
+        "description": "얻고 싶은 성장을 현재 조건에서 실현한다."
+      }
+    },
+    "和家人列出轮流分担的安排": {
+      "sourceDescription": "把看得见和看不见的照护工作都写清楚。",
+      "en": {
+        "label": "Make a care rota with your family",
+        "description": "List both visible chores and less visible care work."
+      },
+      "ja": {
+        "label": "家族と交代で分担する予定を作る",
+        "description": "目に見える世話も、見えにくい世話も明確に書く。"
+      },
+      "ko": {
+        "label": "가족과 교대 분담 일정 적기",
+        "description": "눈에 보이는 돌봄과 보이지 않는 돌봄 노동을 모두 명확히 적는다."
+      }
+    },
+    "了解附近可用的照护服务": {
+      "sourceDescription": "比较费用、条件与对方真正需要的帮助。",
+      "en": {
+        "label": "Find out which care services are available nearby",
+        "description": "Compare costs, requirements and the help actually needed."
+      },
+      "ja": {
+        "label": "近くで使える介護・支援サービスを調べる",
+        "description": "費用、条件、相手が本当に必要とする支援を比べる。"
+      },
+      "ko": {
+        "label": "근처에서 이용할 수 있는 돌봄 서비스 알아보기",
+        "description": "비용과 조건, 상대에게 정말 필요한 도움을 비교한다."
+      }
+    },
+    "用一部分预算购买可靠服务": {
+      "sourceDescription": "减少最耗时的重复劳动。",
+      "en": {
+        "label": "Use part of the budget for a reliable service",
+        "description": "Reduce the repetitive tasks that take the most time."
+      },
+      "ja": {
+        "label": "予算の一部で信頼できるサービスを使う",
+        "description": "最も時間のかかる繰り返しの作業を減らす。"
+      },
+      "ko": {
+        "label": "예산 일부로 믿을 만한 서비스 이용하기",
+        "description": "시간이 가장 많이 드는 반복 노동을 줄인다."
+      }
+    },
+    "抽出固定时间陪伴与倾听": {
+      "sourceDescription": "按自己的能力承担一块稳定的责任。",
+      "en": {
+        "label": "Set regular time aside to be present and listen",
+        "description": "Take on a steady share of responsibility that you can manage."
+      },
+      "ja": {
+        "label": "決まった時間を共に過ごし、話を聞く",
+        "description": "自分の能力に合わせ、安定して果たせる責任を担う。"
+      },
+      "ko": {
+        "label": "정해진 시간을 내 함께하고 이야기 듣기",
+        "description": "자신의 능력에 맞춰 꾸준히 감당할 책임을 맡는다."
+      }
+    },
+    "先协商自己的时间与精力边界": {
+      "sourceDescription": "争取一份能持续而不透支的安排。",
+      "en": {
+        "label": "Agree on limits to your time and energy first",
+        "description": "Seek an arrangement you can sustain without exhaustion."
+      },
+      "ja": {
+        "label": "まず使える時間と力の限度を相談する",
+        "description": "無理をせず続けられる分担を目指す。"
+      },
+      "ko": {
+        "label": "자신의 시간과 체력 한계부터 협의하기",
+        "description": "소진되지 않고 지속할 수 있는 계획을 마련한다."
+      }
+    },
+    "约一次不被打断的长谈": {
+      "sourceDescription": "把愿望与担忧都说具体。",
+      "en": {
+        "label": "Arrange a long conversation without interruptions",
+        "description": "Explain both your hopes and your concerns in concrete terms."
+      },
+      "ja": {
+        "label": "中断されない長い話の時間を約束する",
+        "description": "願いも心配も具体的に話す。"
+      },
+      "ko": {
+        "label": "방해받지 않는 긴 대화 약속하기",
+        "description": "바람과 걱정을 모두 구체적으로 이야기한다."
+      }
+    },
+    "共同做一个短期生活计划": {
+      "sourceDescription": "先尝试一个月，再一起评估。",
+      "en": {
+        "label": "Make a short-term living plan together",
+        "description": "Try it for a month and review it together afterward."
+      },
+      "ja": {
+        "label": "短期の生活計画を一緒に作る",
+        "description": "まず一か月試し、その後一緒に振り返る。"
+      },
+      "ko": {
+        "label": "함께 단기 생활 계획 세우기",
+        "description": "먼저 한 달 동안 시도한 뒤 함께 평가한다."
+      }
+    },
+    "安排一次轻松的共同活动": {
+      "sourceDescription": "先找回相处的愉快，再谈难题。",
+      "en": {
+        "label": "Plan a relaxed activity together",
+        "description": "Recover some enjoyment in each other's company before tackling difficult issues."
+      },
+      "ja": {
+        "label": "気軽に一緒に楽しむ時間を設ける",
+        "description": "共に過ごす楽しさを取り戻してから、難しい話をする。"
+      },
+      "ko": {
+        "label": "가벼운 공동 활동 마련하기",
+        "description": "함께하는 즐거움을 먼저 되찾고 어려운 문제를 이야기한다."
+      }
+    },
+    "坦诚说明暂时无法承担的部分": {
+      "sourceDescription": "保留尊重，也给双方选择的空间。",
+      "en": {
+        "label": "Be honest about what you cannot take on yet",
+        "description": "Remain respectful and leave both sides room to choose."
+      },
+      "ja": {
+        "label": "今は引き受けられないことを率直に伝える",
+        "description": "敬意を保ち、双方に選ぶ余地を残す。"
+      },
+      "ko": {
+        "label": "당장 감당할 수 없는 부분 솔직히 말하기",
+        "description": "존중을 유지하며 양쪽 모두 선택할 여지를 둔다."
+      }
+    },
+    "请双方认可的人帮助梳理": {
+      "sourceDescription": "获得新的视角，决定仍由当事人作出。",
+      "en": {
+        "label": "Ask someone you both trust to help clarify things",
+        "description": "Gain another perspective while leaving decisions to those involved."
+      },
+      "ja": {
+        "label": "双方が認める人に整理を手伝ってもらう",
+        "description": "新しい視点を得つつ、決定は当事者が行う。"
+      },
+      "ko": {
+        "label": "양측이 인정하는 사람에게 정리 도움 받기",
+        "description": "새로운 시각을 얻되 결정은 당사자가 내린다."
+      }
+    },
+    "先听取不同使用者的需求": {
+      "sourceDescription": "把老人、孩子和不同作息者的处境放在一起。",
+      "en": {
+        "label": "Listen to the needs of different users first",
+        "description": "Consider older people, children and those with different daily schedules."
+      },
+      "ja": {
+        "label": "まず異なる利用者の要望を聞く",
+        "description": "高齢者、子ども、生活時間の違う人の事情を共に考える。"
+      },
+      "ko": {
+        "label": "먼저 다양한 이용자의 필요 듣기",
+        "description": "노인과 아이, 생활 시간이 다른 사람들의 상황을 함께 살핀다."
+      }
+    },
+    "整理一个可试行的折中方案": {
+      "sourceDescription": "提出范围和期限，让讨论有具体对象。",
+      "en": {
+        "label": "Prepare a compromise that can be tried out",
+        "description": "Specify its scope and duration to give the discussion a practical focus."
+      },
+      "ja": {
+        "label": "試行できる折衷案を整理する",
+        "description": "範囲と期限を示し、具体的な案を話し合えるようにする。"
+      },
+      "ko": {
+        "label": "시범 운영할 수 있는 절충안 정리하기",
+        "description": "범위와 기간을 제시해 구체적인 대상을 놓고 논의한다."
+      }
+    },
+    "参与一项实际维护工作": {
+      "sourceDescription": "从清洁、指引或整理公共材料做起。",
+      "en": {
+        "label": "Help with a concrete maintenance task",
+        "description": "Start with cleaning, signs or organizing shared materials."
+      },
+      "ja": {
+        "label": "実際の維持管理に参加する",
+        "description": "清掃、案内、共有資料の整理から始める。"
+      },
+      "ko": {
+        "label": "실제 유지관리 작업에 참여하기",
+        "description": "청소와 안내, 공용 자료 정리부터 시작한다."
+      }
+    },
+    "帮助公布清晰的讨论记录": {
+      "sourceDescription": "征得同意后保留争议与尚未解决的问题。",
+      "en": {
+        "label": "Help publish a clear record of the discussion",
+        "description": "With consent, record disagreements and unresolved questions."
+      },
+      "ja": {
+        "label": "分かりやすい議事録の公開を手伝う",
+        "description": "同意を得て、対立点と未解決の問題を残す。"
+      },
+      "ko": {
+        "label": "명확한 논의 기록 공개 돕기",
+        "description": "동의를 얻어 쟁점과 아직 해결되지 않은 문제를 남긴다."
+      }
+    },
+    "只反馈与自己直接相关的问题": {
+      "sourceDescription": "投入有限时间，照顾原有生活安排。",
+      "en": {
+        "label": "Give feedback only on issues directly affecting you",
+        "description": "Limit the time involved and protect your existing commitments."
+      },
+      "ja": {
+        "label": "自分に直接関わる問題だけを伝える",
+        "description": "使う時間を限り、元の生活の予定を大切にする。"
+      },
+      "ko": {
+        "label": "자신과 직접 관련된 문제만 의견 내기",
+        "description": "한정된 시간을 쓰며 기존 생활 일정을 돌본다."
+      }
+    },
+    "核对要求，整理完整材料": {
+      "sourceDescription": "把信息来源和办理记录保存好。",
+      "en": {
+        "label": "Check the requirements and assemble the documents",
+        "description": "Keep records of your information sources and applications."
+      },
+      "ja": {
+        "label": "要件を確認し、資料をそろえる",
+        "description": "情報源と手続きの記録を保管する。"
+      },
+      "ko": {
+        "label": "요건을 확인하고 완전한 자료 준비하기",
+        "description": "정보 출처와 처리 기록을 잘 보관한다."
+      }
+    },
+    "提出具体的流程改进建议": {
+      "sourceDescription": "围绕重复填写、说明和可达性表达需求。",
+      "en": {
+        "label": "Suggest a specific improvement to the process",
+        "description": "Address repeated forms, unclear instructions or accessibility."
+      },
+      "ja": {
+        "label": "手続きの具体的な改善を提案する",
+        "description": "重複記入、説明、利用のしやすさについて要望を伝える。"
+      },
+      "ko": {
+        "label": "구체적인 절차 개선 제안하기",
+        "description": "중복 작성과 설명, 접근성에 관한 필요를 전달한다."
+      }
+    },
+    "与有相同经历的人交换信息": {
+      "sourceDescription": "共享经验时去掉不必要的个人资料。",
+      "en": {
+        "label": "Exchange information with people who have similar experiences",
+        "description": "Remove unnecessary personal details when sharing what you learned."
+      },
+      "ja": {
+        "label": "同じ経験をした人と情報交換する",
+        "description": "経験を共有する際は、不要な個人情報を除く。"
+      },
+      "ko": {
+        "label": "같은 경험을 한 사람과 정보 나누기",
+        "description": "경험을 공유할 때 불필요한 개인정보를 뺀다."
+      }
+    },
+    "请熟悉流程的正规服务人员协助": {
+      "sourceDescription": "用有限费用减少反复奔波。",
+      "en": {
+        "label": "Ask an authorized service worker familiar with the process",
+        "description": "Spend a limited amount to reduce repeated trips."
+      },
+      "ja": {
+        "label": "手続きに詳しい正規の担当者に助けてもらう",
+        "description": "限られた費用で、何度も足を運ぶ負担を減らす。"
+      },
+      "ko": {
+        "label": "절차에 익숙한 정식 서비스 담당자에게 도움 받기",
+        "description": "한정된 비용으로 반복해서 오가는 수고를 줄인다."
+      }
+    },
+    "调整办理顺序，先完成急事": {
+      "sourceDescription": "接受部分等待，把精力花在本月可推进的步骤。",
+      "en": {
+        "label": "Reorder the applications and finish urgent matters first",
+        "description": "Accept some waiting and focus on steps you can advance this month."
+      },
+      "ja": {
+        "label": "手続きの順番を変え、急ぐことを先に終える",
+        "description": "待つ必要も受け入れ、今月進められる段階に力を使う。"
+      },
+      "ko": {
+        "label": "처리 순서를 조정해 급한 일부터 마치기",
+        "description": "일부 기다림을 받아들이고 이번 달 진행할 수 있는 단계에 힘을 쓴다."
+      }
+    },
+    "记录实际工作量与约定差异": {
+      "sourceDescription": "用可核对的材料支持后续沟通。",
+      "en": {
+        "label": "Record the gap between actual work and agreed terms",
+        "description": "Use checkable evidence to support later discussions."
+      },
+      "ja": {
+        "label": "実際の仕事量と約束の違いを記録する",
+        "description": "確認できる資料を、その後の話し合いの根拠にする。"
+      },
+      "ko": {
+        "label": "실제 업무량과 약속의 차이 기록하기",
+        "description": "대조할 수 있는 자료로 후속 소통을 뒷받침한다."
+      }
+    },
+    "和相关人员一起提出可行建议": {
+      "sourceDescription": "寻找共同需求，同时尊重不同处境。",
+      "en": {
+        "label": "Develop workable suggestions with the people concerned",
+        "description": "Look for shared needs while respecting different circumstances."
+      },
+      "ja": {
+        "label": "関係者と一緒に実行できる提案をする",
+        "description": "共通の要望を探し、それぞれの事情も尊重する。"
+      },
+      "ko": {
+        "label": "관련자와 함께 실행 가능한 제안하기",
+        "description": "공통 필요를 찾으며 서로 다른 상황도 존중한다."
+      }
+    },
+    "与负责人谈一个月的试行方案": {
+      "sourceDescription": "把调整拆成可以评估的小范围改变。",
+      "en": {
+        "label": "Discuss a one-month trial with the person in charge",
+        "description": "Break the adjustment into small changes that can be evaluated."
+      },
+      "ja": {
+        "label": "担当責任者と一か月の試行案を話す",
+        "description": "評価できる小さな変更に分けて調整する。"
+      },
+      "ko": {
+        "label": "책임자와 한 달 시범안 논의하기",
+        "description": "평가할 수 있는 작은 범위의 변화로 나누어 조정한다."
+      }
+    },
+    "开始为其他机会做准备": {
+      "sourceDescription": "更新作品与技能清单，联系可靠渠道。",
+      "en": {
+        "label": "Start preparing for other opportunities",
+        "description": "Update your work samples and skills list and contact reliable channels."
+      },
+      "ja": {
+        "label": "ほかの機会に向けた準備を始める",
+        "description": "作品と技能の一覧を更新し、信頼できる窓口に連絡する。"
+      },
+      "ko": {
+        "label": "다른 기회를 위한 준비 시작하기",
+        "description": "작품과 기술 목록을 갱신하고 믿을 만한 경로에 연락한다."
+      }
+    },
+    "优先安排休息与已有生活责任": {
+      "sourceDescription": "明确自己本月能够承担的范围。",
+      "en": {
+        "label": "Prioritize rest and existing responsibilities",
+        "description": "State clearly how much you can take on this month."
+      },
+      "ja": {
+        "label": "休息と今ある生活上の責任を優先する",
+        "description": "今月引き受けられる範囲を明確にする。"
+      },
+      "ko": {
+        "label": "휴식과 기존 생활 책임부터 챙기기",
+        "description": "이번 달 감당할 수 있는 범위를 명확히 한다."
+      }
+    },
+    "记录几类日用品的实际价格": {
+      "sourceDescription": "持续观察，不凭一次变化作大判断。",
+      "en": {
+        "label": "Track the actual prices of several necessities",
+        "description": "Observe over time instead of drawing conclusions from one change."
+      },
+      "ja": {
+        "label": "数種類の日用品の実際の価格を記録する",
+        "description": "観察を続け、一度の変化だけで大きな判断をしない。"
+      },
+      "ko": {
+        "label": "몇 가지 생활용품의 실제 가격 기록하기",
+        "description": "지속해서 관찰하고 한 번의 변화로 큰 판단을 내리지 않는다."
+      }
+    },
+    "和小店经营者聊聊成本": {
+      "sourceDescription": "尊重对方不愿公开的信息。",
+      "en": {
+        "label": "Ask a small-shop owner about costs",
+        "description": "Respect any information they prefer not to share."
+      },
+      "ja": {
+        "label": "小さな店の経営者と費用の話をする",
+        "description": "相手が公開したくない情報は尊重する。"
+      },
+      "ko": {
+        "label": "작은 가게 운영자와 비용 이야기하기",
+        "description": "상대가 공개하고 싶지 않은 정보는 존중한다."
+      }
+    },
+    "按实际需求调整采购": {
+      "sourceDescription": "比较单位成本，减少闲置和浪费。",
+      "en": {
+        "label": "Adjust purchases to actual needs",
+        "description": "Compare unit prices and reduce unused purchases and waste."
+      },
+      "ja": {
+        "label": "実際の必要に合わせて買い物を調整する",
+        "description": "単位あたりの費用を比べ、使わずに置く物や無駄を減らす。"
+      },
+      "ko": {
+        "label": "실제 필요에 맞춰 구매 조절하기",
+        "description": "단위 비용을 비교하고 방치와 낭비를 줄인다."
+      }
+    },
+    "写一篇有具体细节的生活观察": {
+      "sourceDescription": "区分个人经历、转述与可核实资料。",
+      "en": {
+        "label": "Write about everyday life using concrete details",
+        "description": "Distinguish personal experience, hearsay and verifiable records."
+      },
+      "ja": {
+        "label": "具体的な細部を含めて暮らしの観察を書く",
+        "description": "自分の経験、伝聞、確認できる資料を区別する。"
+      },
+      "ko": {
+        "label": "구체적인 세부 사항이 담긴 생활 관찰 쓰기",
+        "description": "개인 경험과 전언, 확인 가능한 자료를 구분한다."
+      }
+    },
+    "把这一月留给熟悉的生活": {
+      "sourceDescription": "不追逐每一条议论，按计划休息与工作。",
+      "en": {
+        "label": "Spend this month on familiar routines",
+        "description": "Follow your plans for rest and work instead of chasing every discussion."
+      },
+      "ja": {
+        "label": "今月はなじみの暮らしに充てる",
+        "description": "すべての議論を追わず、予定どおり休み、働く。"
+      },
+      "ko": {
+        "label": "이번 달을 익숙한 생활에 쓰기",
+        "description": "모든 논의를 좇지 않고 계획대로 쉬고 일한다."
+      }
+    },
+    "完成一篇短文或一组小作品": {
+      "sourceDescription": "把规模控制在这个月能完成的范围内。",
+      "en": {
+        "label": "Finish a short piece or a small set of works",
+        "description": "Keep the project small enough to finish this month."
+      },
+      "ja": {
+        "label": "短文一篇か小作品の一組を完成させる",
+        "description": "今月中に終えられる規模に収める。"
+      },
+      "ko": {
+        "label": "짧은 글 한 편이나 작은 작품 묶음 완성하기",
+        "description": "이번 달에 끝낼 수 있는 규모로 제한한다."
+      }
+    },
+    "与可信的朋友交换反馈": {
+      "sourceDescription": "听取不同理解，保留自己的表达方向。",
+      "en": {
+        "label": "Exchange feedback with trusted friends",
+        "description": "Hear different interpretations while keeping your own direction."
+      },
+      "ja": {
+        "label": "信頼できる友達と感想を交わす",
+        "description": "異なる受け取り方を聞き、自分の表現の方向も保つ。"
+      },
+      "ko": {
+        "label": "믿을 수 있는 친구와 의견 나누기",
+        "description": "다른 해석을 듣고 자신의 표현 방향도 유지한다."
+      }
+    },
+    "整理私人记录，暂时不公开": {
+      "sourceDescription": "保存生活的细节，不急着接受评价。",
+      "en": {
+        "label": "Organize private records without publishing them yet",
+        "description": "Save the details of your life without rushing to seek judgment."
+      },
+      "ja": {
+        "label": "私的な記録を整理し、今は公開しない",
+        "description": "生活の細部を残し、評価を受けることを急がない。"
+      },
+      "ko": {
+        "label": "개인 기록을 정리하고 당장은 공개하지 않기",
+        "description": "생활의 세부 사항을 보존하고 평가받기를 서두르지 않는다."
+      }
+    },
+    "采访愿意分享经历的人": {
+      "sourceDescription": "明确用途，并尊重对方撤回内容的意愿。",
+      "en": {
+        "label": "Interview someone willing to share their experience",
+        "description": "Explain the intended use and respect their wish to withdraw material."
+      },
+      "ja": {
+        "label": "経験を話してくれる人に聞き取りをする",
+        "description": "用途を明らかにし、内容の撤回を望む意思も尊重する。"
+      },
+      "ko": {
+        "label": "경험을 나누려는 사람 인터뷰하기",
+        "description": "용도를 명확히 하고 내용 철회를 원하는 의사도 존중한다."
+      }
+    },
+    "尝试一种新的创作工具": {
+      "sourceDescription": "用简单练习理解表现方法。",
+      "en": {
+        "label": "Try a new creative tool",
+        "description": "Learn its methods through simple exercises."
+      },
+      "ja": {
+        "label": "新しい制作の道具を試す",
+        "description": "簡単な練習で表現方法を理解する。"
+      },
+      "ko": {
+        "label": "새로운 창작 도구 시도하기",
+        "description": "간단한 연습으로 표현 방식을 이해한다."
+      }
+    },
+    "建立可以坚持的睡眠与运动安排": {
+      "sourceDescription": "从低强度、符合自身条件的活动开始。",
+      "en": {
+        "label": "Establish a sustainable sleep and exercise routine",
+        "description": "Start with low-intensity activities suited to your condition."
+      },
+      "ja": {
+        "label": "続けられる睡眠と運動の予定を作る",
+        "description": "低い強度で、自分の状態に合う活動から始める。"
+      },
+      "ko": {
+        "label": "유지할 수 있는 수면과 운동 계획 세우기",
+        "description": "강도가 낮고 자신의 조건에 맞는 활동부터 시작한다."
+      }
+    },
+    "减少一项不必要的承诺": {
+      "sourceDescription": "把空出来的时间用于恢复。",
+      "en": {
+        "label": "Drop one unnecessary commitment",
+        "description": "Use the time you gain to recover."
+      },
+      "ja": {
+        "label": "不要な約束を一つ減らす",
+        "description": "空いた時間を回復に使う。"
+      },
+      "ko": {
+        "label": "불필요한 약속 하나 줄이기",
+        "description": "비워진 시간을 회복에 쓴다."
+      }
+    },
+    "安排必要的常规健康咨询": {
+      "sourceDescription": "把具体困扰交给合适的专业人员讨论。",
+      "en": {
+        "label": "Arrange an appropriate routine health consultation",
+        "description": "Discuss your specific concerns with a suitable professional."
+      },
+      "ja": {
+        "label": "必要な通常の健康相談を受ける",
+        "description": "具体的な悩みを適切な専門家に相談する。"
+      },
+      "ko": {
+        "label": "필요한 정기 건강 상담 잡기",
+        "description": "구체적인 불편함을 적절한 전문가와 상의한다."
+      }
+    },
+    "约朋友做一次轻松活动": {
+      "sourceDescription": "把陪伴和休息放在同一个下午。",
+      "en": {
+        "label": "Meet a friend for a relaxed activity",
+        "description": "Combine companionship and rest in the same afternoon."
+      },
+      "ja": {
+        "label": "友達と気軽な活動を一度する",
+        "description": "同じ午後に、一緒に過ごす時間と休息を設ける。"
+      },
+      "ko": {
+        "label": "친구와 가벼운 활동 한 번 하기",
+        "description": "함께하는 시간과 휴식을 같은 오후에 둔다."
+      }
+    },
+    "重新拆分长期计划": {
+      "sourceDescription": "降低本月负荷，保留小而稳定的进度。",
+      "en": {
+        "label": "Break your long-term plan into smaller parts again",
+        "description": "Reduce this month's load while keeping steady progress."
+      },
+      "ja": {
+        "label": "長期計画を改めて小分けにする",
+        "description": "今月の負担を減らし、小さく安定した進歩を保つ。"
+      },
+      "ko": {
+        "label": "장기 계획 다시 나누기",
+        "description": "이번 달 부담을 낮추고 작지만 꾸준한 진전을 유지한다."
+      }
+    },
+    "每周提供一小段固定时间": {
+      "sourceDescription": "承担范围明确、自己能够完成的事情。",
+      "en": {
+        "label": "Offer a short, regular period each week",
+        "description": "Take on a clearly defined task you can complete."
+      },
+      "ja": {
+        "label": "毎週少しずつ決まった時間を提供する",
+        "description": "範囲が明確で、自分にできることを引き受ける。"
+      },
+      "ko": {
+        "label": "매주 짧은 시간을 정해 제공하기",
+        "description": "범위가 명확하고 스스로 마칠 수 있는 일을 맡는다."
+      }
+    },
+    "整理公开而必要的服务信息": {
+      "sourceDescription": "帮助需要的人找到可靠的正规渠道。",
+      "en": {
+        "label": "Organize essential public service information",
+        "description": "Help people find reliable, established channels."
+      },
+      "ja": {
+        "label": "公開されている必要なサービス情報を整理する",
+        "description": "必要な人が信頼できる正規の窓口を見つけられるよう助ける。"
+      },
+      "ko": {
+        "label": "공개된 필수 서비스 정보 정리하기",
+        "description": "필요한 사람이 믿을 만한 정식 경로를 찾도록 돕는다."
+      }
+    },
+    "提供一件闲置但好用的物品": {
+      "sourceDescription": "先问清需求，再决定如何分享。",
+      "en": {
+        "label": "Offer an unused item that still works well",
+        "description": "Ask what is needed before deciding how to share it."
+      },
+      "ja": {
+        "label": "使っていないが役立つ物を一つ提供する",
+        "description": "まず必要かを尋ね、その後で分け合い方を決める。"
+      },
+      "ko": {
+        "label": "쓰지 않지만 쓸 만한 물건 하나 제공하기",
+        "description": "먼저 필요를 확인한 뒤 나누는 방법을 정한다."
+      }
+    },
+    "帮助制定清晰的轮值与退出安排": {
+      "sourceDescription": "让互助不依靠少数人长期透支。",
+      "en": {
+        "label": "Help make clear rotas and withdrawal arrangements",
+        "description": "Keep mutual aid from depending on a few overworked people."
+      },
+      "ja": {
+        "label": "当番と辞退の仕組みを明確にする手助けをする",
+        "description": "少数の人の無理に頼らず、助け合いが続くようにする。"
+      },
+      "ko": {
+        "label": "명확한 당번과 그만둘 절차 마련 돕기",
+        "description": "소수의 사람이 오래 무리해야만 유지되는 상호부조를 피한다."
+      }
+    },
+    "保留联系方式，先照顾自己的生活": {
+      "sourceDescription": "在确有余力时再承担额外责任。",
+      "en": {
+        "label": "Keep in touch while looking after your own life first",
+        "description": "Take on extra responsibility when you have the capacity."
+      },
+      "ja": {
+        "label": "連絡先を残し、まず自分の暮らしを整える",
+        "description": "本当に余力ができてから、追加の責任を引き受ける。"
+      },
+      "ko": {
+        "label": "연락처를 남기고 자신의 생활부터 돌보기",
+        "description": "실제로 여력이 있을 때 추가 책임을 맡는다."
+      }
+    },
+    "固定散步与适合自己的活动时间": {
+      "sourceDescription": "根据身体情况保持低负担的规律活动。",
+      "en": {
+        "label": "Keep regular times for walks and suitable activities",
+        "description": "Maintain a low-burden routine that fits your physical condition."
+      },
+      "ja": {
+        "label": "散歩や自分に合う活動の時間を決める",
+        "description": "体調に合わせ、負担の少ない定期的な活動を続ける。"
+      },
+      "ko": {
+        "label": "산책과 자신에게 맞는 활동 시간 정하기",
+        "description": "몸 상태에 맞춰 부담이 적은 규칙적인 활동을 유지한다."
+      }
+    },
+    "参加一次适龄的兴趣交流": {
+      "sourceDescription": "从熟悉的话题认识新的伙伴。",
+      "en": {
+        "label": "Join an interest group suited to your age",
+        "description": "Meet new companions through familiar subjects."
+      },
+      "ja": {
+        "label": "年齢に合う趣味の交流会に参加する",
+        "description": "なじみの話題から新しい仲間を知る。"
+      },
+      "ko": {
+        "label": "나이에 맞는 취미 교류에 참여하기",
+        "description": "익숙한 주제로 새로운 친구를 알아간다."
+      }
+    },
+    "整理生活用品与常用联系信息": {
+      "sourceDescription": "让日常所需更容易找到和使用。",
+      "en": {
+        "label": "Organize everyday items and useful contact details",
+        "description": "Make what you need easier to find and use."
+      },
+      "ja": {
+        "label": "生活用品とよく使う連絡先を整理する",
+        "description": "日々必要なものを探しやすく、使いやすくする。"
+      },
+      "ko": {
+        "label": "생활용품과 자주 쓰는 연락처 정리하기",
+        "description": "일상에 필요한 것을 더 쉽게 찾고 쓰도록 한다."
+      }
+    },
+    "安排安静的阅读或创作": {
+      "sourceDescription": "给独处保留一项自己愿意做的事情。",
+      "en": {
+        "label": "Arrange quiet time for reading or creative work",
+        "description": "Keep something you enjoy doing during time alone."
+      },
+      "ja": {
+        "label": "静かに読書や創作をする",
+        "description": "一人の時間に、自分がやりたいことを一つ残す。"
+      },
+      "ko": {
+        "label": "조용한 독서나 창작 시간 마련하기",
+        "description": "혼자 있을 때 기꺼이 할 수 있는 활동 하나를 남긴다."
+      }
+    },
+    "和家人谈谈自己希望的生活": {
+      "sourceDescription": "明确需要帮助的部分，也保留自主决定的空间。",
+      "en": {
+        "label": "Tell your family how you want to live",
+        "description": "Specify where you need help while retaining your own decisions."
+      },
+      "ja": {
+        "label": "望む暮らしを家族に話す",
+        "description": "助けが必要な部分を明確にし、自分で決める余地も残す。"
+      },
+      "ko": {
+        "label": "원하는 생활을 가족과 이야기하기",
+        "description": "도움이 필요한 부분을 명확히 하고 스스로 결정할 여지도 남긴다."
+      }
+    },
+    "请可信的人陪着练习完整流程": {
+      "sourceDescription": "由自己操作，不急着记住所有功能。",
+      "en": {
+        "label": "Practice the whole process with someone you trust",
+        "description": "Operate it yourself without trying to remember every function at once."
+      },
+      "ja": {
+        "label": "信頼できる人と一連の操作を練習する",
+        "description": "自分で操作し、すべての機能を急いで覚えようとしない。"
+      },
+      "ko": {
+        "label": "믿을 수 있는 사람과 전체 절차 연습하기",
+        "description": "직접 조작하되 모든 기능을 서둘러 외우려 하지 않는다."
+      }
+    },
+    "整理常用操作的纸质提示": {
+      "sourceDescription": "把步骤、求助方式和容易出错的地方记清楚。",
+      "en": {
+        "label": "Make paper reminders for common operations",
+        "description": "Record the steps, ways to seek help and common mistakes clearly."
+      },
+      "ja": {
+        "label": "よく使う操作を紙にまとめる",
+        "description": "手順、助けを求める方法、間違えやすい点を明確に書く。"
+      },
+      "ko": {
+        "label": "자주 쓰는 조작을 종이 안내로 정리하기",
+        "description": "단계와 도움을 구하는 방법, 틀리기 쉬운 부분을 명확히 적는다."
+      }
+    },
+    "向服务方询问线下办理办法": {
+      "sourceDescription": "选择更适合自己的方式。",
+      "en": {
+        "label": "Ask the service provider about offline access",
+        "description": "Choose a way of handling it that suits you better."
+      },
+      "ja": {
+        "label": "窓口に対面で手続きする方法を尋ねる",
+        "description": "自分により合う方法を選ぶ。"
+      },
+      "ko": {
+        "label": "서비스 제공자에게 오프라인 처리 방법 묻기",
+        "description": "자신에게 더 적합한 방식을 고른다."
+      }
+    },
+    "与同龄朋友交换使用经验": {
+      "sourceDescription": "一起核实信息，避免把传闻当教程。",
+      "en": {
+        "label": "Exchange practical experience with friends your age",
+        "description": "Check information together instead of treating rumors as instructions."
+      },
+      "ja": {
+        "label": "同年代の友達と利用経験を交わす",
+        "description": "一緒に情報を確かめ、うわさを手引きにしないようにする。"
+      },
+      "ko": {
+        "label": "또래 친구와 이용 경험 나누기",
+        "description": "함께 정보를 확인하고 소문을 안내서처럼 믿지 않는다."
+      }
+    },
+    "减少非必要通知和功能": {
+      "sourceDescription": "保留真正有用的工具，让手机安静一些。",
+      "en": {
+        "label": "Reduce unnecessary notifications and features",
+        "description": "Keep useful tools and make your phone less distracting."
+      },
+      "ja": {
+        "label": "不要な通知や機能を減らす",
+        "description": "本当に役立つ道具を残し、携帯を少し静かにする。"
+      },
+      "ko": {
+        "label": "불필요한 알림과 기능 줄이기",
+        "description": "정말 유용한 도구만 남겨 휴대전화를 조금 조용하게 만든다."
+      }
+    },
+    "讲一个具体的人和一件具体的事": {
+      "sourceDescription": "把亲历与听说的部分分开。",
+      "en": {
+        "label": "Talk about one specific person and event",
+        "description": "Separate things you witnessed from things you heard about."
+      },
+      "ja": {
+        "label": "一人の人物と一つの出来事を具体的に話す",
+        "description": "自分が経験したことと聞いたことを分ける。"
+      },
+      "ko": {
+        "label": "구체적인 사람 한 명과 사건 하나 이야기하기",
+        "description": "직접 겪은 부분과 들은 부분을 구분한다."
+      }
+    },
+    "录一段只留给家人的声音": {
+      "sourceDescription": "保存自己的语气和想表达的内容。",
+      "en": {
+        "label": "Record a message just for your family",
+        "description": "Preserve your voice and what you want to say."
+      },
+      "ja": {
+        "label": "家族だけに残す音声を録る",
+        "description": "自分の声の調子と、伝えたい内容を残す。"
+      },
+      "ko": {
+        "label": "가족에게만 남길 음성 녹음하기",
+        "description": "자신의 말투와 표현하고 싶은 내용을 보존한다."
+      }
+    },
+    "整理照片并标注不确定之处": {
+      "sourceDescription": "不为了完整而补造细节。",
+      "en": {
+        "label": "Organize photographs and mark uncertain details",
+        "description": "Do not invent details just to fill gaps."
+      },
+      "ja": {
+        "label": "写真を整理し、不確かな点を記す",
+        "description": "完全な記録にするために細部を作り足さない。"
+      },
+      "ko": {
+        "label": "사진을 정리하고 불확실한 부분 표시하기",
+        "description": "완전한 기록을 만들려고 세부 사항을 지어내지 않는다."
+      }
+    },
+    "参加小范围的代际交流": {
+      "sourceDescription": "听年轻人的问题，也说自己的疑问。",
+      "en": {
+        "label": "Join a small discussion across generations",
+        "description": "Listen to younger people's questions and share your own."
+      },
+      "ja": {
+        "label": "少人数の世代間交流に参加する",
+        "description": "若い人の疑問を聞き、自分の疑問も話す。"
+      },
+      "ko": {
+        "label": "소규모 세대 간 교류에 참여하기",
+        "description": "젊은 사람들의 질문을 듣고 자신의 의문도 말한다."
+      }
+    },
+    "婉拒回忆，谈谈现在的爱好": {
+      "sourceDescription": "让相处围绕此刻愿意分享的生活展开。",
+      "en": {
+        "label": "Decline to revisit the past and discuss present interests",
+        "description": "Focus your time together on the life you want to share now."
+      },
+      "ja": {
+        "label": "思い出話は丁寧に断り、今の趣味を話す",
+        "description": "今分かち合いたい暮らしを中心に共に過ごす。"
+      },
+      "ko": {
+        "label": "회상은 정중히 사양하고 현재 취미 이야기하기",
+        "description": "지금 나누고 싶은 생활을 중심으로 함께 시간을 보낸다."
+      }
+    },
+    "列出希望被帮助的具体事情": {
+      "sourceDescription": "把协助与替自己决定分清楚。",
+      "en": {
+        "label": "List the specific things you want help with",
+        "description": "Distinguish assistance from having decisions made for you."
+      },
+      "ja": {
+        "label": "助けてほしいことを具体的に挙げる",
+        "description": "助けることと、代わりに決めることを区別する。"
+      },
+      "ko": {
+        "label": "도움받고 싶은 구체적인 일 적기",
+        "description": "도움을 주는 것과 대신 결정하는 것을 구분한다."
+      }
+    },
+    "共同整理一份联络与生活安排": {
+      "sourceDescription": "让需要支持时更容易找到合适的人。",
+      "en": {
+        "label": "Prepare a contact and daily-living plan together",
+        "description": "Make it easier to find the right person when you need support."
+      },
+      "ja": {
+        "label": "連絡と生活の予定を一緒に整理する",
+        "description": "支えが必要なとき、適した人を見つけやすくする。"
+      },
+      "ko": {
+        "label": "함께 연락과 생활 계획 정리하기",
+        "description": "지원이 필요할 때 적절한 사람을 더 쉽게 찾도록 한다."
+      }
+    },
+    "了解附近的日间活动或支持服务": {
+      "sourceDescription": "比较实际条件，不急着作长期承诺。",
+      "en": {
+        "label": "Explore nearby daytime activities and support services",
+        "description": "Compare actual conditions before making a long-term commitment."
+      },
+      "ja": {
+        "label": "近くの日中活動や支援サービスを調べる",
+        "description": "実際の条件を比べ、長期の約束を急がない。"
+      },
+      "ko": {
+        "label": "근처 주간 활동이나 지원 서비스 알아보기",
+        "description": "실제 조건을 비교하고 장기 약속은 서두르지 않는다."
+      }
+    },
+    "保留一项自己愿意独立完成的事务": {
+      "sourceDescription": "根据状态调整难度，维持参与感。",
+      "en": {
+        "label": "Keep one task you want to do independently",
+        "description": "Adjust its difficulty to your condition while staying involved."
+      },
+      "ja": {
+        "label": "自分でやりたい用事を一つ残す",
+        "description": "調子に合わせて難しさを変え、関わりを保つ。"
+      },
+      "ko": {
+        "label": "혼자 해내고 싶은 일 하나 유지하기",
+        "description": "상태에 따라 난이도를 조절하며 참여감을 유지한다."
+      }
+    },
+    "用一次共同活动缓和讨论": {
+      "sourceDescription": "在轻松相处中表达自己的想法。",
+      "en": {
+        "label": "Ease the discussion through a shared activity",
+        "description": "Express your views while spending relaxed time together."
+      },
+      "ja": {
+        "label": "一緒に活動し、話し合いの緊張を和らげる",
+        "description": "気軽に過ごしながら自分の考えを伝える。"
+      },
+      "ko": {
+        "label": "공동 활동으로 논의 분위기 부드럽게 하기",
+        "description": "편안하게 함께하며 자신의 생각을 표현한다."
+      }
+    },
+    "分享曾经有效也曾经失败的方法": {
+      "sourceDescription": "连同当时的条件一起说明。",
+      "en": {
+        "label": "Share methods that worked and methods that failed",
+        "description": "Explain the circumstances in which you tried them."
+      },
+      "ja": {
+        "label": "うまくいった方法も失敗した方法も伝える",
+        "description": "当時の条件も合わせて説明する。"
+      },
+      "ko": {
+        "label": "효과가 있었던 방법과 실패한 방법 나누기",
+        "description": "당시 조건도 함께 설명한다."
+      }
+    },
+    "陪对方分析当前真正的问题": {
+      "sourceDescription": "先倾听，不急着替别人选路。",
+      "en": {
+        "label": "Help the other person examine the real problem",
+        "description": "Listen before choosing a path on their behalf."
+      },
+      "ja": {
+        "label": "相手と今の本当の問題を考える",
+        "description": "まず耳を傾け、代わりに進路を決めようと急がない。"
+      },
+      "ko": {
+        "label": "상대와 현재의 진짜 문제 분석하기",
+        "description": "먼저 듣고 다른 사람의 길을 대신 고르려 서두르지 않는다."
+      }
+    },
+    "整理一份短小的经验笔记": {
+      "sourceDescription": "只留下仍能验证或值得讨论的部分。",
+      "en": {
+        "label": "Write a brief note about your experience",
+        "description": "Keep only what can still be checked or usefully discussed."
+      },
+      "ja": {
+        "label": "短い経験ノートをまとめる",
+        "description": "今も確かめられることや、話し合う価値のあることだけを残す。"
+      },
+      "ko": {
+        "label": "짧은 경험 노트 정리하기",
+        "description": "아직 검증할 수 있거나 논의할 가치가 있는 부분만 남긴다."
+      }
+    },
+    "请对方教自己一项新工具": {
+      "sourceDescription": "把单向请教变成互相学习。",
+      "en": {
+        "label": "Ask the other person to teach you a new tool",
+        "description": "Turn one-way advice into learning from each other."
+      },
+      "ja": {
+        "label": "新しい道具を一つ相手に教わる",
+        "description": "一方的な相談を、互いに学ぶ時間に変える。"
+      },
+      "ko": {
+        "label": "상대에게 새로운 도구 하나 배우기",
+        "description": "일방적인 조언 요청을 서로 배우는 시간으로 바꾼다."
+      }
+    },
+    "约定有限的交流时间": {
+      "sourceDescription": "愿意帮助，也保护自己的休息节奏。",
+      "en": {
+        "label": "Agree on a limited amount of time to talk",
+        "description": "Offer help while protecting your own rest."
+      },
+      "ja": {
+        "label": "交流する時間を限って約束する",
+        "description": "助ける気持ちを持ちつつ、自分の休息も守る。"
+      },
+      "ko": {
+        "label": "제한된 교류 시간 약속하기",
+        "description": "도움을 주면서도 자신의 휴식 리듬을 보호한다."
+      }
+    },
+    "梳理账单并取消不用的服务": {
+      "sourceDescription": "节约不影响基本生活的开支。",
+      "en": {
+        "label": "Review bills and cancel unused services",
+        "description": "Save on expenses without affecting basic needs."
+      },
+      "ja": {
+        "label": "請求書を整理し、使わないサービスを解約する",
+        "description": "基本的な生活に影響しない支出を節約する。"
+      },
+      "ko": {
+        "label": "청구서를 정리하고 안 쓰는 서비스 해지하기",
+        "description": "기본 생활에 지장이 없는 지출을 절약한다."
+      }
+    },
+    "把常用支出做成容易查看的记录": {
+      "sourceDescription": "让自己更清楚钱花在何处。",
+      "en": {
+        "label": "Keep an easy-to-read record of regular spending",
+        "description": "Make it clearer where your money goes."
+      },
+      "ja": {
+        "label": "よくある支出を見やすい記録にする",
+        "description": "何にお金を使っているか、自分で把握しやすくする。"
+      },
+      "ko": {
+        "label": "자주 하는 지출을 보기 쉬운 기록으로 만들기",
+        "description": "돈을 어디에 쓰는지 더 분명하게 이해한다."
+      }
+    },
+    "与可信的家人商量必要的支持": {
+      "sourceDescription": "明确自己的意愿与可接受的安排。",
+      "en": {
+        "label": "Discuss necessary support with trusted family members",
+        "description": "Make your wishes and acceptable arrangements clear."
+      },
+      "ja": {
+        "label": "信頼できる家族と必要な支援を相談する",
+        "description": "自分の意思と、受け入れられる方法を明確にする。"
+      },
+      "ko": {
+        "label": "믿을 수 있는 가족과 필요한 지원 상의하기",
+        "description": "자신의 의사와 받아들일 수 있는 방식을 명확히 한다."
+      }
+    },
+    "留出适当的活动与健康预算": {
+      "sourceDescription": "把生活质量纳入计划。",
+      "en": {
+        "label": "Keep an appropriate budget for activities and health",
+        "description": "Include quality of life in your plans."
+      },
+      "ja": {
+        "label": "活動と健康のための適切な予算を残す",
+        "description": "生活の質も計画に含める。"
+      },
+      "ko": {
+        "label": "적절한 활동 및 건강 예산 남겨 두기",
+        "description": "삶의 질을 계획에 포함한다."
+      }
+    },
+    "核实自己可申请的正规公共服务": {
+      "sourceDescription": "通过公开渠道了解条件与办理方式。",
+      "en": {
+        "label": "Check which established public services you qualify for",
+        "description": "Use public information to learn requirements and application procedures."
+      },
+      "ja": {
+        "label": "申請できる正規の公共サービスを確かめる",
+        "description": "公開された窓口から条件と手続き方法を知る。"
+      },
+      "ko": {
+        "label": "신청 가능한 정식 공공서비스 확인하기",
+        "description": "공개된 경로에서 조건과 신청 방법을 알아본다."
+      }
+    },
+    "听不同年龄居民讲实际需求": {
+      "sourceDescription": "把抽象立场还原成具体生活问题。",
+      "en": {
+        "label": "Listen to residents of different ages describe their needs",
+        "description": "Connect abstract positions to specific everyday problems."
+      },
+      "ja": {
+        "label": "いろいろな年齢の住民の実際の要望を聞く",
+        "description": "抽象的な立場を、具体的な暮らしの問題に戻して考える。"
+      },
+      "ko": {
+        "label": "다양한 연령 주민의 실제 필요 듣기",
+        "description": "추상적인 입장을 구체적인 생활 문제로 풀어 본다."
+      }
+    },
+    "整理一个与自己相关的小建议": {
+      "sourceDescription": "通过公开渠道询问办理与反馈方式。",
+      "en": {
+        "label": "Prepare a small suggestion relevant to you",
+        "description": "Ask through public channels how to submit it and receive feedback."
+      },
+      "ja": {
+        "label": "自分に関わる小さな提案をまとめる",
+        "description": "公開された窓口に手続きと回答の方法を尋ねる。"
+      },
+      "ko": {
+        "label": "자신과 관련된 작은 제안 정리하기",
+        "description": "공개된 경로로 처리 및 답변 방식을 문의한다."
+      }
+    },
+    "参加范围明确的社区事务": {
+      "sourceDescription": "从环境整理或活动协助做起。",
+      "en": {
+        "label": "Join a clearly defined community task",
+        "description": "Begin with tidying shared areas or helping at activities."
+      },
+      "ja": {
+        "label": "範囲の明確な地域活動に参加する",
+        "description": "環境の整理や催しの手伝いから始める。"
+      },
+      "ko": {
+        "label": "범위가 명확한 지역 일에 참여하기",
+        "description": "환경 정리나 활동 지원부터 시작한다."
+      }
+    },
+    "比较不同说法使用的证据": {
+      "sourceDescription": "不因为立场相近就省略核实。",
+      "en": {
+        "label": "Compare the evidence behind different claims",
+        "description": "Verify claims even when you agree with their position."
+      },
+      "ja": {
+        "label": "異なる説明が使う証拠を比べる",
+        "description": "立場が近いからといって確認を省かない。"
+      },
+      "ko": {
+        "label": "서로 다른 주장에 쓰인 증거 비교하기",
+        "description": "입장이 비슷하다는 이유로 확인을 생략하지 않는다."
+      }
+    },
+    "减少争论，先照顾家中安排": {
+      "sourceDescription": "保留自己的判断，把本月精力留给重要的人。",
+      "en": {
+        "label": "Argue less and attend to family arrangements first",
+        "description": "Keep your own judgment and spend this month's energy on important people."
+      },
+      "ja": {
+        "label": "議論を減らし、まず家の予定を整える",
+        "description": "自分の判断を保ち、今月の力を大切な人に使う。"
+      },
+      "ko": {
+        "label": "논쟁을 줄이고 집안일부터 돌보기",
+        "description": "자신의 판단을 유지하며 이번 달 힘을 소중한 사람들에게 쓴다."
+      }
+    },
+    "比较不同岗位的真实要求": {
+      "sourceDescription": "把工时、培训和通勤都列入考虑。",
+      "en": {
+        "label": "Compare the actual requirements of different jobs",
+        "description": "Consider hours, training and commuting together."
+      },
+      "ja": {
+        "label": "職種ごとの実際の要件を比べる",
+        "description": "勤務時間、研修、通勤をすべて考慮する。"
+      },
+      "ko": {
+        "label": "여러 직무의 실제 요건 비교하기",
+        "description": "근무 시간과 교육, 통근을 모두 고려한다."
+      }
+    },
+    "向从业者询问实际工作经验": {
+      "sourceDescription": "了解岗位之间的差异与转换难度。",
+      "en": {
+        "label": "Ask workers about their practical experience",
+        "description": "Learn how the roles differ and how difficult changing jobs might be."
+      },
+      "ja": {
+        "label": "働いている人に実務経験を聞く",
+        "description": "職種ごとの違いと、移る難しさを知る。"
+      },
+      "ko": {
+        "label": "현직자에게 실제 업무 경험 묻기",
+        "description": "직무 간 차이와 전환의 어려움을 알아본다."
+      }
+    },
+    "学习一项可迁移的基础技能": {
+      "sourceDescription": "优先练习数据处理、语言或设备基础。",
+      "en": {
+        "label": "Learn a transferable basic skill",
+        "description": "Start with data handling, language or basic equipment skills."
+      },
+      "ja": {
+        "label": "ほかの仕事にも活かせる基礎技能を一つ学ぶ",
+        "description": "データ処理、言語、機器の基礎を優先して練習する。"
+      },
+      "ko": {
+        "label": "다른 일에도 쓸 수 있는 기초 기술 하나 배우기",
+        "description": "데이터 처리와 언어, 장비 기초를 우선 연습한다."
+      }
+    },
+    "接一份范围明确的临时工作": {
+      "sourceDescription": "先增加当月收入，再评估长期适合程度。",
+      "en": {
+        "label": "Accept a clearly defined temporary job",
+        "description": "Add to this month's income, then judge its longer-term suitability."
+      },
+      "ja": {
+        "label": "範囲の明確な臨時の仕事を受ける",
+        "description": "まず今月の収入を増やし、その後で長期的に合うか考える。"
+      },
+      "ko": {
+        "label": "범위가 명확한 임시 일자리 맡기",
+        "description": "이번 달 수입을 먼저 늘린 뒤 장기적으로 맞는지 평가한다."
+      }
+    },
+    "围绕现有能力寻找本地机会": {
+      "sourceDescription": "保留生活支持网络，逐步调整方向。",
+      "en": {
+        "label": "Look for local opportunities using your existing abilities",
+        "description": "Keep your support network while gradually changing direction."
+      },
+      "ja": {
+        "label": "今ある能力に合う地元の機会を探す",
+        "description": "生活を支えるつながりを保ち、少しずつ方向を調整する。"
+      },
+      "ko": {
+        "label": "현재 능력으로 지역 기회 찾기",
+        "description": "생활 지원 관계망을 유지하며 방향을 점차 조절한다."
+      }
+    },
+    "阅读不同立场的短篇材料": {
+      "sourceDescription": "记录作者依据与自己尚未理解的部分。",
+      "en": {
+        "label": "Read short pieces from different perspectives",
+        "description": "Record the authors' evidence and what you still do not understand."
+      },
+      "ja": {
+        "label": "立場の異なる短い資料を読む",
+        "description": "著者の根拠と、自分がまだ理解していない部分を記録する。"
+      },
+      "ko": {
+        "label": "서로 다른 입장의 짧은 자료 읽기",
+        "description": "저자의 근거와 자신이 아직 이해하지 못한 부분을 기록한다."
+      }
+    },
+    "和愿意分享的居民聊旧街区": {
+      "sourceDescription": "把个人记忆与可核对资料分别保存。",
+      "en": {
+        "label": "Talk about the old neighborhood with willing residents",
+        "description": "Keep personal memories separate from checkable records."
+      },
+      "ja": {
+        "label": "話してくれる住民と昔の街の話をする",
+        "description": "個人の記憶と確認できる資料を分けて残す。"
+      },
+      "ko": {
+        "label": "기꺼이 나누려는 주민과 옛 동네 이야기하기",
+        "description": "개인의 기억과 대조 가능한 자료를 따로 보존한다."
+      }
+    },
+    "用步行认识熟悉街区的细节": {
+      "sourceDescription": "观察建筑、商店与公共空间的使用。",
+      "en": {
+        "label": "Walk through familiar streets and notice the details",
+        "description": "Observe how buildings, shops and public spaces are used."
+      },
+      "ja": {
+        "label": "歩いて身近な街の細部を知る",
+        "description": "建物、店、公共空間の使われ方を観察する。"
+      },
+      "ko": {
+        "label": "걸어서 익숙한 동네의 세부 모습 알아보기",
+        "description": "건물과 가게, 공공 공간이 쓰이는 모습을 관찰한다."
+      }
+    },
+    "写一段自己的生活观察": {
+      "sourceDescription": "关注具体的人和事，避免替所有人发言。",
+      "en": {
+        "label": "Write your own observation of everyday life",
+        "description": "Focus on specific people and events without speaking for everyone."
+      },
+      "ja": {
+        "label": "自分の暮らしの観察を短く書く",
+        "description": "具体的な人や出来事に目を向け、全員を代弁しないようにする。"
+      },
+      "ko": {
+        "label": "자신의 생활 관찰 짧게 쓰기",
+        "description": "구체적인 사람과 일에 주목하며 모두를 대신해 말하지 않는다."
+      }
+    },
+    "选一本与政治无关的书放松": {
+      "sourceDescription": "让阅读也有单纯的愉快。",
+      "en": {
+        "label": "Relax with a book unrelated to politics",
+        "description": "Let reading be enjoyable in its own right."
+      },
+      "ja": {
+        "label": "政治と関係のない本を選んでくつろぐ",
+        "description": "読書の素朴な楽しみも大切にする。"
+      },
+      "ko": {
+        "label": "정치와 무관한 책을 골라 쉬기",
+        "description": "독서에도 순수한 즐거움이 있도록 한다."
+      }
+    },
+    "确认通知内容与适用范围": {
+      "sourceDescription": "不懂的词和流程向可靠窗口询问。",
+      "en": {
+        "label": "Confirm what the notice says and where it applies",
+        "description": "Ask a reliable service desk about unfamiliar terms and procedures."
+      },
+      "ja": {
+        "label": "通知の内容と適用範囲を確認する",
+        "description": "分からない言葉や手順は、信頼できる窓口に尋ねる。"
+      },
+      "ko": {
+        "label": "공지 내용과 적용 범위 확인하기",
+        "description": "모르는 단어나 절차는 믿을 수 있는 창구에 문의한다."
+      }
+    },
+    "参与一次可承担的社区活动": {
+      "sourceDescription": "做一项时间与职责都明确的小事。",
+      "en": {
+        "label": "Join a community activity you can manage",
+        "description": "Do a small task with clearly defined hours and responsibilities."
+      },
+      "ja": {
+        "label": "無理なく参加できる地域活動に加わる",
+        "description": "時間と役割が明確な小さな仕事をする。"
+      },
+      "ko": {
+        "label": "감당할 수 있는 지역 활동에 참여하기",
+        "description": "시간과 책임이 명확한 작은 일을 한다."
+      }
+    },
+    "询问居民实际关心的问题": {
+      "sourceDescription": "从垃圾分类、噪音和公共空间的具体经验谈起。",
+      "en": {
+        "label": "Ask what local residents actually care about",
+        "description": "Start with their experiences of waste sorting, noise and shared space."
+      },
+      "ja": {
+        "label": "住民が実際に気にかける問題を尋ねる",
+        "description": "ごみの分別、騒音、公共空間の具体的な経験から話す。"
+      },
+      "ko": {
+        "label": "주민이 실제로 관심 있는 문제 묻기",
+        "description": "쓰레기 분리배출과 소음, 공공 공간의 구체적 경험부터 이야기한다."
+      }
+    },
+    "整理对自己有用的联系信息": {
+      "sourceDescription": "把公开服务与个人生活安排连接起来。",
+      "en": {
+        "label": "Organize contact details that are useful to you",
+        "description": "Connect available public services with your everyday arrangements."
+      },
+      "ja": {
+        "label": "自分に役立つ連絡先を整理する",
+        "description": "公共サービスを自分の生活の予定につなげる。"
+      },
+      "ko": {
+        "label": "자신에게 유용한 연락처 정리하기",
+        "description": "공공서비스와 개인 생활 계획을 연결한다."
+      }
+    },
+    "说明目前无法投入额外时间": {
+      "sourceDescription": "保持礼貌联系，先处理既有责任。",
+      "en": {
+        "label": "Explain that you cannot give extra time at present",
+        "description": "Stay in polite contact while meeting existing responsibilities."
+      },
+      "ja": {
+        "label": "今は追加の時間を割けないと伝える",
+        "description": "丁寧な付き合いを保ち、まず今の責任を果たす。"
+      },
+      "ko": {
+        "label": "현재 추가 시간을 낼 수 없다고 설명하기",
+        "description": "예의 있게 연락을 유지하며 기존 책임부터 처리한다."
+      }
+    },
+    "记录一周实际花在通勤上的时间": {
+      "sourceDescription": "把疲劳与交通费用一起纳入判断。",
+      "en": {
+        "label": "Record a week's actual commuting time",
+        "description": "Consider fatigue alongside transport costs."
+      },
+      "ja": {
+        "label": "一週間の実際の通勤時間を記録する",
+        "description": "疲労と交通費も合わせて判断する。"
+      },
+      "ko": {
+        "label": "일주일 동안 실제 통근 시간 기록하기",
+        "description": "피로와 교통비를 함께 고려해 판단한다."
+      }
+    },
+    "与相关人员协商时间安排": {
+      "sourceDescription": "提出范围清楚、能够评估的调整方式。",
+      "en": {
+        "label": "Negotiate timing with the people involved",
+        "description": "Propose a clearly scoped adjustment that can be evaluated."
+      },
+      "ja": {
+        "label": "関係者と時間の調整を相談する",
+        "description": "範囲が明確で、評価できる変更を提案する。"
+      },
+      "ko": {
+        "label": "관련자와 시간 조정 협의하기",
+        "description": "범위가 분명하고 평가 가능한 조정 방식을 제안한다."
+      }
+    },
+    "了解本地其他岗位的条件": {
+      "sourceDescription": "核对资格、职责与报酬，不急着离开现有安排。",
+      "en": {
+        "label": "Find out about other local positions",
+        "description": "Check qualifications, duties and pay before leaving your current arrangement."
+      },
+      "ja": {
+        "label": "地元のほかの仕事の条件を調べる",
+        "description": "資格、責任、報酬を確認し、今の仕事を急いで離れない。"
+      },
+      "ko": {
+        "label": "지역의 다른 직무 조건 알아보기",
+        "description": "자격과 책임, 보수를 확인하고 현재 자리를 서둘러 떠나지 않는다."
+      }
+    },
+    "利用一段固定时间学习": {
+      "sourceDescription": "以语言、专业基础或职业能力为小目标。",
+      "en": {
+        "label": "Set aside a regular period for learning",
+        "description": "Choose a small goal in language, professional basics or job skills."
+      },
+      "ja": {
+        "label": "決まった時間を学習に使う",
+        "description": "語学、専門の基礎、職業能力を小さな目標にする。"
+      },
+      "ko": {
+        "label": "정해진 시간을 학습에 쓰기",
+        "description": "언어와 전공 기초, 직업 능력을 작은 목표로 삼는다."
+      }
+    },
+    "把一个空闲时段留给生活": {
+      "sourceDescription": "在附近散步、做饭或与朋友相处。",
+      "en": {
+        "label": "Leave a free period for everyday life",
+        "description": "Walk nearby, cook or spend time with friends."
+      },
+      "ja": {
+        "label": "空いた時間を一つ、暮らしのために残す",
+        "description": "近所を散歩したり、料理をしたり、友達と過ごしたりする。"
+      },
+      "ko": {
+        "label": "빈 시간 한 구간을 생활에 남기기",
+        "description": "근처에서 산책하고 요리하거나 친구와 시간을 보낸다."
+      }
+    },
+    "查阅本地公开的避难与联络信息": {
+      "sourceDescription": "记住可靠的信息渠道与需要核实的问题。",
+      "en": {
+        "label": "Read local public information on shelter and contact points",
+        "description": "Note reliable information channels and questions that need checking."
+      },
+      "ja": {
+        "label": "地元で公開されている避難と連絡の情報を調べる",
+        "description": "信頼できる情報源と、確認が必要な点を覚えておく。"
+      },
+      "ko": {
+        "label": "지역에 공개된 대피 및 연락 정보 확인하기",
+        "description": "믿을 만한 정보 경로와 확인해야 할 문제를 기억해 둔다."
+      }
+    },
+    "和家人商量失联时如何联系": {
+      "sourceDescription": "建立简单、人人理解的约定。",
+      "en": {
+        "label": "Agree with your family how to reconnect if contact is lost",
+        "description": "Make a simple arrangement everyone understands."
+      },
+      "ja": {
+        "label": "連絡が途絶えたときの方法を家族と相談する",
+        "description": "簡単で、全員が理解できる約束を決める。"
+      },
+      "ko": {
+        "label": "연락이 끊겼을 때 방법을 가족과 상의하기",
+        "description": "간단하고 모두가 이해할 수 있는 약속을 만든다."
+      }
+    },
+    "检查已有用品是否便于取用": {
+      "sourceDescription": "按实际需求整理，不重复囤购。",
+      "en": {
+        "label": "Check whether existing supplies are easy to reach",
+        "description": "Organize around actual needs without buying duplicate stock."
+      },
+      "ja": {
+        "label": "今ある用品を取り出しやすいか確かめる",
+        "description": "実際の必要に合わせて整理し、重複して買い込まない。"
+      },
+      "ko": {
+        "label": "기존 물품을 꺼내 쓰기 쉬운지 확인하기",
+        "description": "실제 필요에 맞춰 정리하고 중복해서 사재기하지 않는다."
+      }
+    },
+    "参加适龄、正规的社区说明活动": {
+      "sourceDescription": "认识工作人员与邻里支持方式。",
+      "en": {
+        "label": "Attend an official community briefing suited to your age",
+        "description": "Get to know staff and neighborhood support arrangements."
+      },
+      "ja": {
+        "label": "年齢に合う正式な地域説明会に参加する",
+        "description": "担当者と、近所で支え合う方法を知る。"
+      },
+      "ko": {
+        "label": "나이에 맞는 정식 지역 설명 활동 참여하기",
+        "description": "담당자와 이웃 지원 방식을 알아본다."
+      }
+    },
+    "整理必要文件的个人备份": {
+      "sourceDescription": "注意保管，只保存自己确实需要的信息。",
+      "en": {
+        "label": "Make personal backups of necessary documents",
+        "description": "Keep them secure and retain only information you actually need."
+      },
+      "ja": {
+        "label": "必要書類の個人用控えを整える",
+        "description": "保管に気を配り、本当に必要な情報だけを残す。"
+      },
+      "ko": {
+        "label": "필요 서류의 개인용 사본 정리하기",
+        "description": "보관에 주의하고 정말 필요한 정보만 저장한다."
+      }
+    },
+    "参加项目的技术讨论": {
+      "sourceDescription": "先核对问题与资料，谈清楚自己能够承担的部分。",
+      "en": {
+        "label": "Join the project's technical discussion",
+        "description": "Check the questions and evidence, then clarify what you can take on."
+      },
+      "ja": {
+        "label": "事業の技術的な話し合いに参加する",
+        "description": "まず課題と資料を確かめ、自分が担当できる部分を明確にする。"
+      },
+      "ko": {
+        "label": "프로젝트의 기술 논의 참여하기",
+        "description": "문제와 자료부터 확인하고 자신이 맡을 수 있는 부분을 분명히 한다."
+      }
+    },
+    "请求在家完成一部分工作": {
+      "sourceDescription": "为照顾现有生活，先从资料和计算开始。",
+      "en": {
+        "label": "Ask to do part of the work from home",
+        "description": "Start with documents and calculations to fit your existing life."
+      },
+      "ja": {
+        "label": "仕事の一部を在宅で行いたいと頼む",
+        "description": "今の暮らしを大切にし、まず資料整理と計算から始める。"
+      },
+      "ko": {
+        "label": "일부 업무를 집에서 하도록 요청하기",
+        "description": "기존 생활을 돌보기 위해 자료와 계산부터 시작한다."
+      }
+    },
+    "把时间留给原来的计划": {
+      "sourceDescription": "礼貌回信，继续完成手边更紧迫的事情。",
+      "en": {
+        "label": "Keep your time for the original plan",
+        "description": "Reply politely and continue the more urgent work already at hand."
+      },
+      "ja": {
+        "label": "元の計画のために時間を残す",
+        "description": "丁寧に返事をし、手元のより急ぐ仕事を続ける。"
+      },
+      "ko": {
+        "label": "원래 계획에 시간 남기기",
+        "description": "정중히 답장하고 당장 더 급한 일을 계속 마친다."
+      }
+    },
+    "认真准备并递交申请": {
+      "sourceDescription": "把作品、成绩与生活安排写清楚。",
+      "en": {
+        "label": "Prepare carefully and submit an application",
+        "description": "Describe your work, achievements and living arrangements clearly."
+      },
+      "ja": {
+        "label": "丁寧に準備して申請する",
+        "description": "作品、成績、生活の予定を分かりやすく書く。"
+      },
+      "ko": {
+        "label": "충실히 준비하고 신청서 제출하기",
+        "description": "작품과 성적, 생활 계획을 명확히 적는다."
+      }
+    },
+    "请熟悉你的人提出建议": {
+      "sourceDescription": "听完意见后再修改材料。",
+      "en": {
+        "label": "Ask someone who knows you for advice",
+        "description": "Hear their views before revising the material."
+      },
+      "ja": {
+        "label": "自分をよく知る人に助言を求める",
+        "description": "意見を聞いてから資料を直す。"
+      },
+      "ko": {
+        "label": "자신을 잘 아는 사람에게 조언 구하기",
+        "description": "의견을 들은 뒤 자료를 수정한다."
+      }
+    },
+    "先完成正在进行的学习": {
+      "sourceDescription": "待成果更完整时再寻找机会。",
+      "en": {
+        "label": "Finish your current studies first",
+        "description": "Look for opportunities once your work is more complete."
+      },
+      "ja": {
+        "label": "今取り組んでいる学習を先に終える",
+        "description": "成果がよりまとまってから、機会を探す。"
+      },
+      "ko": {
+        "label": "진행 중인 학습부터 마치기",
+        "description": "성과가 더 완성된 뒤 기회를 찾는다."
+      }
+    },
+    "参与前期调查": {
+      "sourceDescription": "亲自了解租金、需求和真实的经营状况。",
+      "en": {
+        "label": "Join the preliminary research",
+        "description": "Check rent, demand and actual business conditions in person."
+      },
+      "ja": {
+        "label": "事前調査に参加する",
+        "description": "賃料、需要、実際の経営状況を自分で調べる。"
+      },
+      "ko": {
+        "label": "사전 조사에 참여하기",
+        "description": "임대료와 수요, 실제 운영 상황을 직접 알아본다."
+      }
+    },
+    "小额参与并划清责任": {
+      "sourceDescription": "留下生活储备，将合作条件逐项写明。",
+      "en": {
+        "label": "Make a small contribution with clear responsibilities",
+        "description": "Keep reserves for living costs and record each condition of cooperation."
+      },
+      "ja": {
+        "label": "少額で参加し、責任を明確に分ける",
+        "description": "生活費の備えを残し、協力条件を一つずつ書く。"
+      },
+      "ko": {
+        "label": "소액으로 참여하고 책임 구분하기",
+        "description": "생활비 비축분을 남기고 협업 조건을 항목별로 명시한다."
+      }
+    },
+    "暂时保留家庭储蓄": {
+      "sourceDescription": "先照顾眼前的支出和家人的安排。",
+      "en": {
+        "label": "Preserve the family's savings for now",
+        "description": "Attend to immediate expenses and family arrangements first."
+      },
+      "ja": {
+        "label": "今は家族の貯蓄を残す",
+        "description": "目の前の支出と、家族の予定を先に考える。"
+      },
+      "ko": {
+        "label": "당분간 가족 저축 유지하기",
+        "description": "당장의 지출과 가족의 계획부터 챙긴다."
+      }
+    },
+    "为家人安排合适的照护": {
+      "sourceDescription": "先了解需要，再核对服务与费用。",
+      "en": {
+        "label": "Arrange suitable care for a family member",
+        "description": "Understand the need before checking services and costs."
+      },
+      "ja": {
+        "label": "家族に合う世話や介護を手配する",
+        "description": "まず必要を把握し、それからサービスと費用を確かめる。"
+      },
+      "ko": {
+        "label": "가족에게 알맞은 돌봄 마련하기",
+        "description": "필요부터 파악한 뒤 서비스와 비용을 확인한다."
+      }
+    },
+    "亲自分担一部分家务": {
+      "sourceDescription": "把陪伴落实到每周的安排中。",
+      "en": {
+        "label": "Do part of the housework yourself",
+        "description": "Make your support part of the weekly schedule."
+      },
+      "ja": {
+        "label": "家事の一部を自分で担う",
+        "description": "家族と過ごすことを、毎週の予定に具体的に組み込む。"
+      },
+      "ko": {
+        "label": "집안일 일부 직접 나누어 맡기",
+        "description": "함께하는 시간을 매주 일정에 구체적으로 반영한다."
+      }
+    },
+    "留出应急储蓄": {
+      "sourceDescription": "与家人商量未来几个月的支出。",
+      "en": {
+        "label": "Set aside emergency savings",
+        "description": "Discuss spending over the next few months with your family."
+      },
+      "ja": {
+        "label": "緊急時の貯蓄を残す",
+        "description": "これから数か月の支出を家族と相談する。"
+      },
+      "ko": {
+        "label": "비상 저축 남겨 두기",
+        "description": "가족과 앞으로 몇 달의 지출을 상의한다."
+      }
+    },
+    "参加远足，提前检查用品": {
+      "sourceDescription": "量力安排路程，和同伴确认联络方式。",
+      "en": {
+        "label": "Join the hike and check your supplies beforehand",
+        "description": "Choose a manageable distance and confirm contact arrangements with companions."
+      },
+      "ja": {
+        "label": "遠足に参加し、事前に用品を確かめる",
+        "description": "体力に合う行程を決め、仲間と連絡方法を確認する。"
+      },
+      "ko": {
+        "label": "하이킹에 참여하고 용품 미리 확인하기",
+        "description": "체력에 맞춰 경로를 정하고 동행인과 연락 방법을 확인한다."
+      }
+    },
+    "选择较短的一段同行": {
+      "sourceDescription": "把体力留在舒适的范围内。",
+      "en": {
+        "label": "Join for a shorter part of the journey",
+        "description": "Keep the physical effort within a comfortable range."
+      },
+      "ja": {
+        "label": "短い区間だけ一緒に歩く",
+        "description": "無理のない範囲で体力を使う。"
+      },
+      "ko": {
+        "label": "짧은 구간만 동행하기",
+        "description": "체력을 편안하게 감당할 수 있는 범위에 둔다."
+      }
+    },
+    "这个月继续日常训练": {
+      "sourceDescription": "不改变作息，保持规律。",
+      "en": {
+        "label": "Continue your regular training this month",
+        "description": "Keep a consistent routine without changing your schedule."
+      },
+      "ja": {
+        "label": "今月も日々のトレーニングを続ける",
+        "description": "生活時間を変えず、規則正しく続ける。"
+      },
+      "ko": {
+        "label": "이번 달도 일상 훈련 계속하기",
+        "description": "생활 리듬을 바꾸지 않고 규칙성을 유지한다."
+      }
+    },
+    "参加几次合练": {
+      "sourceDescription": "先熟悉节奏和队友。",
+      "en": {
+        "label": "Attend a few group practice sessions",
+        "description": "Get used to the pace and your teammates first."
+      },
+      "ja": {
+        "label": "合同練習に数回参加する",
+        "description": "まずリズムと仲間に慣れる。"
+      },
+      "ko": {
+        "label": "합동 연습에 몇 차례 참여하기",
+        "description": "먼저 리듬과 팀원들에게 익숙해진다."
+      }
+    },
+    "帮忙安排训练与联络": {
+      "sourceDescription": "把自己的经验用于照顾大家的日常安排。",
+      "en": {
+        "label": "Help organize practice and communication",
+        "description": "Use your experience to support everyone's daily arrangements."
+      },
+      "ja": {
+        "label": "練習と連絡の手配を手伝う",
+        "description": "自分の経験を、みんなの日々の予定を整えるために使う。"
+      },
+      "ko": {
+        "label": "훈련 일정과 연락 돕기",
+        "description": "자신의 경험으로 모두의 일상 일정을 돌본다."
+      }
+    },
+    "继续独自运动": {
+      "sourceDescription": "把身体状态放在成绩之前。",
+      "en": {
+        "label": "Keep exercising on your own",
+        "description": "Put your physical condition ahead of performance."
+      },
+      "ja": {
+        "label": "一人での運動を続ける",
+        "description": "成績より体の調子を優先する。"
+      },
+      "ko": {
+        "label": "혼자 운동 계속하기",
+        "description": "성적보다 몸 상태를 우선한다."
+      }
+    },
+    "参加拍摄并讲述自己的日常": {
+      "sourceDescription": "选择愿意公开的片段，与对方确认用途。",
+      "en": {
+        "label": "Join the filming and talk about everyday life",
+        "description": "Choose what you wish to share and confirm how it will be used."
+      },
+      "ja": {
+        "label": "撮影に参加し、自分の日常を話す",
+        "description": "公開してもよい場面を選び、相手と用途を確認する。"
+      },
+      "ko": {
+        "label": "촬영에 참여하고 자신의 일상 이야기하기",
+        "description": "공개하고 싶은 장면을 고르고 상대와 용도를 확인한다."
+      }
+    },
+    "邀请家人一起留影": {
+      "sourceDescription": "把这次机会留作共同的纪念。",
+      "en": {
+        "label": "Invite your family to take photographs together",
+        "description": "Use the opportunity to make a shared keepsake."
+      },
+      "ja": {
+        "label": "家族を一緒の記念撮影に誘う",
+        "description": "この機会をみんなの思い出として残す。"
+      },
+      "ko": {
+        "label": "가족과 함께 기념사진 찍기",
+        "description": "이번 기회를 함께하는 추억으로 남긴다."
+      }
+    },
+    "婉拒公开拍摄": {
+      "sourceDescription": "照常生活，保留自己的私人空间。",
+      "en": {
+        "label": "Politely decline public filming",
+        "description": "Carry on as usual and keep your private space."
+      },
+      "ja": {
+        "label": "公開撮影を丁寧に断る",
+        "description": "普段どおり暮らし、自分の私的な空間を守る。"
+      },
+      "ko": {
+        "label": "공개 촬영 정중히 거절하기",
+        "description": "평소대로 생활하며 자신의 사적인 공간을 지킨다."
+      }
+    },
+    "接受邀请，仔细准备材料": {
+      "sourceDescription": "用具体经历说明事情，不夸大自己的贡献。",
+      "en": {
+        "label": "Accept the invitation and prepare carefully",
+        "description": "Use specific experiences without exaggerating your contribution."
+      },
+      "ja": {
+        "label": "招待を受け、資料を丁寧に準備する",
+        "description": "具体的な経験で説明し、自分の貢献を大げさにしない。"
+      },
+      "ko": {
+        "label": "초대를 수락하고 자료 꼼꼼히 준비하기",
+        "description": "구체적인 경험으로 설명하고 자신의 기여를 과장하지 않는다."
+      }
+    },
+    "请伙伴一起上台": {
+      "sourceDescription": "分担准备，让不同经历都能被听到。",
+      "en": {
+        "label": "Ask your companions to join you on stage",
+        "description": "Share the preparation and let different experiences be heard."
+      },
+      "ja": {
+        "label": "仲間を一緒に登壇するよう誘う",
+        "description": "準備を分担し、さまざまな経験が伝わるようにする。"
+      },
+      "ko": {
+        "label": "동료에게 함께 무대에 서자고 제안하기",
+        "description": "준비를 나누어 맡아 서로 다른 경험이 들리게 한다."
+      }
+    },
+    "只承担幕后准备": {
+      "sourceDescription": "把资料与现场安排处理妥当。",
+      "en": {
+        "label": "Handle only the behind-the-scenes preparation",
+        "description": "Put the documents and practical arrangements in order."
+      },
+      "ja": {
+        "label": "裏方の準備だけを引き受ける",
+        "description": "資料と現場の手配をきちんと整える。"
+      },
+      "ko": {
+        "label": "무대 뒤 준비만 맡기",
+        "description": "자료와 현장 일정을 제대로 정리한다."
+      }
+    },
+    "核实本地通知，调整这个月的安排": {
+      "sourceDescription": "通过可靠渠道了解实际适用的生活与公共服务安排。",
+      "en": {
+        "label": "Verify local notices and adjust this month's plans",
+        "description": "Use reliable channels to check which living and public-service arrangements apply."
+      },
+      "ja": {
+        "label": "地域の通知を確かめ、今月の予定を調整する",
+        "description": "信頼できる窓口で、暮らしや公共サービスに実際に適用される決まりを確認する。"
+      },
+      "ko": {
+        "label": "지역 공지를 확인하고 이달의 일정을 조정하기",
+        "description": "믿을 만한 경로로 실제 적용되는 생활 및 공공서비스 방침을 확인한다."
+      }
+    },
+    "和家人商量照护与联络": {
+      "sourceDescription": "明确需要帮助的人与可分担的日常事务。",
+      "en": {
+        "label": "Discuss care and communication with your family",
+        "description": "Identify who needs help and which daily tasks can be shared."
+      },
+      "ja": {
+        "label": "家族と世話や連絡の方法を相談する",
+        "description": "助けが必要な人と、分担できる日々の用事をはっきりさせる。"
+      },
+      "ko": {
+        "label": "가족과 돌봄 및 연락 방법을 의논하기",
+        "description": "도움이 필요한 사람과 나눠 맡을 일상 업무를 분명히 한다."
+      }
+    },
+    "把可远程完成的工作或学习搬到线上": {
+      "sourceDescription": "试着维持有限而具体的进度。",
+      "en": {
+        "label": "Move suitable work or study online",
+        "description": "Try to maintain limited, concrete progress remotely."
+      },
+      "ja": {
+        "label": "遠隔でできる仕事や勉強をオンラインに移す",
+        "description": "範囲を絞り、具体的な作業を少しずつ進める。"
+      },
+      "ko": {
+        "label": "원격으로 가능한 일과 공부를 온라인으로 옮기기",
+        "description": "작고 구체적인 진도를 유지해 본다."
+      }
+    },
+    "参与自己能承担的社区互助": {
+      "sourceDescription": "协助整理信息或对接正规服务，避免过度承担。",
+      "en": {
+        "label": "Join community support you can manage",
+        "description": "Help organize information or connect people with formal services without overcommitting."
+      },
+      "ja": {
+        "label": "自分にできる地域の助け合いに加わる",
+        "description": "情報整理や公的サービスとの連絡を手伝い、引き受けすぎないようにする。"
+      },
+      "ko": {
+        "label": "감당할 수 있는 지역 상호부조에 참여하기",
+        "description": "정보 정리나 공식 서비스 연결을 돕되 무리하게 떠맡지 않는다."
+      }
+    },
+    "按实际需要补充家庭日用品": {
+      "sourceDescription": "核对已有储备，把预算留给确实缺少的东西。",
+      "en": {
+        "label": "Replenish household supplies according to actual need",
+        "description": "Check existing reserves and spend on what is genuinely missing."
+      },
+      "ja": {
+        "label": "実際に必要な日用品を補充する",
+        "description": "今ある備蓄を確かめ、本当に足りない物に予算を回す。"
+      },
+      "ko": {
+        "label": "실제 필요에 맞춰 생활용품 보충하기",
+        "description": "기존 비축품을 확인하고 정말 부족한 물품에 예산을 쓴다."
+      }
+    },
+    "记录这段时间的真实生活": {
+      "sourceDescription": "保留可核实的经历与尚不确定的消息。",
+      "en": {
+        "label": "Record what everyday life is actually like",
+        "description": "Preserve verifiable experiences and mark uncertain reports separately."
+      },
+      "ja": {
+        "label": "この時期の実際の暮らしを記録する",
+        "description": "確かめられる経験と、まだ不確かな知らせを分けて残す。"
+      },
+      "ko": {
+        "label": "이 시기의 실제 생활을 기록하기",
+        "description": "확인 가능한 경험과 아직 불확실한 소식을 구분해 남긴다."
+      }
+    },
+    "先听清不同参与者的具体诉求": {
+      "sourceDescription": "关注工作、生活与公共服务问题，避免只用标签判断。",
+      "en": {
+        "label": "Listen to what different participants are asking for",
+        "description": "Focus on work, living conditions and services rather than judging by labels alone."
+      },
+      "ja": {
+        "label": "さまざまな参加者の具体的な要求を聞く",
+        "description": "仕事、暮らし、公共サービスの問題に目を向け、肩書きだけで判断しない。"
+      },
+      "ko": {
+        "label": "다양한 참여자들의 구체적인 요구부터 듣기",
+        "description": "일과 생활, 공공서비스 문제에 주목하고 꼬리표만으로 판단하지 않는다."
+      }
+    },
+    "通过合适的公开渠道表达个人意见": {
+      "sourceDescription": "把诉求写具体，由自己决定愿意公开的范围。",
+      "en": {
+        "label": "Express your views through suitable public channels",
+        "description": "Make your requests specific and decide how much you wish to make public."
+      },
+      "ja": {
+        "label": "適切な公開窓口を通じて自分の意見を伝える",
+        "description": "要望を具体的に書き、どこまで公にするかは自分で決める。"
+      },
+      "ko": {
+        "label": "적절한 공개 경로로 자신의 의견을 표현하기",
+        "description": "요구를 구체적으로 쓰고 공개할 범위는 스스로 정한다."
+      }
+    },
+    "与家人重新安排出行和联络": {
+      "sourceDescription": "根据可信信息照顾日常需要。",
+      "en": {
+        "label": "Rearrange travel and communication with your family",
+        "description": "Use reliable information to meet daily needs."
+      },
+      "ja": {
+        "label": "家族と外出や連絡の予定を組み直す",
+        "description": "信頼できる情報をもとに、日常の必要を満たす。"
+      },
+      "ko": {
+        "label": "가족과 외출 및 연락 계획을 다시 세우기",
+        "description": "믿을 수 있는 정보에 따라 일상의 필요를 돌본다."
+      }
+    },
+    "核实消息并保留审慎的观察记录": {
+      "sourceDescription": "区分现场见闻、转述与未经确认的说法。",
+      "en": {
+        "label": "Verify reports and keep careful observation notes",
+        "description": "Separate firsthand observations, retellings and unconfirmed claims."
+      },
+      "ja": {
+        "label": "知らせを確かめ、慎重に観察を記録する",
+        "description": "現場で見聞きしたこと、伝聞、未確認の話を分ける。"
+      },
+      "ko": {
+        "label": "소식을 확인하고 신중한 관찰 기록을 남기기",
+        "description": "현장에서 보고 들은 일, 전해 들은 말, 미확인 주장을 구분한다."
+      }
+    },
+    "为受影响的邻里提供有限帮助": {
+      "sourceDescription": "从时间、信息或日常照护中选择自己能承担的一项。",
+      "en": {
+        "label": "Offer limited help to affected neighbors",
+        "description": "Choose manageable help with time, information or everyday care."
+      },
+      "ja": {
+        "label": "影響を受けた近隣の人を限られた範囲で助ける",
+        "description": "時間、情報、日常の世話から、自分にできることを一つ選ぶ。"
+      },
+      "ko": {
+        "label": "영향을 받은 이웃에게 한정된 도움을 제공하기",
+        "description": "시간과 정보, 일상 돌봄 중 감당할 수 있는 한 가지를 고른다."
+      }
+    },
+    "暂时减少公共讨论，稳住个人生活": {
+      "sourceDescription": "尊重自己的承受能力，继续工作、学习或休息。",
+      "en": {
+        "label": "Reduce public discussion and stabilize your own life",
+        "description": "Respect your limits and continue working, studying or resting."
+      },
+      "ja": {
+        "label": "公の議論を減らし、自分の暮らしを整える",
+        "description": "自分の限度を尊重し、仕事、勉強、休息を続ける。"
+      },
+      "ko": {
+        "label": "공개 토론을 줄이고 개인 생활을 안정시키기",
+        "description": "자신의 한계를 존중하며 일, 공부 또는 휴식을 이어간다."
+      }
+    },
+    "安排家庭联络与必要生活支出": {
+      "sourceDescription": "根据所在地的可靠信息处理眼前事务。",
+      "en": {
+        "label": "Arrange family contact and essential living expenses",
+        "description": "Handle immediate matters using reliable local information."
+      },
+      "ja": {
+        "label": "家族との連絡と必要な生活費を手配する",
+        "description": "所在地の信頼できる情報をもとに、目の前の用事を進める。"
+      },
+      "ko": {
+        "label": "가족 연락과 필수 생활비를 마련하기",
+        "description": "거주 지역의 믿을 만한 정보에 따라 당장 필요한 일을 처리한다."
+      }
+    },
+    "核实交通与公共服务的变化": {
+      "sourceDescription": "只采用已确认、与自己确实相关的信息。",
+      "en": {
+        "label": "Check changes to transport and public services",
+        "description": "Use only confirmed information that actually concerns you."
+      },
+      "ja": {
+        "label": "交通や公共サービスの変更を確認する",
+        "description": "確かめられた情報のうち、自分に関係するものだけを使う。"
+      },
+      "ko": {
+        "label": "교통과 공공서비스의 변화를 확인하기",
+        "description": "확인되었으며 자신과 실제로 관련된 정보만 활용한다."
+      }
+    },
+    "向正规救助与公共服务渠道提供协助": {
+      "sourceDescription": "选择信息整理、生活支持等适合自己的工作。",
+      "en": {
+        "label": "Help through established relief and public-service channels",
+        "description": "Choose suitable tasks such as organizing information or supporting daily needs."
+      },
+      "ja": {
+        "label": "正式な救援や公共サービスの窓口を手伝う",
+        "description": "情報整理や生活支援など、自分に合った仕事を選ぶ。"
+      },
+      "ko": {
+        "label": "공식 구호 및 공공서비스 경로를 돕기",
+        "description": "정보 정리와 생활 지원 등 자신에게 맞는 일을 고른다."
+      }
+    },
+    "调整就业或学习计划，保留收入来源": {
+      "sourceDescription": "把长期目标拆成当前条件下可完成的小步骤。",
+      "en": {
+        "label": "Adjust work or study plans while keeping income",
+        "description": "Break long-term goals into steps possible under current conditions."
+      },
+      "ja": {
+        "label": "収入を保ちながら仕事や学習の予定を調整する",
+        "description": "長期の目標を、今の条件でできる小さな段階に分ける。"
+      },
+      "ko": {
+        "label": "수입원을 유지하며 취업이나 학업 계획 조정하기",
+        "description": "장기 목표를 현재 조건에서 마칠 수 있는 작은 단계로 나눈다."
+      }
+    },
+    "记录普通人的生活与愿望": {
+      "sourceDescription": "征得当事人同意，保护不愿公开的身份细节。",
+      "en": {
+        "label": "Record ordinary people's lives and hopes",
+        "description": "Obtain consent and protect identity details they want kept private."
+      },
+      "ja": {
+        "label": "普通の人々の暮らしと願いを記録する",
+        "description": "本人の同意を得て、公表を望まない身元の情報を守る。"
+      },
+      "ko": {
+        "label": "평범한 사람들의 생활과 바람을 기록하기",
+        "description": "당사자의 동의를 얻고 공개를 원하지 않는 신상 정보를 보호한다."
+      }
+    },
+    "为暂时迁居做资料与预算准备": {
+      "sourceDescription": "核实可行条件后再决定是否行动。",
+      "en": {
+        "label": "Prepare information and a budget for a temporary move",
+        "description": "Verify what is feasible before deciding whether to act."
+      },
+      "ja": {
+        "label": "一時的な転居に向け、資料と予算を準備する",
+        "description": "実行できる条件を確かめてから、動くかどうかを決める。"
+      },
+      "ko": {
+        "label": "임시 이주를 위한 자료와 예산 준비하기",
+        "description": "실현 가능한 조건을 확인한 뒤 행동할지 정한다."
+      }
+    },
+    "阅读新安排的具体内容与执行范围": {
+      "sourceDescription": "先弄清哪些变化真正涉及自己的生活。",
+      "en": {
+        "label": "Read the details and scope of the new arrangements",
+        "description": "Find out which changes actually affect your life."
+      },
+      "ja": {
+        "label": "新たな取り決めの内容と適用範囲を読む",
+        "description": "どの変更が本当に自分の暮らしに関わるかを確かめる。"
+      },
+      "ko": {
+        "label": "새 방침의 구체적인 내용과 적용 범위 읽기",
+        "description": "어떤 변화가 자신의 생활에 실제로 영향을 주는지 확인한다."
+      }
+    },
+    "与不同立场的熟人认真交谈": {
+      "sourceDescription": "从实际经历出发，保留彼此不同的判断。",
+      "en": {
+        "label": "Talk seriously with acquaintances holding different views",
+        "description": "Start from lived experience and allow different conclusions."
+      },
+      "ja": {
+        "label": "立場の異なる知人とじっくり話す",
+        "description": "実際の経験から話を始め、互いに異なる判断を認める。"
+      },
+      "ko": {
+        "label": "입장이 다른 지인들과 진지하게 대화하기",
+        "description": "실제 경험에서 출발하며 서로 다른 판단을 존중한다."
+      }
+    },
+    "围绕一项公共问题表达自己的主张": {
+      "sourceDescription": "提出具体、可讨论的需求，而不替所有人发言。",
+      "en": {
+        "label": "State your position on one public issue",
+        "description": "Make specific, discussable requests without speaking for everyone."
+      },
+      "ja": {
+        "label": "一つの公共の問題について自分の主張を伝える",
+        "description": "全員を代表しようとせず、具体的に話し合える要望を出す。"
+      },
+      "ko": {
+        "label": "하나의 공적 문제에 대해 자신의 주장 표현하기",
+        "description": "모두를 대신해 말하지 않고 구체적으로 토론할 수 있는 요구를 제시한다."
+      }
+    },
+    "参加适合自己的社区与公共事务": {
+      "sourceDescription": "以有限责任了解政策如何落到日常生活。",
+      "en": {
+        "label": "Join community and public affairs that suit you",
+        "description": "Take limited responsibility and learn how policies affect daily life."
+      },
+      "ja": {
+        "label": "自分に合う地域や公共の活動に参加する",
+        "description": "限定した責任を担い、政策が日常にどう届くかを知る。"
+      },
+      "ko": {
+        "label": "자신에게 맞는 지역 및 공공 업무에 참여하기",
+        "description": "한정된 책임을 맡으며 정책이 일상에 어떻게 적용되는지 알아본다."
+      }
+    },
+    "为职业、学业与家庭安排留出余地": {
+      "sourceDescription": "根据实际变化调整计划，保留多种选择。",
+      "en": {
+        "label": "Leave room in your work, study and family plans",
+        "description": "Adjust to actual changes while keeping several options open."
+      },
+      "ja": {
+        "label": "仕事、学業、家族の予定に余地を残す",
+        "description": "実際の変化に合わせて調整し、複数の選択肢を保つ。"
+      },
+      "ko": {
+        "label": "직업과 학업, 가족 계획에 여유 남기기",
+        "description": "실제 변화에 맞춰 계획을 조정하고 여러 선택지를 유지한다."
+      }
+    },
+    "暂缓站队，把本月留给私人生活": {
+      "sourceDescription": "认真处理眼前的人与事，稍后再评估局势。",
+      "en": {
+        "label": "Delay taking sides and spend this month on private life",
+        "description": "Attend to immediate people and matters, then reassess the situation later."
+      },
+      "ja": {
+        "label": "立場を決めるのを待ち、今月は私生活を優先する",
+        "description": "目の前の人や用事に丁寧に向き合い、情勢は後で見直す。"
+      },
+      "ko": {
+        "label": "편을 정하는 일을 미루고 이달은 사생활에 쓰기",
+        "description": "눈앞의 사람과 일을 성실히 돌본 뒤 정세를 다시 판단한다."
+      }
+    },
+    "了解技术实际能做什么与不能做什么": {
+      "sourceDescription": "比较演示、证据与应用条件。",
+      "en": {
+        "label": "Find out what the technology can and cannot do",
+        "description": "Compare demonstrations, evidence and conditions for use."
+      },
+      "ja": {
+        "label": "技術で実際にできることとできないことを知る",
+        "description": "実演、証拠、利用の条件を比較する。"
+      },
+      "ko": {
+        "label": "기술로 실제 가능한 일과 불가능한 일 알아보기",
+        "description": "시연과 증거, 적용 조건을 비교한다."
+      }
+    },
+    "用公开、非敏感材料做小规模试用": {
+      "sourceDescription": "记录错误和限制，避免把输出直接当成事实。",
+      "en": {
+        "label": "Run a small trial with public, non-sensitive material",
+        "description": "Record errors and limitations instead of treating outputs as facts."
+      },
+      "ja": {
+        "label": "公開された機密性のない資料で小さく試す",
+        "description": "出力をそのまま事実とせず、誤りや限界を記録する。"
+      },
+      "ko": {
+        "label": "공개된 비민감 자료로 소규모 시험하기",
+        "description": "출력을 곧바로 사실로 여기지 않고 오류와 한계를 기록한다."
+      }
+    },
+    "研究它对工作与技能要求的影响": {
+      "sourceDescription": "为个人学习或转岗制定一个月的计划。",
+      "en": {
+        "label": "Examine its effects on work and skill requirements",
+        "description": "Make a one-month learning or career-transition plan."
+      },
+      "ja": {
+        "label": "仕事や必要な技能への影響を調べる",
+        "description": "自分の学習や転職に向け、一か月の計画を立てる。"
+      },
+      "ko": {
+        "label": "업무와 요구 기술에 미치는 영향 조사하기",
+        "description": "개인 학습이나 이직을 위한 한 달 계획을 세운다."
+      }
+    },
+    "关注数据使用、纠错与申诉机制": {
+      "sourceDescription": "提出与普通使用者有关的具体问题。",
+      "en": {
+        "label": "Examine data use, corrections and appeals",
+        "description": "Raise concrete questions relevant to ordinary users."
+      },
+      "ja": {
+        "label": "データ利用、訂正、異議申立ての仕組みを調べる",
+        "description": "一般の利用者に関わる具体的な疑問を出す。"
+      },
+      "ko": {
+        "label": "데이터 이용과 오류 수정, 이의제기 절차 살피기",
+        "description": "일반 이용자와 관련된 구체적인 질문을 제기한다."
+      }
+    },
+    "与不同背景的人讨论使用体验": {
+      "sourceDescription": "同时听取获得便利与受到影响的人。",
+      "en": {
+        "label": "Discuss experiences with people from different backgrounds",
+        "description": "Hear from both those helped and those adversely affected."
+      },
+      "ja": {
+        "label": "背景の異なる人と利用体験を話し合う",
+        "description": "便利になった人と、不利益を受けた人の両方から聞く。"
+      },
+      "ko": {
+        "label": "배경이 다른 사람들과 사용 경험을 의논하기",
+        "description": "편리해진 사람과 영향을 받은 사람의 이야기를 함께 듣는다."
+      }
+    },
+    "先维持熟悉的生活方式": {
+      "sourceDescription": "观察后续效果，把精力留给现有安排。",
+      "en": {
+        "label": "Keep your familiar way of life for now",
+        "description": "Watch what happens and save energy for existing commitments."
+      },
+      "ja": {
+        "label": "当面は慣れた暮らし方を続ける",
+        "description": "その後の結果を見守り、今ある予定に力を残す。"
+      },
+      "ko": {
+        "label": "당분간 익숙한 생활 방식 유지하기",
+        "description": "후속 결과를 지켜보며 기존 일정에 쓸 힘을 남긴다."
+      }
+    },
+    "确认本地可靠信息与可用公共服务": {
+      "sourceDescription": "区分所在地点的情况与外地传来的消息。",
+      "en": {
+        "label": "Confirm reliable local information and available services",
+        "description": "Distinguish conditions where you are from reports elsewhere."
+      },
+      "ja": {
+        "label": "地域の確かな情報と使える公共サービスを確認する",
+        "description": "自分のいる場所の状況と、他の地域からの知らせを分ける。"
+      },
+      "ko": {
+        "label": "믿을 만한 지역 정보와 이용 가능한 공공서비스 확인하기",
+        "description": "현재 있는 곳의 상황과 다른 지역에서 들려오는 소식을 구분한다."
+      }
+    },
+    "优先安排自己与家人的基本生活": {
+      "sourceDescription": "按实际需要处理照护、联络和生活用品。",
+      "en": {
+        "label": "Prioritize your own and your family's basic needs",
+        "description": "Arrange care, contact and supplies according to actual need."
+      },
+      "ja": {
+        "label": "自分と家族の基本的な暮らしを優先する",
+        "description": "実際の必要に応じ、世話、連絡、生活用品を整える。"
+      },
+      "ko": {
+        "label": "자신과 가족의 기본 생활부터 마련하기",
+        "description": "실제 필요에 맞춰 돌봄과 연락, 생활용품을 준비한다."
+      }
+    },
+    "向正规的救助渠道提供有限支持": {
+      "sourceDescription": "选择自己能够持续承担的时间或物资。",
+      "en": {
+        "label": "Offer limited support through established relief channels",
+        "description": "Choose time or supplies you can continue to provide."
+      },
+      "ja": {
+        "label": "正式な救援窓口を通じて限られた支援をする",
+        "description": "継続して提供できる時間や物資を選ぶ。"
+      },
+      "ko": {
+        "label": "공식 구호 경로에 한정된 지원 제공하기",
+        "description": "꾸준히 감당할 수 있는 시간이나 물자를 고른다."
+      }
+    },
+    "调整工作与学习的负荷": {
+      "sourceDescription": "保留必要进度，同时给身体与情绪恢复时间。",
+      "en": {
+        "label": "Reduce your work and study load",
+        "description": "Keep essential progress while allowing physical and emotional recovery."
+      },
+      "ja": {
+        "label": "仕事や学習の負担を調整する",
+        "description": "必要な進み具合を保ちながら、身体と気持ちの回復を待つ。"
+      },
+      "ko": {
+        "label": "일과 공부의 부담 조정하기",
+        "description": "필요한 진도는 유지하면서 몸과 마음이 회복할 시간을 둔다."
+      }
+    },
+    "整理所在地公开的生活资源信息": {
+      "sourceDescription": "核对可用性后帮助身边的人查找服务。",
+      "en": {
+        "label": "Organize public information about local living resources",
+        "description": "Check availability before helping people nearby find services."
+      },
+      "ja": {
+        "label": "所在地の公開された生活支援情報を整理する",
+        "description": "使えることを確かめてから、身近な人のサービス探しを手伝う。"
+      },
+      "ko": {
+        "label": "거주 지역의 공개된 생활 자원 정보 정리하기",
+        "description": "이용 가능 여부를 확인한 뒤 주변 사람들이 서비스를 찾도록 돕는다."
+      }
+    },
+    "为可能的临时迁居准备条件": {
+      "sourceDescription": "核实接收、交通和预算，暂不作超出信息的决定。",
+      "en": {
+        "label": "Prepare for a possible temporary move",
+        "description": "Check reception arrangements, transport and budget before deciding further."
+      },
+      "ja": {
+        "label": "一時的な転居に備えて条件を整える",
+        "description": "受け入れ先、交通、予算を確認し、分からないまま判断しない。"
+      },
+      "ko": {
+        "label": "가능한 임시 이주에 대비해 조건 마련하기",
+        "description": "수용처와 교통, 예산을 확인하고 정보가 부족한 상태에서 결정하지 않는다."
+      }
+    },
+    "先确认家庭成员的联络与生活安排": {
+      "sourceDescription": "根据所在地区实际情况处理必要事务。",
+      "en": {
+        "label": "Confirm your family's contact and living arrangements first",
+        "description": "Handle necessary matters according to actual local conditions."
+      },
+      "ja": {
+        "label": "まず家族の連絡と生活の予定を確かめる",
+        "description": "所在地の実情に合わせ、必要な用事を済ませる。"
+      },
+      "ko": {
+        "label": "가족의 연락과 생활 계획부터 확인하기",
+        "description": "거주 지역의 실제 상황에 따라 필요한 일을 처리한다."
+      }
+    },
+    "核实不同信息源的说法": {
+      "sourceDescription": "把已确认的变化与相互冲突的消息分别记录。",
+      "en": {
+        "label": "Check the claims of different information sources",
+        "description": "Record confirmed changes separately from conflicting reports."
+      },
+      "ja": {
+        "label": "異なる情報源の主張を確かめる",
+        "description": "確認された変化と、食い違う報道を別々に記録する。"
+      },
+      "ko": {
+        "label": "서로 다른 정보원의 주장 확인하기",
+        "description": "확인된 변화와 서로 충돌하는 소식을 따로 기록한다."
+      }
+    },
+    "维护跨立场的私人关系": {
+      "sourceDescription": "从彼此安全与具体困难谈起，保留意见分歧。",
+      "en": {
+        "label": "Maintain personal relationships across political differences",
+        "description": "Start with safety and practical difficulties while allowing disagreement."
+      },
+      "ja": {
+        "label": "立場を越えた個人のつながりを保つ",
+        "description": "互いの安全や具体的な困りごとから話し、意見の違いを残す。"
+      },
+      "ko": {
+        "label": "입장이 달라도 개인적 관계 유지하기",
+        "description": "서로의 안전과 구체적인 어려움부터 이야기하며 의견 차이는 인정한다."
+      }
+    },
+    "参与当地可承担的民生互助": {
+      "sourceDescription": "帮助对接日常照护、公开信息与正规服务。",
+      "en": {
+        "label": "Join local mutual aid within your capacity",
+        "description": "Help connect people with daily care, public information and formal services."
+      },
+      "ja": {
+        "label": "地域で無理なくできる生活の助け合いに参加する",
+        "description": "日々の世話、公開情報、正式なサービスへの橋渡しを手伝う。"
+      },
+      "ko": {
+        "label": "감당할 수 있는 지역 생활 상호부조에 참여하기",
+        "description": "일상 돌봄과 공개 정보, 공식 서비스를 연결하도록 돕는다."
+      }
+    },
+    "重新评估收入、学业与居住的连续性": {
+      "sourceDescription": "准备替代方案，按这个月的条件逐步调整。",
+      "en": {
+        "label": "Reassess continuity of income, study and housing",
+        "description": "Prepare alternatives and adjust gradually to this month's conditions."
+      },
+      "ja": {
+        "label": "収入、学業、住まいを続けられるか見直す",
+        "description": "代わりの案を用意し、今月の条件に合わせて少しずつ調整する。"
+      },
+      "ko": {
+        "label": "수입과 학업, 주거의 지속 가능성 재검토하기",
+        "description": "대안을 준비하고 이달의 조건에 따라 조금씩 조정한다."
+      }
+    },
+    "用私人日记保存这段生活": {
+      "sourceDescription": "记录个人经验，暂不承担公开表达的压力。",
+      "en": {
+        "label": "Keep a private diary of this period",
+        "description": "Record personal experience without taking on the pressure of public expression."
+      },
+      "ja": {
+        "label": "私的な日記でこの時期の暮らしを残す",
+        "description": "公に発言する負担を負わず、個人の経験を記録する。"
+      },
+      "ko": {
+        "label": "개인 일기로 이 시기의 생활 남기기",
+        "description": "공개적으로 발언해야 한다는 부담 없이 개인 경험을 기록한다."
+      }
+    },
+    "弄清变化与自己生活的联系": {
+      "sourceDescription": "查阅可靠信息，圈出需要本月处理的问题。",
+      "en": {
+        "label": "Find out how the changes relate to your life",
+        "description": "Consult reliable information and identify what needs attention this month."
+      },
+      "ja": {
+        "label": "変化が自分の暮らしとどう関わるかを調べる",
+        "description": "確かな情報を読み、今月扱うべき問題に印を付ける。"
+      },
+      "ko": {
+        "label": "변화와 자신의 생활이 어떻게 연결되는지 알아보기",
+        "description": "믿을 만한 정보를 찾아 이달에 처리할 문제를 골라낸다."
+      }
+    },
+    "与重要的人商量接下来的安排": {
+      "sourceDescription": "把工作、学习与照护需要放在一起讨论。",
+      "en": {
+        "label": "Discuss the next arrangements with important people",
+        "description": "Consider work, study and care needs together."
+      },
+      "ja": {
+        "label": "大切な人と今後の予定を相談する",
+        "description": "仕事、勉強、世話の必要をまとめて話し合う。"
+      },
+      "ko": {
+        "label": "소중한 사람들과 앞으로의 계획 의논하기",
+        "description": "일과 공부, 돌봄의 필요를 함께 놓고 의논한다."
+      }
+    },
+    "参与一项范围明确的公共事务": {
+      "sourceDescription": "从身边的小事理解时代的变化。",
+      "en": {
+        "label": "Join a clearly defined public task",
+        "description": "Understand the changing times through matters close to home."
+      },
+      "ja": {
+        "label": "範囲の明確な公共の仕事に参加する",
+        "description": "身近な小さなことから、時代の変化を知る。"
+      },
+      "ko": {
+        "label": "범위가 분명한 공공 업무에 참여하기",
+        "description": "주변의 작은 일에서 시대의 변화를 이해한다."
+      }
+    },
+    "把长期目标拆成当前的一步": {
+      "sourceDescription": "依据自己的条件保留学习与行动的进度。",
+      "en": {
+        "label": "Break a long-term goal into one current step",
+        "description": "Maintain learning and action at a pace your conditions allow."
+      },
+      "ja": {
+        "label": "長期の目標を今できる一歩に分ける",
+        "description": "自分の条件に合わせ、学習や行動の進み具合を保つ。"
+      },
+      "ko": {
+        "label": "장기 목표를 지금 할 수 있는 한 단계로 나누기",
+        "description": "자신의 조건에 맞춰 학습과 행동의 진도를 유지한다."
+      }
+    },
+    "记录个人观察，留出修正判断的余地": {
+      "sourceDescription": "区分自己看到的、听到的与推测的内容。",
+      "en": {
+        "label": "Record observations while leaving room to revise your judgment",
+        "description": "Separate what you saw, what you heard and what you inferred."
+      },
+      "ja": {
+        "label": "判断を直す余地を残し、自分の観察を記録する",
+        "description": "見たこと、聞いたこと、推測したことを分ける。"
+      },
+      "ko": {
+        "label": "판단을 수정할 여지를 남기고 개인 관찰 기록하기",
+        "description": "직접 본 것과 들은 것, 추측한 내용을 구분한다."
+      }
+    },
+    "把本月用于休息和维系日常生活": {
+      "sourceDescription": "不必立刻回应所有消息，先照顾重要的事。",
+      "en": {
+        "label": "Spend this month resting and maintaining everyday life",
+        "description": "You need not respond to every report immediately; attend to what matters first."
+      },
+      "ja": {
+        "label": "今月は休息と日々の暮らしに充てる",
+        "description": "すべての知らせにすぐ反応せず、大事なことを先に整える。"
+      },
+      "ko": {
+        "label": "이달은 쉬면서 일상생활을 유지하기",
+        "description": "모든 소식에 즉시 반응할 필요 없이 중요한 일부터 돌본다."
+      }
+    },
+    "尝试让值守人员确认自己的意识": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Try to make the attendants recognize your consciousness",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "自分に意識があると当直の人に伝えようとする",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "곁을 지키는 사람에게 자신의 의식을 알리기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "配合照护，逐渐恢复身体": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Cooperate with care and gradually recover physically",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "世話を受けながら、身体を少しずつ回復させる",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "돌봄에 협조하며 몸을 차츰 회복하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "请身边的人介绍现在的情况": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Ask the people nearby to explain the current situation",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "身近な人に今の状況を説明してもらう",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "곁의 사람에게 현재 상황을 설명해 달라고 하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "集中精神复活，站起来说话": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Concentrate on coming back to life, stand up and speak",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "意識を集中して復活し、立ち上がって話す",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "정신을 집중해 부활하고 일어나 말하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "了解如今的社会与普通人的生活": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Learn about today's society and ordinary people's lives",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "今の社会と普通の人々の暮らしを知る",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "현재 사회와 평범한 사람들의 생활 알아보기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "与愿意见面的人讨论自己的打算": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Discuss your plans with people willing to meet you",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "会いたいと望む人々と自分の計画を話す",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "만나려는 사람들과 자신의 계획을 의논하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "公开接受采访，说明自己的近况": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Give a public interview and explain how you are doing",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "公の取材を受け、自分の近況を説明する",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "공개 인터뷰에 응하고 자신의 근황 설명하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "休息并记录已经发生的事情": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Rest and record what has happened",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "休みながら、すでに起きたことを記録する",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "쉬면서 이미 일어난 일을 기록하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "寻找合适的猎物，吞噬后继续进化": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Find suitable prey and continue evolving after eating",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "適した獲物を探し、食べて進化を続ける",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "알맞은 먹잇감을 찾아 먹고 진화를 이어가기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "沿洋流探索新的水域": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Follow the currents to explore new waters",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "海流に沿って新たな海域を探る",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "해류를 따라 새로운 해역을 탐색하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "躲进安全的水域休息": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Hide in safer waters and rest",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "安全な水域に隠れて休む",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "안전한 해역에 숨어 쉬기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "向日本海岸游去，尝试上岸": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Swim toward Japan's coast and try to come ashore",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "日本の海岸へ泳ぎ、上陸を試みる",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "일본 해안으로 헤엄쳐 가서 상륙 시도하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "回海里觅食，保留目前的身体": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Return to the sea to feed while keeping your current body",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "今の身体のまま海へ戻って餌を探す",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "현재 몸을 유지하며 바다로 돌아가 먹이 찾기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "让身体化形，成为能够在人群中生活的人": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Transform into a human who can live among other people",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "身体を人の姿に変え、人々の中で暮らせるようになる",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "몸을 인간 모습으로 바꿔 사람들 사이에서 살기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "观察附近居民的生活": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Observe the lives of nearby residents",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "近くの住民の暮らしを観察する",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "근처 주민들의 생활을 관찰하기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "沿海岸寻找能够停留的地方": {
+      "sourceDescription": "按照自己的身体情况和意愿安排这个月。",
+      "en": {
+        "label": "Look along the coast for somewhere to stay",
+        "description": "Arrange the month according to your physical condition and wishes."
+      },
+      "ja": {
+        "label": "海岸沿いで滞在できる場所を探す",
+        "description": "身体の状態と自分の意思に合わせて、今月を過ごす。"
+      },
+      "ko": {
+        "label": "해안을 따라 머물 수 있는 곳 찾기",
+        "description": "자신의 몸 상태와 뜻에 따라 이달의 생활을 정한다."
+      }
+    },
+    "写信给家人说明近况": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Write to your family about how you are doing",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "家族に手紙を書いて近況を伝える",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "가족에게 편지를 써서 근황 알리기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "申请允许范围内的会见": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Apply for a visit within the permitted rules",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "許可される範囲で面会を申請する",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "허용된 범위에서 면회를 신청하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "整理申诉与法律咨询材料": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Organize appeal papers and legal consultation materials",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "不服申立てと法律相談の資料を整理する",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "이의신청과 법률 상담 자료를 정리하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "阅读能够取得的书籍": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Read the books available to you",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "手に入る本を読む",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "구할 수 있는 책을 읽기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "按身体情况规律活动": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Keep regular activity suited to your physical condition",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "身体に合わせて規則的に活動する",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "몸 상태에 맞춰 규칙적으로 활동하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "根据身体情况安排训练": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Plan training around your physical condition",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "身体の状態に合わせて訓練を組む",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "몸 상태에 맞춰 훈련 계획 세우기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "向有经验的同伴请教": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Ask experienced companions for advice",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "経験のある仲間に教えを請う",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "경험 있는 동료에게 조언 구하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "认真完成日常事务": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Carry out routine duties carefully",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "日々の任務を丁寧にこなす",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "일상 업무를 성실히 수행하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "写信向家人说明近况": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Write home to explain your recent circumstances",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "家族へ手紙を送り、最近の様子を伝える",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "가족에게 편지로 최근 상황을 전하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "整理本月训练与学习记录": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Organize this month's training and study notes",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "今月の訓練と学習の記録をまとめる",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "이달의 훈련 및 학습 기록 정리하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "听取基层和公众的具体意见": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Listen to specific views from local communities and the public",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "地域の現場や市民から具体的な意見を聞く",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "현장과 시민의 구체적인 의견 듣기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "核查正在执行的公共安排": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Check the public arrangements currently being implemented",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "実施中の公共の取り決めを点検する",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "현재 시행 중인 공적 방침 점검하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "安排经济与民生专题讨论": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Arrange a discussion on the economy and people's livelihoods",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "経済と暮らしをテーマに協議を開く",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "경제와 민생을 주제로 논의 마련하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "约见不同意见的负责人": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Meet officials with differing views",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "異なる意見を持つ責任者と会う",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "다른 의견을 가진 책임자 만나기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "审阅报告并处理人事事务": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Review reports and handle personnel matters",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "報告を読み、人事を扱う",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "보고서를 검토하고 인사 업무 처리하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "完成手头作品的修改": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Finish revisions to the work at hand",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "手元の作品の修正を終える",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "진행 중인 작품의 수정 마치기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "与合作人员讨论新的创作": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Discuss new creative work with collaborators",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "協力者と新しい制作について話す",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "협업자와 새로운 창작을 의논하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "练习需要用到的专业技能": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Practice the professional skills you need",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "必要になる専門技能を練習する",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "필요한 전문 기술을 연습하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "回应近期观众关注的问题": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Respond to issues the audience has recently raised",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "最近観客が関心を寄せている問題に答える",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "최근 관객들이 관심을 보인 문제에 답하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "留出时间休息并联系家人": {
+      "sourceDescription": "按当前条件安排具体工作，记录结果和后续需要。",
+      "en": {
+        "label": "Make time to rest and contact your family",
+        "description": "Arrange specific work under current conditions and record results and follow-up needs."
+      },
+      "ja": {
+        "label": "休息と家族への連絡の時間を取る",
+        "description": "今の条件で具体的な作業を決め、結果と次に必要なことを記録する。"
+      },
+      "ko": {
+        "label": "쉬고 가족에게 연락할 시간 마련하기",
+        "description": "현재 조건에 맞춰 구체적인 일을 정하고 결과와 후속 필요를 기록한다."
+      }
+    },
+    "继续处理这件事的后续": {
+      "sourceDescription": "按照已经完成的部分，处理眼前仍需落实的安排。",
+      "en": {
+        "label": "Continue following up on this undertaking",
+        "description": "Build on what is finished and deal with arrangements that still need attention."
+      },
+      "ja": {
+        "label": "この取り組みの後に残った用事を進める",
+        "description": "終えた部分を踏まえ、まだ実行する必要がある予定を扱う。"
+      },
+      "ko": {
+        "label": "이 일의 후속 업무를 이어가기",
+        "description": "이미 마친 부분을 바탕으로 아직 실행해야 할 계획을 처리한다."
+      }
+    },
+    "检查现有资源和身体情况": {
+      "sourceDescription": "先检查这件事留下的开支、装备或身体负担，再安排下一步。",
+      "en": {
+        "label": "Check your resources and physical condition",
+        "description": "Review the costs, equipment and physical burden left by this undertaking before planning ahead."
+      },
+      "ja": {
+        "label": "手元の資源と身体の状態を確かめる",
+        "description": "この件で生じた出費、装備、身体の負担を確かめてから次を決める。"
+      },
+      "ko": {
+        "label": "현재 자원과 몸 상태를 확인하기",
+        "description": "이 일로 생긴 지출과 장비, 몸의 부담을 살핀 뒤 다음 계획을 세운다."
+      }
+    }
+  }
+}

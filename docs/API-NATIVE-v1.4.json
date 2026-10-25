@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-24T14:09:45.255Z",
+  "results": [
+    {
+      "provider": "deepseek",
+      "status": 200,
+      "ok": true,
+      "elapsedMs": 208,
+      "generationOk": true,
+      "generationMs": 3626,
+      "model": "deepseek-flash",
+      "title": "年初居家与联系朋友",
+      "consequence": "一月里你按自己的安排把自动化课程的笔记整理成册，按单元分类标注了重点和练习题，也把课堂上没弄懂的部分单独记下，准备以后找人问。你给正在找工作的朋友打了电话，先听他讲最近投了哪几家、面试卡在哪里，再把自己整理的资料和查找工作的路子说了一遍。聊到后来，对方说心里踏实了些，你也把课程进度和家里的事排了个轻重。",
+      "narrative": "进了二月，你继续待在家里，自动化课程的进度往前推了一节，笔记按章节重新编号，便于以后翻查。里办公室开始登记口罩需求，你替家里跑了一趟区公所问清楚流程，回来时顺路买了些日用品。朋友那边的工作消息还不确定，你们约好过些天再通电话。",
+      "options": 0
+    },
+    {
+      "provider": "gemini",
+      "status": 200,
+      "ok": true,
+      "elapsedMs": 552,
+      "generationOk": false,
+      "generationMs": 3752,
+      "error": "Gemini 服务暂时繁忙，请稍后重试。 本月未推进。"
+    }
+  ]
+}

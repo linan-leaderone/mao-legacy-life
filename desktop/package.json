@@ -1,0 +1,12 @@
+{
+  "name": "mao-legacy-desktop",
+  "version": "1.10.0",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "45.0.0"
+  }
+}

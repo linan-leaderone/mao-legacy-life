@@ -1,0 +1,231 @@
+import {getRelationshipGraph} from './relationships.js';
+import {getPortrait,contactPortraitValue} from './portraits.js';
+
+const SVG_NS='http://www.w3.org/2000/svg';
+const clamp=(value,min,max)=>Math.min(max,Math.max(min,value));
+const hash=value=>{let n=2166136261;for(const c of String(value))n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;};
+const intersects=(a,b,gap=0)=>a.x-a.w/2<b.x+b.w/2+gap&&a.x+a.w/2>b.x-b.w/2-gap&&a.y-a.h/2<b.y+b.h/2+gap&&a.y+a.h/2>b.y-b.h/2-gap;
+const short=(text,max=15)=>{const characters=Array.from(String(text||''));return characters.length>max?characters.slice(0,max-1).join('')+'…':characters.join('');};
+const point=(x,y)=>({x,y});
+const length=p=>Math.hypot(p.x,p.y)||1;
+const titleOf=node=>node?.name||'姓名未详';
+const edgeLabel=edge=>edge.status||'保持联系';
+const STANDARD_STATUSES=new Set(['保持联系','家人','亲人','朋友','伴侣','盟友','敌对','对手','师友','伙伴','相识','疏远','关系紧张','乐队伙伴','党内同事','联盟伙伴','有分歧的盟友','保持政治联系']);
+const attached=(edge,id)=>edge.source===id||edge.target===id;
+const otherEnd=(edge,id)=>edge.source===id?edge.target:edge.source;
+const strong=edge=>Number(edge.strength)>=60||['family','partner','ally','rival','hostile','mentor'].includes(edge.kind);
+const family=edge=>/family|partner/.test(edge.kind||'')||/亲属|父亲|母亲|兄|姐|弟|妹|夫妻|妻子|丈夫|恋人|伴侣|子女/.test(edge.status||'');
+const hostile=edge=>/rival|hostile|estranged/.test(edge.kind||'')||/敌|对立|疏远|竞争|冲突/.test(edge.status||'');
+const groupOf=edge=>family(edge)?'family':hostile(edge)?'opposed':strong(edge)?'close':'other';
+
+export function relationshipPage(graph,{query='',group='all',page=0,pageSize=8,focusId=null}={}){
+  const text=String(query).normalize('NFKC').trim().toLocaleLowerCase(),edges=graph.edges||[],player=graph.nodes.find(node=>node.id==='player');
+  const related=focusId?new Set(edges.filter(edge=>attached(edge,focusId)).map(edge=>otherEnd(edge,focusId))):null;
+  const people=graph.nodes.filter(node=>node.id!=='player').filter(node=>{
+    const relations=edges.filter(edge=>attached(edge,node.id));
+    if(text&&!`${node.name} ${node.detail||''} ${relations.map(edge=>`${edge.status} ${edge.detail||''}`).join(' ')}`.normalize('NFKC').toLocaleLowerCase().includes(text))return false;
+    if(group!=='all'&&!relations.some(edge=>attached(edge,'player')&&groupOf(edge)===group))return false;
+    return !related||node.id===focusId||related.has(node.id);
+  });
+  const size=clamp(Math.floor(pageSize)||8,1,12),pages=Math.max(1,Math.ceil(people.length/size)),index=clamp(Math.floor(page)||0,0,pages-1);
+  return {nodes:[...(player?[player]:[]),...people.slice(index*size,(index+1)*size)],people,total:people.length,page:index,pages,pageSize:size};
+}
+
+function nodeRect(node){
+  if(!node.textScale)return {x:node.x,y:node.y+20,w:148,h:150};
+  const scale=node.textScale,r=node.id==='player'?46:37,top=-r-10,bottom=r+7*scale+(Array.from(titleOf(node)).length>11?41:25)*scale;
+  return {x:node.x,y:node.y+(top+bottom)/2,w:Math.max((r+10)*2,node.captionWidth),h:bottom-top};
+}
+function labelWidth(text){return clamp(Array.from(text).reduce((width,char)=>width+(/[\u2e80-\uffff]/.test(char)?12:7),20),48,150);}
+function curvePoint(curve,t){const s=1-t;return {x:s*s*s*curve.a.x+3*s*s*t*curve.b.x+3*s*t*t*curve.c.x+t*t*t*curve.d.x,y:s*s*s*curve.a.y+3*s*s*t*curve.b.y+3*s*t*t*curve.c.y+t*t*t*curve.d.y};}
+function makeCurve(a,b,bend){
+  const d=point(b.x-a.x,b.y-a.y),dist=length(d),u=point(d.x/dist,d.y/dist),n=point(-u.y,u.x),ar=a.id==='player'?47:38,br=b.id==='player'?47:38;
+  const start=point(a.x+u.x*ar,a.y+u.y*ar),end=point(b.x-u.x*br,b.y-u.y*br);
+  return {a:start,b:point(start.x+d.x*.27+n.x*bend,start.y+d.y*.27+n.y*bend),c:point(end.x-d.x*.27+n.x*bend*.82,end.y-d.y*.27+n.y*bend*.82),d:end};
+}
+function blocked(curve,nodes,a,b){
+  for(let t=.06;t<.95;t+=.025){const p=curvePoint(curve,t);if(nodes.some(node=>node.id!==a&&node.id!==b&&intersects({x:p.x,y:p.y,w:5,h:5},nodeRect(node),6)))return true;}
+  return false;
+}
+function boundsOf(nodes,edges){
+  const points=nodes.flatMap(node=>{const box=nodeRect(node);return [{x:box.x-box.w/2-14,y:box.y-box.h/2-8},{x:box.x+box.w/2+14,y:box.y+box.h/2+8}];});
+  for(const edge of edges){for(let t=0;t<=1;t+=.05)points.push(curvePoint(edge.curve,t));points.push({x:edge.label.x-edge.label.w/2-8,y:edge.label.y-edge.label.h/2-8},{x:edge.label.x+edge.label.w/2+8,y:edge.label.y+edge.label.h/2+8});}
+  const minX=Math.min(-130,...points.map(p=>p.x)),maxX=Math.max(130,...points.map(p=>p.x)),minY=Math.min(-130,...points.map(p=>p.y)),maxY=Math.max(130,...points.map(p=>p.y));
+  return {x:(minX+maxX)/2,y:(minY+maxY)/2,w:maxX-minX+60,h:maxY-minY+60};
+}
+
+/** Local drag positions are separate from saved relationships. The player stays at the origin. */
+export function avoidRelationshipOverlap(desired,nodes,id){
+  const target={x:clamp(Number(desired.x)||0,-2500,2500),y:clamp(Number(desired.y)||0,-2500,2500)};
+  const previous=nodes.find(node=>node.id===id),valid=p=>!nodes.some(node=>node.id!==id&&intersects(nodeRect({...previous,...desired,...p,id}),nodeRect(node),18));
+  if(valid(target))return target;
+  for(let ring=1;ring<=24;ring++)for(let step=0;step<32;step++){
+    const angle=step*Math.PI/16,radius=ring*24,p={x:target.x+Math.cos(angle)*radius,y:target.y+Math.sin(angle)*radius};
+    if(valid(p))return p;
+  }
+  return {x:target.x+760,y:target.y+760};
+}
+
+/** Small, stable pages keep every portrait and relationship label readable; no graph data is removed. */
+export function buildRelationshipLayout(graph,{ids,positions={},textScale=0}={}){
+  const chosen=ids?new Set(['player',...ids]):null,source=graph.nodes.filter(node=>!chosen||chosen.has(node.id)),people=source.filter(node=>node.id!=='player');
+  const fontGeometry=node=>textScale?{textScale,captionWidth:Math.max(52,Array.from(short(titleOf(node),11)).reduce((w,char)=>w+(/[\u2e80-\uffff]/.test(char)?13:8),20))*textScale}:{};
+  const center=source.find(node=>node.id==='player')||{id:'player',name:'你'},nodes=[{...center,...fontGeometry(center),x:0,y:0}];
+  people.forEach((node,index)=>{
+    const angle=-Math.PI/2+index*Math.PI*2/Math.max(people.length,1)+(people.length===2?Math.PI/2:0),radius=people.length<=2?250:people.length<=6?285:340;
+    const wanted=positions instanceof Map?positions.get(node.id):positions[node.id],geometry=fontGeometry(node),position=avoidRelationshipOverlap({...geometry,...(wanted||point(Math.cos(angle)*radius,Math.sin(angle)*radius))},nodes,node.id);
+    nodes.push({...node,...geometry,...position});
+  });
+  const byId=new Map(nodes.map(node=>[node.id,node])),occupied=nodes.map(nodeRect),edges=[];
+  const visible=(graph.edges||[]).filter(edge=>byId.has(edge.source)&&byId.has(edge.target)&&(attached(edge,'player')||strong(edge))).sort((a,b)=>Number(attached(b,'player'))-Number(attached(a,'player'))||Number(b.strength||0)-Number(a.strength||0)||String(a.id).localeCompare(String(b.id)));
+  visible.forEach((edge,index)=>{
+    const a=byId.get(edge.source),b=byId.get(edge.target),text=short(edgeLabel(edge),textScale?8:17),w=(textScale?Math.max(labelWidth(text),Array.from(text).reduce((n,char)=>n+(/[\u2e80-\uffff]/.test(char)?12:7),20)):labelWidth(text))*(textScale||1),h=27*(textScale||1),sign=(hash(edge.id)%2?1:-1),direct=attached(edge,'player');
+    let picked=null;
+    for(let attempt=0;attempt<90&&!picked;attempt++){
+      const magnitude=attempt===0?(direct?24:100):50+Math.floor((attempt+1)/2)*44,bend=magnitude*sign*(attempt%2?-1:1),curve=makeCurve(a,b,bend);
+      if(blocked(curve,nodes,a.id,b.id))continue;
+      for(const t of [.5,.4,.6,.3,.7,.22,.78]){const p=curvePoint(curve,t),label={...p,w,h};if(!occupied.some(box=>intersects(label,box,9))){picked={...edge,text,curve,label,path:`M ${curve.a.x} ${curve.a.y} C ${curve.b.x} ${curve.b.y}, ${curve.c.x} ${curve.c.y}, ${curve.d.x} ${curve.d.y}`};break;}}
+    }
+    if(!picked){
+      // Dense or freely dragged networks can need a wide outer lane. It remains reachable via zoom/full view.
+      for(let lane=1;lane<=60&&!picked;lane++){
+        const curve=makeCurve(a,b,(2300+lane*180+index*35)*sign),p=curvePoint(curve,.5),label={...p,w,h};
+        if(!blocked(curve,nodes,a.id,b.id)&&!occupied.some(box=>intersects(label,box,9)))picked={...edge,text,curve,label,path:`M ${curve.a.x} ${curve.a.y} C ${curve.b.x} ${curve.b.y}, ${curve.c.x} ${curve.c.y}, ${curve.d.x} ${curve.d.y}`};
+      }
+    }
+    if(picked){occupied.push(picked.label);edges.push(picked);}
+  });
+  return {nodes,edges,bounds:boundsOf(nodes,edges),relationshipCount:visible.length};
+}
+
+let nextMapId=0;
+
+/** A read-only map: pan, zoom, filter and freely arrange this view without advancing or changing a life. */
+export function openRelationshipMap(state,{document:doc=globalThis.document,window:win=globalThis.window,portraitFor=getPortrait,translate=value=>value}={}){
+  return new Promise(resolve=>{
+    if(!doc?.createElementNS||!doc?.body){resolve();return;}
+    const t=value=>String(translate(value)||value),statusOf=edge=>STANDARD_STATUSES.has(edgeLabel(edge))?t(edgeLabel(edge)):edgeLabel(edge),graph=getRelationshipGraph(state),byId=new Map(graph.nodes.map(node=>[node.id,node])),previousFocus=doc.activeElement,uid=`relationship-${++nextMapId}`;
+    const dialog=doc.createElement('dialog');dialog.className='relationship-dialog';dialog.setAttribute('aria-labelledby',`${uid}-title`);
+    const make=(tag,className,text)=>{const element=doc.createElement(tag);if(className)element.className=className;if(text!==undefined)element.textContent=text;return element;};
+    const svgElement=(tag,attrs={})=>{const element=doc.createElementNS(SVG_NS,tag);for(const [name,value]of Object.entries(attrs))element.setAttribute(name,String(value));return element;};
+    const listeners=[];const listen=(element,type,handler,options)=>{if(!element?.addEventListener)return;element.addEventListener(type,handler,options);listeners.push(()=>element.removeEventListener(type,handler,options));};
+    const button=(text,className,handler)=>{const element=make('button',className,t(text));element.type='button';if(handler)listen(element,'click',handler);return element;};
+    const header=make('header','relationship-header'),heading=make('div'),eyebrow=make('span','relationship-eyebrow',t('与你同行的人')),title=make('h2','',t('人物关系'));title.id=`${uid}-title`;heading.append(eyebrow,title);
+    const close=button('关闭','relationship-close',()=>finish());close.setAttribute('aria-label',t('关闭人物关系'));header.append(heading,close);
+    const tools=make('div','relationship-tools'),searchLabel=make('label','relationship-search'),searchCaption=make('span','relationship-sr-only',t('搜索人物与关系')),search=make('input');search.type='search';search.placeholder=t('搜索姓名、关系或经历');search.setAttribute('aria-label',t('搜索人物与关系'));search.autocomplete='off';searchLabel.append(searchCaption,search);
+    const groupLabel=make('label','relationship-filter'),groupCaption=make('span','relationship-sr-only',t('关系分类')),group=make('select');group.setAttribute('aria-label',t('关系分类'));
+    for(const[value,label]of[['all','全部关系'],['family','家人与伴侣'],['close','紧密联系'],['opposed','对立与疏远'],['other','其他来往']]){const option=make('option','',t(label));option.value=value;group.append(option);}group.value='all';groupLabel.append(groupCaption,group);
+    const focusOnly=button('只看此人','relationship-focus',()=>{if(selected!=='player'){focused=focused?null:selected;page=0;render(true);}});focusOnly.disabled=true;focusOnly.setAttribute('aria-pressed','false');tools.append(searchLabel,groupLabel,focusOnly);
+    const body=make('div','relationship-body'),mapSection=make('section','relationship-map-section'),stage=make('div','relationship-stage'),svg=svgElement('svg',{class:'relationship-canvas',tabindex:'0',role:'group','aria-label':t('人物关系图。可拖动人物或空白处，也可使用缩放按钮。'),'aria-describedby':`${uid}-help`,preserveAspectRatio:'xMidYMid meet'});
+    const backdrop=svgElement('rect',{x:-10000,y:-10000,width:20000,height:20000,fill:'transparent'}),drawing=svgElement('g');svg.append(backdrop,drawing);stage.append(svg);
+    const mapTools=make('div','relationship-map-tools'),zoomOut=button('−','',()=>zoomAt(.8)),zoomLabel=make('output','relationship-zoom','100%'),zoomIn=button('＋','',()=>zoomAt(1.25)),home=button('回到本人','',()=>{autoFit=false;camera={x:0,y:0,scale:1};applyCamera();}),fit=button('全览','',()=>fitView()),reset=button('自动排列','',()=>{positions.clear();render(true);});zoomOut.setAttribute('aria-label',t('缩小'));zoomIn.setAttribute('aria-label',t('放大'));zoomLabel.setAttribute('aria-label',t('缩放比例'));mapTools.append(zoomOut,zoomLabel,zoomIn,home,fit,reset);
+    const empty=make('p','relationship-empty');stage.append(empty);
+    const pagination=make('nav','relationship-pagination');pagination.setAttribute('aria-label',t('人物关系分页'));const prev=button('上一组','',()=>{page--;render(true);}),pageInfo=make('span'),next=button('下一组','',()=>{page++;render(true);});pagination.append(prev,pageInfo,next);
+    const help=make('p','relationship-help',t('拖动圆形可调整位置；拖动空白处移动视野。点击人物查看来往，双指或滚轮缩放。'));help.id=`${uid}-help`;mapSection.append(stage,mapTools,pagination,help);
+    const detail=make('aside','relationship-detail');detail.setAttribute('aria-label',t('人物与联系详情'));body.append(mapSection,detail);
+    const footer=make('div','relationship-footer'),counts=make('span'),legend=make('span','relationship-legend',t('实线：你的联系　曲线：人物间的紧密联系'));footer.append(counts,legend);dialog.append(header,tools,body,footer);
+    let selected='player',focused=null,page=0,pageState,layout,camera={x:0,y:0,scale:1},autoFit=true,centerFitOnPlayer=true,textZoom=1,pageLimit=8,closed=false,observer=null,frame=0,drag=null,pinch=null,suppressClick=false;const positions=new Map(),pointers=new Map();
+    const size=()=>{const box=svg.getBoundingClientRect();return {w:Math.max(1,box.width||780),h:Math.max(1,box.height||520),left:box.left||0,top:box.top||0};};
+    const pageCapacity=()=>Math.min(pageLimit,size().w<540?3:8);
+    const applyCamera=()=>{const box=size();svg.setAttribute('viewBox',`${camera.x-box.w/camera.scale/2} ${camera.y-box.h/camera.scale/2} ${box.w/camera.scale} ${box.h/camera.scale}`);zoomLabel.textContent=`${Math.round(camera.scale*100)}%`;};
+    const screenPoint=(x,y)=>{const box=size();return {x:camera.x+(x-box.left-box.w/2)/camera.scale,y:camera.y+(y-box.top-box.h/2)/camera.scale};};
+    function zoomAt(factor,client){autoFit=false;const before=client?screenPoint(client.x,client.y):null;camera.scale=clamp(camera.scale*factor,.02,2.4);if(client){const after=screenPoint(client.x,client.y);camera.x+=before.x-after.x;camera.y+=before.y-after.y;}applyCamera();}
+    function fitCamera(bounds,centerOnPlayer){
+      const box=size(),padding=20,x=centerOnPlayer?0:bounds.x,y=centerOnPlayer?0:bounds.y;
+      // Fit complete circles, name plates and curved labels. When the player is
+      // centred, the asymmetric name space below each face also needs to fit.
+      const width=bounds.w+2*Math.abs(bounds.x-x),height=bounds.h+2*Math.abs(bounds.y-y);
+      return {x,y,scale:clamp(Math.min(Math.max(1,box.w-padding*2)/width,Math.max(1,box.h-padding*2)/height),.001,1.2)};
+    }
+    function fitView(centerOnPlayer=false,reflow=true){if(!layout)return;autoFit=true;centerFitOnPlayer=centerOnPlayer;if(reflow){render(false);return;}camera=fitCamera(layout.bounds,centerOnPlayer);applyCamera();}
+    const directFor=id=>graph.edges.find(edge=>attached(edge,'player')&&attached(edge,id));
+    function choose(id,{jump=false}={}){
+      if(!byId.has(id))return;selected=id;
+      if(jump&&id!=='player'){search.value='';group.value='all';focused=null;const people=graph.nodes.filter(node=>node.id!=='player');page=Math.floor(people.findIndex(node=>node.id===id)/pageCapacity());}
+      render(jump);const node=layout.nodes.find(node=>node.id===id);if(jump&&node){autoFit=false;camera.x=node.x;camera.y=node.y;camera.scale=Math.max(.85,camera.scale);applyCamera();}
+      const target=[...svg.querySelectorAll('[data-person-id]')].find(element=>element.getAttribute('data-person-id')===id);target?.focus?.({preventScroll:true});
+    }
+    function renderDetails(){
+      detail.replaceChildren();const node=byId.get(selected)||byId.get('player'),related=graph.edges.filter(edge=>attached(edge,node.id)),top=make('div','relationship-detail-heading'),name=make('h3','',titleOf(node)),badge=make('span','relationship-detail-badge',node.id==='player'?t('你'):statusOf(directFor(node.id)||{}));name.setAttribute('data-no-translate','');badge.setAttribute('data-no-translate','');top.append(name,badge);detail.append(top);
+      if(node.detail){const prose=make('p','relationship-description',node.detail);prose.setAttribute('data-no-translate','');detail.append(prose);}
+      if(node.id==='player')detail.append(make('p','relationship-description',t('一路上认识的人都留在这里。选择一个名字，查看你们的联系。')));
+      const list=make('ul','relationship-list');
+      for(const edge of related){const other=byId.get(otherEnd(edge,node.id));if(!other)continue;const row=make('li'),link=make('button','relationship-person-link');row.setAttribute('data-no-translate','');link.type='button';link.setAttribute('data-jump-id',other.id);const personName=make('strong','',titleOf(other)),stateText=make('span','',statusOf(edge));link.append(personName,stateText);row.append(link);if(edge.detail)row.append(make('p','',edge.detail));list.append(row);}
+      if(!related.length)detail.append(make('p','relationship-description',t('还没有留下明确的来往记录。')));detail.append(list);
+      const notVisible=related.filter(edge=>!layout.nodes.some(item=>item.id===otherEnd(edge,node.id))).length;
+      if(notVisible)detail.append(make('p','relationship-detail-hint',`${t('其他组中的联系')}：${notVisible} · ${t('点击姓名可前往')}`));
+      focusOnly.disabled=node.id==='player';focusOnly.textContent=t(focused?'查看所有人':'只看此人');focusOnly.setAttribute('aria-pressed',String(!!focused));
+    }
+    function render(fitAfter=false){
+      if(fitAfter){autoFit=true;centerFitOnPlayer=true;}
+      const translatedGraph={...graph,edges:graph.edges.map(edge=>({...edge,status:statusOf(edge)}))};
+      const readable=()=>textZoom*fitCamera(layout.bounds,centerFitOnPlayer).scale>=1&&layout.nodes.every((node,index)=>layout.nodes.slice(index+1).every(other=>!intersects(nodeRect(node),nodeRect(other),4)));
+      for(let attempt=0;attempt<8;attempt++){
+        pageState=relationshipPage(graph,{query:search.value,group:group.value,page,pageSize:pageCapacity(),focusId:focused});page=pageState.page;
+        if(autoFit)textZoom=1;
+        for(let pass=0;pass<12;pass++){
+          layout=buildRelationshipLayout(translatedGraph,{ids:pageState.nodes.map(node=>node.id),positions,textScale:textZoom});
+          if(!autoFit)break;
+          const fitted=fitCamera(layout.bounds,centerFitOnPlayer);
+          if(textZoom*fitted.scale>=1||pass===11||1.04/fitted.scale>4)break;
+          textZoom=1.04/fitted.scale;
+        }
+        if(!autoFit||readable()||pageState.pageSize===1)break;
+        // Smaller pages preserve readable text on narrow displays. No contacts
+        // are removed; search and page navigation use this same page size.
+        pageLimit=pageState.pageSize-1;
+      }
+      drawing.replaceChildren();
+      const definitions=svgElement('defs'),edgeGroup=svgElement('g',{class:'relationship-edges'}),labelGroup=svgElement('g',{class:'relationship-edge-labels'}),nodeGroup=svgElement('g',{class:'relationship-nodes'});drawing.append(definitions,edgeGroup,labelGroup,nodeGroup);
+      for(const edge of layout.edges){const active=selected==='player'?attached(edge,'player'):attached(edge,selected),cross=!attached(edge,'player'),classes=`relationship-edge${cross?' relationship-peer-edge':''}${active?' is-active':''}${hostile(edge)?' is-opposed':''}`;
+        const path=svgElement('path',{d:edge.path,class:classes,fill:'none','vector-effect':'non-scaling-stroke'});edgeGroup.append(path);
+        const group=svgElement('g',{class:`relationship-edge-label${active?' is-active':''}${hostile(edge)?' is-opposed':''}`,transform:`translate(${edge.label.x} ${edge.label.y})`,'data-no-translate':''}),bg=svgElement('rect',{x:-edge.label.w/2,y:-edge.label.h/2,width:edge.label.w,height:edge.label.h,rx:12*textZoom}),text=svgElement('text',{'text-anchor':'middle','dominant-baseline':'central',style:`font-size:${12*textZoom}px`}),full=svgElement('title');text.textContent=edge.text;full.textContent=`${titleOf(byId.get(edge.source))} · ${titleOf(byId.get(edge.target))}：${edgeLabel(edge)}`;group.append(full,bg,text);labelGroup.append(group);
+      }
+      for(const node of layout.nodes){const isPlayer=node.id==='player',r=isPlayer?46:37,active=node.id===selected,nodeElement=svgElement('g',{class:`relationship-node${isPlayer?' relationship-player':''}${active?' is-selected':''}`,transform:`translate(${node.x} ${node.y})`,tabindex:'0',role:'button','aria-label':`${titleOf(node)}${isPlayer?' · '+t('你'):' · '+statusOf(directFor(node.id)||{})}`,'aria-pressed':String(active),'data-person-id':node.id,'data-no-translate':''}),title=svgElement('title');title.textContent=titleOf(node);nodeElement.append(title);
+        const halo=svgElement('circle',{r:r+7,class:'relationship-node-halo'}),circle=svgElement('circle',{r,class:'relationship-node-circle'});nodeElement.append(halo,circle);
+        let portrait;try{portrait=portraitFor(contactPortraitValue(state,node));}catch{portrait=null;}
+        if(portrait?.src){const clipId=`${uid}-portrait-${hash(node.id).toString(36)}`,clip=svgElement('clipPath',{id:clipId});clip.append(svgElement('circle',{r:r-3}));definitions.append(clip);const image=svgElement('image',{href:portrait.src,x:-r+3,y:-r+3,width:(r-3)*2,height:(r-3)*2,preserveAspectRatio:'xMidYMin slice','clip-path':`url(#${clipId})`,'aria-hidden':'true',style:portrait.style||''});nodeElement.append(image);}
+        else{const initial=svgElement('text',{class:'relationship-initial','text-anchor':'middle','dominant-baseline':'central','aria-hidden':'true'});initial.textContent=Array.from(titleOf(node))[0];nodeElement.append(initial);}
+        const lines=Array.from(titleOf(node)),caption=short(node.name,20),label=svgElement('text',{class:'relationship-node-name','text-anchor':'middle',y:r+22*textZoom,style:`font-size:${13*textZoom}px`}),labelBg=svgElement('rect',{class:'relationship-name-backdrop',x:-node.captionWidth/2,y:r+7*textZoom,width:node.captionWidth,height:(lines.length>11?41:25)*textZoom,rx:7*textZoom});
+        if(lines.length>11){for(const[index,line]of[short(lines.slice(0,10).join(''),11),short(lines.slice(10).join(''),11)].entries()){const span=svgElement('tspan',{x:0,dy:index?16*textZoom:0});span.textContent=line;label.append(span);}}
+        else label.textContent=caption;nodeElement.append(labelBg,label);nodeGroup.append(nodeElement);
+      }
+      empty.hidden=pageState.total>0;empty.textContent=t(graph.nodes.length<=1?'相识的人会陆续出现在这里。':'没有找到符合条件的人物。');
+      prev.disabled=page===0;next.disabled=page>=pageState.pages-1;pageInfo.textContent=`${t('第')} ${page+1} / ${pageState.pages} ${t('组')} · ${t('本组')} ${Math.max(0,pageState.nodes.length-1)} ${t('人')}`;
+      counts.textContent=`${t('相识')} ${Math.max(0,graph.nodes.length-1)} ${t('人')} · ${t('联系')} ${graph.edges.length} · ${t('当前显示')} ${Math.max(0,layout.nodes.length-1)} ${t('人')}`;
+      renderDetails();if(fitAfter)fitView(true,false);else if(autoFit)fitView(centerFitOnPlayer,false);else applyCamera();
+    }
+    function release(){for(const id of pointers.keys())try{if(svg.hasPointerCapture?.(id))svg.releasePointerCapture(id);}catch{}pointers.clear();drag=null;pinch=null;}
+    function finish(){if(closed)return;closed=true;release();listeners.forEach(remove=>remove());observer?.disconnect();if(frame)win?.cancelAnimationFrame?.(frame);if(dialog.open)dialog.close();dialog.remove();if(previousFocus?.isConnected)previousFocus.focus?.({preventScroll:true});resolve();}
+    const personFrom=target=>{let element=target;while(element&&element!==svg){const id=element.getAttribute?.('data-person-id');if(id)return id;element=element.parentNode;}return null;};
+    listen(search,'input',()=>{page=0;render(true);});listen(group,'change',()=>{page=0;render(true);});
+    listen(detail,'click',event=>{const link=event.target.closest?.('[data-jump-id]');if(link&&detail.contains(link))choose(link.getAttribute('data-jump-id'),{jump:true});});
+    listen(svg,'click',event=>{if(suppressClick){suppressClick=false;return;}const id=personFrom(event.target);if(id)choose(id);});
+    listen(svg,'wheel',event=>{event.preventDefault();zoomAt(Math.exp(-clamp(event.deltaY,-150,150)*.0025),{x:event.clientX,y:event.clientY});},{passive:false});
+    listen(svg,'pointerdown',event=>{
+      if(event.button!==undefined&&event.button!==0)return;event.preventDefault();if(!pointers.size)suppressClick=false;svg.focus({preventScroll:true});const id=personFrom(event.target),p={x:event.clientX,y:event.clientY};pointers.set(event.pointerId,p);try{svg.setPointerCapture?.(event.pointerId);}catch{}
+      if(pointers.size===2){const [a,b]=[...pointers.values()];pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),center:{x:(a.x+b.x)/2,y:(a.y+b.y)/2}};drag=null;return;}
+      const node=layout.nodes.find(node=>node.id===id);drag={pointerId:event.pointerId,personId:id==='player'?null:id,origin:p,world:screenPoint(p.x,p.y),node:node?{x:node.x,y:node.y}:null,camera:{...camera},moved:false};
+    });
+    listen(svg,'pointermove',event=>{
+      if(!pointers.has(event.pointerId))return;const p={x:event.clientX,y:event.clientY};pointers.set(event.pointerId,p);
+      if(pointers.size>=2){const[a,b]=[...pointers.values()],distance=Math.hypot(a.x-b.x,a.y-b.y),center={x:(a.x+b.x)/2,y:(a.y+b.y)/2};if(pinch?.distance){zoomAt(distance/pinch.distance,center);camera.x-=(center.x-pinch.center.x)/camera.scale;camera.y-=(center.y-pinch.center.y)/camera.scale;applyCamera();}pinch={distance,center};suppressClick=true;return;}
+      if(!drag||drag.pointerId!==event.pointerId)return;const dx=p.x-drag.origin.x,dy=p.y-drag.origin.y;if(Math.hypot(dx,dy)<5&&!drag.moved)return;drag.moved=true;suppressClick=true;autoFit=false;
+      if(drag.personId&&drag.node){const current=screenPoint(p.x,p.y),position=avoidRelationshipOverlap({x:drag.node.x+current.x-drag.world.x,y:drag.node.y+current.y-drag.world.y},layout.nodes,drag.personId);positions.set(drag.personId,position);selected=drag.personId;render(false);}
+      else{camera.x=drag.camera.x-dx/camera.scale;camera.y=drag.camera.y-dy/camera.scale;applyCamera();}
+    });
+    const pointerEnd=event=>{const previous=drag;pointers.delete(event.pointerId);try{if(svg.hasPointerCapture?.(event.pointerId))svg.releasePointerCapture(event.pointerId);}catch{}if(pointers.size<2)pinch=null;if(previous?.pointerId===event.pointerId){drag=null;if(!previous.moved){const id=personFrom(event.target);if(id)choose(id);}}};
+    listen(svg,'pointerup',pointerEnd);listen(svg,'pointercancel',event=>{pointerEnd(event);suppressClick=true;});listen(win,'blur',release);
+    listen(svg,'keydown',event=>{
+      const id=personFrom(event.target);if((event.key==='Enter'||event.key===' ')&&id){event.preventDefault();choose(id);return;}
+      if(event.key==='+'||event.key==='='){event.preventDefault();zoomAt(1.25);}else if(event.key==='-'){event.preventDefault();zoomAt(.8);}else if(event.key==='Home'){event.preventDefault();autoFit=false;camera={x:0,y:0,scale:1};applyCamera();}
+      else if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)){event.preventDefault();autoFit=false;const dx=event.key==='ArrowLeft'?-35:event.key==='ArrowRight'?35:0,dy=event.key==='ArrowUp'?-35:event.key==='ArrowDown'?35:0;if(id&&id!=='player'&&event.shiftKey){const node=layout.nodes.find(node=>node.id===id);positions.set(id,avoidRelationshipOverlap({x:node.x+dx,y:node.y+dy},layout.nodes,id));render(false);const target=[...svg.querySelectorAll('[data-person-id]')].find(element=>element.getAttribute('data-person-id')===id);target?.focus();}else{camera.x+=dx/camera.scale;camera.y+=dy/camera.scale;applyCamera();}}
+    });
+    listen(dialog,'cancel',event=>{event.preventDefault();finish();});listen(dialog,'close',finish);listen(dialog,'keydown',event=>{if(event.key==='Escape'){event.preventDefault();finish();}});
+    doc.body.append(dialog);try{dialog.showModal();}catch{dialog.setAttribute('open','');}
+    render(true);search.focus({preventScroll:true});
+    // Detail height changes also resize the map on phones. Preserve the selected
+    // person's camera instead of jumping back to the player after each click.
+    if(win?.ResizeObserver){observer=new win.ResizeObserver(()=>{if(closed)return;if(frame)win.cancelAnimationFrame?.(frame);frame=win.requestAnimationFrame?.(()=>{frame=0;render(false);})||0;});observer.observe(stage);}
+  });
+}

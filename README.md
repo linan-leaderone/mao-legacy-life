@@ -2,6 +2,8 @@
 
 2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.10.0**。
 
+[直接游玩](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.10.md)
+
 ## 从源码运行
 
 需要 Node.js 22 或更新版本与 pnpm 10。公开源码不提供 API 密钥；可在首页填写自己的连接，或选择“不联网”。
@@ -13,7 +15,7 @@ pnpm dev
 
 验证执行 `pnpm test`。公开网页/PWA 执行 `pnpm build:ios`，发布 `dist-ios/`；普通应用构建执行 `pnpm build`。Windows 与 Android 的封装方式见 [构建说明](docs/BUILD.md)。人物资料与运行剧情已随源码提供，正常游玩和构建不需要原 MOD；重新扫描 MOD 时才需要自行提供其目录。
 
-`node scripts/export-public-source.mjs` 按明确目录清单导出公开源码并检查凭据。导出不含个人连接、签名材料、原生安装包、浏览器档案、查询缓存或完整 MOD 审计索引。API 密钥在各自设备上配置，不要提交到仓库。
+`node scripts/export-public-source.mjs` 按明确目录清单导出公开源码并检查凭据。导出不含个人连接、签名材料、原生安装包、浏览器档案、查询缓存或完整 MOD 审计索引。API 密钥在各自设备上配置，不要提交到仓库。随后运行 `node scripts/package-public-source.mjs` 可按同一清单生成可分享的源码ZIP（需要Python 3.8+）。
 
 ## 开始与保存
 
@@ -23,7 +25,7 @@ pnpm dev
 - 每次打开先进入首页，即使已有档案也可先选 **DeepSeek、Gemini 或自定义 API**，再继续人生、新建或读取。点击左上角品牌可返回首页；切换服务不改动进度，月度请求进行时暂时不能切换。
 - 默认选择 **DeepSeek**，模型为 `deepseek-flash`；Gemini 默认模型为 `gemini-4-argon`。每项服务分别保存密钥与模型，输入后自动保存。支持测试连接、手填模型、导入连接配置和“不联网”；自定义服务可选 **OpenAI 兼容、Gemini 原生、Anthropic Messages** 三种协议。
 - 连接配置使用 `providerRevision: 7` 和独立的 `providers` 对象。旧版单份配置迁移到对应服务，保留不联网偏好；清除密钥后会保留空值，重启不会重新填入默认密钥。Windows、Android 通过原生 HTTP 桥请求接口，避免 WebView 的跨域限制；普通浏览器仍受服务端 CORS 设置约束。连接细节见 `docs/API-PROVIDERS.md`。
-- Windows、Android安装包按用户授权预填DeepSeek、Gemini两份默认密钥，由构建时的 `.private/settings.json` 注入；私有配置文件本身与签名私钥不打包。iPhone网页不含个人默认密钥，需在手机填写。人生存档不包含密钥，界面可分别替换或清除。叙事请求失败或取消时仍停留在原月，可重试或使用一次本地叙事。
+- 作者本机的个人Windows、Android构建可按授权预填DeepSeek、Gemini密钥，由构建时的 `.private/settings.json` 注入；本公开仓库不含此配置，下载源码构建时默认密钥为空；私有配置文件本身与签名私钥不打包。iPhone网页不含个人默认密钥，需在手机填写。人生存档不包含密钥，界面可分别替换或清除。叙事请求失败或取消时仍停留在原月，可重试或使用一次本地叙事。
 - 进行中可通过“保存”“读取”使用 **三个可命名的保存位置**，也可导入、导出 JSON 文件。自动保存独立存在；读取另一份档案或开始新人生前保留上一份备份。Windows、安卓与iPhone共用存档格式。旧版存档保留既有人生历史，当前页按新版改为个人生活与独立新闻。Safari与主屏幕App的数据可能分开保存，应先安装再游玩，已有进度通过JSON转移。
 
 上述路径是打包脚本的输出位置；实际包版本与验证记录见 `docs/BUILD.md`、`docs/VERIFICATION.md`。
