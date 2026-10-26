@@ -7,11 +7,11 @@ import catalog from '../src/data/countries.json' with {type:'json'};
 test('all registered MOD TAGs have evidence and present/releasable status',()=>{
  assert.equal(countryCatalogCounts.tags,692);
  assert.equal(Object.keys(catalog.tags).length,countryCatalogCounts.tags);
- assert.equal(countryCatalogCounts.startingTags,186);
+ assert.equal(countryCatalogCounts.startingTags,187);
  for(const record of Object.values(catalog.tags)){
   assert.ok(record.sourceRefs.length>=2,record.tag);
   assert.ok(['active','not-present'].includes(record.startingStatus));
-  assert.equal(record.startingStatus==='active',record.ownedStateCount>0);
+  assert.equal(record.startingStatus==='active',record.ownedStateCount>0||record.controlledStateIds.length>0);
   assert.ok(record.sourceRefs.every(s=>s.file&&Number.isInteger(s.line)&&s.line>0));
  }
 });
@@ -56,12 +56,12 @@ test('opening country offices, government systems, politics and capitals come fr
  assert.ok(us.parties.some(x=>x.name.includes('共和党')&&x.popularity>0));
 });
 
-test('East Asian user-specified opening systems and special administrative regions stay coherent',()=>{
- assert.match(countryByIso('CHN').ideology,/市场毛/);
- assert.match(countryByIso('TWN').ideology,/社会自由/);
- assert.match(countryByIso('JPN').ideology,/议会民主/);
+test('East Asian final MOD opening systems and special administrative regions stay coherent',()=>{
+ assert.match(countryByIso('CHN').ideology,/习大林/);
+ assert.match(countryByIso('TWN').ideology,/台湾进步/);
+ assert.match(countryByIso('JPN').ideology,/右翼民粹/);
  assert.match(countryByIso('JPN').headOfState,/德仁/);
- assert.match(countryByIso('JPN').leader,/安倍/);
+ assert.match(countryByIso('JPN').headOfGovernment,/安倍/);
  assert.match(countryByIso('HKG').leader,/林郑月娥/);
  assert.match(countryByIso('MAC').leader,/贺一诚/);
  assert.equal(countryByIso('MAC').tag,null);
@@ -73,7 +73,7 @@ test('dynamic government overrides replace current facts while baseline remains 
  assert.match(tw.ideology,/社会主义与劳工民主/);
  assert.equal(tw.leader,'左翼联盟');assert.equal(tw.rulingParty,null);
  assert.equal(tw.conflict,null);assert.equal(tw.factionId,'taiwan_left');
- assert.match(tw.baseline.leader,/蔡英文/);assert.match(tw.baseline.ideology,/社会自由/);
+ assert.match(tw.baseline.leader,/蔡英文/);assert.match(tw.baseline.ideology,/台湾进步/);
  assert.equal(tw.currentSource,'dynamic');assert.deepEqual(state,original);
 });
 

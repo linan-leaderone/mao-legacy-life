@@ -71,7 +71,7 @@ test('occupation displays the controller ideology instead of the previous local 
   const left=deriveTerritorySituation(state({month:0,territoryOverrides:{[district.id]:{controller:'左翼联盟',controllerId:'taiwan_left',month:0}}}),district,lore);
   assert.match(left.ideology,/社会主义/);assert.doesNotMatch(left.ideology,/社会自由/);assert.doesNotMatch(left.government,/总统制/);
   const china=deriveTerritorySituation(state({territoryOverrides:{[district.id]:{controller:'大陆接管当局',controllerId:'china',month:48}}}),district,lore);
-  assert.match(china.ideology,/市场毛主义/);assert.match(china.government,/中国共产党/);
+  assert.match(china.ideology,/习大林主义/);assert.match(china.government,/主席|共产党|独裁/);
   const unknown=deriveTerritorySituation(state({territoryOverrides:{[district.id]:{controller:'星海联邦',controllerId:'star-sea',month:48}}}),district,lore);
   assert.equal(unknown.ideology,null);assert.match(unknown.government,/尚待确认/);assert.doesNotMatch(unknown.government,/民进党/);
 });

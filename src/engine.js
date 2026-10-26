@@ -1,5 +1,6 @@
 import {movementFromAction,updatePlayerPosition,validatePlayerPosition} from './player-position.js';
 import {countryRegionNames} from './countries.js';
+import {normalizeBirthplace,birthplaceUnitForPlace,birthplaceLabel,macroPlaceForUnit,defaultNationality,birthplaceSelectionForUnit} from './birthplace.js';
 import {territoryActionChanges,validateTerritorialState} from './territory-actions.js';
 import {territoryExposure,getGeographyUnit} from './world-territories.js';
 import {selectMonthlyPolicies} from './policies.js';
@@ -517,7 +518,8 @@ function syncPublicIdentity(s){
 }
 export function createGame(input,lore){
   const profile=lockPersonaProfile(input),persona=profile.lockedPersonaId?findPersona(profile.lockedPersonaId):null;
-  if(!persona&&!PLACES.includes(profile.place))throw new Error('请选择出生地。');const startAge=Number(profile.age);if(!Number.isInteger(startAge)||startAge<0||startAge>(persona?200:90))throw new Error('年龄须为 0–90 岁的整数。');
+  const birthplace=persona?null:normalizeBirthplace(profile);if(birthplace)profile.place=birthplace.place;
+  const startAge=Number(profile.age);if(!Number.isInteger(startAge)||startAge<0||startAge>(persona?200:90))throw new Error('年龄须为 0–90 岁的整数。');
   const points=profile.points||{intelligence:5,family:5,fitness:5,appearance:5};
   if(POINT_STATS.some(k=>!Number.isInteger(Number(points[k]))||Number(points[k])<0||Number(points[k])>10)||(!persona&&POINT_STATS.reduce((n,k)=>n+Number(points[k]),0)!==20))throw new Error('请将 20 点分配完毕，每项为 0–10 点。');
   const location=persona?profile.startLocation:profile.place,bgs=backgroundsFor(location),bg=bgs.find(b=>b.id===profile.background)||bgs[0];
@@ -525,6 +527,9 @@ export function createGame(input,lore){
   const p={name:persona?.name||(profile.name?.trim()||'无名者').slice(0,30),age:startAge,startAgeMonths:persona?profile.startAgeMonths:startAge*12,place:profile.place,startLocation:location,background:bg.id,backgroundText:(profile.backgroundText||bg.detail).slice(0,3000),goal:(profile.goal?.trim()||'照顾自己和家人，完成想做的事情。').slice(0,1000),narrative:profile.narrative==='balanced'?'balanced':'player',points:Object.fromEntries(POINT_STATS.map(k=>[k,Number(points[k])]))};
   p.freedom=['unlimited','influential','grounded'].includes(profile.freedom)?profile.freedom:p.narrative==='balanced'?'grounded':'unlimited';p.narrative=p.freedom==='grounded'?'balanced':'player';
   p.identity=normalizeCharacterIdentity(profile.identity);p.language=normalizeLanguage(profile.language);p.scenario=createOpeningScenario(p);
+  const openingUnit=birthplace?.unit||birthplaceUnitForPlace(location);
+  if(birthplace)p.birthplace={...birthplaceSelectionForUnit(openingUnit,profile.openingAuthorityId),unitId:openingUnit.id,label:birthplace.label};
+  if(!p.identity.nationality)p.identity.nationality=defaultNationality(openingUnit,location,p.birthplace?.authorityId);
   if(persona)Object.assign(p,{birthDate:persona.birthDate,birthDatePrecision:persona.birthDatePrecision||'day',birthPlace:persona.birthPlace,lockedPersonaId:persona.id,persona});
   const influenceBase={ordinary:2,worker:3,rural:1,research:6,cadre:14,business:10,custom:2}[bg.id];
   const position=/国家主席|总统|首相|最高领导|中央领导/.test(p.backgroundText)?65:/省长|部长|司令|议员|市长|企业董事长/.test(p.backgroundText)?35:/主任|干部|教授|记者|经理|工会代表/.test(p.backgroundText)?12:0;
@@ -532,7 +537,9 @@ export function createGame(input,lore){
   const stats={...Object.fromEntries(POINT_STATS.map(k=>[k,p.points[k]*10])),influence,health:70+p.points.fitness*2,funds:startAge<16?100+p.points.family*100:Math.round(500+Math.pow(p.points.family,2)*300+bg.funds/4),connections:bg.connections,stress:18,morality:50,promiscuity:0,charisma:Math.round((p.points.appearance*10+bg.connections)/2),...(persona?.stats||{})};
   const s={version:1,timelineVersion:5,id:`life-${seed}`,seed,profile:p,person:initialPerson(p),location,month:0,turn:0,routes:chooseRoutes(lore,profile.routes,seed),calendar:{straitEnd:31+hash(seed+':strait-end')%3},eventMonths:{},seenEvents:[],seenNews:[],newsHistory:[],worldPressure:pressureDefaults(),worldState:{},worldOverrides:{},worldDynamics:{},territoryOverrides:{},factionConflicts:{},statChanges:[],stats,memories:[],pins:[],history:[],ended:false};
   s.routeSelectionExplicit=!!input.routes;s.npcPressure=pressureDefaults();
-  initializeSpecialLife(s,persona);applyOpeningScenario(s);updatePlayerPosition(s);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
+  initializeSpecialLife(s,persona);applyOpeningScenario(s);
+  if(birthplace&&s.location===location)s.position={unitId:openingUnit.id,label:birthplaceLabel(openingUnit),coordinates:[...openingUnit.center],precision:openingUnit.role,month:0,source:'opening',locationSnapshot:location};
+  updatePlayerPosition(s);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
 }
 export function actionEncounter(s,action){
   const plain={...action,meta:{...action.meta}};delete plain.meta.encounterGame;
@@ -669,7 +676,8 @@ export function advance(s,action,response,major=null,lore){
 export function exportSave(s){return JSON.stringify({format:'mao-legacy-life',version:1,savedAt:new Date().toISOString(),game:s},null,2);}
 export function importSave(text,lore){
   if(text.length>15000000)throw new Error('存档过大（上限 15 MB）。');const x=JSON.parse(text),s=x?.game;
-  if(x.format!=='mao-legacy-life'||x.version!==1||!s||s.version!==1||!Number.isInteger(s.month)||((s.timelineVersion||1)<5&&(s.month<0||s.month>1440))||!s.profile||(!PLACES.includes(s.profile.place)&&!findPersona(s.profile.lockedPersonaId))||!Number.isInteger(s.profile.age)||s.profile.age<0||s.profile.age>(findPersona(s.profile.lockedPersonaId)?200:90)||typeof s.profile.name!=='string'||typeof s.profile.goal!=='string'||typeof s.profile.backgroundText!=='string'||typeof s.seed!=='string'||typeof s.location!=='string'||!Array.isArray(s.history)||((s.timelineVersion||1)<5&&s.history.length!==s.month)||!Array.isArray(s.pins)||!Array.isArray(s.memories)||!Array.isArray(s.seenEvents)||!s.routes)throw new Error('无法读取这份存档，原有经历仍保留。');
+  if(x.format!=='mao-legacy-life'||x.version!==1||!s||s.version!==1||!Number.isInteger(s.month)||((s.timelineVersion||1)<5&&(s.month<0||s.month>1440))||!s.profile||(!birthplaceUnitForPlace(s.profile.place)&&!findPersona(s.profile.lockedPersonaId))||!Number.isInteger(s.profile.age)||s.profile.age<0||s.profile.age>(findPersona(s.profile.lockedPersonaId)?200:90)||typeof s.profile.name!=='string'||typeof s.profile.goal!=='string'||typeof s.profile.backgroundText!=='string'||typeof s.seed!=='string'||typeof s.location!=='string'||!Array.isArray(s.history)||((s.timelineVersion||1)<5&&s.history.length!==s.month)||!Array.isArray(s.pins)||!Array.isArray(s.memories)||!Array.isArray(s.seenEvents)||!s.routes)throw new Error('无法读取这份存档，原有经历仍保留。');
+  if(s.profile.birthplace){const unit=getGeographyUnit(s.profile.birthplace.unitId);if(!unit||macroPlaceForUnit(unit)!==s.profile.place)throw new Error('这份档案的开局区划记录不完整。');}
   if(s.timelineVersion!==undefined&&![1,2,3,4,5].includes(s.timelineVersion))throw new Error('这份档案来自较新的版本，请更新后再打开。');
   const legacy=(s.timelineVersion||1)<3,upgrade=(s.timelineVersion||1)<4,oldCalendar=(s.timelineVersion||1)<5;
   if(!s.stats||typeof s.stats!=='object')throw new Error('这份档案缺少生活记录。');

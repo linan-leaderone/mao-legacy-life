@@ -12,7 +12,7 @@ export function detectIOSInstallEnvironment({window: win = {}, navigator: nav = 
 }
 
 function cacheDescription(state) {
-  if (state.cache === 'ready') return '离线内容已就绪。地方地图首次查看需联网，已查看的图层会保存；AI 叙述需要联网。';
+  if (state.cache === 'ready') return '离线内容已就绪。地方地图与旗帜首次查看需联网，已查看的内容会保存；AI 叙述需要联网。';
   if (state.cache === 'offline') return '暂时没有网络，离线内容尚未确认完整。请联网后再次打开。';
   if (state.cache === 'unavailable') return '离线内容尚未保存完整。请保持联网，稍后重新打开。';
   return '正在保存离线内容，首次下载请保持页面打开。';

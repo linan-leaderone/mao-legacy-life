@@ -18,7 +18,7 @@ for(const file of sources){
   if(data.length>25*1024*1024)throw new Error(`Static asset exceeds hosting limit: ${path}`);
   if(/(?:^|\/)(?:\.private|\.cache|node_modules)(?:\/|$)|mod-corpus|\.p12$|settings\.json$/i.test(path))throw new Error('Private or audit-only file in iPhone build');
   if(secrets.some(secret=>data.includes(Buffer.from(secret))))throw new Error('A private default credential entered the iPhone build');
-  assets.push({path,sha256:createHash('sha256').update(data).digest('hex'),bytes:data.length,...(/^maps\/.+-boundaries\.json$/.test(path)&&path!=='maps/world-boundaries.json'?{lazy:true}:{})});
+  assets.push({path,sha256:createHash('sha256').update(data).digest('hex'),bytes:data.length,...((/^maps\/.+-boundaries\.json$/.test(path)&&path!=='maps/world-boundaries.json'||/^flags\/.+\.png$/.test(path))?{lazy:true}:{})});
 }
 const template=await readFile(resolve(root,'scripts/pwa-worker-template.js'),'utf8');
 // Include worker behavior so a worker-only update cannot delete the active cache on failure.

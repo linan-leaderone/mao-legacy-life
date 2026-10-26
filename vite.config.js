@@ -10,5 +10,6 @@ export default defineConfig(({mode})=>{
     server:{port:5173,strictPort:true,watch:{ignored:['**/release/**','**/.cache/**','**/.private/**','**/dist-ios/**','**/desktop/node_modules/**']}},build:{target:ios?'safari15.4':'es2020',outDir:ios?'dist-ios':'dist',rollupOptions:{output:{manualChunks(id){
       if(id.endsWith('/src/data/world-geography-index.json'))return 'geography-data';
       if(id.endsWith('/src/data/countries.json'))return 'country-data';
+      if(id.endsWith('/src/data/faction-flags.json'))return 'flag-data';
     }}}}};
 });

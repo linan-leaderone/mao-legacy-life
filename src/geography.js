@@ -5,8 +5,28 @@ const simplify=OpenCC.Converter({from:'tw',to:'cn'});
 const clean=value=>simplify(String(value||'')).toLowerCase().replace(/[\s·・,，。]/g,'');
 const COUNTRY_REGIONS={CHN:'china',TWN:'taiwan',JPN:'japan',KOR:'korea',HKG:'hongkong',MAC:'macau'};
 const COUNTRY_ALIASES={CHN:['中国大陆','大陆','中国','China'],TWN:['中国台湾','台湾','台灣'],JPN:['日本'],KOR:['韩国','韓國'],HKG:['香港'],MAC:['澳门','澳門'],USA:['美国','USA','United States'],PRK:['朝鲜'],RUS:['俄罗斯'],IND:['印度']};
+// Names are aliases of existing real administrative units. Control of a unit
+// is kept in opening-control/territory overrides, never encoded into its ISO.
+// Distinguish an eponymous province from its county/city seat with a suffix.
+const LOCALITY_ALIASES={
+  'UKR-14850775B24260608407062':['克里米亚','克里米亚自治共和国','Crimea'],
+  'UKR-14850775B70667807354554':['塞瓦斯托波尔','塞瓦斯托波尔市'],
+  'SYR-8384693B3351094574159':['哈塞克省'],
+  'SYR-27442178B13029247631939':['哈塞克','哈塞克县','哈塞克市'],
+  'SYR-8384693B38455082445791':['伊德利卜省'],
+  'SYR-27442178B9567094438554':['伊德利卜','伊德利卜县','伊德利卜市'],
+  'SYR-27442178B88911382861768':['阿夫林','阿夫林县','阿夫林市'],
+  'AFG-12653393B60423242182357':['喀布尔省'],
+  'AFG-17698898B53195345217503':['喀布尔','喀布尔县','喀布尔市'],
+  'AFG-12653393B40111500734429':['坎大哈省'],
+  'AFG-17698898B3536630965398':['坎大哈','坎大哈县','坎大哈市'],
+  'YEM-18629408B48104637123824':['萨那','萨那市','萨那首都市'],
+  'YEM-18629408B64822604790923':['萨那省'],
+  'YEM-18629408B11945654439238':['亚丁','亚丁省','亚丁市'],
+};
+const LOCALITY_ALIAS_NAMES=new Set(Object.values(LOCALITY_ALIASES).flat().map(clean));
 const SOURCES=new Map(atlas.sources.map(row=>[row.id,row]));
-export const geographyUnits=atlas.units.map(row=>({id:row.id,name:row.n,aliases:row.a||[],country:row.c,region:row.r,level:row.l,parent:row.p||'',parentId:row.pi||null,role:row.h||(row.id.startsWith('country:')?'country':row.id.startsWith('province:')?'province':'county'),continent:row.ct||null,subregion:row.sr||null,layer:row.f||(row.l==='world'?'world':'asia'),center:row.z,bounds:row.b,source:SOURCES.get(row.l)}));
+export const geographyUnits=atlas.units.map(row=>({id:row.id,name:row.n,aliases:[...new Set([...(row.a||[]),...(LOCALITY_ALIASES[row.id]||[])])],country:row.c,region:row.r,level:row.l,parent:row.p||'',parentId:row.pi||null,role:row.h||(row.id.startsWith('country:')?'country':row.id.startsWith('province:')?'province':'county'),continent:row.ct||null,subregion:row.sr||null,layer:row.f||(row.l==='world'?'world':'asia'),center:row.z,bounds:row.b,source:SOURCES.get(row.l)}));
 const UNIT_INDEX=new Map(geographyUnits.map(row=>[row.id,row]));
 const NAME_INDEX=new Map();
 for(const unit of geographyUnits){
@@ -61,6 +81,10 @@ export function resolveTerritoryTargets(text,{region,country}={}){
   // "中国台湾" contains the mainland alias "中国"; the longer region wins.
   const found=[];
   for(const name of matches){
+    if(LOCALITY_ALIAS_NAMES.has(name)){
+      const remainder=[...matches].filter(longer=>longer.length>name.length&&longer.includes(name)&&LOCALITY_ALIAS_NAMES.has(longer)).reduce((remaining,longer)=>remaining.replaceAll(longer,''),value);
+      if(!remainder.includes(name))continue;
+    }
     const units=NAME_INDEX.get(name);
     let candidates=region?units.filter(row=>row.region===region):units;
     if(country)candidates=candidates.filter(row=>row.country===country);

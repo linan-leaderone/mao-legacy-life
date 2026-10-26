@@ -18,7 +18,7 @@ export function resolveCountry(query){
 export function countryByTag(tag){const row=data.tags[String(tag||'').toUpperCase()];return row?clone(row):null;}
 export function countryByIso(iso,state){return getCountryContext(state||{},iso);}
 
-const CURRENT_FIELDS=['leader','headOfState','headOfGovernment','government','governmentTypeId','ideology','ideologyId','ideologyGroup','rulingParty','parties','capital','stage','factionId','conflict','regionalConflict','institutions','terms','economy','economyId','alliance','subjectOf','nationalSpirits','focusTreeIds'];
+const CURRENT_FIELDS=['leader','headOfState','headOfGovernment','government','governmentTypeId','ideology','ideologyId','ideologyGroup','rulingParty','parties','capital','stage','factionId','cosmeticTag','conflict','regionalConflict','institutions','terms','economy','economyId','alliance','subjectOf','nationalSpirits','focusTreeIds','laws','ministers'];
 function datedPatch(value,month){return value&&typeof value==='object'&&!Array.isArray(value)&&(!Number.isFinite(value.month)||value.month<=month)?value:null;}
 function copyCurrent(target,patch){if(!patch)return;for(const key of CURRENT_FIELDS)if(Object.hasOwn(patch,key))target[key]=clone(patch[key]);}
 /** Static MOD evidence remains in baseline. Only public state and explicit changes
@@ -46,5 +46,23 @@ export function getCountryContext(state={},query){
  if(state.worldDynamics?.lastingPeace)result.conflict=null;
  result.institutions??=['当地行政机关','地方议事与公共服务机构'];result.terms??=[];
  result.dailyLife=`${identity.name}的居民在家庭、工作场所和公共服务机构之间安排日常事务。`;
+ return result;
+}
+
+/** A controlling authority can differ from the geographical country's main
+ * government. Resolve its own TAG first; never borrow that country's president. */
+export function getFactionContext(state={},tag){
+ const row=data.tags[String(tag||'').toUpperCase()];if(!row)return null;
+ const identity=data.countries[row.iso];
+ if(identity?.tag===row.tag)return getCountryContext(state,row.iso);
+ const month=Number(state.month)||0,result={...clone(row),baseline:clone(row),currentSource:'mod-opening'};
+ if(month<0){for(const key of CURRENT_FIELDS)result[key]=['nationalSpirits','focusTreeIds','parties','laws','ministers','institutions','terms'].includes(key)?[]:null;result.currentSource='historical-unknown';result.startingStatus='unknown';}
+ const current=datedPatch(state.worldState?.[row.tag]||state.worldState?.[row.factionId],month);
+ const declared=datedPatch(state.worldOverrides?.[row.tag]||state.worldOverrides?.[row.factionId],month);
+ if(current||declared){copyCurrent(result,current);copyCurrent(result,declared);result.currentSource='dynamic';
+  if(['leader','government','ideology','factionId'].some(key=>Object.hasOwn(declared||{},key)||Object.hasOwn(current||{},key)))for(const field of ['leader','headOfState','headOfGovernment','rulingParty'])if(!Object.hasOwn(current||{},field)&&!Object.hasOwn(declared||{},field))result[field]=null;
+ }
+ for(const key of [row.tag,result.factionId])if(Object.hasOwn(state.factionConflicts||{},key))result.conflict=state.factionConflicts[key];
+ if(state.worldDynamics?.lastingPeace)result.conflict=null;
  return result;
 }

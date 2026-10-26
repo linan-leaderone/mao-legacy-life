@@ -2,8 +2,9 @@ import data from './data/regions.json' with {type:'json'};
 import memeData from './data/memes.json' with {type:'json'};
 import {REGIMES,EVENT_REGIMES,baselineRegime,normalizedGovernmentOverride} from './regime-rules.js';
 import {scenarioRegionPatch} from './scenario.js';
-import {getCountryContext,resolveCountry} from './countries.js';
-import {resolveTerritoryTargets,geographyAncestors} from './geography.js';
+import {getCountryContext,getFactionContext,resolveCountry} from './countries.js';
+import {resolveTerritoryTargets,geographyAncestors,getGeographyUnit} from './geography.js';
+import {openingAdministration,territorialPatchFor,controllerContext} from './local-control.js';
 
 const ALIASES={台灣:'中国台湾',台湾:'中国台湾',台北:'中国台湾',臺北:'中国台湾',台中:'中国台湾',高雄:'中国台湾',新竹:'中国台湾',台南:'中国台湾',花莲:'中国台湾',东京:'日本',東京:'日本',大阪:'日本',京都:'日本',横滨:'日本',北海道:'日本',冲绳:'日本',首尔:'韩国',首爾:'韩国',釜山:'韩国',香港特别行政区:'香港',香港特別行政區:'香港',澳门特别行政区:'澳门',澳門:'澳门',大陆:'中国大陆',中國大陸:'中国大陆',中国:'中国大陆',中國:'中国大陆',石家庄:'河北',太原:'山西',呼和浩特:'内蒙古',沈阳:'辽宁',大连:'辽宁',长春:'吉林',哈尔滨:'黑龙江',南京:'江苏',苏州:'江苏',杭州:'浙江',宁波:'浙江',合肥:'安徽',福州:'福建',厦门:'福建',南昌:'江西',济南:'山东',青岛:'山东',郑州:'河南',武汉:'湖北',长沙:'湖南',广州:'广东',深圳:'广东',南宁:'广西',海口:'海南',三亚:'海南',成都:'四川',贵阳:'贵州',昆明:'云南',拉萨:'西藏',西安:'陕西',兰州:'甘肃',西宁:'青海',银川:'宁夏',乌鲁木齐:'新疆'};
 const SPECIAL={'中国台湾':'taiwan','日本':'japan','香港':'hongkong','澳门':'macau','韩国':'korea','中国大陆':'china'};
@@ -24,7 +25,7 @@ function locality(place){
   return {region:'global',province:null,place:raw};
 }
 export function backgroundsFor(place){
-  const local=locality(place),rows=data.backgrounds[local.region]||data.backgrounds.korea;
+  const local=locality(place),rows=data.backgrounds[local.region]||[['普通家庭','家人在当地工作与生活。'],['工人家庭','家人依靠工资收入安排生活。'],['乡村出身','家人与当地农业及乡村社区保持联系。'],['科研家庭','家人在学校或研究机构任职。'],['公共部门家庭','家人在当地行政或公共服务机构任职。'],['商人家庭','家庭经营本地生意。'],['自定义背景','你在当地生活。']];
   return rows.map(([name,detail],i)=>({id:IDS[i],name,detail:i===6?'你在当地生活，与家人和熟悉的人保持联系。':detail.replace(/，(?:不预设[^。]*|不等于属于[^。]*|不套用[^。]*|职业不等于[^。]*|职责、级别与影响由具体经历决定)/g,''),funds:VALUES[i][0],knowledge:VALUES[i][1],connections:VALUES[i][2]}));
 }
 export const regionForPlace=place=>locality(place).region;
@@ -123,12 +124,14 @@ function applyWorldOverride(result,state){
   result.playerChanged=true;
 }
 export function regionContext(state,lore){
-  const where=locality(state.location),country=!data.regions[where.region]&&where.country?getCountryContext(state,where.country):null;
-  const base=country?{...data.regions.global,...Object.fromEntries(['leader','government','ideology','factionId','conflict','institutions','terms','dailyLife','stage'].map(key=>[key,country[key]])),label:country.name,forbiddenAssumptions:['按照当地已经明确的政务资料、语言与生活情况描述，不把其他国家的机构套到这里。']}:data.regions[where.region]||data.regions.global;
+  const where=locality(state.location),country=getCountryContext(state,where.country||where.region);
+  const localBase=data.regions[where.region]||data.regions.global;
+  const political=country?Object.fromEntries(['leader','government','governmentTypeId','ideology','ideologyId','ideologyGroup','tag','cosmeticTag','iso','conflict','rulingParty','economy','economyId'].filter(key=>country[key]!==undefined).map(key=>[key,country[key]])):{};
+  const base={...localBase,...political,...(!data.regions[where.region]&&country?{institutions:country.institutions,terms:country.terms,dailyLife:country.dailyLife,label:country.name}:{}),forbiddenAssumptions:[...(localBase.forbiddenAssumptions||[])]};
   const province=data.provinces[where.province];
   if(where.region==='ocean')return {...where,location:state.location,stage:'ocean',conflict:null,government:'所处海域没有陆地居民的行政生活',leader:null,institutions:[],terms:['洋流','海温','鱼群','礁石','水深'],forbiddenAssumptions:['海中身体与陆地居民生活分开，不安排上班、学校、社区登记、家庭账单或防疫手续。'],dailyContext:'洋流带来食物与陌生鱼群，水深、体形和捕食者决定活动范围。',plainLocalDescription:'你生活在太平洋，周围是海水、鱼群和不同深度的海底环境。',localDetails:['洋流和海温影响食物分布。','更大的生物会改变附近鱼群的游动方向。'],pandemic:'陆地公共卫生措施不直接成为海洋生物的生活安排。',knownChanges:[],knownRegionalReports:[],institutionState:{stage:'ocean',government:null,leader:null,conflict:null}};
   const historical=historicalEnvironment(where,Number(state.month)||0);
-  const result={...structuredClone(base),...where,...baselineRegime(where.region),location:state.location,stage:country?.stage||'civilian',conflict:country?.conflict||null,...historical,...scenarioRegionPatch(state,where.region)};
+  const result={...structuredClone(base),...where,factionId:country?.factionId||baselineRegime(where.region).factionId,location:state.location,stage:country?.stage||'civilian',conflict:country?.conflict||null,...historical,...scenarioRegionPatch(state,where.region)};
   const known=knownEvents(state,lore),seen=new Set(known.map(e=>e.id)),changes=[];
   for(const event of known){
     const patch=CHANGES[event.id];
@@ -144,6 +147,18 @@ export function regionContext(state,lore){
     if(event.id==='world_asia_end'){result.regionalConflict=null;}
   }
   applyWorldOverride(result,state);
+  const unit=state.position?.locationSnapshot===state.location?getGeographyUnit(state.position.unitId):null;
+  if(unit&&unit.region===where.region&&!historical){
+    const controlled=openingAdministration(state,unit,{...result,knownChanges:changes});
+    if(controlled){Object.assign(result,{controller:controlled.controller,controllerId:controlled.controllerId,controllerTag:controlled.controllerTag,government:controlled.government,ideology:controlled.ideology,conflict:controlled.conflict,controlUncertain:controlled.uncertain,mixedControllers:controlled.mixedControllers});if(!controlled.uncertain)result.leader=controlled.leader;
+      const chosen=state.position.source==='opening'&&state.profile?.birthplace?.unitId===unit.id?state.profile.birthplace.authorityId:null;
+      const tag=chosen?.startsWith('faction:')?chosen.slice(8):chosen?.startsWith('country:')?getCountryContext({},chosen.slice(8))?.tag:null;
+      if(controlled.uncertain&&tag&&controlled.mixedControllers?.some(row=>row.tag===tag)){const actual=getFactionContext(state,tag);Object.assign(result,{controller:actual.name,controllerId:`faction:${tag}`,controllerTag:tag,leader:actual.leader,government:actual.government,ideology:actual.ideology,controlUncertain:false,partialControl:true});}
+    }
+    const territorial=territorialPatchFor(state,unit);
+    if(territorial.controller||territorial.controllerId){const current=controllerContext(state,territorial.controllerId);Object.assign(result,{controller:territorial.controller||current?.name||territorial.controllerId,controllerId:territorial.controllerId,controllerTag:current?.tag||null,leader:current?.leader||territorial.controller,government:current?.government||`${territorial.controller||territorial.controllerId}实际管治`,ideology:current?.ideology||null,controlUncertain:false,playerChanged:true});}
+    if(Object.hasOwn(territorial,'conflict'))result.conflict=territorial.conflict;
+  }
   const globalChange=state.worldOverrides?.global,terminated=state.worldDynamics?.terminatedConflicts||[];
   if(where.region==='usa'&&seen.has('world_usa_civil_war')&&!terminated.includes('usa')&&!Object.hasOwn(state.worldOverrides?.usa||{},'conflict')){result.conflict='美国内战';result.stage='civil_war';}
   if(state.worldDynamics?.lastingPeace){result.conflict=null;result.regionalConflict=null;}
@@ -156,6 +171,7 @@ export function regionContext(state,lore){
   result.dailyContext=historical?historical.dailyLife:province?`${province.dailyLife}。${province.pressures}，常常进入家庭的讨论。`:base.dailyLife;
   result.plainLocalDescription=result.dailyContext;
   result.localDetails=historical?[historical.dailyLife]:province?[`${province.dailyLife}。`,`${province.industry}带来不同的工作与生计。`,`${province.pressures}，需要一家人商量安排。`,`${province.ruralLife}，与城市之间仍有亲友和生活上的往来。`]:[base.dailyLife,`人们在${result.institutions.slice(-2).join('和')||'当地办事机构'}处理日常事务。`];
+  if(result.partialControl){const note=`你生活在${result.controller}管治的部分，同一行政区内还有其他势力控制的地区。`;result.localDetails.unshift(note);result.dailyContext=note+result.dailyContext;}
   result.pandemic=historical?'目前没有本地重大传染病疫情的消息。':seen.has('world_opening')?pandemicContext(where,state.month,seen):'当地尚未发布新的疫情通报。';
   const localHealth=known.filter(e=>e.region===where.region&&(/^rs_tw_(command|masks|vaccine|distribution)$|^rs_jp_(response|packages)$/.test(e.id)||e.category==='pandemic')).slice(-2);
   if(localHealth.length)result.pandemic+=' '+localHealth.map(e=>e.description).filter(Boolean).join(' ');
@@ -166,7 +182,7 @@ export function regionContext(state,lore){
 /** Serialized current facts for engine saves, maps and prompts; does not mutate the life. */
 export function deriveGovernmentState(state,lore){
   return Object.fromEntries(Object.entries({china:'中国大陆',taiwan:'中国台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国'}).map(([region,location])=>{
-    const current=regionContext({...state,location},lore);
+    const current=regionContext({...state,location,position:undefined},lore);
     return [region,{...current.institutionState,regionalConflict:current.regionalConflict||null}];
   }));
 }
