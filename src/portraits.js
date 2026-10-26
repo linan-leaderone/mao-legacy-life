@@ -56,7 +56,7 @@ export function getPortrait(value = {}) {
 /** A stable contact id is an ordinary fictional person, not a missing historical-person record. */
 export function contactPortraitValue(state = {}, node = {}) {
   if (node.id === 'player') return state;
-  return {seed:state.seed,profile:{name:node.name || '无名者',portraitContactId:node.id || node.name, ...(node.personaId ? {lockedPersonaId:node.personaId} : {})}};
+  return {seed:state.seed,profile:{name:node.name || '无名者',portraitContactId:node.id || node.name, ...(node.personaId ? {lockedPersonaId:node.personaId} : node.referenceRequired ? {id:node.id || node.name} : {})}};
 }
 
 export function getContactPortrait(state, node) { return getPortrait(contactPortraitValue(state,node)); }

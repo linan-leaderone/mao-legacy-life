@@ -74,7 +74,7 @@ export function createAtlasNavigation({position,units,manifest={},situation,incl
 
 /** At most six visible countries are decoded per overview. An explicit destination
  * may request one additional layer; zooming back out does not retain fine layers. */
-export function selectAtlasLayers({manifest={},viewport,scale=1,focusedUnit=null,maxCountries=6}={}) {
+export function selectAtlasLayers({manifest={},viewport,scale=1,focusedUnit=null,maxCountries=6,controlCountries=new Set()}={}) {
   const layers=manifest.layers||[],out=new Set(layers.some(row=>row.id==='world')?['world']:[]);
   const candidates=new Map();
   for(const layer of layers){
@@ -86,7 +86,7 @@ export function selectAtlasLayers({manifest={},viewport,scale=1,focusedUnit=null
     const distance=rows=>{const bound=rows[0].bounds;return Math.hypot(atlasLongitudeNear((bound[0]+bound[2])/2,cx)-cx,(bound[1]+bound[3])/2-cy);};
     return distance(a[1])-distance(b[1]);
   });
-  for(const [,rows] of sorted.slice(0,maxCountries)){
+  for(const [country,rows] of sorted.slice(0,maxCountries)){
     const sortedRows=rows.sort((a,b)=>(ROLE_ORDER[a.role]??0)-(ROLE_ORDER[b.role]??0)||Number(a.level?.match(/\d+/)?.[0]||0)-Number(b.level?.match(/\d+/)?.[0]||0));
     let chosen=null;
     for(const layer of sortedRows){
@@ -94,6 +94,13 @@ export function selectAtlasLayers({manifest={},viewport,scale=1,focusedUnit=null
       if(scale<minimumScale)continue;
       const b=layer.bounds,area=Math.max(0,b[2]-b[0])*Math.max(0,b[3]-b[1])*scale*scale;
       if(area/Math.max(1,layer.count)>=18)chosen=layer;
+    }
+    // A provincial overview must still reveal the county control mosaic. Keep
+    // worldwide views bounded and skip countries occupying only a few pixels.
+    if(controlCountries.has(country)&&scale>=4){
+      const finest=sortedRows.at(-1),b=finest.bounds;
+      const width=(b[2]-b[0])*scale,height=(b[3]-b[1])*scale;
+      if(width>=70&&height>=55)chosen=finest;
     }
     if(chosen)out.add(chosen.id);
   }

@@ -78,7 +78,7 @@ export function buildRelationshipLayout(graph,{positions={},textScale=0,selected
   visible.forEach((edge,index)=>{
     const a=byId.get(edge.source),b=byId.get(edge.target),text=short(edgeLabel(edge),textScale?8:17),w=(textScale?Math.max(labelWidth(text),Array.from(text).reduce((n,char)=>n+(/[\u2e80-\uffff]/.test(char)?12:7),20)):labelWidth(text))*(textScale||1),h=27*(textScale||1),sign=(hash(edge.id)%2?1:-1),direct=attached(edge,'player');
     const needsLabel=attached(edge,selectedId),fast=textScale>1||nodes.length>32||visible.length>140;
-    if(!needsLabel){const curve=makeCurve(a,b,(direct?24:55)*sign);edges.push({...edge,text,curve,label:null,path:`M ${curve.a.x} ${curve.a.y} C ${curve.b.x} ${curve.b.y}, ${curve.c.x} ${curve.c.y}, ${curve.d.x} ${curve.d.y}`});return;}
+    if(!needsLabel){let curve=makeCurve(a,b,(direct?24:55)*sign);if(nodes.length<=32)for(let attempt=1;attempt<=12&&blocked(curve,nodes,a.id,b.id);attempt++)curve=makeCurve(a,b,(55+attempt*55)*sign);edges.push({...edge,text,curve,label:null,path:`M ${curve.a.x} ${curve.a.y} C ${curve.b.x} ${curve.b.y}, ${curve.c.x} ${curve.c.y}, ${curve.d.x} ${curve.d.y}`});return;}
     let picked=null;
     for(let attempt=0;attempt<(fast?12:90)&&!picked;attempt++){
       const magnitude=attempt===0?(direct?24:100):50+Math.floor((attempt+1)/2)*44,bend=magnitude*sign*(attempt%2?-1:1),curve=makeCurve(a,b,bend);
@@ -124,7 +124,7 @@ export function openRelationshipMap(state,{document:doc=globalThis.document,wind
     const footer=make('div','relationship-footer'),counts=make('span'),legend=make('span','relationship-legend',t('实线：你的联系　曲线：人物间的紧密联系'));footer.append(counts,legend);dialog.append(header,tools,body,footer);
     let selected='player',pageState,layout,camera={x:0,y:0,scale:1},autoFit=false,textZoom=1.25,closed=false,observer=null,frame=0,drag=null,pinch=null,suppressClick=false;const positions=new Map(),pointers=new Map();
     const size=()=>{const box=svg.getBoundingClientRect();return {w:Math.max(1,box.width||780),h:Math.max(1,box.height||520),left:box.left||0,top:box.top||0};};
-    const applyCamera=()=>{const box=size();svg.setAttribute('viewBox',`${camera.x-box.w/camera.scale/2} ${camera.y-box.h/camera.scale/2} ${box.w/camera.scale} ${box.h/camera.scale}`);svg.setAttribute('data-overview',String(camera.scale<.8));zoomLabel.textContent=`${Math.round(camera.scale*100)}%`;};
+    const applyCamera=()=>{const box=size();svg.setAttribute('viewBox',`${camera.x-box.w/camera.scale/2} ${camera.y-box.h/camera.scale/2} ${box.w/camera.scale} ${box.h/camera.scale}`);svg.setAttribute('data-overview',String(camera.scale<.8&&graph.nodes.length>13));zoomLabel.textContent=`${Math.round(camera.scale*100)}%`;};
     const screenPoint=(x,y)=>{const box=size();return {x:camera.x+(x-box.left-box.w/2)/camera.scale,y:camera.y+(y-box.top-box.h/2)/camera.scale};};
     function zoomAt(factor,client){autoFit=false;const before=client?screenPoint(client.x,client.y):null;camera.scale=clamp(camera.scale*factor,.02,2.4);if(client){const after=screenPoint(client.x,client.y);camera.x+=before.x-after.x;camera.y+=before.y-after.y;}applyCamera();}
     function fitCamera(bounds,centerOnPlayer){
@@ -177,7 +177,7 @@ export function openRelationshipMap(state,{document:doc=globalThis.document,wind
       }
       empty.hidden=pageState.total>0;empty.textContent=t('相识的人会陆续出现在这里。');
       counts.textContent=`${t('相识')} ${Math.max(0,graph.nodes.length-1)} ${t('人')} · ${t('联系')} ${graph.edges.length} · ${t('同一张图')}`;
-      renderDetails();if(fitAfter){autoFit=false;camera={x:0,y:0,scale:size().w<540?.85:1};applyCamera();}else if(autoFit)fitView();else applyCamera();
+      renderDetails();if(fitAfter){if(graph.nodes.length<=13)fitView();else{autoFit=false;camera={x:0,y:0,scale:size().w<540?.85:1};applyCamera();}}else if(autoFit)fitView();else applyCamera();
     }
     function release(){for(const id of pointers.keys())try{if(svg.hasPointerCapture?.(id))svg.releasePointerCapture(id);}catch{}pointers.clear();drag=null;pinch=null;}
     function finish(){if(closed)return;closed=true;release();listeners.forEach(remove=>remove());observer?.disconnect();if(frame)win?.cancelAnimationFrame?.(frame);if(dialog.open)dialog.close();dialog.remove();if(previousFocus?.isConnected)previousFocus.focus?.({preventScroll:true});resolve();}

@@ -119,6 +119,9 @@ export function normalizeRelationshipGraph(state={}){
       if(!raw||typeof raw!=='object'||raw.id==='player')continue;
       const person=builder.ensure(raw.personaId||raw.name,raw.detail,false,raw.nameEvidence);if(!person)continue;
       person.firstMetMonth=moment(raw.firstMetMonth,monthOf(state));person.lastContactMonth=moment(raw.lastContactMonth,person.firstMetMonth);
+      if(raw.referenceRequired===true)person.referenceRequired=true;
+      if(['living','deceased','missing','unknown'].includes(raw.lifeStatus))person.lifeStatus=raw.lifeStatus;
+      if(typeof raw.familyRole==='string')person.familyRole=text(raw.familyRole,24);
       mapping.set(text(raw.id,200),person.id);
     }
     for(const raw of saved.edges.slice(0,MAX_EDGES)){
@@ -139,6 +142,27 @@ export function normalizeRelationshipGraph(state={}){
   addKnownLinks(builder,state);return builder.finish();
 }
 export const getRelationshipGraph=normalizeRelationshipGraph;
+
+/** The opening initializer supplies sourced relatives or seeded fictional ones.
+ * Existing contact facts and ties win; this is never a per-turn people generator. */
+export function mergeOpeningRelationshipGraph(state,contacts=[],links=[]){
+  const builder=makeBuilder(state,normalizeRelationshipGraph(state)),player=builder.nodes.get('player');
+  for(const row of contacts.slice(0,64)){
+    const person=builder.ensure(row.name,row.detail);if(!person||person.id==='player')continue;
+    if(row.referenceRequired===true)person.referenceRequired=true;
+    if(['living','deceased','missing','unknown'].includes(row.lifeStatus))person.lifeStatus=row.lifeStatus;
+    person.familyRole=text(row.role,24);
+    const old=builder.edges.get(edgeId('player',person.id).id),kind=['丈夫','妻子','伴侣'].includes(row.role)?'partner':row.role==='熟人'?'friend':'family';
+    // Legacy graphs may already record estrangement or death after the opening.
+    const preserve=old&&!['background','opening-family'].includes(old.origin);
+    if(!preserve)builder.connect(player,person,{status:row.role+(row.lifeStatus==='deceased'?'·已故':row.lifeStatus==='missing'?'·失联':''),kind,detail:row.detail,strength:kind==='friend'?65:90,origin:'opening-family'});
+  }
+  for(const row of links.slice(0,64)){
+    const a=existingNode(builder,row.source,state),b=existingNode(builder,row.target,state);
+    if(a&&b)builder.connect(a,b,row,false);
+  }
+  return builder.finish();
+}
 
 const objectVerb='(?:见到|遇见|遇到|认识|结识|拜访|约见|会见|接待|接触|联系上|联系|采访|帮助|救下|救了|搭救|击败|袭击|拥抱|亲吻|打电话给|发消息给)';
 const contactVerb='(?:见到|见面|遇见|遇到|认识|结识|拜访|约见|会见|接待|接触|联系上|联系|采访|帮助|救下|救了|搭救|击败|袭击|拥抱|亲吻|打电话给|打电话|通话|发消息给|交谈|谈话|商量|讨论|争吵|争执|吵架|合作|共事|结盟|成为朋友|结为朋友|成为好友|成为恋人|结婚|离婚|分手|绝交|决裂|断绝关系|恢复联系|并肩作战|一起[^，。]{0,12})';
@@ -220,6 +244,7 @@ export function isValidRelationshipGraph(raw){
   const ids=new Set();
   for(const node of raw.nodes){
     if(!node||typeof node.id!=='string'||!node.id||node.id.length>200||ids.has(node.id)||typeof node.name!=='string'||!node.name.trim()||node.name.length>80||typeof node.detail!=='string'||node.detail.length>320||!Number.isFinite(node.firstMetMonth)||!Number.isFinite(node.lastContactMonth)||node.personaId!==undefined&&(typeof node.personaId!=='string'||node.personaId.length>100)||node.nameEvidence!==undefined&&(typeof node.nameEvidence!=='string'||node.nameEvidence.length>240))return false;
+    if(node.referenceRequired!==undefined&&typeof node.referenceRequired!=='boolean'||node.lifeStatus!==undefined&&!['living','deceased','missing','unknown'].includes(node.lifeStatus)||node.familyRole!==undefined&&(typeof node.familyRole!=='string'||node.familyRole.length>24))return false;
     ids.add(node.id);
   }
   if(!ids.has('player'))return false;

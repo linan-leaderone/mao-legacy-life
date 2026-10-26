@@ -36,12 +36,12 @@ test('country and controlling faction choices include Crimea and fragmented stat
  assert.equal(game.profile.identity.nationality,'俄罗斯');assert.equal(game.position.unitId,crimea.id);assert.equal(territoryExposure(game,game.location,lore).controllerTag,'SOV');
  assert.throws(()=>make({birthplaceId:jinshui.id,openingAuthorityId:'country:RUS'}),/控制范围/);
 });
-test('mixed counties can start within a chosen faction while the map stays mixed',()=>{
+test('mixed opening evidence resolves consistently to the chosen birthplace faction',()=>{
  const unit=getGeographyUnit('AFG-17698898B53195345217503');
  const selected=birthplaceSelectionForUnit(unit,'faction:TAL');assert.equal(selected.authorityId,'faction:TAL');assert.equal(birthplaceOptions(selected).complete,true);
  const game=make({birthplaceId:unit.id,openingAuthorityId:'faction:TAL'}),context=regionContext(game,lore);
- assert.equal(game.profile.identity.nationality,'阿富汗');assert.equal(context.controllerTag,'TAL');assert.equal(context.partialControl,true);
- const map=deriveTerritorySituation(game,unit,lore);assert.equal(map.uncertain,true);assert.equal(map.war,true);assert.ok(map.mixedControllers.some(row=>row.tag==='TAL'));
+ assert.equal(game.profile.identity.nationality,'阿富汗');assert.equal(context.controllerTag,'TAL');assert.equal(context.controlUncertain,false);
+ const map=deriveTerritorySituation(game,unit,lore);assert.equal(map.uncertain,false);assert.equal(map.war,true);assert.equal(map.ownerTag,'TAL');assert.deepEqual(map.mixedControllers,[]);
 });
 test('explicit citizenship survives a new location; unknown birthplace IDs fail cleanly',()=>{
  const game=make({birthplaceId:jinshui.id,identity:{nationality:'火星联邦'}});

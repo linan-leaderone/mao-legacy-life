@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import lore from '../src/data/lore.json' with {type:'json'};
-import {createTerritoryContext,deriveTerritorySituation} from '../src/world-territories.js';
+import {createTerritoryContext,deriveTerritorySituation,geographyUnits} from '../src/world-territories.js';
 import {territoryActionChanges} from '../src/territory-actions.js';
 import {selectFactionFlag} from '../src/faction-flags.js';
 
@@ -22,6 +22,8 @@ test('a new civil war cannot silently preserve exclusive 2020 control of the ent
  assert.equal(situation.war,true);
  assert.equal(situation.uncertain,true);
  assert.notEqual(situation.controllerId,'japan_ldp');
+ const local=deriveTerritorySituation(s,geographyUnits.find(unit=>unit.country==='JPN'&&unit.role==='city'),lore);
+ assert.equal(local.uncertain,false);assert.ok(['japan_left','japan_toyokawa'].includes(local.ownerId));
 });
 
 test('helping a named existing MOD faction take territory retains its official identity and government',()=>{

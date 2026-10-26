@@ -76,6 +76,17 @@ test('world overview never downloads every local polygon layer',()=>{
   assert.deepEqual(selectAtlasLayers({manifest:layerManifest,viewport:[-180,-60,180,80],scale:1}),['world']);
 });
 
+test('fragmented countries show county control at province zoom without loading the whole world',()=>{
+  const fragmented=new Set(['X0','X1','X2','X3','X4','X5','X6','X7']);
+  assert.deepEqual(selectAtlasLayers({manifest:layerManifest,viewport:[-180,-60,180,80],scale:1,controlCountries:fragmented}),['world']);
+  const countryLayers={layers:[{id:'world',role:'country'},
+    {id:'AFG-ADM1',country:'AFG',role:'province',count:34,bounds:[60,29,75,39]},
+    {id:'AFG-ADM2',country:'AFG',role:'county',count:400,bounds:[60,29,75,39]}]};
+  assert.deepEqual(selectAtlasLayers({manifest:countryLayers,viewport:[59,28,76,40],scale:10,controlCountries:new Set(['AFG'])}),['world','AFG-ADM2']);
+  assert.deepEqual(selectAtlasLayers({manifest:countryLayers,viewport:[59,28,76,40],scale:10}),['world','AFG-ADM1']);
+  assert.equal(selectAtlasLayers({manifest:layerManifest,viewport:[0,0,24,2],scale:40,controlCountries:fragmented}).length,7);
+});
+
 test('close views load only intersecting countries at a bounded count',()=>{
   const chosen=selectAtlasLayers({manifest:layerManifest,viewport:[0,0,24,2],scale:60});
   assert.equal(chosen.length,7);assert.equal(chosen.filter(id=>id.endsWith('ADM2')).length,6);

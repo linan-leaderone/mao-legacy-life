@@ -21,6 +21,8 @@ test('fixed portraits remain fixed, and missing historical references never rece
   assert.equal(getContactPortrait(a,known).src,getContactPortrait(b,known).src);
   assert.equal(getContactPortrait(a,missing).src,null);
   assert.equal(getContactPortrait(a,missing).kind,'missing');
+  assert.equal(getContactPortrait(a,{id:'relative:real-mother',name:'母亲',referenceRequired:true}).kind,'missing');
+  assert.equal(getContactPortrait(a,{id:'relative:real-mother',name:'母亲',referenceRequired:true}).src,null);
   assert.equal(contactPortraitValue(a,{id:'player'}),a);
 });
 

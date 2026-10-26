@@ -56,10 +56,10 @@ test('a Taiwan left victory changes current controller and ideology, with no old
   const old=deriveTerritorySituation(state({month:0}),district,lore);assert.notEqual(old.controllerId,value.controllerId);assert.notEqual(controllerColor(old.controllerId),controllerColor(value.controllerId));
 });
 
-test('uncertain civil-war local control is visibly uncertain, not randomly assigned',()=>{
+test('civil-war counties have a stable concrete side without mutating the life',()=>{
   const s=state({seenEvents:['tw_civil_war'],eventMonths:{tw_civil_war:30}}),before=JSON.stringify(s);
   const first=deriveTerritorySituation(s,district,lore),second=deriveTerritorySituation(s,district,lore);
-  assert.equal(first.uncertain,true);assert.match(first.controller,/争夺/);assert.equal(first.frontline,false);assert.deepEqual(first,second);assert.equal(JSON.stringify(s),before);
+  assert.equal(first.uncertain,false);assert.ok(['taiwan_left','taiwan_dpp','taiwan_kmt','taiwan_revanchist'].includes(first.ownerId));assert.deepEqual(first,second);assert.equal(JSON.stringify(s),before);
 });
 
 test('precise ownership takes priority over region and province overlays',()=>{

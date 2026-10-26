@@ -1,7 +1,7 @@
 # 项目事实
 
 - 本目录是独立游戏，不修改相邻 `TFR-xinzuo-rebuild`。MOD 剧情来源见 `docs/LORE-SOURCES.md`，配图来源见 `docs/ART-SOURCES.md`。
-- 当前源码版本1.13.0，`timelineVersion: 5`、`providerRevision: 7`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
+- 当前源码版本1.14.0，`timelineVersion: 5`、`providerRevision: 7`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
 - 用户只有iPhone，iOS交付采用Safari“添加到主屏幕”的PWA（iOS/iPadOS 15.4+），不是原生IPA或TestFlight。`pnpm build:ios`单独输出`dist-ios`，不改变既有Windows/Android产物。`src/ios-install.js`只在`__IOS_PWA__`构建启用；`src/file-export.js`在iPhone使用支持JSON文件的系统分享面板，否则回退下载，原生导出优先级保留。核心离线缓存成功才显示就绪，地方地图按查看范围加载并校验缓存，首次查看未缓存地区需要联网，更新不强制刷新当前人生。
 - iOS发布副本为相邻`mao-legacy-life-ios-site`，Site身份在其`.openai/hosting.json`，必须沿用。这个目录只同步已经移除默认密钥的`dist-ios`内容，不能复制整个游戏目录、`.private`、原始查询缓存或完整MOD审计索引。iOS网页禁止内置个人默认密钥，手机自行填写并保存在当地浏览器/主屏幕存储中。用户于2026-10-24明确要求免注册登录分享，Site已设为public；后续更新保留公开访问，使用普通保存/部署流程，不得调用会要求owner-only的私有部署操作。发布方式和验证边界见`docs/IOS.md`。
 - 每次启动先显示首页 API 卡，包括有存档时；支持 DeepSeek、Gemini、自定义 API 三选一，以及不联网、继续、新人生和读取。品牌入口返回首页，切换连接不丢失进度，请求进行中不得切换。首页和设置共用连接表单，编辑自动保存，开始和继续前提交当前表单；测试连接必须使用当前草稿，迟到结果不能覆盖已修改配置。
@@ -23,7 +23,7 @@
 - 新闻 `exposure` 分为 direct、indirect、remote、none。远方报道不自动在本地造成灾害、封控、拘押或收入损失；大陆政治和办事机构不套到台日港澳韩。地区环境只应用已经发生的制度变化。
 - 面向人物的正文、选项与新闻必须沉浸式，不插入开发者、玩家、本局、触发节点、路线锁定、属性加成等局外说明。来源、适配说明和隐藏分支仅保留在数据元信息与文档，不能拼入叙事或提前透露终局。
 - `src/narrative.js` 管理简洁文风与可识别错龄校验；各叙事服务最多自动重写一次，不在重写时推进月份或重算行动。格式错误、再次不合格或网络失败交由界面重试或本地叙事。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
-- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.12.0；Android versionCode 14；Windows目录`release/MaoLegacyLife-1.12.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
+- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.14.0；Android versionCode 16；Windows目录`release/MaoLegacyLife-1.14.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
 - 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，默认选择DeepSeek。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA一律空默认密钥。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
 - 修改核心行为后运行相应测试并完成 `pnpm test`；构建用 `pnpm build`，原生包需重新封装后才能交付。实际验证边界与最终测试结果在 `docs/VERIFICATION.md`，不得把源码更新直接写成已交付新包。
 
@@ -46,3 +46,5 @@
 - 1.12地图索引在src/geography.js，位置记录在src/player-position.js，国别资料在src/countries.js。全球55,588单位/258轮廓/203个国家与地区有地方层，55个仅轮廓；384几何分片按视窗加载。七层视图跟随本人当前位置，搜索不迁居，行政区中心是示意位置，未知地点不伪造坐标。保留v1.11单位ID；来源与未覆盖层见docs/WORLD-MAP-v1.12.md。state.location保留兼容宏观地区，state.position存真实可解析县市、精度和月份，已完成迁居才提交。
 
 - 1.13 country-catalog按history、启动effect/on_action与ZZZ覆盖解析最终开局状态，保留条件未确定记录；不等同运行完整HOI4脚本引擎。PRK政府为法西斯专政、主体思想。opening-control将MOD控制与现实行政单位关联，多方或映射不确定处明确标注，不把采样比例当面积比例。territory/worldOverrides继续优先。faction-flags收录全部尺寸的旗帜标识并按cosmetic、控制TAG、已知路线选择，玩家新势力匹配标识注明拟用。PWA地方地图及旗帜按需校验缓存。来源见docs/COUNTRIES-v1.13.md、OPENING-CONTROL-v1.13.md与FLAGS-v1.13.md。
+
+- 1.14 不确定市县使用 territory-simulation 按人生种子和区划ID建立固定控制，原始opening-control证据保留；明确接管/停火优先。world-map按ownerId着色，frontline叠attackerId斜纹，战时广域影响不覆盖势力色。fragmentedCountryIds指导县级层提前展开。界面不再显示被用户删除的来源说明，来源与许可留在资源文件与文档。opening-relationships初始化普通新人物家庭，真实隐藏人物只复用档案，referenceRequired无参考图保留空缺。旧档仅证据迁移，不能随机补在世亲属。详见docs/RELEASE-v1.14.md。

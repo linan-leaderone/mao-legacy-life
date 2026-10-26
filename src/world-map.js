@@ -1,5 +1,5 @@
 import './world-map.css';
-import {geographyUnits,createTerritoryContext,deriveTerritorySituation,controllerColor,resolveTerritoryTargets,searchGeographyUnits} from './world-territories.js';
+import {geographyUnits,createTerritoryContext,deriveTerritorySituation,controllerColor,resolveTerritoryTargets,searchGeographyUnits,fragmentedCountryIds} from './world-territories.js';
 import {getPlayerPosition} from './player-position.js';
 import {getCountryContext,countryByTag} from './countries.js';
 import {factionFlagMarkup} from './faction-display.js';
@@ -32,7 +32,7 @@ async function loadLayer(layer,signal){
   let sinceYield=0;
   for(const [id,encoded] of Object.entries(data.features||{})){
     if(signal.aborted)throw new DOMException('Aborted','AbortError');
-    const unit=byId.get(id);if(unit){const polygons=decodeGeometry(encoded,data.scale);rows.push({unit,path:pathFor(polygons),projected:[unit.bounds[0],-mercator(unit.bounds[3]),unit.bounds[2],-mercator(unit.bounds[1])]});}
+    const unit=byId.get(id);if(unit){const polygons=decodeGeometry(encoded,data.scale),parts=polygons.map(poly=>{const bounds=[Infinity,Infinity,-Infinity,-Infinity];for(const ring of poly)for(const [x,y] of ring){bounds[0]=Math.min(bounds[0],x);bounds[1]=Math.min(bounds[1],y);bounds[2]=Math.max(bounds[2],x);bounds[3]=Math.max(bounds[3],y);}return bounds;});rows.push({unit,path:pathFor(polygons),parts,projected:[unit.bounds[0],-mercator(unit.bounds[3]),unit.bounds[2],-mercator(unit.bounds[1])]});}
     if(++sinceYield>=240){sinceYield=0;await new Promise(resolve=>setTimeout(resolve,0));}
   }
   cacheLayer(layer.id,rows);return rows;
@@ -43,11 +43,12 @@ async function loadLayer(layer,signal){
 export function mountWorldMap(host,initialState,lore){
   if(!host)return {destroy(){},update(){}};
   host.classList.add('world-atlas');
-  host.innerHTML=`<div class="atlas-heading"><div><span class="tiny-label">世界地图</span><h3>此刻，各地</h3></div><button type="button" data-atlas-here>回到本人</button></div><div class="atlas-position" aria-live="polite"></div><nav class="atlas-scopes" aria-label="按本人所在地查看地图">${ATLAS_SCOPES.map(scope=>`<button type="button" data-atlas-scope="${scope.id}">${scope.label}</button>`).join('')}</nav><p class="atlas-scope-note" aria-live="polite"></p><details class="atlas-missing"><summary>没有亮起的层级</summary><ul></ul></details><form class="atlas-search" role="search"><label class="sr-only" for="atlas-search-input">查找地区</label><input id="atlas-search-input" placeholder="查找全球县市、地区或国家" autocomplete="off"><button type="submit">查找</button></form><div class="atlas-search-results" aria-live="polite"></div><div class="atlas-frame"><canvas tabindex="0" aria-label="世界局势地图，可拖动与双指缩放，也可使用地图层级和地区查找"></canvas><div class="atlas-player-marker" hidden><div class="atlas-player-face"></div><span></span></div><div class="atlas-status" role="status">正在展开地图…</div><div class="atlas-scale"></div></div><div class="atlas-controls"><div><button type="button" data-atlas-zoom="out" aria-label="缩小地图">−</button><button type="button" data-atlas-zoom="in" aria-label="放大地图">＋</button></div><span>拖动或双指缩放 · 点选地区</span></div><div class="atlas-legend"><span><i class="atlas-normal"></i>管治范围</span><span><i class="atlas-war"></i>参战势力控制区</span><span><i class="atlas-front"></i>确认交战地区</span><span><i class="atlas-person"></i>本人所在地区</span></div><section class="atlas-detail" aria-live="polite"><p>选择一个地区，查看目前的管治与战事。</p></section><details class="atlas-sources"><summary>地图范围与资料</summary><p>世界底图与各国地方边界按需展开。行政层级依当地体系与现有资料显示，缺少的层级不补造边界。大区指东亚、西欧等地理分区。</p><p>头像标记位于已知所在地的示意中心，不代表具体住址。尚未明确县市时，不能由省份中心推断本人所在县市。未确认的内战分区保留“各方争夺”，红色仅表示已经确认的当地交战。</p><p>边界：<a href="https://www.geoboundaries.org/" target="_blank" rel="noopener">geoBoundaries</a>、<a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>；本地名称：<a href="https://www.geonames.org/" target="_blank" rel="noopener">GeoNames</a>。</p><a href="./maps/sources.json" target="_blank" rel="noopener">数据年份与许可</a> · <a href="./maps/manifest.json" target="_blank" rel="noopener">各国边界覆盖情况</a></details>`;
+  host.innerHTML=`<div class="atlas-heading"><div><span class="tiny-label">世界地图</span><h3>此刻，各地</h3></div><button type="button" data-atlas-here>回到本人</button></div><div class="atlas-position" aria-live="polite"></div><nav class="atlas-scopes" aria-label="按本人所在地查看地图">${ATLAS_SCOPES.map(scope=>`<button type="button" data-atlas-scope="${scope.id}">${scope.label}</button>`).join('')}</nav><p class="atlas-scope-note" aria-live="polite"></p><details class="atlas-missing"><summary>没有亮起的层级</summary><ul></ul></details><form class="atlas-search" role="search"><label class="sr-only" for="atlas-search-input">查找地区</label><input id="atlas-search-input" placeholder="查找全球县市、地区或国家" autocomplete="off"><button type="submit">查找</button></form><div class="atlas-search-results" aria-live="polite"></div><div class="atlas-frame"><canvas tabindex="0" aria-label="世界局势地图，可拖动与双指缩放，也可使用地图层级和地区查找"></canvas><div class="atlas-player-marker" hidden><div class="atlas-player-face"></div><span></span></div><div class="atlas-status" role="status">正在展开地图…</div><div class="atlas-scale"></div></div><div class="atlas-controls"><div><button type="button" data-atlas-zoom="out" aria-label="缩小地图">−</button><button type="button" data-atlas-zoom="in" aria-label="放大地图">＋</button></div><span>拖动或双指缩放 · 点选地区</span></div><div class="atlas-legend" aria-label="势力颜色"></div><section class="atlas-detail" aria-live="polite"><p>选择一个地区，查看目前的管治与战事。</p></section>`;
   const canvas=host.querySelector('canvas'),ctx=canvas.getContext('2d'),status=host.querySelector('.atlas-status'),detail=host.querySelector('.atlas-detail'),results=host.querySelector('.atlas-search-results'),scaleLabel=host.querySelector('.atlas-scale'),marker=host.querySelector('.atlas-player-marker'),abort=new AbortController();
   let state=initialState,prepared=createTerritoryContext(state,lore),position=getPlayerPosition(state),manifest={layers:[{id:'world',file:'world-boundaries.json',role:'country'}]},navigation=[],activeScope='world',scopeBounds=null,focusedUnit=null;
-  let width=600,height=410,dpr=1,camera={x:0,y:0,scale:1},selection=null,disposed=false,frame=0,layerTimer=0,drag=null,pinch=null,autoFit=true,loaded=new Map(),wanted=new Set(['world']),factionDestination=null,portraitSource='';
+  let width=600,height=410,dpr=1,camera={x:0,y:0,scale:1},selection=null,disposed=false,frame=0,layerTimer=0,drag=null,pinch=null,autoFit=true,loaded=new Map(),wanted=new Set(['world']),factionDestination=null,portraitSource='',legendKey='';
   const pointers=new Map(),listeners=[],situations=new Map(),pending=new Map(),failedLayers=new Set();
+  let controlCountries=fragmentedCountryIds(state,prepared);
   const listen=(element,type,callback,options)=>{element.addEventListener(type,callback,options);listeners.push(()=>element.removeEventListener(type,callback,options));};
   const situation=unit=>{if(!situations.has(unit.id))situations.set(unit.id,deriveTerritorySituation(state,unit,lore,prepared));return situations.get(unit.id);};
   const schedule=()=>{if(!disposed&&!frame)frame=requestAnimationFrame(()=>{frame=0;draw();});};
@@ -94,18 +95,18 @@ export function mountWorldMap(host,initialState,lore){
   }
   function here(){const unit=byId.get(position?.unitId);if(!unit)return;const role=navigation.find(row=>row.id===unit.role&&row.available);if(role)view(role.id);else{activeScope=null;autoFit=true;scopeBounds=unit.bounds;select(unit,true);}}
   function resize(){const box=canvas.getBoundingClientRect();width=Math.max(240,box.width);height=Math.max(260,box.height);dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);if(autoFit&&scopeBounds)fit(scopeBounds);else schedule();}
-  function visible(row){const b=row.projected,halfW=width/camera.scale/2,halfH=height/camera.scale/2;return b[2]>=camera.x-halfW&&b[0]<=camera.x+halfW&&b[3]>=camera.y-halfH&&b[1]<=camera.y+halfH;}
+  function visible(row){const halfW=width/camera.scale/2,halfH=height/camera.scale/2,intersects=(b,offset=0)=>b[2]+offset>=camera.x-halfW&&b[0]+offset<=camera.x+halfW&&b[3]>=camera.y-halfH&&b[1]<=camera.y+halfH;return intersects(row.projected)&&(!row.parts||row.parts.some(part=>intersects(part,row.offset||0)));}
   function rowsToDraw(){
     const rows=[];for(const id of wanted)for(const row of loaded.get(id)||[]){
       const center=(row.projected[0]+row.projected[2])/2,base=atlasLongitudeNear(center,camera.x)-center;
-      for(const offset of [base-360,base,base+360]){const projected=[row.projected[0]+offset,row.projected[1],row.projected[2]+offset,row.projected[3]];if(visible({projected}))rows.push({...row,projected,offset});}
+      for(const offset of [base-360,base,base+360]){const projected=[row.projected[0]+offset,row.projected[1],row.projected[2]+offset,row.projected[3]];if(visible({projected,parts:row.parts,offset}))rows.push({...row,projected,offset});}
     }
     return rows.sort((a,b)=>(ROLE_RANK[a.unit.role]??0)-(ROLE_RANK[b.unit.role]??0));
   }
   async function refreshLayers(){
     if(disposed)return;
     const previous=wanted;
-    wanted=new Set(selectAtlasLayers({manifest,viewport:viewport(),scale:camera.scale,focusedUnit}));wanted.add('world');
+    wanted=new Set(selectAtlasLayers({manifest,viewport:viewport(),scale:camera.scale,focusedUnit,controlCountries}));wanted.add('world');
     for(const id of previous)if(!wanted.has(id))loaded.delete(id);
     const needed=[...wanted].filter(id=>!loaded.has(id));
     status.hidden=!needed.length;if(needed.length)status.textContent='正在展开这一带的地方边界…';
@@ -131,6 +132,30 @@ export function mountWorldMap(host,initialState,lore){
     marker.hidden=false;marker.style.left=`${x}px`;marker.style.top=`${y}px`;
     return [x-80,y-38,160,70];
   }
+  function drawFrontline(row,s){
+    // Clip to both the county polygon and viewport. Spacing stays constant on screen.
+    const offset=row.offset||0,halfW=width/camera.scale/2,halfH=height/camera.scale/2;
+    const left=Math.max(row.projected[0],camera.x-halfW)-offset,right=Math.min(row.projected[2],camera.x+halfW)-offset;
+    const top=Math.max(row.projected[1],camera.y-halfH),bottom=Math.min(row.projected[3],camera.y+halfH);
+    if(right<=left||bottom<=top)return;
+    ctx.save();ctx.clip(row.path,'evenodd');ctx.beginPath();ctx.rect(left,top,right-left,bottom-top);ctx.clip();
+    const gap=10/camera.scale,rise=bottom-top;
+    ctx.strokeStyle=controllerColor(s.attackerId);ctx.lineWidth=3/camera.scale;ctx.beginPath();
+    for(let x=Math.floor((left-rise)/gap)*gap;x<right+gap;x+=gap){ctx.moveTo(x,bottom);ctx.lineTo(x+rise,top);}
+    ctx.stroke();ctx.restore();
+  }
+  function renderLegend(rows){
+    const finest=new Map();for(const row of rows)finest.set(row.unit.country,Math.max(finest.get(row.unit.country)||0,ROLE_RANK[row.unit.role]||0));
+    const factions=new Map();let fighting=false;
+    for(const row of rows){
+      if((ROLE_RANK[row.unit.role]||0)<finest.get(row.unit.country))continue;
+      const s=situation(row.unit),id=s.ownerId||s.controllerId;
+      if(id)factions.set(id,s.ownerName||s.controller);
+      if(s.frontline&&s.attackerId){factions.set(s.attackerId,s.attackerName||s.attackerId);fighting=true;}
+    }
+    const entries=[...factions].sort((a,b)=>a[0].localeCompare(b[0])),key=JSON.stringify([entries,fighting]);if(key===legendKey)return;legendKey=key;
+    host.querySelector('.atlas-legend').innerHTML=entries.map(([id,name])=>`<span><i style="background:${escape(controllerColor(id))}"></i>${escape(name)}</span>`).join('')+(fighting?'<span class="atlas-battle-key"><i></i>交战：守方底色 · 攻方斜纹</span>':'');
+  }
   function draw(){
     if(!ctx)return;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);ctx.fillStyle='#dfe9e4';ctx.fillRect(0,0,width,height);
     ctx.save();ctx.translate(width/2,height/2);ctx.scale(camera.scale,camera.scale);ctx.translate(-camera.x,-camera.y);
@@ -140,20 +165,21 @@ export function mountWorldMap(host,initialState,lore){
     const rows=rowsToDraw();
     for(const row of rows){
       ctx.save();ctx.translate(row.offset||0,0);
-      const s=situation(row.unit);ctx.fillStyle=controllerColor(s.uncertain?s.controllerId:s.controllerId+':'+s.controller);ctx.fill(row.path,'evenodd');
-      if(s.war){ctx.fillStyle=s.frontline?'#a62f3280':'#db9d3f55';ctx.fill(row.path,'evenodd');}
+      const s=situation(row.unit);ctx.fillStyle=controllerColor(s.ownerId||s.controllerId);ctx.fill(row.path,'evenodd');
+      if(s.frontline&&s.attackerId)drawFrontline(row,s);
       ctx.lineWidth=(row.unit.role==='country'?1:.55)/camera.scale;ctx.strokeStyle=row.unit.role==='country'?'#faf8ecbb':'#f4f3e4aa';ctx.stroke(row.path);
-      if(s.frontline){ctx.strokeStyle='#9b3533';ctx.lineWidth=2/camera.scale;ctx.stroke(row.path);}
+      if(s.frontline&&s.attackerId){ctx.strokeStyle=controllerColor(s.attackerId);ctx.lineWidth=1.5/camera.scale;ctx.stroke(row.path);}
       if(row.unit.id===selection){ctx.strokeStyle='#203d34';ctx.lineWidth=3/camera.scale;ctx.stroke(row.path);}
       ctx.restore();
     }
     ctx.restore();
-    const playerBox=markerBox(),occupied=playerBox?[playerBox]:[],detailedCountries=new Set(rows.filter(row=>row.unit.role!=='country').map(row=>row.unit.country));ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='12px system-ui, sans-serif';
+    renderLegend(rows);
+    const playerBox=markerBox(),occupied=playerBox?[playerBox]:[],detailRanks=new Map();for(const row of rows)detailRanks.set(row.unit.country,Math.max(detailRanks.get(row.unit.country)||0,ROLE_RANK[row.unit.role]||0));ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='12px system-ui, sans-serif';
     const labelRows=[...rows].sort((a,b)=>(b.unit.id===selection)-(a.unit.id===selection));
     for(const row of labelRows){
       const u=row.unit,b=row.projected,bw=(b[2]-b[0])*camera.scale,bh=(b[3]-b[1])*camera.scale;
       if(u.id!==selection&&(bw<56||bh<24))continue;
-      if(u.role==='country'&&detailedCountries.has(u.country))continue;
+      if(u.id!==selection&&(ROLE_RANK[u.role]||0)<detailRanks.get(u.country))continue;
       const x=(u.center[0]+(row.offset||0)-camera.x)*camera.scale+width/2,y=(-mercator(u.center[1])-camera.y)*camera.scale+height/2;
       if(x<25||x>width-25||y<12||y>height-12)continue;
       const text=u.name.length>14?u.name.slice(0,13)+'…':u.name,w=ctx.measureText(text).width+10,box=[x-w/2,y-9,w,18];
@@ -167,9 +193,9 @@ export function mountWorldMap(host,initialState,lore){
     const s=situation(unit),source=unit.source||{},country=getCountryContext(state,unit.country),badge=s.frontline?'交战地区':s.war?'战时影响区':'暂无当地战事';
     const chain=atlasAncestors(unit,byId).reverse().filter(row=>row.id!==unit.id),parent=chain.map(row=>row.name).join(' › ')||unit.parent||unit.country;
     const controlledBaseline=s.controllerTag?countryByTag(s.controllerTag):null;
-    const baseline=controlledBaseline||country?.baseline||country,coverage=manifest.coverage?.find(row=>row.country===unit.country);
+    const baseline=controlledBaseline||country?.baseline||country;
     const opening=countryOpeningMarkup(baseline);
-    detail.innerHTML=`<div class="atlas-detail-title"><div><span class="tiny-label">${escape(parent)} · ${escape(source.level||unit.level)}</span><h4>${factionFlagMarkup(s)}${escape(unit.name)}</h4></div><span class="atlas-badge ${s.war?'is-war':''}">${badge}</span></div>${position?.unitId===unit.id?`<p class="atlas-here-note">你目前在这里，已知位置为${escape(PRECISION_LABEL[position.precision]||'所在地区')}。</p>`:''}<dl><div><dt>目前管治</dt><dd>${escape(s.controller)}</dd></div>${s.government?`<div><dt>当前制度</dt><dd>${escape(s.government)}</dd></div>`:''}${s.ideology?`<div><dt>政治取向</dt><dd>${escape(s.ideology)}</dd></div>`:''}${s.conflict?`<div><dt>当前战事</dt><dd>${escape(s.conflict)}</dd></div>`:''}</dl><p>${escape(s.description)}</p>${s.mixedControllers?.length?`<div class="atlas-mixed-controls">${s.mixedControllers.map(row=>`<span>${factionFlagMarkup({controllerTag:row.tag})}${escape(row.name)}</span>`).join('')}</div>`:''}${opening}<small>边界资料：${escape(source.provider||'geoBoundaries')} · ${escape(source.year||'来源年份未标明')}。${unit.aliases?.[0]?`资料名称：${escape(unit.aliases[0])}。`:''}${coverage?`<br>当地已收录层级：${escape((coverage.availableLevels||[]).join('、')||'世界底图')}。${escape(coverage.note||'')}`:''}</small>`;
+    detail.innerHTML=`<div class="atlas-detail-title"><div><span class="tiny-label">${escape(parent)} · ${escape(source.level||unit.level)}</span><h4>${factionFlagMarkup(s)}${escape(unit.name)}</h4></div><span class="atlas-badge ${s.war?'is-war':''}">${badge}</span></div>${position?.unitId===unit.id?`<p class="atlas-here-note">你目前在这里，已知位置为${escape(PRECISION_LABEL[position.precision]||'所在地区')}。</p>`:''}<dl><div><dt>目前管治</dt><dd>${escape(s.ownerName||s.controller)}</dd></div>${s.frontline&&s.attackerId?`<div><dt>进攻方</dt><dd>${escape(s.attackerName||s.attackerId)}</dd></div>`:''}${s.government?`<div><dt>当前制度</dt><dd>${escape(s.government)}</dd></div>`:''}${s.ideology?`<div><dt>政治取向</dt><dd>${escape(s.ideology)}</dd></div>`:''}${s.conflict?`<div><dt>当前战事</dt><dd>${escape(s.conflict)}</dd></div>`:''}</dl><p>${escape(s.description)}</p>${s.mixedControllers?.length?`<div class="atlas-mixed-controls">${s.mixedControllers.map(row=>`<span>${factionFlagMarkup({controllerTag:row.tag})}${escape(row.name)}</span>`).join('')}</div>`:''}${opening}`;
   }
   function select(unit,zoom=false){if(!unit)return;selection=unit.id;renderDetail(unit);if(zoom){activeScope=null;autoFit=true;scopeBounds=unit.bounds;focusedUnit=unit;updateScopeNote();fit(unit.bounds);}else schedule();}
   function leavePreset(){autoFit=false;activeScope=null;focusedUnit=null;updateScopeNote();}
@@ -209,7 +235,7 @@ export function mountWorldMap(host,initialState,lore){
   })();
   return {
     update(next){
-      const previousPosition=position;state=next;prepared=createTerritoryContext(state,lore);position=getPlayerPosition(state);situations.clear();factionDestination=null;
+      const previousPosition=position;state=next;prepared=createTerritoryContext(state,lore);controlCountries=fragmentedCountryIds(state,prepared);position=getPlayerPosition(state);situations.clear();factionDestination=null;
       const previousScope=activeScope;refreshNavigation();
       if(previousScope&&navigation.some(row=>row.id===previousScope&&row.available))view(previousScope);
       else if(previousPosition?.unitId!==position?.unitId){if(position?.unitId)here();else view('world');}
