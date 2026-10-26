@@ -1,3 +1,4 @@
+import {shuihuText} from './shuihu.js';
 import * as OpenCC from 'opencc-js/cn2t';
 import optionTranslations from './data/option-translations.json' with {type:'json'};
 
@@ -23,7 +24,7 @@ function withProtected(text,protectedValues,convert){
   return convert(masked).replace(/\uE000(\d+)\uE001/g,(_,index)=>slots[Number(index)]);
 }
 export function convertChinese(text,language,protectedValues=[]){
-  const mode=normalizeLanguage(language),convert=mode==='zh-TW'?traditional:mode==='martian'?martian:value=>value;
+  const mode=normalizeLanguage(language),convert=mode==='zh-TW'?traditional:mode==='martian'?martian:mode==='shuihu'?value=>shuihuText(value):value=>value;
   return withProtected(String(text??''),protectedValues,convert);
 }
 
@@ -38,12 +39,12 @@ export function languageInstruction(value){
     martian:'使用可辨读的中文火星文：适量使用谐音字、异体字与少量符号，保留完整句子与实际因果。不要每个字都替成难辨符号，不编造网络用语的年代。',
     shuihu:'依用户明确选择，使用《水浒传》式通俗白话章回叙事，适量使用“话说”“当下”“且说”等说书语气。保持第二人称或清楚指向本人，写清事情的前因后果。此模式允许古白话措辞，覆盖默认现代书面语与禁古文要求；不把现代制度、装备、地点硬改成宋朝，不引入用户未要求的神魔，不机械套原著人物与情节。'
   };
-  return `${instructions[language]} 所选语言/文风只改变表达，不改变世界事实。用户自填姓名、族裔、性别、国籍/势力和引号内的行动原文保持原样；JSON字段名、枚举、人物ID和location保持输入值。personUpdate属于延续档案，已有身份与职业名称保持输入的原称，新职业用可核对的具体称谓。正文和选项遵循所选语言。`;
+  return `${instructions[language]} 所选语言/文风保持本次开局确认的世界事实；若有scenario，以其中的彩蛋开局和已发生变化为准，不按文风擅自再改史实。用户自填姓名、族裔、性别、国籍/势力和引号内的行动原文保持原样；JSON字段名、枚举、人物ID和location保持输入值。personUpdate属于延续档案，已有身份与职业名称保持输入的原称，新职业用可核对的具体称谓。正文和选项遵循所选语言。`;
 }
 export function writingRulesForLanguage(language,baseRules){
   const mode=normalizeLanguage(language);
   if(mode==='zh-CN'||mode==='zh-TW'||mode==='martian')return baseRules;
-  if(mode==='shuihu')return '每月写两段连贯的古白话正文。consequence用60–120字交代刚完成行动、结果和影响，narrative用100–190字续写因果相连的新进展，不重复上段。以通俗说书口吻写具体事情，不堆典故，不将现代生活改造成宋代制度。';
+  if(mode==='shuihu')return '每月写两段连贯的古白话正文。consequence用100–180字重点交代刚完成行动、结果和影响，narrative只用40–90字续写一项因果相连的新进展，不重复上段。以通俗说书口吻写具体事情，不堆典故，不将现代生活改造成宋代制度。';
   return '每月两段连贯正文，以所选语言自然书写。consequence说明刚完成的行动、结果和影响，narrative接着写有因果联系的下一步，不大段复述。英语每段约45–100词；日语每段约100–220字；韩语每段约100–240字。可以少于上限，不凑字数。避免空泛抒情、密集比喻、故作深奥和单词碎句。中文范例只表示数据结构，不能据此把输出改回中文。';
 }
 
@@ -81,7 +82,7 @@ export function translateUI(value,language){
   if(!trimmed||mode==='zh-CN')return text;
   const padding=translated=>text.replace(trimmed,translated);
   if(mode==='zh-TW'||mode==='martian')return padding(convertChinese(trimmed,mode));
-  if(mode==='shuihu')return padding(modeInterface.shuihu[trimmed]||trimmed);
+  if(mode==='shuihu')return padding(modeInterface.shuihu[trimmed]||shuihuText(trimmed));
   const entry=dictionary.get(trimmed);if(entry?.[mode])return padding(entry[mode]);
   const point=trimmed.match(/^(剩余|超出)\s*(\d+)\s*点$/);
   if(point)return padding(mode==='en'?`${point[2]} points ${point[1]==='剩余'?'remaining':'over budget'}`:mode==='ja'?`${point[2]}点${point[1]==='剩余'?'残り':'超過'}`:`${point[2]}점 ${point[1]==='剩余'?'남음':'초과'}`);
@@ -163,6 +164,6 @@ export function localizeEvent(event,state,action=null){
   const protectedValues=protectedIdentityValues(state).concat(action?.label||[]),convert=text=>convertChinese(text,language,protectedValues);
   const news=(event.news||[]).map(item=>localizeNews(item,language,{protectedValues}));
   if(['zh-TW','martian'].includes(language))return {...event,title:convert(event.title),narrative:convert(event.narrative),consequence:convert(event.consequence),memory:convert(event.memory),options:(event.options||[]).map(option=>({...option,originalLabel:option.originalLabel||option.label,label:convert(option.label),description:convert(option.description)})),news,language};
-  if(language==='shuihu')return {...event,language,news,title:event.title,narrative:`话说${String(event.narrative||'').replace(/^你/,'你这日').replace(/接下来的/g,'此后的').replace(/随后/g,'当下')}`,consequence:event.consequence?`且说${String(event.consequence).replace(/^你/,'你先前')}`:'',options:event.options};
+  if(language==='shuihu'){const convert=text=>convertChinese(text,language,protectedValues);return {...event,language,news,title:convert(event.title),narrative:withProtected(event.narrative||'',protectedValues,text=>shuihuText(text,{prose:true})),consequence:event.consequence?convert(event.consequence):'',memory:convert(event.memory),options:(event.options||[]).map(o=>({...o,originalLabel:o.originalLabel||o.label,label:convert(o.label),description:convert(o.description)}))};}
   return {...event,...localStory(state,action,language,event),news,language,translationStatus:'local-template',localOriginal:{title:event.title,narrative:event.narrative,consequence:event.consequence||''}};
 }

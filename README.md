@@ -1,6 +1,6 @@
 # 毛的遗产 · 人生档案
 
-2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.10.0**。
+2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.11.0**。
 
 [直接游玩](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.10.md)
 
@@ -92,3 +92,5 @@ pwsh -NoProfile -File scripts/package-android.ps1
 Gemini默认使用指定转发站的Gemini原生协议与`gemini-4-argon`，原随包Google默认配置会定向迁移；个人自定义连接保留。工作、鱼群捕食、受伤感染及普通行动的后续均延续已经发生的事情。
 
 新增配送、质检、柜台配单、办公校对，以及带障碍和地形的丧尸遭遇战。弹药、装备、感染和实际奖金随行动保存，退出不推进月份。水滴鱼使用用户参考图改绘，隐藏人物缺少参考照片时留空；完成数量和素材来源见[立绘记录](docs/PORTRAITS-v1.7.md)。[小游戏说明](docs/MINIGAMES-v1.7.md)记录操作与结算规则。
+
+1.11 增加世界与东亚细区地图、控制归属和战时影响，修复政权意识形态与关系抽取；取消关系分页，固定开局语言，加入水浒借魂开局和43条国策适配政策。地图边界年份、许可和精度见地图来源文档，政治/政策适配见 [WORLD-RULES-v1.11](docs/WORLD-RULES-v1.11.md)。

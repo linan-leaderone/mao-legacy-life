@@ -1,3 +1,4 @@
+import {storyOverlap} from './story-flow.js';
 import {continuityIssues} from './continuity.js';
 import * as OpenCC from 'opencc-js/t2cn';
 import {normalizeLanguage} from './language.js';
@@ -60,7 +61,7 @@ function foreignProseIssues(response,context){
 
 export const WRITING_RULES=`使用现代汉语日常书面语，像人在交代实际经历，句子完整连贯。不要古文、网文腔、故作深奥、华丽辞藻、密集比喻和类比，不用单词或两三个字反复断成短句。
 禁用“很沉”“很轻”“变轻”“脸上写着”；不用“而且、并且、不仅、不但、甚至、况且、何况、更何况、再者、此外、进而、进一步、更重要的是”等递进表达。禁用“不是…而是”“不是…是”“不是…不是…而是”“不是…也不是…”及“，却…”的转折句式。直写做了什么、遇到谁、得到什么结果，不在结尾升华人生。
-每月只写两段连贯正文。consequence用60–110字写刚完成的行动过程、结果和实际影响，narrative用100–170字接着写由这个结果带来的具体后续，不能另起无关生活。照常生活时consequence用30–60字，narrative用100–170字延续已有工作、项目、关系和身体状况。两段各有进展，不换词复述。可以少于上限，不凑字数，不罗列新闻。`;
+每月只写两段连贯正文。consequence用100–180字重点写刚完成的行动过程、结果和实际影响，narrative只用40–80字写由此产生的一项新后续，不能另起无关生活。照常生活时两段合计100–180字延续已有工作、项目、关系和身体状况。本月的主要篇幅必须落在本人行动上，第二段不能再做一遍第一段的工作、再领一遍工资或再说一次约定，只写新的反馈、阻碍、联系或待办。可以少于上限，不凑字数，不罗列新闻。`;
 
 const forbidden=[
   /很沉|很轻|变轻|脸上写着/,
@@ -107,7 +108,7 @@ export function proseIssues(originalResponse,{language='zh-CN',ageYears,priorAge
   }
   const grams=text=>{const s=String(text||'').replace(/[\s，。！？、：；,.!?]/g,'');return new Set(Array.from({length:Math.max(0,s.length-4)},(_,i)=>s.slice(i,i+5)));};
   const a=grams(response.narrative),b=grams(response.consequence);
-  if(a.size>=30&&b.size>=30&&[...a].filter(g=>b.has(g)).length/Math.min(a.size,b.size)>0.62)issues.push('两段大面积复述了相同经过。consequence保留上月行动，narrative写新月已变化的生活和后续事项。');
+  if((a.size>=30&&b.size>=30&&[...a].filter(g=>b.has(g)).length/Math.min(a.size,b.size)>0.62)||storyOverlap(response.consequence,response.narrative).length>=2)issues.push('两段大面积复述了相同经过。consequence保留上月行动，narrative写新月已变化的生活和后续事项。');
   if(region&&region!=='china'){
     for(const text of [response.narrative,response.consequence])if(/你[^。！？]{0,24}(?:向街道办|到街道办|找村支书|参加党支部|办理入党积极分子)/.test(text||''))issues.push('所在地不使用中国大陆基层党政办事流程，请按当前制度改写。');
   }
@@ -119,7 +120,7 @@ export function proseIssues(originalResponse,{language='zh-CN',ageYears,priorAge
   if(location&&originalResponse.location&&originalResponse.location!==location)issues.push('保持已落实的当前所在地，不能另行迁居。');
   if((actionPassive||canSuggestWorldUpdates===false)&&Array.isArray(response.worldUpdates)&&response.worldUpdates.length)issues.push('本次行动没有允许补充的公共事实，worldUpdates必须为空数组；保留已有新闻即可。');
   if(Array.isArray(response.worldUpdates)&&response.worldUpdates.some(e=>/玩家|游戏|本局|系统判定|路线分支|剧情节点|开发者|属性加成/.test(`${e?.title||''} ${e?.description||''}`)))issues.push('公共报道只写已发生的事实与社会影响，删除局外规则说明。');
-  if(intimacyAllowed===false&&(fields.some(t=>/性行为|发生性关系|性爱|性交|性欲|淫乱|色情|床笫|性爱玩具/.test(t))||(response.options||[]).some(o=>Number(o.delta?.promiscuity)>0)))issues.push('当前身体条件不允许成人亲密内容，请改为非性化的人际关系、照护和日常生活。');
+  if(intimacyAllowed===false&&(fields.some(t=>/性行为|发生(?:了)?(?:性)?关系|性爱|性交|性欲|淫乱|色情|床笫|性爱玩具|用信息素|催眠.{0,12}(?:亲密|伴侣|服从)/.test(t))||(response.options||[]).some(o=>Number(o.delta?.promiscuity)>0)))issues.push('当前身体条件不允许成人亲密内容，请改为非性化的人际关系、照护和日常生活。');
   return [...new Set([...issues,...continuityIssues(response,continuation)])].slice(0,8);
 }
 

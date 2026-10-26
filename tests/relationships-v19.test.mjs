@@ -136,3 +136,26 @@ test('untrusted structured updates are bounded and cannot inject arbitrary save 
   const rows=normalizeRelationshipUpdates(raw);assert.equal(rows.length,RELATIONSHIP_LIMITS.updates);assert.equal(rows[0].status.length,48);assert.equal(rows[0].detail.length,320);assert.equal(rows[0].strength,100);assert.equal(rows[0].apiKey,undefined);assert.equal(rows[0].portrait,undefined);
   assert.deepEqual(normalizeRelationshipUpdates({target:'张三'}),[]);
 });
+
+test('ordinary objects and screenshot sentence fragments never become contacts',()=>{
+  for(const label of ['你把照片和之前抄下的地名放到一起。','我遇到了困难。','我接触了资料。','我把旧的方式和新的方式一起整理。','我和方式一起处理事情。','我把资料与张三一起交给同事。'])assert.deepEqual(names(act(state(),label)),['小林'],label);
+  const g=act(state(),'我和张三一起整理资料。你在车间与陈明一起工作。');assert.deepEqual(names(g),['小林','张三','陈明']);
+});
+
+test('legacy junk fragments are removed without deleting valid custom and international names',()=>{
+  const s=state();s.relationshipGraph={version:1,nodes:[{id:'player',name:'小林',detail:'',firstMetMonth:0,lastContactMonth:0},...['之前抄下的地名放到','方式','八云紫永远十七岁','Alex Morgan','김민수','张三','过雪'].map((name,i)=>({id:`old-${i}`,name,detail:i===0?'你把照片和之前抄下的地名放到一起':'曾经相识',firstMetMonth:0,lastContactMonth:1}))],edges:Array.from({length:7},(_,i)=>({id:`edge-${i}`,source:'player',target:`old-${i}`,status:'相识',kind:'acquaintance',detail:'相识',strength:30,updatedMonth:1}))};
+  const before=structuredClone(s),g=getRelationshipGraph(s);assert.deepEqual(names(g),['小林','八云紫永远十七岁','Alex Morgan','김민수','张三','过雪']);assert.equal(g.edges.length,5);assert.deepEqual(s,before);assert(isValidRelationshipGraph(g));
+});
+
+test('explicit invented names survive subsequent visits and save normalization',()=>{
+  const s=state();s.relationshipGraph=act(s,'我见到了名叫方式的工程师。我认识了自称八云紫永远十七岁的人。');
+  assert.deepEqual(names(s.relationshipGraph),['小林','方式','八云紫永远十七岁']);
+  assert.deepEqual(names(getRelationshipGraph(JSON.parse(JSON.stringify(s)))),names(s.relationshipGraph));
+  s.relationshipGraph=act(s,'我与方式结为朋友');assert.equal(tie(s.relationshipGraph,'小林','方式').kind,'friend');
+  s.relationshipGraph=act(s,'我与方式绝交');assert.equal(tie(s.relationshipGraph,'小林','方式').kind,'estranged');assert(names(getRelationshipGraph(s)).includes('方式'));
+});
+
+test('saved nicknames containing ordinary grammar and family names remain intact',()=>{
+  const s=state();s.person.relationships=['飞翔的河南人：朋友','我的朋友叫夜雨：同事','Alexander de Vries：朋友','过雪：同学'];
+  const g=normalizeRelationshipGraph(s);assert(names(g).includes('飞翔的河南人'));assert(names(g).includes('Alexander de Vries'));assert(names(g).includes('过雪'));assert.deepEqual(names(normalizeRelationshipGraph({...s,relationshipGraph:g})),names(g));
+});

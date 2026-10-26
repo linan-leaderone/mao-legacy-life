@@ -50,6 +50,7 @@ export function buildPersonaIndex(groups){
 const database=buildPersonaIndex([specialData.personas,modData.personas,data.personas,curatedData.personas,catalogData.personas]);
 const {records,byName}=database;
 export const PERSONA_DATABASE_INFO=Object.freeze({count:records.length,merged:database.merged,ambiguousAliases:database.ambiguousNames.length,asOf:'2020-01-01'});
+const BAND_MEMBERS=new Set(['hazawa_tsugumi','mitake_ran','aoba_moca','uehara_himari','udagawa_tomoe']);
 
 /** Exact known names and aliases only; a famous surname alone never locks a profile. */
 export function findPersona(name){
@@ -63,12 +64,13 @@ export function findPersona(name){
 export function getPoliticalActors(state={}){
   const month=Number(state.month)||0;if(month<0)return [];
   const known=new Set([...(state.seenEvents||[]),...(state.seenNews||[]),...(state.newsHistory||[]).filter(e=>e.month<=month).map(e=>e.id)]);
-  const activeLeader=Object.values(state.worldOverrides||{}).map(x=>x.leader).filter(Boolean).join(' ');
+  const april=state.profile?.scenario?.id==='mao-april',activeLeader=[...Object.values(state.worldOverrides||{}).map(x=>x.leader).filter(Boolean),...(april?['薄熙来','赖清德']:[])].join(' ');
   const local=String(state.location||state.profile?.place||'');
   const region=/台湾|台灣|台北|高雄|新竹/.test(local)?'taiwan':/日本|东京|大阪/.test(local)?'japan':/香港/.test(local)?'hongkong':/澳门/.test(local)?'macau':'china';
   const all=[];
   for(const actor of modData.actors){
     if(actor.name===state.profile?.name)continue;
+    if(april&&(['习近平','蔡英文'].includes(actor.name)||(state.person?.bodyIdentity==='赖清德'&&actor.name==='赖清德')))continue;
     if((actor.inactiveAfter||[]).some(id=>known.has(id))&&!activeLeader.includes(actor.name))continue;
     const stages=(actor.stages||[]).filter(s=>(s.requires||[]).every(id=>known.has(id))&&!(s.blockAfter||[]).some(id=>known.has(id)));
     const stage=stages.at(-1);if(!stage&&!activeLeader.includes(actor.name))continue;
@@ -78,7 +80,20 @@ export function getPoliticalActors(state={}){
     const override=state.worldOverrides?.[merged.region];
     if(merged.incumbent&&override?.leader&&!override.leader.includes(actor.name))continue;
     const relationships=(actor.relationships||[]).filter(r=>(r.requires||[]).every(id=>known.has(id)));
-    all.push({id:actor.id,name:actor.name,region:merged.region,ideology:merged.ideology,role:merged.role,priorities:merged.priorities||actor.priorities,relationships,influence:merged.influence||35,sourceRefs:merged.sourceRefs||actor.sourceRefs,local:merged.region===region});
+    const explicitPoliticalRole=activeLeader.includes(actor.name)||(state.newsHistory||[]).some(e=>e.source==='player'&&e.month<=month&&`${e.actor||''} ${e.description||''}`.includes(actor.name)&&/任命|担任|领导|率领|组建.*(?:政府|军|政党)/.test(e.description||''));
+    const civilWar=known.has('jp_hazawa_toyokawa_war')||known.has('world_japan_civil')||known.has('jp_hazawa_end')||/内战/.test(state.worldOverrides?.japan?.conflict||'');
+    const isBand=BAND_MEMBERS.has(actor.id),toyokawa=actor.id==='toyokawa_sakiko';
+    const autonomyEligible=isBand?(civilWar||explicitPoliticalRole):toyokawa?(known.has('jp_toyokawa_rise')||known.has('jp_emergency_committee')||explicitPoliticalRole):true;
+    // Music, relief and public expression do not confer command of a state or armed faction.
+    const scope=isBand&&!autonomyEligible?'music-and-personal-life':autonomyEligible?'public-affairs':'personal-life';
+    let role=merged.role,ideology=merged.ideology,influence=merged.influence||35;
+    if(isBand&&civilWar&&!/联合军|联合阵线/.test(role)){role=actor.id==='hazawa_tsugumi'?'参与日本左翼联合组织的音乐人':'参与战时救助与左翼公共活动的音乐人';ideology='战时形成中的左翼政治立场';}
+    if(state.profile?.scenario?.id==='mao-april'){
+      if(actor.name==='习近平')continue;
+      if(actor.name==='薄熙来'){role='中国国家主席';ideology='市场毛主义与太子党主席独裁';influence=95;}
+      if(actor.name==='赖清德'){role='毛泽东借魂的台湾执政者';ideology='群众政治与毛主义';influence=90;}
+    }
+    all.push({id:actor.id,name:actor.name,region:merged.region,ideology,role,priorities:merged.priorities||actor.priorities,relationships,influence,sourceRefs:merged.sourceRefs||actor.sourceRefs,local:merged.region===region,autonomyEligible,activityScope:scope});
   }
   return all.sort((a,b)=>Number(b.local)-Number(a.local)||b.influence-a.influence).slice(0,12).map(x=>structuredClone(x));
 }

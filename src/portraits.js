@@ -35,6 +35,7 @@ function bodyAge(value, profile) {
 
 /** Metadata belongs to portrait management, never appended to monthly narration. */
 export function getPortrait(value = {}) {
+  if(value.person?.bodyPersonaId){const body=value.person.bodyPersonaId;const person={...value.person};delete person.bodyPersonaId;return getPortrait({...value,person,profile:{...value.profile,lockedPersonaId:body,name:value.person.bodyIdentity||value.profile.name,persona:undefined}});}
   const profile = profileOf(value), known = knownOf(profile), identityKey = portraitIdentity(value), custom = overrides.get(identityKey);
   const age = bodyAge(value, profile), ageVariant = age < 16 ? 'child' : age >= 60 ? 'older' : 'adult';
   const base = {id: known?.id || profile.lockedPersonaId || identityKey, identityKey, name: profile.name || known?.name || '无名者', ageVariant, age, canUpload: true, style: '', sourceStatus: ''};

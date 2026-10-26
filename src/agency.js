@@ -1,3 +1,4 @@
+import {relationshipBehaviorDelta} from './adult-relationships.js';
 // Personal declarations are stored as world facts; narration cannot undo them.
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 export const monthOf=(year,month=1)=>(year-2020)*12+month-1;
@@ -123,8 +124,8 @@ export function declarationPlan(s,action,{region='china',ageMonths=216}={}){
   if(/帮助|救助|捐赠|救援|赈灾|守约|偿还|道歉/.test(text))plan.delta.morality=2;
   if(/贪污|侵吞|诈骗|背叛|欺骗|抢劫/.test(text))plan.delta.morality=-3;
   if(/演出|演讲|表演|唱歌|化妆|交际|沟通|安慰/.test(text))plan.delta.charisma=2;
-  const adult=(plan.ageMonths??ageMonths)>=216&&!/未成年|儿童|小学生|中学生|幼儿|萝莉|正太/.test(text);
-  if(adult&&/(?:双方|彼此|大家|所有人).{0,8}(?:同意|自愿)|开放式关系|非专一关系/.test(text)&&/伴侣|恋爱|亲密|约会|关系/.test(text))plan.delta.promiscuity=2;
+  const preferenceDelta=relationshipBehaviorDelta(s,text,{ageMonths,nextAgeMonths:plan.ageMonths??ageMonths});
+  if(preferenceDelta)plan.delta.promiscuity=preferenceDelta;
   return plan;
 }
 export function settlementPlan(s,action,plan,success){

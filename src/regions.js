@@ -1,5 +1,7 @@
 import data from './data/regions.json' with {type:'json'};
 import memeData from './data/memes.json' with {type:'json'};
+import {REGIMES,EVENT_REGIMES,baselineRegime,normalizedGovernmentOverride} from './regime-rules.js';
+import {scenarioRegionPatch} from './scenario.js';
 
 const ALIASES={台灣:'中国台湾',台湾:'中国台湾',台北:'中国台湾',臺北:'中国台湾',台中:'中国台湾',高雄:'中国台湾',新竹:'中国台湾',台南:'中国台湾',花莲:'中国台湾',东京:'日本',東京:'日本',大阪:'日本',京都:'日本',横滨:'日本',北海道:'日本',冲绳:'日本',首尔:'韩国',首爾:'韩国',釜山:'韩国',香港特别行政区:'香港',香港特別行政區:'香港',澳门特别行政区:'澳门',澳門:'澳门',大陆:'中国大陆',中國大陸:'中国大陆',中国:'中国大陆',中國:'中国大陆',石家庄:'河北',太原:'山西',呼和浩特:'内蒙古',沈阳:'辽宁',大连:'辽宁',长春:'吉林',哈尔滨:'黑龙江',南京:'江苏',苏州:'江苏',杭州:'浙江',宁波:'浙江',合肥:'安徽',福州:'福建',厦门:'福建',南昌:'江西',济南:'山东',青岛:'山东',郑州:'河南',武汉:'湖北',长沙:'湖南',广州:'广东',深圳:'广东',南宁:'广西',海口:'海南',三亚:'海南',成都:'四川',贵阳:'贵州',昆明:'云南',拉萨:'西藏',西安:'陕西',兰州:'甘肃',西宁:'青海',银川:'宁夏',乌鲁木齐:'新疆'};
 const SPECIAL={'中国台湾':'taiwan','日本':'japan','香港':'hongkong','澳门':'macau','韩国':'korea','中国大陆':'china'};
@@ -110,23 +112,24 @@ function historicalEnvironment(where,month){
   return common;
 }
 function applyWorldOverride(result,state){
-  const patch=state.worldOverrides?.[result.region];if(!patch||typeof patch!=='object')return;
-  for(const key of ['leader','government','stage','conflict','ideology','institutions','terms'])if(Object.hasOwn(patch,key))result[key]=structuredClone(patch[key]);
+  const patch=normalizedGovernmentOverride(result.region,state.worldOverrides?.[result.region]);if(!patch||typeof patch!=='object')return;
+  for(const key of ['leader','government','stage','conflict','ideology','factionId','institutions','terms'])if(Object.hasOwn(patch,key))result[key]=structuredClone(patch[key]);
   result.playerChanged=true;
 }
 export function regionContext(state,lore){
   const where=locality(state.location),base=data.regions[where.region],province=data.provinces[where.province];
   if(where.region==='ocean')return {...where,location:state.location,stage:'ocean',conflict:null,government:'所处海域没有陆地居民的行政生活',leader:null,institutions:[],terms:['洋流','海温','鱼群','礁石','水深'],forbiddenAssumptions:['海中身体与陆地居民生活分开，不安排上班、学校、社区登记、家庭账单或防疫手续。'],dailyContext:'洋流带来食物与陌生鱼群，水深、体形和捕食者决定活动范围。',plainLocalDescription:'你生活在太平洋，周围是海水、鱼群和不同深度的海底环境。',localDetails:['洋流和海温影响食物分布。','更大的生物会改变附近鱼群的游动方向。'],pandemic:'陆地公共卫生措施不直接成为海洋生物的生活安排。',knownChanges:[],knownRegionalReports:[],institutionState:{stage:'ocean',government:null,leader:null,conflict:null}};
   const historical=historicalEnvironment(where,Number(state.month)||0);
-  const result={...structuredClone(base),...where,location:state.location,stage:'civilian',conflict:null,...historical};
+  const result={...structuredClone(base),...where,...baselineRegime(where.region),location:state.location,stage:'civilian',conflict:null,...historical,...scenarioRegionPatch(state,where.region)};
   const known=knownEvents(state,lore),seen=new Set(known.map(e=>e.id)),changes=[];
   for(const event of known){
     const patch=CHANGES[event.id];
-    if(patch?.region===where.region){Object.assign(result,structuredClone(patch));changes.push({id:event.id,month:event.month,title:event.title||event.id});}
+    if(patch?.region===where.region){Object.assign(result,structuredClone(patch),REGIMES[EVENT_REGIMES[event.id]]||{});changes.push({id:event.id,month:event.month,title:event.title||event.id});}
+    if(event.id==='april_direct_democracy'&&where.region==='taiwan')changes.push({id:event.id,month:event.month,title:event.title});
     if(event.id==='world_strait_war'&&where.region==='taiwan'){result.conflict='台海战争';result.stage='wartime';}
     if(event.id==='world_strait_end'&&where.region==='taiwan'){
       result.conflict=null;result.stage='postwar';
-      if(/大陆部队.*控制|中华人民共和国.*统一|北京.*接管|大陆付出巨大代价的胜利/.test(event.description||'')){result.government='台海停火后处于接管与重建阶段，具体地方安排尚待公布';result.leader='战后接管当局';result.institutions=['接管当局','地方行政机关','重建机构'];}
+      if(/大陆部队.*控制|中华人民共和国.*统一|北京.*接管|大陆付出巨大代价的胜利/.test(event.description||'')){Object.assign(result,REGIMES.taiwan_takeover);result.government='台海停火后处于接管与重建阶段，具体地方安排尚待公布';result.leader='战后接管当局';result.institutions=['接管当局','地方行政机关','重建机构'];}
     }
     if(event.id==='world_japan_civil'&&where.region==='japan'){result.conflict='日本内战';result.stage='civil_war';}
     if(event.id==='world_asia_war'&&['china','japan','taiwan'].includes(where.region)){result.regionalConflict='大亚洲战争';}
@@ -139,7 +142,7 @@ export function regionContext(state,lore){
   else if(globalChange?.conflict&&/大亚洲/.test(globalChange.conflict)&&['china','taiwan','japan'].includes(where.region))result.regionalConflict=globalChange.conflict;
   result.knownChanges=changes.slice(-8);
   result.knownRegionalReports=known.filter(e=>e.region===where.region||e.id?.startsWith(`rs_${({china:'cn',taiwan:'tw',japan:'jp'})[where.region]}_`)).slice(-8).map(e=>({id:e.id,month:e.month,title:e.title,description:e.description}));
-  result.institutionState={stage:result.stage,government:result.government,leader:result.leader,conflict:result.conflict};
+  result.institutionState={stage:result.stage,government:result.government,leader:result.leader,ideology:result.ideology,factionId:result.factionId,conflict:result.conflict};
   result.industry=historical?null:province?.industry||null;result.pressures=historical?null:province?.pressures||null;
   result.dailyContext=historical?historical.dailyLife:province?`${province.dailyLife}。${province.pressures}，常常进入家庭的讨论。`:base.dailyLife;
   result.plainLocalDescription=result.dailyContext;
@@ -150,6 +153,16 @@ export function regionContext(state,lore){
   if(result.stage!=='civilian')result.forbiddenAssumptions.push('政治称谓与机构使用当前已经公布的安排，不把2020年初制度或未发生的现实后续当作现状。');
   if(where.region!=='china')result.forbiddenAssumptions.push('中国大陆新闻可以被阅读，但不能因此认定本人经历同一政策、集会、灾害或物资损失。');
   return result;
+}
+/** Serialized current facts for engine saves, maps and prompts; does not mutate the life. */
+export function deriveGovernmentState(state,lore){
+  return Object.fromEntries(Object.entries({china:'中国大陆',taiwan:'中国台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国'}).map(([region,location])=>{
+    const current=regionContext({...state,location},lore);
+    return [region,{...current.institutionState,regionalConflict:current.regionalConflict||null}];
+  }));
+}
+export function normalizeWorldOverrides(state){
+  return Object.fromEntries(Object.entries(state.worldOverrides||{}).map(([region,patch])=>[region,normalizedGovernmentOverride(region,patch)]));
 }
 function pandemicContext(where,month,seen){
   if(where.region==='china'){
@@ -176,7 +189,7 @@ export function newsExposure(state,event){
   const loc=locality(state.location),p=data.provinces[loc.province],id=event.id||'',r=eventRegion(event),month=state.month||0;
   if(loc.region==='ocean')return exposure(0,'');
   const listed=(event.places||[]).map(locality),direct=listed.some(x=>x.province?x.province===loc.province:x.region===loc.region),neighbor=p&&listed.some(x=>x.province&&p.neighbors.includes(x.province));
-  if(id==='world_opening')return exposure(loc.region==='china'?(loc.province==='湖北'?1.4:0.65):({taiwan:0.16,japan:0.12,hongkong:0.35,macau:0.3,korea:0.12}[loc.region]||0.03),loc.region==='taiwan'?'选举消息和本地防疫安排进入日常，跨海往来需要重新留意。':'疫情消息让人重新留意出行、医疗与家人的近况。');
+  if(id==='world_opening')return exposure(loc.region==='china'?(loc.province==='湖北'?1.4:0.65):({taiwan:0.16,japan:0.12,hongkong:0.35,macau:0.3,korea:0.12}[loc.region]||0.03),loc.region==='taiwan'?(state.profile?.scenario?.id==='mao-april'?'本地防疫安排进入日常，跨海往来需要重新留意。':'选举消息和本地防疫安排进入日常，跨海往来需要重新留意。'):'疫情消息让人重新留意出行、医疗与家人的近况。');
   if(id==='news_zhengzhou_flood')return exposure(loc.province==='河南'?1.5:loc.region==='china'?(neighbor?0.3:0.04):0,loc.province==='河南'?'暴雨与交通中断打乱了出行，家人开始互相确认平安。':neighbor?'部分跨省车次、货运和探亲安排受到影响。':'你读到了灾情，日常安排暂未出现明显变化。');
   if(id==='world_protests'||id==='cn_economic_failure')return exposure(loc.region==='china'?(p?.protestFactor||0.85):0,`街头消息和各地防控安排让一些出行、工作与家庭计划需要重新确认。`);
   if(id==='news_wuhan')return exposure(loc.province==='湖北'?(month<=3?1.5:0.8):loc.region==='china'?(neighbor?0.25:0.08):0,'湖北的交通和公共卫生消息影响了家人联络、探亲及货物往来。');

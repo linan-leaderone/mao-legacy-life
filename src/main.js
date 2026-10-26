@@ -1,3 +1,5 @@
+import {mountWorldMap} from './world-map.js';
+import {storyParagraphs} from './story-flow.js';
 import './style.css';
 import './encounter-games.css';
 import './battle-view.css';
@@ -17,7 +19,7 @@ import {getPortrait,loadPortraitOverrides,setCustomPortrait,clearCustomPortrait}
 import './minigame-avatar.css';
 import {openRelationshipMap} from './relationship-view.js';
 import {SEX_OPTIONS,NATIONALITY_OPTIONS,characterIdentityFromForm,identityRows} from './character-identity.js';
-import {LANGUAGE_OPTIONS,normalizeLanguage,translateUI,applyInterfaceLanguage} from './language.js';
+import {LANGUAGE_OPTIONS,normalizeLanguage,translateUI,applyInterfaceLanguage,convertChinese,protectedIdentityValues} from './language.js';
 
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -33,10 +35,10 @@ try{localStorage.setItem(SETTINGS,JSON.stringify(settings));}catch{}
 try{const raw=localStorage.getItem(KEY);if(raw)game=importSave(raw,lore);}catch{error='本地档案暂时无法读取，请从保存的文件或备份恢复。';}
 let language=normalizeLanguage(game?.profile?.language);
 try{language=normalizeLanguage(localStorage.getItem(LANGUAGE_KEY)||language);}catch{}
-if(game)game.profile.language=language;
+let startupLanguage=language;
 const tr=text=>translateUI(text,language);
-function languagePanel(){return `<section class="language-setting"><div><label for="life-language">语言与文风</label><p>切换界面与之后的叙述，已经写下的经历保留原文。</p></div><select id="life-language" data-no-translate>${LANGUAGE_OPTIONS.map(option=>`<option value="${esc(option.id)}" ${language===option.id?'selected':''}>${esc(option.label)}</option>`).join('')}</select></section>`;}
-function bindLanguagePanel(root=document){const select=root.querySelector('#life-language');if(!select)return;select.onchange=()=>{if(busy)return;const api=root.querySelector('.api-panel');if(api?.commitApi&&!api.commitApi()){select.value=language;return;}language=normalizeLanguage(select.value);try{localStorage.setItem(LANGUAGE_KEY,language);}catch{}if(game){game.profile.language=language;persist();}root.matches?.('dialog')? (root.close(),render(),openSettings()):render();};}
+function languagePanel(){return `<section class="language-setting"><div><label for="life-language">语言与文风</label><p>仅用于新的人生。开始后保持所选语言与文风，读取档案沿用其中的记录。</p></div><select id="life-language" data-no-translate>${LANGUAGE_OPTIONS.map(option=>`<option value="${esc(option.id)}" ${startupLanguage===option.id?'selected':''}>${esc(option.label)}</option>`).join('')}</select></section>`;}
+function bindLanguagePanel(root=document){const select=root.querySelector('#life-language');if(!select)return;select.onchange=()=>{if(busy)return;const api=root.querySelector('.api-panel');if(api?.commitApi&&!api.commitApi()){select.value=startupLanguage;return;}startupLanguage=normalizeLanguage(select.value);language=startupLanguage;try{localStorage.setItem(LANGUAGE_KEY,startupLanguage);}catch{}render();};}
 function identityFields(){return `<fieldset class="identity-fields"><legend>身份与归属</legend><div class="form-grid"><div><label class="field">性别<select name="sex">${SEX_OPTIONS.map(option=>`<option value="${option.id}">${option.label}</option>`).join('')}</select></label><label class="field identity-custom-label" data-sex-custom hidden>自行填写性别<input name="sexLabel" maxlength="80" placeholder="写下自己的性别"/></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="sexDescription"/>添加性别描述</label><textarea name="sexDescription" aria-label="性别描述" maxlength="1000" hidden placeholder="补充身体特征或你希望采用的设定"></textarea></div><div><label class="field">族裔<input name="ethnicity" maxlength="100" placeholder="自由填写，也可以是非人类族裔"/></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="ethnicityDescription"/>添加族裔描述</label><textarea name="ethnicityDescription" aria-label="族裔描述" maxlength="1000" hidden placeholder="文化、来历、身体特点与生活习惯"></textarea></div><div><label class="field">国籍 / 所属势力<input name="nationality" list="nationality-list" maxlength="100" placeholder="选择或填写国家、组织及其他势力"/><datalist id="nationality-list">${NATIONALITY_OPTIONS.map(name=>`<option value="${esc(name)}"></option>`).join('')}</datalist></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="nationalityDescription"/>添加势力描述</label><textarea name="nationalityDescription" aria-label="势力描述" maxlength="1000" hidden placeholder="制度、所在地、公民身份和你与它的关系"></textarea></div></div><p class="identity-caption">这些身份由你填写。出生地与国籍分别记录，描述可以留空。</p></fieldset>`;}
 function bindIdentityFields(form){const field=name=>form.elements.namedItem(name);field('sex').onchange=()=>{form.querySelector('[data-sex-custom]').hidden=field('sex').value!=='custom';field('sexLabel').required=field('sex').value==='custom';};form.querySelectorAll('[data-identity-description]').forEach(toggle=>{toggle.onchange=()=>{field(toggle.dataset.identityDescription).hidden=!toggle.checked;};});}
 function identityBlock(){return `<dl class="identity-details" data-no-translate>${identityRows(game.profile.identity).map(row=>`<div><dt>${esc(tr(row.label))}</dt><dd>${esc(row.value||tr('暂不填写'))}${row.description?`<p>${esc(row.description)}</p>`:''}</dd></div>`).join('')}</dl>`;}
@@ -47,11 +49,7 @@ function notify(message){
 }
 function persist(){try{localStorage.setItem(KEY,exportSave(game));}catch{notify('自动保存失败，请导出档案以保留这一段经历。');}}
 function paragraphs(text){return String(text||'').split(/\n+/).filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('');}
-function continuousStory(event){
-  const outcome=String(event.consequence||'').trim(),narrative=String(event.narrative||'').trim();
-  if(!game.history.length||!outcome||narrative.includes(outcome))return paragraphs(narrative);
-  return paragraphs(outcome+'\n\n'+narrative);
-}
+function continuousStory(event){return paragraphs(storyParagraphs(event,{opening:!game.history.length}));}
 function physicalStatus(){
   const body=game.encounterState;if(!body)return '';
   const gear=body.equipment||[];
@@ -78,6 +76,7 @@ function artPath(art){return `./art/${/^[a-z0-9_-]+$/i.test(art||'')?art:'newsro
 function stamp(){return '<span class="stamp">2020<br><small>ARCHIVE</small></span>';}
 
 function render(){
+  language=view==='home'?startupLanguage:normalizeLanguage(game?.profile.language||startupLanguage);
   $('#app').innerHTML=`<div class="shell">
     <aside class="sidebar"><a class="brand" href="#" aria-label="人生档案首页"><span class="brand-mark">人</span><span>毛的遗产<small>THE LIFE ARCHIVE</small></span></a>
       <div class="edition">一个人，一段时代 <span>VOL. 2020</span></div>
@@ -200,7 +199,7 @@ function openStatus(){
 function regionalProse(value){
   const text=String(value||'').replace(/；/g,'。');
   const clauses=text.split(/。/).map(sentence=>sentence.split(/[，,]/).filter(clause=>!/(?:不可(?:凭空|套用)|不能(?:凭空|直接套用|预写)|不要(?:把|将)|不默认|不预设|不套用|不直接套用|按照已知地方公告|现实后续|具体措施取决于|^不把2020)/.test(clause)).join('，').trim()).filter(Boolean);
-  return clauses.length?clauses.join('。')+'。':'';
+  return convertChinese(clauses.length?clauses.join('。')+'。':'',language,protectedIdentityValues(game));
 }
 function localWorldCard(context){
   const conflicts=[...new Set([context.conflict,context.regionalConflict].filter(Boolean))];
@@ -217,7 +216,7 @@ function localWorldCard(context){
 }
 function publicWorldActivity(labels,regions){
   if(game.month<0)return '';
-  const actors=getPoliticalActors(game),activity=(game.npcActivity||[]).filter(entry=>Number.isInteger(entry.month)&&entry.month<=game.month).slice(-8).reverse();
+  const actors=getPoliticalActors(game).filter(actor=>actor.autonomyEligible!==false),activity=(game.npcActivity||[]).filter(entry=>Number.isInteger(entry.month)&&entry.month<=game.month).slice(-8).reverse();
   const trends=Object.entries(labels).filter(([key])=>Number(game.npcPressure?.[key]));
   const trendText=value=>Math.abs(value)<4?(value>0?'有关主张开始得到回应':'有关主张正受到质疑'):Math.abs(value)<15?(value>0?'支持这些安排的联系逐渐增加':'有关安排遇到更多阻力'):(value>0?'多个团体正在组织人员推动相关安排':'多个团体正在组织人员反对相关安排');
   return `${trends.length||activity.length?`<section class="public-activity"><h3 class="world-history-title">各方正在推动的变化</h3>${trends.length?`<div class="world-trends">${trends.map(([key,label])=>`<div><span>${esc(label)}</span><strong>${trendText(Number(game.npcPressure[key]))}</strong></div>`).join('')}</div>`:''}${activity.length?`<ul class="public-activity-list">${activity.map(entry=>`<li><div><strong>${esc(entry.actor)}</strong><time>${dateLabel(entry.month)}</time></div><p>${esc(entry.ideology||'公开政治活动')} · 围绕${esc(labels[entry.pressure]||'公共事务')}开展联系。</p></li>`).join('')}</ul>`:''}</section>`:''}${actors.length?`<h3 class="world-history-title">公开活动的人物</h3><div class="political-people">${actors.map(actor=>`<details><summary>${portraitAvatar({name:actor.name,lockedPersonaId:actor.id||actor.name})}<span><strong>${esc(actor.name)}</strong><small>${esc(regions[actor.region]||actor.region)} · ${esc(actor.role||'参与公共事务')}</small></span><span>＋</span></summary><div class="political-person-body"><p><span>政治主张</span>${esc(actor.ideology||'尚无明确的公开主张')}</p>${actor.priorities?.length?`<p><span>关注的事情</span>${actor.priorities.map(esc).join('；')}</p>`:''}${actor.relationships?.length?`<ul>${actor.relationships.map(relation=>`<li>${typeof relation==='string'?esc(relation):`${esc(relation.name||'相关人物')}：${esc(relation.detail||relation.type||'保持联系')}`}</li>`).join('')}</ul>`:''}</div></details>`).join('')}</div>`:''}`;
@@ -236,7 +235,8 @@ function openWorld(){
   const context=regionContext(game,lore);
   const regions={china:'中国大陆',taiwan:'台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国',europe:'欧洲',global:'国际局势'};
   const contextPlaces={china:'中国大陆',taiwan:'中国台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国'};
-  modal('世界局势',`<div class="world-heading"><span class="eyebrow">${dateLabel(game.month)}</span><p>查看目前各地已知的消息与生活状况。</p></div>${localWorldCard(context)}<h3 class="world-history-title">各地近况</h3><div class="world-regions">${Object.entries(regions).map(([key,name])=>{const region=game.worldState?.[key],override=game.worldOverrides?.[key],current=contextPlaces[key]?regionContext({...game,location:contextPlaces[key]},lore):null,conflict=current?.conflict||current?.regionalConflict;return `<article><span class="tiny-label">${name}</span><h3>${esc(current?.leader||override?.leader||region?.title||'近来没有新的消息')}</h3>${current?.government||override?.government?`<p>${esc(regionalProse(current?.government||override.government))}</p>`:''}${current?.ideology||override?.ideology?`<p class="world-ideology">${esc(current?.ideology||override.ideology)}</p>`:''}${conflict?`<p>${esc(conflict)}</p>`:''}${region?.description&&!override?`<p>${esc(regionalProse(region.description))}</p>`:''}${region||override?`<small>${dateLabel(override?.month??region?.month??game.month)}</small>`:''}</article>`;}).join('')}</div>${changedWorldArrangements(regions)}<h3 class="world-history-title">你的行动带来的变化</h3><div class="world-trends">${Object.entries(labels).map(([key,label])=>`<div><span>${label}</span><strong>${description(key,Number(game.worldPressure?.[key]||0))}</strong></div>`).join('')}</div>${publicWorldActivity(labels,regions)}<h3 class="world-history-title">已经发生的事</h3>${events.length?newsCards([...events].reverse(),{archive:true}):'<p class="muted">暂时没有新的消息。</p>'}`,true);
+  const dialog=modal('世界局势',`<div class="world-heading"><span class="eyebrow">${dateLabel(game.month)}</span><p>查看目前各地已知的消息与生活状况。</p></div><div id="world-map"></div>${localWorldCard(context)}<h3 class="world-history-title">各地近况</h3><div class="world-regions">${Object.entries(regions).map(([key,name])=>{const region=game.worldState?.[key],override=game.worldOverrides?.[key],current=contextPlaces[key]?regionContext({...game,location:contextPlaces[key]},lore):null,conflict=current?.conflict||current?.regionalConflict;return `<article><span class="tiny-label">${name}</span><h3>${esc(current?.leader||override?.leader||region?.title||'近来没有新的消息')}</h3>${current?.government||override?.government?`<p>${esc(regionalProse(current?.government||override.government))}</p>`:''}${current?.ideology||override?.ideology?`<p class="world-ideology">${esc(current?.ideology||override.ideology)}</p>`:''}${conflict?`<p>${esc(conflict)}</p>`:''}${region?.description&&!override?`<p>${esc(regionalProse(region.description))}</p>`:''}${region||override?`<small>${dateLabel(override?.month??region?.month??game.month)}</small>`:''}</article>`;}).join('')}</div>${changedWorldArrangements(regions)}<h3 class="world-history-title">你的行动带来的变化</h3><div class="world-trends">${Object.entries(labels).map(([key,label])=>`<div><span>${label}</span><strong>${description(key,Number(game.worldPressure?.[key]||0))}</strong></div>`).join('')}</div>${publicWorldActivity(labels,regions)}<h3 class="world-history-title">已经发生的事</h3>${events.length?newsCards([...events].reverse(),{archive:true}):'<p class="muted">暂时没有新的消息。</p>'}`,true);
+  const host=dialog.querySelector?.('#world-map');if(host){const map=mountWorldMap(host,game,lore);dialog.addEventListener('close',()=>map.destroy(),{once:true});}
 }
 
 function openNew(){
@@ -272,8 +272,10 @@ function openNew(){
       field('backgroundText').value=persona.backgroundText;field('backgroundText').readOnly=true;
       for(const key of Object.keys(pointNames)){$(`#point-${key}`).value=persona.points[key];$(`#point-${key}`).disabled=true;}
       document.querySelectorAll('[data-step]').forEach(button=>button.disabled=true);
-      const ageText=persona.specialScenario?`距出生 ${age.years} 年`:persona.birthDatePrecision==='day'?`${age.years} 岁 ${age.months} 个月`:`约 ${age.years} 岁`;
-      notice.hidden=false;notice.innerHTML=`${portraitCard({name:persona.name,persona},{manage:false})}<span class="tiny-label">${esc(persona.name)}的旧档案</span><h3>${esc(persona.occupation)}</h3><p>${esc(persona.status)}</p><div class="persona-facts"><span>出生：${esc(persona.birthDate||'日期未核实')}</span><span>2020 年初：${ageText}</span><span>所在地：${esc(persona.startLocation)}</span></div><p class="persona-lock-note">出生与既有经历已经写在这份档案中，往后的愿望由你填写。</p>${persona.notes.length?`<details><summary>资料说明</summary>${persona.notes.map(note=>`<p>${esc(note)}</p>`).join('')}<div class="persona-sources">${persona.sourceUrls.filter(url=>/^https:\/\//.test(url)).map((url,i)=>`<a href="${esc(url)}" target="_blank" rel="noreferrer">资料 ${i+1} ↗</a>`).join('')}</div></details>`:''}`;
+      const openingPreview=startupLanguage==='shuihu'&&['毛泽东','赖清德','薄熙来'].includes(persona.name)?createGame({name:persona.name,language:startupLanguage,seed:'opening-preview'},lore):null;
+      if(openingPreview){field('age').value=currentAge(openingPreview).years;field('backgroundText').value=openingPreview.profile.backgroundText;}
+      const ageText=openingPreview?ageLabel(openingPreview):persona.specialScenario?`距出生 ${age.years} 年`:persona.birthDatePrecision==='day'?`${age.years} 岁 ${age.months} 个月`:`约 ${age.years} 岁`;
+      notice.hidden=false;notice.innerHTML=`${portraitCard(openingPreview||{name:persona.name,persona},{manage:false})}<span class="tiny-label">${esc(persona.name)}的旧档案</span><h3>${esc(openingPreview?.person.occupation||persona.occupation)}</h3><p>${esc(openingPreview?.person.status||persona.status)}</p><div class="persona-facts"><span>出生：${esc(persona.birthDate||'日期未核实')}</span><span>2020 年初：${ageText}</span><span>所在地：${esc(openingPreview?.location||persona.startLocation)}</span></div><p class="persona-lock-note">出生与既有经历已经写在这份档案中，往后的愿望由你填写。</p>${persona.notes.length?`<details><summary>资料说明</summary>${persona.notes.map(note=>`<p>${esc(note)}</p>`).join('')}<div class="persona-sources">${persona.sourceUrls.filter(url=>/^https:\/\//.test(url)).map((url,i)=>`<a href="${esc(url)}" target="_blank" rel="noreferrer">资料 ${i+1} ↗</a>`).join('')}</div></details>`:''}`;
       $('#point-rule').textContent='人物初始估值';$('#point-note').textContent=persona.statsBasis;
     }else if(locked){
       locked=null;for(const key of ['age','place','background'])field(key).disabled=false;field('backgroundText').readOnly=false;
@@ -288,7 +290,7 @@ function openNew(){
   $('#life-name').addEventListener('input',updatePersona);$('#life-name').addEventListener('change',updatePersona);
   form.onsubmit=e=>{
     e.preventDefault();let fields=Object.fromEntries(new FormData(e.target));fields.points=Object.fromEntries(Object.keys(pointNames).map(key=>[key,Number($(`#point-${key}`).value)]));fields.narrative=fields.freedom==='grounded'?'balanced':'player';fields=lockPersonaProfile(fields);
-    try{form.querySelectorAll('[data-identity-description]').forEach(toggle=>{if(!toggle.checked)fields[toggle.dataset.identityDescription]='';});fields.identity=characterIdentityFromForm(fields);fields.language=language;const fresh=createGame(fields,lore);const prior=localStorage.getItem(KEY);if(prior)localStorage.setItem(KEY+'-backup',prior);game=fresh;pending=null;draftAction='';error='';view='play';persist();m.close();render();window.scrollTo(0,0);}catch(err){notify(err.message);}
+    try{form.querySelectorAll('[data-identity-description]').forEach(toggle=>{if(!toggle.checked)fields[toggle.dataset.identityDescription]='';});fields.identity=characterIdentityFromForm(fields);fields.language=startupLanguage;const fresh=createGame(fields,lore);const prior=localStorage.getItem(KEY);if(prior)localStorage.setItem(KEY+'-backup',prior);game=fresh;language=normalizeLanguage(game.profile.language);pending=null;draftAction='';error='';view='play';persist();m.close();render();window.scrollTo(0,0);}catch(err){notify(err.message);}
   };
 }
 
@@ -392,11 +394,11 @@ function prepareConnection(){
   if(settings.mode==='offline')return true;
   try{validateConnection(settings);return true;}catch(err){const status=panel?.querySelector('[data-api-status]');if(status){status.textContent=redactApiError(err);status.classList.add('api-failure');status.scrollIntoView({block:'nearest'});}else notify(redactApiError(err));return false;}
 }
-function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;view='play';render();window.scrollTo(0,0);}
+function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;language=normalizeLanguage(game.profile.language);view='play';render();window.scrollTo(0,0);}
 function openSettings(){
   if(busy)return;
-  const m=modal('连接设置',`${languagePanel()}${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.9.0</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
-  const panel=m.querySelector('.api-panel');bindApiPanel(panel);bindLanguagePanel(m);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
+  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.11.0</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
+  const panel=m.querySelector('.api-panel');bindApiPanel(panel);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
   m.addEventListener('close',()=>{panel.commitApi();if(view==='home')render();});
 }
 

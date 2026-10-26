@@ -1,0 +1,1403 @@
+{
+  "version": 1,
+  "policies": [
+    {
+      "id": "policy_PRC_stabilize_the_economic_sphere",
+      "focusId": "PRC_stabilize_the_economic_sphere",
+      "title": "稳定经济",
+      "description": "相关部门公布稳定订单与就业的安排，企业可申报流动资金需求。地方窗口开始受理材料，具体拨款仍须按公布的条件审核。",
+      "region": "china",
+      "factions": [
+        "china_initial"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC.txt",
+          "key": "PRC_stabilize_the_economic_sphere",
+          "line": 1183
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_stabilize_the_economic_sphere_desc",
+          "line": 71
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_expand_domestic_oil_production",
+        "PRC_diversify_the_oil_trade"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_food_safety_reforms",
+      "focusId": "PRC_food_safety_reforms",
+      "title": "食品安全改革",
+      "description": "市场与卫生部门联合检查食品来源，公布抽检与投诉渠道。商户补齐进货记录，学校食堂与工厂食堂也收到新的验收要求。",
+      "region": "china",
+      "factions": [
+        "china_initial",
+        "china_hu",
+        "china_mao"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC.txt",
+          "key": "PRC_food_safety_reforms",
+          "line": 286
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_food_safety_reforms_desc",
+          "line": 25
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_zero_covid_policy"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_optimize_the_supply_chain",
+      "focusId": "PRC_optimize_the_supply_chain",
+      "title": "优化供应链",
+      "description": "重点港口与工厂核对运输瓶颈，公布临时仓储及转运安排。供应商重新确认到货日期，尚未恢复的线路仍保留风险提示。",
+      "region": "china",
+      "factions": [
+        "china_initial"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_centrist.txt",
+          "key": "PRC_optimize_the_supply_chain",
+          "line": 1887
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_optimize_the_supply_chain_desc",
+          "line": 204
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_expand_trade_arguments",
+        "PRC_economic_autarky"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_stability_and_security",
+      "focusId": "PRC_stability_and_security",
+      "title": "稳定与安全",
+      "description": "国安系统公布重点设施与公共活动的审查安排。地方机关开始核对通行及活动申请，居民办理有关事务所需的手续增加。",
+      "region": "china",
+      "factions": [
+        "china_chen"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_nationalist.txt",
+          "key": "PRC_stability_and_security",
+          "line": 3637
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_stability_and_security_desc",
+          "line": 372
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_hold_snap_party_congress"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_encourage_digitalization_nat",
+      "focusId": "PRC_encourage_digitalization_nat",
+      "title": "鼓励数字化",
+      "description": "政府扩大行政信息系统，要求部门统一登记资料。部分业务改为线上受理，信息纠错与访问权限成为居民关心的问题。",
+      "region": "china",
+      "factions": [
+        "china_chen"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_nationalist.txt",
+          "key": "PRC_encourage_digitalization_nat",
+          "line": 5317
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_encourage_digitalization_nat_desc",
+          "line": 428
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_purity_and_honesty",
+        "PRC_mind_and_skills"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_improve_party_discipline",
+      "focusId": "PRC_improve_party_discipline",
+      "title": "推进党纪",
+      "description": "组织部门公布纪律检查与整改名单，各地单位须说明预算和人员任用。原有行政事务继续办理，涉及调查的事项暂缓签批。",
+      "region": "china",
+      "factions": [
+        "china_transition",
+        "china_initial"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_centrist.txt",
+          "key": "PRC_improve_party_discipline",
+          "line": 1045
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_improve_party_discipline_desc",
+          "line": 164
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_final_strike_against_the_corruption"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_niaolong_33",
+      "focusId": "PRC_niaolong_33",
+      "title": "保障劳动者权利",
+      "description": "劳动部门公布合同、休假与工伤保障的改革安排，工会代表参与征求意见。外包与临时用工的待遇列入审查，已经发生的争议可以递交记录。",
+      "region": "china",
+      "factions": [
+        "china_hu",
+        "china_socialdem",
+        "china_mao"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_niaolong_33",
+          "line": 2283
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_niaolong_33_desc",
+          "line": 261
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_niaolong_32"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_reform_local_elections",
+      "focusId": "PRC_reform_local_elections",
+      "title": "地方选举改革",
+      "description": "地方议事机构开始公布代表产生办法与议程，居民能够登记意见并查询办理结果。先行地区要公开会议记录，具体执行办法仍接受修订。",
+      "region": "china",
+      "factions": [
+        "china_hu",
+        "china_socialdem"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_reform_local_elections",
+          "line": 16416
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_reform_local_elections_desc",
+          "line": 891
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_anti_lobbying_laws"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_niaolong_3",
+      "focusId": "PRC_niaolong_3",
+      "title": "医疗改革",
+      "description": "公共医疗部门开始调整基础诊疗的收费与财政补助，县镇卫生机构报送药品和人员缺口。免费项目分批办理，医院需公开实际可用的诊疗范围。",
+      "region": "china",
+      "factions": [
+        "china_mao",
+        "china_socialdem"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_niaolong_3",
+          "line": 16993
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_niaolong_3_desc",
+          "line": 1711
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_denounce_deng_xiao_ping_thought"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_agricultural_self_sufficiency",
+      "focusId": "PRC_agricultural_self_sufficiency",
+      "title": "农业自给自足",
+      "description": "各地合作组织与农业部门核对耕地、种子和农机需求，安排本季生产与收购。农户可以核查合同和交付时间，地方供销渠道开始调整。",
+      "region": "china",
+      "factions": [
+        "china_mao",
+        "china_socialdem",
+        "china_front"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_agricultural_self_sufficiency",
+          "line": 17536
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_agricultural_self_sufficiency_desc",
+          "line": 955
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_recollectivize_agroculture"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_push_for_local_democracy",
+      "focusId": "PRC_push_for_local_democracy",
+      "title": "中国媒体解冻",
+      "description": "媒体管理部门公布新的采访与信息公开办法，地方记者开始追问预算、工程和公共服务。办事机关被要求答复已经提出的查询。",
+      "region": "china",
+      "factions": [
+        "china_hu",
+        "china_liberal"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_push_for_local_democracy",
+          "line": 21416
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_push_for_local_democracy_desc",
+          "line": 695
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_question_the_four_cardinal_principles"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_greening_economy_campaign",
+      "focusId": "PRC_greening_economy_campaign",
+      "title": "绿色经济运动",
+      "description": "环保部门公布节能改造与污染治理计划，企业按行业提交方案。居民可以查看附近项目的排放记录，工程费用与停工安排分别公布。",
+      "region": "china",
+      "factions": [
+        "china_liberal"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_greening_economy_campaign",
+          "line": 23580
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_greening_economy_campaign_desc",
+          "line": 769
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_wang_yang_three_campaigns"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_support_agricultural_modernization",
+      "focusId": "PRC_support_agricultural_modernization",
+      "title": "支持农业现代化",
+      "description": "农业部门开放农机与技术改造申请，合作组织核对灌溉、仓储和运输需求。首批项目开始施工，农户按合同决定是否参与。",
+      "region": "china",
+      "factions": [
+        "china_liberal"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_support_agricultural_modernization",
+          "line": 23664
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_support_agricultural_modernization_desc",
+          "line": 783
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_lower_tax_high_tech",
+        "PRC_phased_decommissioning_old_plants"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_niaolong_51",
+      "focusId": "PRC_niaolong_51",
+      "title": "数字化监督体系",
+      "description": "行政机关启用集中监督系统，单位须定期上传人员和业务记录。申诉窗口仍在受理纠错，更多日常手续纳入统一审查。",
+      "region": "china",
+      "factions": [
+        "china_whn"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_niaolong_51",
+          "line": 1701
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_niaolong_51_desc",
+          "line": 299
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_niaolong_50"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_WHN_quiet_day",
+      "focusId": "PRC_WHN_quiet_day",
+      "title": "完善劳动教育制度",
+      "description": "政府调整劳动教育与管理程序，相关机构统一登记人员、课程和考核。家属与工作人员开始按照新的规定办理联络和申诉。",
+      "region": "china",
+      "factions": [
+        "china_whn"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_WHN_continuation.txt",
+          "key": "PRC_WHN_quiet_day",
+          "line": 135
+        },
+        {
+          "file": "localisation/simp_chinese/PRC_WHN_continuation_l_simp_chinese.yml",
+          "key": "PRC_WHN_quiet_day_desc",
+          "line": 14
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_WHN_single_case_number"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_niaolong_109",
+      "focusId": "PRC_niaolong_109",
+      "title": "构建地方性自动化计划经济",
+      "description": "地方生产委员会试行按公共需求协调订单，公布库存、运输与设备状况。工人和居民能够核对数据，算法提出的安排仍须由负责机构确认。",
+      "region": "china",
+      "factions": [
+        "china_digital",
+        "china_commune",
+        "china_cybermao"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_niaolong_109",
+          "line": 3817
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_niaolong_109_desc",
+          "line": 517
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_niaolong_88"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_niaolong_108",
+      "focusId": "PRC_niaolong_108",
+      "title": "完善基层数字化民主",
+      "description": "公共议事平台开放新的提案与复核渠道，居民可以核查表决记录。线下办事处为不便使用网络的人登记意见，技术人员公开修订故障。",
+      "region": "china",
+      "factions": [
+        "china_digital",
+        "china_republic",
+        "china_qin"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_niaolong_108",
+          "line": 4561
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_gzl_l_simp_chinese.yml",
+          "key": "PRC_niaolong_108_desc",
+          "line": 560
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_niaolong_106",
+        "PRC_niaolong_107"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_the_Flower_of_Freedom_20",
+      "focusId": "PRC_the_Flower_of_Freedom_20",
+      "title": "公职人员再教育",
+      "description": "公职人员参加新的公共服务与问责培训，居民代表检查办理记录。地方机构收集积压事项，开始公布负责人员和答复日期。",
+      "region": "china",
+      "factions": [
+        "china_populist",
+        "china_commune"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_new_left.txt",
+          "key": "PRC_the_Flower_of_Freedom_20",
+          "line": 657
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_handongfang_l_simp_chinese.yml",
+          "key": "PRC_the_Flower_of_Freedom_20_desc",
+          "line": 157
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_the_Flower_of_Freedom_18"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_reorient_the_economy",
+      "focusId": "PRC_reorient_the_economy",
+      "title": "调整经济",
+      "description": "政府重新安排重点行业的订单与预算，优先处理已公布的生产和基础设施项目。企业、工会与地方机关接到落实通知，资金和用工仍按具体项目核算。",
+      "region": "china",
+      "factions": [
+        "china_bo",
+        "china_ling",
+        "china_junta",
+        "china_han",
+        "china_april_bo"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_nationalist.txt",
+          "key": "PRC_reorient_the_economy",
+          "line": 5599
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_reorient_the_economy_desc",
+          "line": 442
+        }
+      ],
+      "sourcePrerequisites": [],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_PRC_economic_conversion_to_military_needs",
+      "focusId": "PRC_economic_conversion_to_military_needs",
+      "title": "经济转型，军需优先",
+      "description": "战时管理机关调整工厂订单和运输优先次序，医疗与生活物资保留专门运力。相关企业通知工人排班变化，家庭开始核对供给与出行安排。",
+      "region": "china",
+      "factions": [
+        "china_initial",
+        "china_chen",
+        "china_hu",
+        "china_bo",
+        "china_mao",
+        "china_junta",
+        "china_april_bo"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "war": true,
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_PRC_taiwan_war.txt",
+          "key": "PRC_economic_conversion_to_military_needs",
+          "line": 1119
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_PRC_l_simp_chinese.yml",
+          "key": "PRC_economic_conversion_to_military_needs_desc",
+          "line": 128
+        }
+      ],
+      "sourcePrerequisites": [
+        "PRC_slowly_but_surely"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_CHI_TWW_FOCUS_2",
+      "focusId": "CHI_TWW_FOCUS_2",
+      "title": "疫情救助计划",
+      "description": "行政部门公布疫情救助的申请日期与条件，县市窗口接受受影响的家庭和商户登记。补助逐项审核，民间团体继续追问遗漏对象。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_dpp",
+        "taiwan_april_lai"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_CHI.txt",
+          "key": "CHI_TWW_FOCUS_2",
+          "line": 1305
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "CHI_TWW_FOCUS_2_desc",
+          "line": 820
+        }
+      ],
+      "sourcePrerequisites": [
+        "CHI_TWW_FOCUS_1"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_CHI_TWW_FOCUS_14",
+      "focusId": "CHI_TWW_FOCUS_14",
+      "title": "外贸多元化",
+      "description": "经贸部门公布新的出口与采购联系计划，厂商重新寻找客户和运输渠道。相关订单需要逐一确认，政府说明融资与保险安排。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_dpp",
+        "taiwan_kmt"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_CHI.txt",
+          "key": "CHI_TWW_FOCUS_14",
+          "line": 812
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "CHI_TWW_FOCUS_14_desc",
+          "line": 838
+        }
+      ],
+      "sourcePrerequisites": [
+        "CHI_TWW_FOCUS_7",
+        "CHI_TWW_FOCUS_6"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_CHI_TWW_FOCUS_21",
+      "focusId": "CHI_TWW_FOCUS_21",
+      "title": "劳工困境",
+      "description": "劳工团体与行政部门就工资、工时和派遣用工举行公开会谈。行业代表提交争议清单，雇主须说明现有合同的履行情况。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_dpp",
+        "taiwan_april_lai"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_CHI.txt",
+          "key": "CHI_TWW_FOCUS_21",
+          "line": 1010
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_qh_l_simp_chinese .yml",
+          "key": "CHI_TWW_FOCUS_21_desc",
+          "line": 858
+        }
+      ],
+      "sourcePrerequisites": [
+        "CHI_TWW_FOCUS_20"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_CHI_engineering_maintenance_brigade",
+      "focusId": "CHI_engineering_maintenance_brigade",
+      "title": "工程维修队",
+      "description": "工程维修队核查供水、供电与道路损坏，发布分区抢修日期。居民据此安排出行，医院与避难设施获得优先修复。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_dpp",
+        "taiwan_kmt",
+        "taiwan_revanchist",
+        "taiwan_april_lai"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "war": true,
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_CHI.txt",
+          "key": "CHI_engineering_maintenance_brigade",
+          "line": 1804
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_CHI_l_simp_chinese.yml",
+          "key": "CHI_engineering_maintenance_brigade_desc",
+          "line": 194
+        }
+      ],
+      "sourcePrerequisites": [
+        "CHI_grant_emergency_powers",
+        "CHI_disrupt_transportation"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_CHI_solidify_civil_defence",
+      "focusId": "CHI_solidify_civil_defence",
+      "title": "巩固民防",
+      "description": "地方机关更新避难地点、紧急联络与救护安排，志愿者按街区登记。通知说明物资领取和伤员转送办法，家庭核对亲友联络方式。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_dpp",
+        "taiwan_kmt",
+        "taiwan_revanchist",
+        "taiwan_april_lai"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "war": true,
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_CHI.txt",
+          "key": "CHI_solidify_civil_defence",
+          "line": 1461
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_CHI_l_simp_chinese.yml",
+          "key": "CHI_solidify_civil_defence_desc",
+          "line": 180
+        }
+      ],
+      "sourcePrerequisites": [
+        "CHI_island_in_one_fate"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_47",
+      "focusId": "TZL_TWW_FOCUS_47",
+      "title": "循次而进",
+      "description": "左翼联盟公布分阶段改革日程，优先恢复公共服务并逐项讨论制度调整。工会、居民与行政人员公开核对承诺，尚有争议的条款留待后续议事。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_47",
+          "line": 1393
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_47_desc",
+          "line": 908
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_42"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_70",
+      "focusId": "TZL_TWW_FOCUS_70",
+      "title": "保障劳工权利",
+      "description": "政府公布最低工资、工时、保险与工会组织的保障办法，劳动部门接受申诉。厂方须向工人说明调整后的合同，工会代表检查执行情况。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "requiresPolicies": [
+        "TZL_TWW_FOCUS_47"
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_70",
+          "line": 1942
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_70_desc",
+          "line": 954
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_47"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_72",
+      "focusId": "TZL_TWW_FOCUS_72",
+      "title": "建立劳资协调机制",
+      "description": "工会、政府与雇主代表建立公开的劳资协调会议，工资和工时争议按期受理。会议留下记录，当事人可以要求复核。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "requiresPolicies": [
+        "TZL_TWW_FOCUS_70"
+      ],
+      "exclusiveGroup": "taiwan-production",
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_72",
+          "line": 2012
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_72_desc",
+          "line": 958
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_71",
+        "TZL_TWW_FOCUS_70"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_45",
+      "focusId": "TZL_TWW_FOCUS_45",
+      "title": "组建台湾计划经济委员会",
+      "description": "计划经济委员会公布首批物资与生产调查，工厂和地方组织报送实际需求。公众能够核查配给与交付记录，未完成的项目继续登记。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left",
+        "taiwan_april_commune"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "exclusiveGroup": "taiwan-production",
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_45",
+          "line": 2158
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_45_desc",
+          "line": 910
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_46",
+        "TZL_TWW_FOCUS_44"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_59",
+      "focusId": "TZL_TWW_FOCUS_59",
+      "title": "完善群众监督体系",
+      "description": "群众监督机构公布投诉、核查和答复程序，居民代表检查公共开支。地方办公室需解释未办结事项，调查结果按规定公开。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left",
+        "taiwan_april_commune"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_59",
+          "line": 1496
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_59_desc",
+          "line": 934
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_44"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TZL_TWW_FOCUS_54",
+      "focusId": "TZL_TWW_FOCUS_54",
+      "title": "整合农田",
+      "description": "农业部门与耕作者核对农地、水利和农机，讨论共同经营的范围。地块与分配记录公开登记，生产安排按当地会议结果逐项办理。",
+      "region": "taiwan",
+      "factions": [
+        "taiwan_left",
+        "taiwan_april_commune"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TZL.txt",
+          "key": "TZL_TWW_FOCUS_54",
+          "line": 2787
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_tzl_l_simp_chinese.yml",
+          "key": "TZL_TWW_FOCUS_54_desc",
+          "line": 922
+        }
+      ],
+      "sourcePrerequisites": [
+        "TZL_TWW_FOCUS_50"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_provide_heavy_inflation_relief_packages",
+      "focusId": "JAP_provide_heavy_inflation_relief_packages",
+      "title": "缓解通胀一揽子计划",
+      "description": "内阁公布针对生活必需品涨价的补助安排，自治体按家庭与商户情况受理。能源和运输企业同时提交价格说明，公众可查询申请进度。",
+      "region": "japan",
+      "factions": [
+        "japan_ldp",
+        "japan_coalition"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP.txt",
+          "key": "JAP_provide_heavy_inflation_relief_packages",
+          "line": 2781
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_provide_heavy_inflation_relief_packages_desc",
+          "line": 249
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_new_japanese_capitalism"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_green_energy_plan",
+      "focusId": "JAP_green_energy_plan",
+      "title": "绿色能源计划",
+      "description": "能源部门公布电网与节能设施的更新计划，自治体说明施工和预算。居民与企业提交用电需求，部分项目开始公开征求意见。",
+      "region": "japan",
+      "factions": [
+        "japan_ldp",
+        "japan_coalition"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP.txt",
+          "key": "JAP_green_energy_plan",
+          "line": 2869
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_green_energy_plan_desc",
+          "line": 239
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_new_three_arrows"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_harmony_labor_life",
+      "focusId": "JAP_harmony_labor_life",
+      "title": "劳逸结合",
+      "description": "劳动部门要求企业说明加班和休假安排，行业团体开始检查执行情况。员工能够查阅记录，企业调整排班并答复已经提出的争议。",
+      "region": "japan",
+      "factions": [
+        "japan_ldp"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_ldp.txt",
+          "key": "JAP_harmony_labor_life",
+          "line": 1202
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_harmony_labor_life_desc",
+          "line": 289
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_preserve_abe_legacy"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_labor_code_reform",
+      "focusId": "JAP_labor_code_reform",
+      "title": "劳动法改革",
+      "description": "联合政府公布劳动法修订草案，工会与雇主分别提出意见。议会讨论工时、派遣和申诉程序，自治体为当事人提供咨询。",
+      "region": "japan",
+      "factions": [
+        "japan_coalition",
+        "japan_republic"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_liberal.txt",
+          "key": "JAP_labor_code_reform",
+          "line": 545
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_labor_code_reform_desc",
+          "line": 201
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_cultural_diversity",
+        "JAP_the_future_of_tokyo"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_accessible_education",
+      "focusId": "JAP_accessible_education",
+      "title": "普及教育",
+      "description": "教育部门公布学费援助与公共教育安排，学校说明可申请的名额和期限。自治体优先核查困难家庭的需要，教师讨论新的教学资源分配。",
+      "region": "japan",
+      "factions": [
+        "japan_coalition",
+        "japan_republic"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_liberal.txt",
+          "key": "JAP_accessible_education",
+          "line": 827
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_accessible_education_desc",
+          "line": 183
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_new_tax_system"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_maintain_constitutionalism",
+      "focusId": "JAP_maintain_constitutionalism",
+      "title": "维护宪政",
+      "description": "议会要求行政机关公开紧急措施的期限与复核办法，法院继续受理相关诉讼。公民团体和地方代表围绕权利保障提交意见。",
+      "region": "japan",
+      "factions": [
+        "japan_coalition",
+        "japan_republic"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_liberal.txt",
+          "key": "JAP_maintain_constitutionalism",
+          "line": 381
+        },
+        {
+          "file": "localisation/simp_chinese/TFR_country_localisation_JAP_l_simp_chinese.yml",
+          "key": "JAP_maintain_constitutionalism_desc",
+          "line": 169
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_bring_the_left_back"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_restore_order",
+      "focusId": "JAP_restore_order",
+      "title": "确保国家稳定",
+      "description": "紧急管理机关统一交通、治安与物资调度，公布各地办事地点。地方居民核对通行手续，商户按照实际运输条件安排营业。",
+      "region": "japan",
+      "factions": [
+        "japan_toyokawa",
+        "japan_junta"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_ldp.txt",
+          "key": "JAP_restore_order",
+          "line": 20
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "JAP_restore_order_desc",
+          "line": 279
+        }
+      ],
+      "sourcePrerequisites": [],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_JAP_rigid_centralization",
+      "focusId": "JAP_rigid_centralization",
+      "title": "强硬集权化",
+      "description": "紧急委员会要求地方机关按统一程序报送资料，重要行政决定集中签批。地方代表提出的异议登记在案，办理公共事务需要更多证明。",
+      "region": "japan",
+      "factions": [
+        "japan_toyokawa",
+        "japan_junta"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "requiresPolicies": [
+        "JAP_restore_order"
+      ],
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_JAP_ldp.txt",
+          "key": "JAP_rigid_centralization",
+          "line": 156
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "JAP_rigid_centralization_desc",
+          "line": 283
+        }
+      ],
+      "sourcePrerequisites": [
+        "JAP_restore_order"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TSU_TWW_FOCUS_44",
+      "focusId": "TSU_TWW_FOCUS_44",
+      "title": "调查财阀与旧官僚",
+      "description": "左翼联合阵线开展财阀资产与旧官僚行政记录的调查，工会和地方组织提交材料。调查机关公布受理范围，涉及生产的企业仍需维持工资与基本供应。",
+      "region": "japan",
+      "factions": [
+        "japan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TSU.txt",
+          "key": "TSU_TWW_FOCUS_44",
+          "line": 2052
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "TSU_TWW_FOCUS_44_desc",
+          "line": 161
+        }
+      ],
+      "sourcePrerequisites": [
+        "TSU_TWW_FOCUS_41"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TSU_TWW_FOCUS_47",
+      "focusId": "TSU_TWW_FOCUS_47",
+      "title": "强调共同底线",
+      "description": "各左翼组织召开协调会议，就劳动保障、行政过渡和公共服务列出共同要求。尚有分歧的议题继续公开讨论，地方代表负责收集具体意见。",
+      "region": "japan",
+      "factions": [
+        "japan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TSU.txt",
+          "key": "TSU_TWW_FOCUS_47",
+          "line": 1714
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "TSU_TWW_FOCUS_47_desc",
+          "line": 169
+        }
+      ],
+      "sourcePrerequisites": [
+        "TSU_TWW_FOCUS_41"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TSU_TWW_FOCUS_79",
+      "focusId": "TSU_TWW_FOCUS_79",
+      "title": "强化电子产业",
+      "description": "产业部门与工人代表讨论电子产业的设备、能源和订单安排，科研人员提出技术需求。首批改造项目公布预算，生产计划按实际供应调整。",
+      "region": "japan",
+      "factions": [
+        "japan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TSU.txt",
+          "key": "TSU_TWW_FOCUS_79",
+          "line": 3388
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "TSU_TWW_FOCUS_79_desc",
+          "line": 269
+        }
+      ],
+      "sourcePrerequisites": [
+        "TSU_TWW_FOCUS_76",
+        "TSU_TWW_FOCUS_75"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    },
+    {
+      "id": "policy_TSU_TWW_FOCUS_106",
+      "focusId": "TSU_TWW_FOCUS_106",
+      "title": "消灭歧视性思维",
+      "description": "公共机构公布反歧视与平等服务的实施办法，学校、工厂和地方组织讨论申诉程序。居民可要求复核差别待遇，执行人员接受相关培训。",
+      "region": "japan",
+      "factions": [
+        "japan_left"
+      ],
+      "minMonth": 2,
+      "settleMonths": 2,
+      "category": "policy",
+      "impact": {},
+      "sourceRefs": [
+        {
+          "file": "common/national_focus/TFR_national_focus_TSU.txt",
+          "key": "TSU_TWW_FOCUS_106",
+          "line": 2479
+        },
+        {
+          "file": "localisation/simp_chinese/replace/_yuzedong_focus_l_simp_chinese.yml",
+          "key": "TSU_TWW_FOCUS_106_desc",
+          "line": 84
+        }
+      ],
+      "sourcePrerequisites": [
+        "TSU_TWW_FOCUS_105"
+      ],
+      "sourceExclusions": [],
+      "adaptation": "原国策前置压缩为当前政权、成立后准备期、已完成政策与战争状态；不把原国策全文或将来结果视为已发生。"
+    }
+  ]
+}

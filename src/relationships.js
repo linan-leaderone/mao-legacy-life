@@ -10,19 +10,27 @@ const monthOf=s=>Number.isFinite(s.month)?Math.trunc(s.month):0;
 const moment=(v,fallback)=>Number.isFinite(v)?clamp(Math.trunc(v),-120000,120000):fallback;
 const relationTypes={bandmate:['乐队伙伴','colleague',85],family:['亲人','family',95],mentor:['相互信任的师友','mentor',80],'political-opponent':['政治对手','rival',80],'party-colleague':['党内同事','colleague',65],'coalition-partner':['联盟伙伴','ally',80],'conditional-alliance':['有分歧的盟友','ally',75],'political-contact':['保持政治联系','acquaintance',50]};
 const invalidName=/^(?:我|你|您|本人|自己|玩家|他|她|它|他们|她们|我们|你们|大家|朋友|熟人|同事|领导|上司|下属|家人|亲人|陌生人|邻居|路人|一位.*|一个.*|几位.*|几名.*|某人|某个.*|有关.*|当地.*|全体.*|群众|市民|警察|军人|士兵|员工|老师|工人|医生|记者|工作|事情|事务|排练|演出|问题|情况|办法|安排|中国|中国大陆|大陆|中国台湾|台湾|日本|韩国|美国|香港|澳门|民进党|国民党|共产党|自民党|afterglow|政府|国家|公司|学校|军队)$/i;
-function cleanName(value){
+// A relationship target may be an unusual chosen name. Only explicit naming
+// evidence bypasses prose/object rejection; loose prose extraction never does.
+const objectName=/^(?:方式|方法|办法|地名|地点|照片|图片|相片|资料|材料|文件|单据|表格|工作表|工资|报酬|事情|任务|计划|问题|情况|结果|消息|信息|新闻|安排|记忆|回忆|生活|历史|社会|经济|政治|国家|世界|物品|东西|食物|水源|电话|手机|电脑|设备|机器|车辆|工具|门口|路口|学校|单位|办公室|店铺|商店|商场|超市|菜市场|文具店|咖啡馆|医院|工厂|部门|市场|书架|书籍|书本|一本书|一张纸|一张照片|一次机会|困难|危险|麻烦|风险|故障|野兽|小鱼|鱼群|丧尸群|工作安排|家庭情况|当地政府|这个人|那个人|这种方式|同一种方式)$/;
+const proseName=/(?:之前|之后|此前|以后|已经|正在|仍然|逐渐|通过|按照|根据|为了|把.+|被.+|抄下|写下|放到|放在|拿到|拿出|交给|完成|发生|变成|进行|接下来|所说的|说过的|眼前的|身边的|自己的|对方的|他们的|她们的|你们的|我们的)/;
+const explicitNaming=(name,detail='')=>{const escaped=String(name).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return new RegExp(`(?:名叫|名为|叫做|叫作|姓名(?:是|为|叫)?|名字(?:是|为|叫)?|称作|自称|昵称(?:是|为|叫)?|called|named)\\s*[“「『"']?${escaped}(?:[”」』"'，。！？；;\\s]|的(?:朋友|同事|同学|工程师|老师|医生|队友|人物|人)|$)`,'iu').test(detail);};
+function cleanName(value,{explicit=false,automatic=false}={}){
   let name=text(value,80).replace(/^[“「『"']|[”」』"']$/g,'').trim();
   const exact=findPersona(name);if(exact)return {name:exact.name,personaId:exact.id,key:`persona:${exact.id}`,persona:exact};
   name=name.replace(/^(?:一位|一名|一个)?(?:新(?:来的)?|老)?(?:邻居|同事|同学|医生|护士|老师|记者|朋友|队友|战友|工程师|老板|师傅|店长|客户|学生|歌手|市长|总统|首相|主席|先生|女士|名叫|叫做|叫|名为)(?:叫|名叫|叫做|名为)?/,'').trim();
   if(name.length<2||name.length>48||invalidName.test(name)||/[，。！？:：;；\n<>={}\/\\]/.test(name)||/(?:新闻|报道|消息|名单|视频|照片|演讲|成员们|同事们|朋友们|身边的人|陌生人|某位|某名|一群|那位|这位)/.test(name))return null;
+  if(!explicit&&(objectName.test(name)||proseName.test(name)||automatic&&/[的把被了着过]/.test(name)&&/[\p{Script=Han}]/u.test(name)))return null;
+  if(automatic&&!explicit&&/^[\p{Script=Han}]+$/u.test(name)&&Array.from(name).length>5)return null;
   if(!/^[\p{L}\p{M}\p{N}·・.'’\-\s]+$/u.test(name))return null;
   const persona=findPersona(name);
   return {name:persona?.name||name,personaId:persona?.id||null,key:persona?`persona:${persona.id}`:`contact:${hash(normalized(name))}`,persona};
 }
-function identity(value,state){
+function identity(value,state,options){
   const name=text(value,80);
   if(name==='player'||/^(?:我|你|本人|自己|玩家)$/.test(name)||normalized(name)===normalized(state.profile?.name))return {key:'player',name:state.profile?.name||'我'};
-  return cleanName(name);
+  const known=state.relationshipGraph?.nodes?.find(node=>node.name===name&&explicitNaming(name,node.nameEvidence));
+  return cleanName(name,{...options,explicit:options?.explicit||!!known});
 }
 function relationshipMeaning(value,type=''){
   const detail=text(value,320),mapped=relationTypes[type];
@@ -37,12 +45,14 @@ function makeBuilder(state,graph){
   const month=monthOf(state),nodes=new Map((graph?.nodes||[]).map(n=>[n.id,{...n}])),edges=new Map((graph?.edges||[]).map(e=>[e.id,{...e}]));
   const playerPersona=state.profile?.lockedPersonaId||state.profile?.persona?.id;
   nodes.set('player',{id:'player',name:text(state.profile?.name,48)||'我',...(playerPersona?{personaId:text(playerPersona,100)}:{}),detail:text(state.person?.occupation||state.profile?.backgroundText,240),firstMetMonth:0,lastContactMonth:month});
-  const ensure=(value,detail='',touch=false)=>{
-    const person=identity(value,state);if(!person)return null;
+  const ensure=(value,detail='',touch=false,nameEvidence='')=>{
+    const explicit=explicitNaming(value,detail)||explicitNaming(value,nameEvidence);
+    const person=identity(value,state,{explicit});if(!person)return null;
     if(person.key==='player')return nodes.get('player');
     const existing=nodes.get(person.key);
     if(!existing&&nodes.size>=MAX_NODES)return null;
     const node=existing||{id:person.key,name:person.name,...(person.personaId?{personaId:person.personaId}:{}),detail:'',firstMetMonth:month,lastContactMonth:month};
+    if(explicit)node.nameEvidence=text(explicitNaming(value,detail)?detail:nameEvidence,240);
     if(detail)node.detail=text(detail,240);if(touch)node.lastContactMonth=month;
     nodes.set(node.id,node);return node;
   };
@@ -107,7 +117,7 @@ export function normalizeRelationshipGraph(state={}){
   if(saved&&Array.isArray(saved.nodes)&&Array.isArray(saved.edges)){
     for(const raw of saved.nodes.slice(0,MAX_NODES)){
       if(!raw||typeof raw!=='object'||raw.id==='player')continue;
-      const person=builder.ensure(raw.personaId||raw.name,raw.detail);if(!person)continue;
+      const person=builder.ensure(raw.personaId||raw.name,raw.detail,false,raw.nameEvidence);if(!person)continue;
       person.firstMetMonth=moment(raw.firstMetMonth,monthOf(state));person.lastContactMonth=moment(raw.lastContactMonth,person.firstMetMonth);
       mapping.set(text(raw.id,200),person.id);
     }
@@ -138,11 +148,18 @@ const remote=/(?:新闻|报道|报纸|电视|视频|直播|网络|网上|推文|
 function clauses(value){return affirmedClauses(text(value,16000)).filter(c=>!noContact.test(c)&&!remote.test(c)&&!/(?:计划|准备|希望|试图|尝试|打算|想要|将要|即将).{0,16}(?:见面|认识|接触|联系|结盟|合作)|(?:接触|联系|见面|会面|结盟|合作).{0,15}(?:失败|未果|被拒|遭到拒绝)|尚未|還未|未曾|從未|並未|沒有|沒能|無法|不認識|不聯繫|假如|如果|拒絕|\b(?:if|never|not|didn't|did not|couldn't|would|might|wish|hope to|plan to|tried to)\b|会っていない|会わな|会えな|知らない|連絡していない|만나지|만난 적 없|연락하지|못 만났|만날 계획/i.test(c));}
 function namesInContact(clause){
   const found=[];let match;
-  const addNames=value=>{for(const item of value.split(/(?:和|与|跟|以及|还有|、| and )/)){const parsed=cleanName(item);if(parsed)found.push(parsed.name);}};
+  const addNames=(value,explicit=false)=>{const whole=cleanName(value,{automatic:true,explicit:explicit||explicitNaming(value,clause)});if(whole?.persona||explicit){if(whole)found.push(whole.name);return;}for(const item of value.split(/(?:和|与|跟|以及|还有|、| and )/)){const parsed=cleanName(item,{automatic:true,explicit:explicitNaming(item,clause)});if(parsed)found.push(parsed.name);}};
+  const named=/(?:名叫|名为|叫做|叫作|自称|昵称(?:是|为|叫)?)[“「『"']?([\p{L}\p{M}\p{N}·・.'’\-\s]{2,48}?)(?:[”」』"']|的(?:朋友|同事|同学|工程师|老师|医生|队友|人物|人)|$)/gu;
+  if(new RegExp(contactVerb).test(clause))while((match=named.exec(clause)))addNames(match[1],true);
   const direct=new RegExp(`${objectVerb}(?:了|过|到|上)?\\s*([\\p{L}\\p{M}·・.'’\\-\\s]{2,48})`,'gu');
-  while((match=direct.exec(clause))){let name=match[1].split(/(?:并|和我|跟我|与我|向我|同我|为我|给我|正在|一起|成为|进行了|进行|介绍|商量|讨论|开始|建立|告别|握手|搬家|修理|修好|做饭|逃离|脱险|解决|处理)|[，。]/)[0];if(!name.includes('的'))addNames(name);}
+  while((match=direct.exec(clause))){let name=match[1].split(/(?:并|和我|跟我|与我|向我|同我|为我|给我|正在|一起|成为|进行了|进行|介绍|商量|讨论|开始|建立|告别|握手|搬家|修理|修好|做饭|逃离|脱险|解决|处理|之后|以后)|[，。]/)[0];if(!name.includes('的'))addNames(name);}
   const mutual=new RegExp(`(?:与|和|跟|同)\\s*([\\p{L}\\p{M}·・.'’\\-\\s]{2,48}?)(?:已经|正式|成功|再次|经常|时常|常常|曾经|一直|早已|一起|共同|已|也)?${relationVerb}`,'gu');
-  while((match=mutual.exec(clause)))addNames(match[1]);
+  while((match=mutual.exec(clause))){
+    const before=clause.slice(0,match.index);
+    // "把照片和地名放到一起" describes objects, not a social encounter.
+    if(/(?:把|将|照片|图片|资料|材料|文件|单据|表格|方式|方法|整理|放到|放在)/.test(before))continue;
+    addNames(match[1]);
+  }
   const telephone=/(?:给|向)([\p{L}\p{M}·・.'’\-\s]{2,48}?)(?:打电话|发消息|发信息|通电话)/gu;
   while((match=telephone.exec(clause)))addNames(match[1]);
   const english=/\b(?:I|You)\s+(?:(?:have|had|already|just|personally|successfully)\s+)*(?:met|meet|befriended|contacted|visited|interviewed|rescued|called|spoke (?:with|to)|talked (?:with|to)|worked with)\s+([A-Z][\p{L}.'’\-]*(?:\s+[A-Z][\p{L}.'’\-]*){0,3})/gu;
@@ -174,7 +191,7 @@ function connectedRelationshipClauses(value,fromAction=false){
   return result;
 }
 function explicitContact(clause,name,state){
-  const p=cleanName(name);if(!p)return false;
+  const p=identity(name,state,{explicit:explicitNaming(name,clause)});if(!p)return false;
   const aliases=[p.name,...(p.persona?.aliases||[])].filter(v=>v.length>1),included=aliases.some(n=>clause.includes(n));if(!included)return false;
   if(namesInContact(clause).some(n=>identity(n,state)?.key===p.key))return true;
   const marker=aliases.find(n=>clause.includes(n)),at=clause.indexOf(marker),before=clause.slice(Math.max(0,at-35),at),after=clause.slice(at+marker.length,at+marker.length+40);
@@ -202,7 +219,7 @@ export function isValidRelationshipGraph(raw){
   if(!raw||raw.version!==1||!Array.isArray(raw.nodes)||!Array.isArray(raw.edges)||raw.nodes.length<1||raw.nodes.length>MAX_NODES||raw.edges.length>MAX_EDGES)return false;
   const ids=new Set();
   for(const node of raw.nodes){
-    if(!node||typeof node.id!=='string'||!node.id||node.id.length>200||ids.has(node.id)||typeof node.name!=='string'||!node.name.trim()||node.name.length>80||typeof node.detail!=='string'||node.detail.length>320||!Number.isFinite(node.firstMetMonth)||!Number.isFinite(node.lastContactMonth)||node.personaId!==undefined&&(typeof node.personaId!=='string'||node.personaId.length>100))return false;
+    if(!node||typeof node.id!=='string'||!node.id||node.id.length>200||ids.has(node.id)||typeof node.name!=='string'||!node.name.trim()||node.name.length>80||typeof node.detail!=='string'||node.detail.length>320||!Number.isFinite(node.firstMetMonth)||!Number.isFinite(node.lastContactMonth)||node.personaId!==undefined&&(typeof node.personaId!=='string'||node.personaId.length>100)||node.nameEvidence!==undefined&&(typeof node.nameEvidence!=='string'||node.nameEvidence.length>240))return false;
     ids.add(node.id);
   }
   if(!ids.has('player'))return false;

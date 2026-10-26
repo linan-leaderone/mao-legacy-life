@@ -10,6 +10,7 @@ root = Path(__file__).resolve().parent.parent
 version = json.loads((root / "package.json").read_text(encoding="utf-8-sig"))["version"]
 dist = root / "dist"
 assets = {p.relative_to(dist).as_posix(): p.read_bytes() for p in dist.rglob("*") if p.is_file()}
+assert sum(len(data) for name, data in assets.items() if name.startswith("maps/")) < 13_000_000, "Unexpected map payload"
 private_settings = root / ".private/settings.json"
 settings = json.loads(private_settings.read_text(encoding="utf-8-sig")) if private_settings.exists() else {}
 included_providers = []
@@ -19,7 +20,7 @@ for provider in ["deepseek", "gemini"]:
         assert any(key in data for name, data in assets.items() if name.endswith(".js")), f"Default credential missing: {provider}"
         included_providers.append(provider)
 assert not any("mod-corpus" in name or ".private" in name for name in assets)
-assert sum(len(data) for name, data in assets.items() if not name.startswith(("portraits/", "characters/"))) < 18_000_000, "Unexpected non-portrait payload; audit corpus must not be shipped"
+assert sum(len(data) for name, data in assets.items() if not name.startswith(("portraits/", "characters/", "maps/"))) < 22_000_000, "Unexpected core payload (includes the geographic name index); audit corpus must not be shipped"
 assert sum(map(len, assets.values())) < 65_000_000, "Portrait and web payload exceeds the offline bundle budget"
 results = []
 for filename, prefix in [

@@ -1,7 +1,12 @@
+import {territoryActionChanges,validateTerritorialState} from './territory-actions.js';
+import {territoryExposure,getGeographyUnit} from './world-territories.js';
+import {selectMonthlyPolicies} from './policies.js';
+import {adultRelationshipsAllowed,personalRelationshipOpportunity,relationshipBehaviorDelta} from './adult-relationships.js';
+import {createOpeningScenario,applyOpeningScenario,scenarioMonthlyEvents,scenarioAllowsEvent,scenarioAdaptEvent} from './scenario.js';
 import lifeEvents from './data/life-events.json' with {type:'json'};
 import newsData from './data/news.json' with {type:'json'};
 import {isForeignAction,filterWorldUpdatesForAction} from './action-language.js';
-import {backgroundsFor,regionContext,newsExposure,regionForPlace} from './regions.js';
+import {backgroundsFor,regionContext,newsExposure,regionForPlace,deriveGovernmentState,normalizeWorldOverrides} from './regions.js';
 import {findPersona,lockPersonaProfile,personaAge,getPoliticalActors} from './personas.js';
 import {freedomMode,declarationPlan,settlementPlan,affirmedClauses,monthNumber,validateAgencyRecord} from './agency.js';
 import {proseIssues,tidyLocalProse} from './narrative.js';
@@ -84,6 +89,7 @@ export function eligibleEvents(s,lore){
     .sort((a,b)=>Number(!!b.fixedMonth)-Number(!!a.fixedMonth)||a.resolvedMonth-b.resolvedMonth||a.id.localeCompare(b.id));
 }
 function eventFitsSituation(s,e,lore){
+  if(!scenarioAllowsEvent(s,e))return false;
   const done=happened(s),override=s.worldOverrides?.[e.region||eventRegion(e)];
   if((e.blockAfter||[]).some(id=>done.has(id)))return false;
   const warStart=/civil|war/.test(e.category||'')&&!/结束|停火|复员|重建|胜利|纪念/.test(e.title);
@@ -220,13 +226,21 @@ function impactFor(s,e){
 function enterMonth(s,lore){
   const major=eligibleEvents(s,lore),ordinary=(newsData.events||[]).filter(e=>e.earliestMonth<=s.month&&!s.seenNews.includes(e.id)&&(!e.routeIds?.length||e.routeIds.some(id=>Object.values(s.routes).includes(id)))&&(e.requires||[]).every(id=>happened(s).has(id))&&eventFitsSituation(s,e,lore));
   const cards=[];
-  for(const [kind,events]of [['world',major],['news',ordinary]])for(const e of events){
+  for(const [kind,events]of [['world',major],['news',ordinary]])for(const raw of events){
+    const e=scenarioAdaptEvent(s,raw);
     const event={...e,region:e.region||eventRegion(e)},exposure=newsExposure(s,event),impact=impactFor(s,event),card={id:e.id,title:e.title,description:tidyLocalProse(e.description),art:artFor(e),category:e.category||'politics',region:event.region,month:s.month,impact,exposure,kind};
     cards.push(card);applyDelta(s.stats,impact,s._statLedger,`报道：${card.title}`);
     if(kind==='world'){s.seenEvents.push(e.id);s.eventMonths[e.id]=s.month;s.worldState[card.region]={title:card.title,description:card.description,month:s.month};}
     else s.seenNews.push(e.id);
   }
-  s.newsHistory.push(...cards);return cards;
+  s.newsHistory.push(...cards);
+  for(const event of scenarioMonthlyEvents(s)){const card=publishPersonalNews(s,event);if(card)cards.push(card);}
+  for(const event of selectMonthlyPolicies(s,lore)){const card=publishPersonalNews(s,{...event,kind:'policy'});if(card){card.impact=impactFor(s,event);applyDelta(s.stats,card.impact,s._statLedger,`政策：${card.title}`);cards.push(card);}}
+  syncGovernments(s,lore);return cards;
+}
+function syncGovernments(s,lore){
+  s.worldOverrides=normalizeWorldOverrides(s);
+  for(const [region,current]of Object.entries(deriveGovernmentState(s,lore)))s.worldState[region]={...s.worldState[region],...current};
 }
 function publishPersonalNews(s,event){
   if(s.newsHistory.some(e=>e.id===event.id))return null;
@@ -251,13 +265,15 @@ function changeWorld(s,change,lore,index=0){
   }
   if(change.kind==='leadership'){delete patch.resumeAfterEventId;if(change.leader===s.profile.name){s.person.authorityOverride={region,leader:s.profile.name,month:s.month};applyDelta(s.stats,{influence:Math.max(0,80-s.stats.influence)},s._statLedger,'公共职务与实际权限',true);}}
   s.worldOverrides??={};s.worldOverrides[region]=patch;
+  s.factionConflicts??={};if(Object.hasOwn(change,'conflict')){s.factionConflicts[region]=change.conflict;const faction=deriveGovernmentState(s,lore)[region]?.factionId;if(faction)s.factionConflicts[faction]=change.conflict;}
+  if(peace)for(const [unitId,territory]of Object.entries(s.territoryOverrides||{})){if(getGeographyUnit(unitId)?.region===region||unitId==='region:'+region||territory.controllerId===region||territory.conflict===change.terminatedConflict||change.terminatedConflict==='all'){territory.conflict=null;territory.frontline=false;}}
   // A direct intervention supersedes the old preselected cross-strait winner coupling.
   if(['taiwan','japan'].includes(region)&&['war','peace','victory','leadership'].includes(change.kind))s.playerChangedCoupling=true;
   return publishPersonalNews(s,{id:change.anchor||`personal_world_${s.turn}_${index}_${hash(change.description||change.title)}`,title:change.title||`${s.location}的最新变化`,description:change.description||'新的公共安排已经开始执行。',region,art:change.kind==='war'?(region==='japan'?'japan-civil':region==='taiwan'?'taiwan-civil':'politics'):'politics',category:change.kind==='war'?'war':'politics',source:'personal_action'});
 }
 function relocateTime(s,target,lore){
-  s.timeJournals=[...(s.timeJournals||[]),{departedMonth:s.month,turn:s.turn,newsHistory:s.newsHistory,worldOverrides:s.worldOverrides||{}}].slice(-4);
-  s.seenEvents=[];s.seenNews=[];s.eventMonths={};s.newsHistory=[];s.worldState={};s.worldOverrides={};s.worldDynamics={};s.npcActivity=[];s.npcPressure=pressureDefaults();s.playerChangedCoupling=false;
+  s.timeJournals=[...(s.timeJournals||[]),{departedMonth:s.month,turn:s.turn,newsHistory:s.newsHistory,worldOverrides:s.worldOverrides||{},territoryOverrides:s.territoryOverrides||{},factionConflicts:s.factionConflicts||{}}].slice(-4);
+  s.seenEvents=[];s.seenNews=[];s.eventMonths={};s.newsHistory=[];s.worldState={};s.worldOverrides={};s.worldDynamics={};s.npcActivity=[];s.territoryOverrides={};s.factionConflicts={};s.npcPressure=pressureDefaults();s.playerChangedCoupling=false;
   // Reconstruct world chronology without charging the traveller for skipped months.
   for(let m=0;m<=Math.min(target,300);m++){
     s.month=m;
@@ -282,7 +298,7 @@ function publicReactions(s,prior,lore){
 }
 function politicalActivity(s){
   if(s.month<0||s.turn===0||hash(s.seed+':npc:'+s.turn)%4!==0)return [];
-  const actors=getPoliticalActors(s).filter(actor=>actor.name!==s.profile.name&&!/在押|服刑|拘押|监禁|学生|中学生|乐队成员/.test(actor.role));
+  const actors=getPoliticalActors(s).filter(actor=>actor.autonomyEligible!==false&&actor.name!==s.profile.name&&!/在押|服刑|拘押|监禁|学生|中学生|乐队成员/.test(actor.role));
   if(!actors.length)return [];
   const actor=actors[hash(s.seed+':actor:'+s.turn)%actors.length],priorities=actor.priorities||[];
   const concern=String(priorities[hash(s.seed+':priority:'+s.turn)%Math.max(1,priorities.length)]||'公共服务与地方事务');
@@ -291,6 +307,24 @@ function politicalActivity(s){
   const card=publishPersonalNews(s,{id:`npc_public_${s.turn}_${actor.id}`,title:`${actor.name}提出新的公共安排`,description:`${actor.name}围绕${concern}与相关人员开展磋商。支持者开始整理诉求和联系人，持不同意见的人要求说明资源来源及落实办法。这些活动正在改变当地的组织联系。`,region:actor.region||'china',source:'political_actor',actor:actor.name,ideology:actor.ideology});
   s.npcActivity=[...(s.npcActivity||[]),{actor:actor.name,month:s.month,ideology:actor.ideology,pressure:key,delta:power}].slice(-30);
   return card?[card]:[];
+}
+function settleTerritoryEffects(s,lore){
+  const reasons=['当地交战与通行中断','所属势力参战带来的交通与供给影响','战时物资与交通支出'];
+  if(s._territorySettlement?.turn===s.turn){
+    s.stats.funds-=s._territorySettlement.funds;s.stats.stress-=s._territorySettlement.stress;
+    s.monthlyLedger=(s.monthlyLedger||[]).filter(e=>e.kind!=='territory');
+    s._statLedger=(s._statLedger||[]).filter(e=>!reasons.includes(e.reason));
+    for(const change of s.statChanges||[])change.reasons=(change.reasons||[]).filter(reason=>!reasons.includes(reason));
+  }
+  const before={funds:s.stats.funds,stress:s.stats.stress};
+  s.territoryStatus=territoryExposure(s,s.location,lore);
+  if(s.territoryStatus.war&&!(s.specialLife&&s.specialLife.body!=='human')){
+    const frontline=s.territoryStatus.frontline;
+    applyDelta(s.stats,{stress:frontline?3:1},s._statLedger,frontline?reasons[0]:reasons[1]);
+    const cost=Math.min(Math.max(0,s.stats.funds),frontline?120:35);
+    if(cost){applyDelta(s.stats,{funds:-cost},s._statLedger,reasons[2],true);s.monthlyLedger.push({label:reasons[2],amount:-cost,kind:'territory'});}
+  }
+  s._territorySettlement={turn:s.turn,funds:s.stats.funds-before.funds,stress:s.stats.stress-before.stress};
 }
 function finishChanges(s,before){
   const ledger=s._statLedger||[];s.statChanges=Object.keys(STAT_NAMES).filter(k=>s.stats[k]!==before[k]).map(k=>({key:k,label:STAT_NAMES[k],before:before[k]??0,after:s.stats[k],delta:s.stats[k]-(before[k]??0),reasons:[...new Set(ledger.filter(e=>e.key===k).map(e=>e.reason))]}));
@@ -328,7 +362,11 @@ function occupationEvent(s,context){
   if(!kind)return null;
   return {id:`personal_${kind}_${s.month%6}`,title,narrative,diary,category:kind==='service'?'health':kind==='office'?'politics':'culture',options:labels.map((label,i)=>({label,description:'按当前条件安排具体工作，记录结果和后续需要。',delta:i===4?{stress:-2}:{intelligence:1,connections:1}}))};
 }
-export function localEvent(s,lore,action=null){return localizeEvent(localEventContent(s,lore,action),s,action);}
+export function localEvent(s,lore,action=null){
+  let event=localEventContent(s,lore,action);const opportunity=s.personalOpportunity;
+  if(opportunity&&!s.ended){event={...event,personalOpportunity:opportunity.id,narrative:event.narrative+'\n'+opportunity.description};if(event.options.length)event.options=[...event.options.slice(0,3),...opportunity.options.map(label=>({label,description:'见面和交往各自由本人决定。',delta:{},check:{stat:'charisma',difficulty:25}}))].slice(0,5);}
+  return localizeEvent(event,s,action);
+}
 function localEventContent(s,lore,action=null){
   if(s.stats.health===0&&!s.person?.deceased)return {title:'最后一段经历',narrative:s.terminalCause==='encounter'?'交锋留下的伤势已经无法支撑你继续活动。身边能够取得的物资没能挽回生命，走过的道路、留下的联系和未完成的安排成为最后的记录。':'身体的情况持续恶化，你已经无法继续原来的生活。此前建立的关系、保存的记录和未完成的事情留了下来，这段人生停在了这里。',consequence:tidyLocalProse(s.actionResult?.summary||''),options:[],memory:'这段人生停在了这里。',actionDelta:{},location:s.location,dailyId:'personal_last_page',decision:false,news:s.pendingNews||[],source:'local'};
   if(s.person?.deceased)return {title:'最后的消息',narrative:'你在内战中遇刺身亡，身边的人随后确认了消息。有关人员整理了你留下的文件与尚未完成的安排，原有联盟开始处理继承与战时指挥问题。亲友收到通知，此前的书信、会面记录和生活经历留了下来。',consequence:tidyLocalProse(s.actionResult?.summary||''),options:[],memory:'你在内战中遇刺身亡。',actionDelta:{},location:s.location,dailyId:'personal_death',decision:false,news:s.pendingNews||[],source:'local'};
@@ -494,15 +532,15 @@ export function createGame(input,lore){
   const seed=profile.seed?.trim()||(globalThis.crypto?.randomUUID?.()||String(Date.now())+'-'+Math.random());
   const p={name:persona?.name||(profile.name?.trim()||'无名者').slice(0,30),age:startAge,startAgeMonths:persona?profile.startAgeMonths:startAge*12,place:profile.place,startLocation:location,background:bg.id,backgroundText:(profile.backgroundText||bg.detail).slice(0,3000),goal:(profile.goal?.trim()||'照顾自己和家人，完成想做的事情。').slice(0,1000),narrative:profile.narrative==='balanced'?'balanced':'player',points:Object.fromEntries(POINT_STATS.map(k=>[k,Number(points[k])]))};
   p.freedom=['unlimited','influential','grounded'].includes(profile.freedom)?profile.freedom:p.narrative==='balanced'?'grounded':'unlimited';p.narrative=p.freedom==='grounded'?'balanced':'player';
-  p.identity=normalizeCharacterIdentity(profile.identity);p.language=normalizeLanguage(profile.language);
+  p.identity=normalizeCharacterIdentity(profile.identity);p.language=normalizeLanguage(profile.language);p.scenario=createOpeningScenario(p);
   if(persona)Object.assign(p,{birthDate:persona.birthDate,birthDatePrecision:persona.birthDatePrecision||'day',birthPlace:persona.birthPlace,lockedPersonaId:persona.id,persona});
   const influenceBase={ordinary:2,worker:3,rural:1,research:6,cadre:14,business:10,custom:2}[bg.id];
   const position=/国家主席|总统|首相|最高领导|中央领导/.test(p.backgroundText)?65:/省长|部长|司令|议员|市长|企业董事长/.test(p.backgroundText)?35:/主任|干部|教授|记者|经理|工会代表/.test(p.backgroundText)?12:0;
   const influence=Math.round(clamp((influenceBase+p.points.family*1.4+position)*(startAge<16?0.25:1),0,95));
   const stats={...Object.fromEntries(POINT_STATS.map(k=>[k,p.points[k]*10])),influence,health:70+p.points.fitness*2,funds:startAge<16?100+p.points.family*100:Math.round(500+Math.pow(p.points.family,2)*300+bg.funds/4),connections:bg.connections,stress:18,morality:50,promiscuity:0,charisma:Math.round((p.points.appearance*10+bg.connections)/2),...(persona?.stats||{})};
-  const s={version:1,timelineVersion:5,id:`life-${seed}`,seed,profile:p,person:initialPerson(p),location,month:0,turn:0,routes:chooseRoutes(lore,profile.routes,seed),calendar:{straitEnd:31+hash(seed+':strait-end')%3},eventMonths:{},seenEvents:[],seenNews:[],newsHistory:[],worldPressure:pressureDefaults(),worldState:{},worldOverrides:{},worldDynamics:{},statChanges:[],stats,memories:[],pins:[],history:[],ended:false};
+  const s={version:1,timelineVersion:5,id:`life-${seed}`,seed,profile:p,person:initialPerson(p),location,month:0,turn:0,routes:chooseRoutes(lore,profile.routes,seed),calendar:{straitEnd:31+hash(seed+':strait-end')%3},eventMonths:{},seenEvents:[],seenNews:[],newsHistory:[],worldPressure:pressureDefaults(),worldState:{},worldOverrides:{},worldDynamics:{},territoryOverrides:{},factionConflicts:{},statChanges:[],stats,memories:[],pins:[],history:[],ended:false};
   s.routeSelectionExplicit=!!input.routes;s.npcPressure=pressureDefaults();
-  initializeSpecialLife(s,persona);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
+  initializeSpecialLife(s,persona);applyOpeningScenario(s);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
 }
 export function actionEncounter(s,action){
   const plain={...action,meta:{...action.meta}};delete plain.meta.encounterGame;
@@ -511,7 +549,7 @@ export function actionEncounter(s,action){
 }
 export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   const temp=structuredClone(s),result=resolveAction(s,action),current=currentAge(s),mode=freedomMode(s);
-  temp.turn=(s.turn??s.history.length)+1;temp.timelineVersion=5;temp._statLedger=[];
+  delete temp._territorySettlement;temp.turn=(s.turn??s.history.length)+1;temp.timelineVersion=5;temp._statLedger=[];
   const prepared=actionEncounter(s,action);temp.encounterState=prepared.state.encounterState;
   let encounterEffect=null,encounterResult=null;
   if(action.meta?.encounterGame){
@@ -559,6 +597,7 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   else temp.month=s.month+1;
   if(declarations&&plan.ageMonths!==null){temp.person.ageOverride={months:plan.ageMonths,turn:temp.turn};if(temp.specialLife)temp.specialLife.bodyAge=Math.floor(plan.ageMonths/12);result.summary=`${plan.dateMonth!==null?`你已抵达${dateLabel(temp.month)}。`:''}你的身体已变为${Math.floor(plan.ageMonths/12)}岁，原有记忆、关系与已完成的事情继续保留。身边的人注意到了变化，你按照现在的身体条件重新安排活动，已有的职务与合作需要说明身份后继续处理。`;}
   const personalNews=[];
+  if(declarations){for(const change of territoryActionChanges(temp,action)){temp.territoryOverrides??={};temp.territoryOverrides[change.unitId]={...temp.territoryOverrides[change.unitId],...change.patch};const card=publishPersonalNews(temp,{id:`territory_${temp.turn}_${change.unitId}`,title:`${change.name}的控制与通行情况改变`,description:change.patch.controller?`${change.patch.controller}已实际接管${change.name}，当地通行与行政安排随之调整。`:`${change.name}${change.patch.frontline?'正在交战，通行与物资供应受到直接影响。':'已经停止交火，居民开始恢复出行。'}`,region:change.region,art:change.patch.frontline?'war':'politics',source:'personal_action'});if(card)personalNews.push(card);}}
   if(declarations){for(const [i,change]of plan.worldChanges.entries()){const card=changeWorld(temp,change,lore,i);if(card)personalNews.push(card);}
     if(plan.worldChanges.length)result.summary=`你已经完成“${tidyLocalProse(action.label).slice(0,220)}”中明确提出的行动。${plan.worldChanges.map(c=>c.description).join(' ')}已有的组织联系与资源投入支撑了这次变化，新的局势继续影响后续生活。`;
     if(/世界和平|永久和平|所有战争.*结束|终结.*所有战争/.test(affirmedClauses(action.label).join(''))){temp.worldDynamics={...temp.worldDynamics,lastingPeace:true};}
@@ -571,8 +610,12 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   adaptWorld(temp,lore);temp.actionResult=result;
   const reports=enterMonth(temp,lore);syncPublicIdentity(temp);
   temp.pendingNews=[...personalNews,...reports,...publicReactions(temp,s,lore),...politicalActivity(temp)];
+  syncGovernments(temp,lore);
+  settleTerritoryEffects(temp,lore);
   if(temp.terminalCause==='encounter')applyDelta(temp.stats,{health:-temp.stats.health},temp._statLedger,'无法挽回的伤势',true);
-  if(currentAge(temp).years<18||(Number.isInteger(temp.specialLife?.bodyAge)&&temp.specialLife.bodyAge<18))temp.stats.promiscuity=0;
+  if(!adultRelationshipsAllowed(temp,currentAge(temp).years*12+currentAge(temp).months))temp.stats.promiscuity=0;
+  if(!action.custom&&!action.passive&&result.success){const preference=relationshipBehaviorDelta(s,action.label,{ageMonths:current.years*12+current.months});if(preference)applyDelta(temp.stats,{promiscuity:preference},temp._statLedger,'本人的交往选择');}
+  temp.personalOpportunity=personalRelationshipOpportunity(temp,currentAge(temp).years*12+currentAge(temp).months);
   finishChanges(temp,s.stats);
   return {state:temp,major:null,news:temp.pendingNews,decision:temp.stats.health>0&&isDecisionMonth(temp),actionResult:result};
 }
@@ -615,6 +658,7 @@ export function advance(s,action,response,major=null,lore){
       const card=changeWorld(next,update,lore,100+i);if(card)news.push(card);declaredRegions.add(update.region);
     }
   }
+  settleTerritoryEffects(next,lore);syncGovernments(next,lore);delete next._territorySettlement;
   const extraLedger=next._statLedger||[];delete next._statLedger;
   next.statChanges=Object.keys(STAT_NAMES).filter(k=>next.stats[k]!==s.stats[k]).map(k=>({key:k,label:STAT_NAMES[k],before:s.stats[k]??0,after:next.stats[k],delta:next.stats[k]-(s.stats[k]??0),reasons:[...new Set([...(next.statChanges.find(c=>c.key===k)?.reasons||[]),...extraLedger.filter(e=>e.key===k).map(e=>e.reason)])]}));
   const newPublicChange=(next.person.publicChanges||[]).some(id=>!s.person.publicChanges?.includes(id));
@@ -681,6 +725,10 @@ export function importSave(text,lore){
   s.profile.identity=normalizeCharacterIdentity(s.profile.identity??{},{strict:true});s.profile.language=normalizeLanguage(s.profile.language);
   if(!isValidRelationshipGraph(s.relationshipGraph))throw new Error('这份档案的人物关系记录不完整。');
   s.relationshipGraph=normalizeRelationshipGraph(s);
+  s.profile.scenario??={id:'standard',version:1};
+  if(!['standard','mao-april'].includes(s.profile.scenario.id)||s.profile.scenario.version!==1)throw new Error('这份档案的时代记录不完整。');
+  validateTerritorialState(s);syncGovernments(s,lore);
+  if(!adultRelationshipsAllowed(s,currentAge(s).years*12+currentAge(s).months))s.stats.promiscuity=0;
   const c=lore.couplings;if(!s.playerChangedCoupling&&c?.chenChinaIds?.includes(s.routes.china)&&(!c.taiwanRoutes.includes(s.routes.taiwan)||s.routes.japan!==(s.routes.taiwan===c.taiwanLeftId?c.japanLeftId:c.japanRightId)))throw new Error('这份存档的海外记录互相矛盾。');
   return structuredClone(s);
 }

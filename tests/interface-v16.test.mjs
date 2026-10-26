@@ -1,3 +1,4 @@
+import {storyParagraphs} from '../src/story-flow.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -8,12 +9,12 @@ import {backgroundsFor,regionContext} from '../src/regions.js';
 import {getPoliticalActors} from '../src/personas.js';
 import {getPortrait} from '../src/portraits.js';
 import {isOceanFish} from '../src/fish-game.js';
-import {normalizeLanguage,translateUI} from '../src/language.js';
+import {normalizeLanguage,translateUI,convertChinese,protectedIdentityValues} from '../src/language.js';
 
 const source=readFileSync(new URL('../src/main.js',import.meta.url),'utf8').replace(/^import .+;\r?\n/gm,'').replace(/initializeIOSInstall\(\);\s*render\(\);\s*$/,'');
 const fresh=()=>createGame({name:'林远',age:22,place:'上海',background:'ordinary',seed:'ui-v16',points:{intelligence:5,family:5,fitness:5,appearance:5}},lore);
 function ui(game){
-  const scope={localStorage:{getItem:()=>null,setItem(){}},normalizeSettings:value=>value,normalizeLanguage,translateUI,lore,STAT_NAMES,currentAge,ageLabel,dateLabel,worldHistory,backgroundsFor,regionContext,getPoliticalActors,isOceanFish,getPortrait,fixture:game};
+  const scope={storyParagraphs,convertChinese,protectedIdentityValues,localStorage:{getItem:()=>null,setItem(){}},normalizeSettings:value=>value,normalizeLanguage,translateUI,lore,STAT_NAMES,currentAge,ageLabel,dateLabel,worldHistory,backgroundsFor,regionContext,getPoliticalActors,isOceanFish,getPortrait,fixture:game};
   vm.createContext(scope);vm.runInContext(source,scope);vm.runInContext('game=fixture;modal=(title,body)=>{globalThis.lastModal=body;return {querySelectorAll:()=>[]};};',scope);
   return expression=>vm.runInContext(expression,scope)??scope.lastModal;
 }
