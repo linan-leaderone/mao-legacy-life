@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import lore from '../src/data/lore.json' with {type:'json'};
 import {createGame,nextContext,localEvent,advance,currentAge,dateLabel,exportSave,importSave,timelineEvents} from '../src/engine.js';
 import {regionContext} from '../src/regions.js';
+import {getCountryContext} from '../src/countries.js';
+import {deriveTerritorySituation} from '../src/world-territories.js';
 
 const passive={label:'照常生活',passive:true};
 const routes={china:'cn_han_cyber',taiwan:'tw_dpp',japan:'jp_ldp',europe:'eu_nato'};
@@ -24,6 +26,15 @@ function tick(s,action=passive){
 }
 const reload=s=>importSave(exportSave(s),lore);
 function months(s,count){for(let i=0;i<count;i++)s=tick(s);return s;}
+
+test('global leadership, wars and peace survive a save and update the same territory view',()=>{
+  let s=tick(game(),custom('我成为法国总统'));
+  s=reload(s);assert.equal(getCountryContext(s,'FRA').leader,'林安');
+  assert.equal(deriveTerritorySituation(s,'country:FRA',lore).controller,'林安');
+  s=tick(s,custom('我发动印度尼西亚内战'));assert.ok(s.worldOverrides.idn?.conflict);assert.equal(s.worldOverrides.ind,undefined);
+  assert.equal(deriveTerritorySituation(s,'country:IDN',lore).war,true);
+  s=reload(tick(s,custom('我结束印度尼西亚内战')));assert.equal(deriveTerritorySituation(s,'country:IDN',lore).war,false);
+});
 
 test('travel to 1976 changes calendar and institutions while age, turn and save continuity survive',()=>{
   const initial=game(),oldAge=currentAge(initial);

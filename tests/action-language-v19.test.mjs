@@ -6,6 +6,14 @@ const state={profile:{name:'小林',place:'日本'},location:'日本'};
 const action=label=>({label,custom:true});
 const update=(kind,region='japan',extra={})=>({kind,region,title:'发生的变化',description:'这次行动已经完成，各方开始处理后续安排。',...extra});
 
+test('global country declarations bind to their named country and preserve the local fallback',()=>{
+  const claims=worldActionClaims(action('I became the president of France.'),state);
+  assert.equal(claims[0]?.region,'fra');assert.equal(claims[0]?.leader,'小林');
+  assert.equal(worldActionClaims(action('I ended the civil war.'),{...state,location:'法国'})[0]?.region,'fra');
+  const rows=filterWorldUpdatesForAction(action('I ended the civil war in France.'),state,[update('peace','japan'),update('peace','fra')]);
+  assert.equal(rows.length,1);assert.equal(rows[0].terminatedConflict,'法国内战');
+});
+
 test('adapter identifies foreign action text and leaves simplified Chinese to the existing agency',()=>{
   assert(!isForeignAction(action('我发动日本内战')));assert(!isForeignAction(action('我加入Afterglow')));
   for(const label of ['I started a civil war in Japan.','私は日本で内戦を開始した。','나는 일본 내전을 일으켰다.','我已經發動日本內戰'])assert(isForeignAction(action(label)),label);

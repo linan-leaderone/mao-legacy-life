@@ -1,5 +1,7 @@
 import {findPersona} from './personas.js';
 import {regionForPlace} from './regions.js';
+import {countryRegionNames} from './countries.js';
+import {resolveTerritoryTargets} from './geography.js';
 
 // This adapter only authorizes model-supplied public facts. It does not translate
 // an action or replace the existing Chinese agency, economy, age or travel rules.
@@ -19,7 +21,10 @@ function actionRegion(clause,state){
   const matches=COUNTRY_PATTERNS.filter(([,re])=>re.test(clause)).map(([key])=>key);
   if(matches.length===1)return matches[0];
   if(matches.length>1)return null;
-  const region=regionForPlace(state.location||state.profile?.place||'');return ['china','taiwan','japan','hongkong','macau','korea'].includes(region)?region:null;
+  const places=resolveTerritoryTargets(clause),regions=[...new Set(places.map(u=>u.region))];
+  if(regions.length===1)return regions[0];
+  if(regions.length>1)return null;
+  const region=regionForPlace(state.location||state.profile?.place||'');return Object.hasOwn(countryRegionNames,region)?region:null;
 }
 function actorIdentity(value){
   const name=clean(value,80).replace(/^(?:the\s+|a\s+)/i,'').trim(),persona=findPersona(name);
@@ -39,7 +44,7 @@ function conflictName(clause,region){
   if(/台海|Taiwan Strait|台湾海峡|대만해협/i.test(clause))return '台海战争';
   if(/大亚洲|Great Asian|大アジア|대아시아/i.test(clause))return '大亚洲战争';
   if(region==='global')return /all wars|所有战争|全部战争|すべての戦争|모든 전쟁/i.test(clause)?'all':'世界战争';
-  const labels={china:'中国',taiwan:'台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国'},civil=/内战|内戦|civil war|내전/i.test(clause);
+  const labels={...countryRegionNames,china:'中国',taiwan:'台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国'},civil=/内战|内戦|civil war|내전/i.test(clause);
   return `${labels[region]}${civil?'内战':'战争'}`;
 }
 function kindsFor(clause){

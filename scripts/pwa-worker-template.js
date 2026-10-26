@@ -11,6 +11,7 @@ async function populate(){
   const cache=await caches.open(CACHE);
   try{
     for(const [url,asset] of urls){
+      if(asset.lazy)continue;
       // Static hosting canonicalizes /index.html to /. Fetch that canonical URL directly.
       const source=asset.path==='index.html'?ROOT.href:url;
       const response=await fetch(new Request(source,{cache:'reload',credentials:'same-origin',redirect:'error'}));
@@ -52,6 +53,14 @@ self.addEventListener('fetch',event=>{
   event.respondWith((async()=>{
     const cached=await (await caches.open(CACHE)).match(key);
     if(cached)return cached;
-    return fetch(request);
+    const asset=urls.get(key);
+    const response=await fetch(asset.lazy?new Request(request,{redirect:'error',cache:'no-cache'}):request);
+    if(asset.lazy&&response.ok&&!response.redirected){
+      const bytes=await response.clone().arrayBuffer();
+      const digest=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+      if(digest!==asset.sha256)throw new Error('Map version mismatch');
+      await (await caches.open(CACHE)).put(key,response.clone());
+    }
+    return response;
   })());
 });

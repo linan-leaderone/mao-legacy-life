@@ -1,8 +1,8 @@
 # 项目事实
 
 - 本目录是独立游戏，不修改相邻 `TFR-xinzuo-rebuild`。MOD 剧情来源见 `docs/LORE-SOURCES.md`，配图来源见 `docs/ART-SOURCES.md`。
-- 当前源码版本1.11.0，`timelineVersion: 5`、`providerRevision: 7`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
-- 用户只有iPhone，iOS交付采用Safari“添加到主屏幕”的PWA（iOS/iPadOS 15.4+），不是原生IPA或TestFlight。`pnpm build:ios`单独输出`dist-ios`，不改变既有Windows/Android产物。`src/ios-install.js`只在`__IOS_PWA__`构建启用；`src/file-export.js`在iPhone使用支持JSON文件的系统分享面板，否则回退下载，原生导出优先级保留。完整离线缓存成功才显示就绪，更新不强制刷新当前人生。
+- 当前源码版本1.12.0，`timelineVersion: 5`、`providerRevision: 7`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
+- 用户只有iPhone，iOS交付采用Safari“添加到主屏幕”的PWA（iOS/iPadOS 15.4+），不是原生IPA或TestFlight。`pnpm build:ios`单独输出`dist-ios`，不改变既有Windows/Android产物。`src/ios-install.js`只在`__IOS_PWA__`构建启用；`src/file-export.js`在iPhone使用支持JSON文件的系统分享面板，否则回退下载，原生导出优先级保留。核心离线缓存成功才显示就绪，地方地图按查看范围加载并校验缓存，首次查看未缓存地区需要联网，更新不强制刷新当前人生。
 - iOS发布副本为相邻`mao-legacy-life-ios-site`，Site身份在其`.openai/hosting.json`，必须沿用。这个目录只同步已经移除默认密钥的`dist-ios`内容，不能复制整个游戏目录、`.private`、原始查询缓存或完整MOD审计索引。iOS网页禁止内置个人默认密钥，手机自行填写并保存在当地浏览器/主屏幕存储中。用户于2026-10-24明确要求免注册登录分享，Site已设为public；后续更新保留公开访问，使用普通保存/部署流程，不得调用会要求owner-only的私有部署操作。发布方式和验证边界见`docs/IOS.md`。
 - 每次启动先显示首页 API 卡，包括有存档时；支持 DeepSeek、Gemini、自定义 API 三选一，以及不联网、继续、新人生和读取。品牌入口返回首页，切换连接不丢失进度，请求进行中不得切换。首页和设置共用连接表单，编辑自动保存，开始和继续前提交当前表单；测试连接必须使用当前草稿，迟到结果不能覆盖已修改配置。
 - `src/api-settings.js` 使用 `providers.deepseek/gemini/custom` 分别保存密钥与模型，不能跨服务串用。DeepSeek默认`deepseek-flash`；Gemini新默认为用户指定转发站`https://aiapi.shiwuyan.cn/v1beta`、Gemini原生协议与`gemini-4-argon`，也允许配置OpenAI兼容协议。只有最早版本随包的原默认Google密钥按固定指纹识别并在升级时替换整个Gemini连接（私有包使用新默认，公共包清空旧密钥）；用户自填Google密钥或自定义地址保留，不能把用户旧密钥自动发给新主机。旧flat配置迁移到对应服务，保留不联网和显式空密钥；空值不能被默认值覆盖。自定义支持OpenAI兼容、Gemini原生、Anthropic Messages，可手填模型、允许匿名本机服务，测试模型列表可暂不填模型。
@@ -23,7 +23,7 @@
 - 新闻 `exposure` 分为 direct、indirect、remote、none。远方报道不自动在本地造成灾害、封控、拘押或收入损失；大陆政治和办事机构不套到台日港澳韩。地区环境只应用已经发生的制度变化。
 - 面向人物的正文、选项与新闻必须沉浸式，不插入开发者、玩家、本局、触发节点、路线锁定、属性加成等局外说明。来源、适配说明和隐藏分支仅保留在数据元信息与文档，不能拼入叙事或提前透露终局。
 - `src/narrative.js` 管理简洁文风与可识别错龄校验；各叙事服务最多自动重写一次，不在重写时推进月份或重算行动。格式错误、再次不合格或网络失败交由界面重试或本地叙事。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
-- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.11.0；Android versionCode 13；Windows目录`release/MaoLegacyLife-1.11.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
+- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.12.0；Android versionCode 14；Windows目录`release/MaoLegacyLife-1.12.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
 - 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，默认选择DeepSeek。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA一律空默认密钥。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
 - 修改核心行为后运行相应测试并完成 `pnpm test`；构建用 `pnpm build`，原生包需重新封装后才能交付。实际验证边界与最终测试结果在 `docs/VERIFICATION.md`，不得把源码更新直接写成已交付新包。
 
@@ -42,3 +42,5 @@
 - 1.11 世界地图由 world-map/world-territories 与离线 maps 数据组成，细区覆盖范围和数据年份见地图来源文档，不把 MOD 州/位图当作现实县界。territoryOverrides 保存明确控制和交战地点，factionConflicts 保存参战；同势力参战区有广域影响，只有明确交战地才显示前线。月度战时费用和压力只在 nextContext 副本结算，advance 一次提交。
 - 1.11 deriveGovernmentState/normalizeWorldOverrides 同步政权、意识形态和势力，旧档只修复已知旧默认错配。普通乐队成员没有公共决策权，转为政治人物需已发生的内战/政治事实。policies 从 43 条 MOD 国策来源适配，按政权/战争/前置/互斥与冷却抽样，不表示全部国策可玩。scenario 固定在新开局，shuihu 新档启用 mao-april；旧档缺 scenario 迁移为 standard，读取不重开彩蛋。
 - 1.11 语言只在首页为新人生选择，进行中的 profile.language 不受首页偏好或连接设置改变。水浒古白话覆盖界面、正文、选项与报道；保持人名和现代制度原称。关系图取消分组与分页，搜索只定位/高亮；旧档清理明显误抽取短语，显式自定义姓名保留。story-flow 合并正文去重，成人关系偏好只从成年自愿非露骨交往变化，概率只生成邀请，不推定同意。
+
+- 1.12地图索引在src/geography.js，位置记录在src/player-position.js，国别资料在src/countries.js。全球55,588单位/258轮廓/203个国家与地区有地方层，55个仅轮廓；384几何分片按视窗加载。七层视图跟随本人当前位置，搜索不迁居，行政区中心是示意位置，未知地点不伪造坐标。保留v1.11单位ID；来源与未覆盖层见docs/WORLD-MAP-v1.12.md。state.location保留兼容宏观地区，state.position存真实可解析县市、精度和月份，已完成迁居才提交。

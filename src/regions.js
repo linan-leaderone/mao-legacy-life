@@ -2,6 +2,8 @@ import data from './data/regions.json' with {type:'json'};
 import memeData from './data/memes.json' with {type:'json'};
 import {REGIMES,EVENT_REGIMES,baselineRegime,normalizedGovernmentOverride} from './regime-rules.js';
 import {scenarioRegionPatch} from './scenario.js';
+import {getCountryContext,resolveCountry} from './countries.js';
+import {resolveTerritoryTargets,geographyAncestors} from './geography.js';
 
 const ALIASES={台灣:'中国台湾',台湾:'中国台湾',台北:'中国台湾',臺北:'中国台湾',台中:'中国台湾',高雄:'中国台湾',新竹:'中国台湾',台南:'中国台湾',花莲:'中国台湾',东京:'日本',東京:'日本',大阪:'日本',京都:'日本',横滨:'日本',北海道:'日本',冲绳:'日本',首尔:'韩国',首爾:'韩国',釜山:'韩国',香港特别行政区:'香港',香港特別行政區:'香港',澳门特别行政区:'澳门',澳門:'澳门',大陆:'中国大陆',中國大陸:'中国大陆',中国:'中国大陆',中國:'中国大陆',石家庄:'河北',太原:'山西',呼和浩特:'内蒙古',沈阳:'辽宁',大连:'辽宁',长春:'吉林',哈尔滨:'黑龙江',南京:'江苏',苏州:'江苏',杭州:'浙江',宁波:'浙江',合肥:'安徽',福州:'福建',厦门:'福建',南昌:'江西',济南:'山东',青岛:'山东',郑州:'河南',武汉:'湖北',长沙:'湖南',广州:'广东',深圳:'广东',南宁:'广西',海口:'海南',三亚:'海南',成都:'四川',贵阳:'贵州',昆明:'云南',拉萨:'西藏',西安:'陕西',兰州:'甘肃',西宁:'青海',银川:'宁夏',乌鲁木齐:'新疆'};
 const SPECIAL={'中国台湾':'taiwan','日本':'japan','香港':'hongkong','澳门':'macau','韩国':'korea','中国大陆':'china'};
@@ -15,6 +17,10 @@ function locality(place){
   // Prefer explicit special-region words over a city or a province substring.
   for(const name of ['香港','澳门','澳門','中国台湾','台湾','台灣','日本','韩国'])if(raw.includes(name))return {region:SPECIAL[ALIASES[name]||name],province:null,place:ALIASES[name]||name};
   for(const name of Object.keys(data.provinces))if(raw.startsWith(name))return {region:'china',province:name,place:name};
+  const country=resolveCountry(raw);
+  if(country)return {region:country.region,country:country.iso,province:null,place:raw};
+  const units=resolveTerritoryTargets(raw);
+  if(units.length===1){const unit=units[0],province=unit.region==='china'?geographyAncestors(unit).find(row=>row.role==='province')?.name:null;return {region:unit.region,country:unit.country,province:province||null,place:raw};}
   return {region:'global',province:null,place:raw};
 }
 export function backgroundsFor(place){
@@ -117,10 +123,12 @@ function applyWorldOverride(result,state){
   result.playerChanged=true;
 }
 export function regionContext(state,lore){
-  const where=locality(state.location),base=data.regions[where.region],province=data.provinces[where.province];
+  const where=locality(state.location),country=!data.regions[where.region]&&where.country?getCountryContext(state,where.country):null;
+  const base=country?{...data.regions.global,...Object.fromEntries(['leader','government','ideology','factionId','conflict','institutions','terms','dailyLife','stage'].map(key=>[key,country[key]])),label:country.name,forbiddenAssumptions:['按照当地已经明确的政务资料、语言与生活情况描述，不把其他国家的机构套到这里。']}:data.regions[where.region]||data.regions.global;
+  const province=data.provinces[where.province];
   if(where.region==='ocean')return {...where,location:state.location,stage:'ocean',conflict:null,government:'所处海域没有陆地居民的行政生活',leader:null,institutions:[],terms:['洋流','海温','鱼群','礁石','水深'],forbiddenAssumptions:['海中身体与陆地居民生活分开，不安排上班、学校、社区登记、家庭账单或防疫手续。'],dailyContext:'洋流带来食物与陌生鱼群，水深、体形和捕食者决定活动范围。',plainLocalDescription:'你生活在太平洋，周围是海水、鱼群和不同深度的海底环境。',localDetails:['洋流和海温影响食物分布。','更大的生物会改变附近鱼群的游动方向。'],pandemic:'陆地公共卫生措施不直接成为海洋生物的生活安排。',knownChanges:[],knownRegionalReports:[],institutionState:{stage:'ocean',government:null,leader:null,conflict:null}};
   const historical=historicalEnvironment(where,Number(state.month)||0);
-  const result={...structuredClone(base),...where,...baselineRegime(where.region),location:state.location,stage:'civilian',conflict:null,...historical,...scenarioRegionPatch(state,where.region)};
+  const result={...structuredClone(base),...where,...baselineRegime(where.region),location:state.location,stage:country?.stage||'civilian',conflict:country?.conflict||null,...historical,...scenarioRegionPatch(state,where.region)};
   const known=knownEvents(state,lore),seen=new Set(known.map(e=>e.id)),changes=[];
   for(const event of known){
     const patch=CHANGES[event.id];
@@ -137,6 +145,7 @@ export function regionContext(state,lore){
   }
   applyWorldOverride(result,state);
   const globalChange=state.worldOverrides?.global,terminated=state.worldDynamics?.terminatedConflicts||[];
+  if(where.region==='usa'&&seen.has('world_usa_civil_war')&&!terminated.includes('usa')&&!Object.hasOwn(state.worldOverrides?.usa||{},'conflict')){result.conflict='美国内战';result.stage='civil_war';}
   if(state.worldDynamics?.lastingPeace){result.conflict=null;result.regionalConflict=null;}
   else if(terminated.includes('asia'))result.regionalConflict=null;
   else if(globalChange?.conflict&&/大亚洲/.test(globalChange.conflict)&&['china','taiwan','japan'].includes(where.region))result.regionalConflict=globalChange.conflict;

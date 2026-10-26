@@ -1,8 +1,8 @@
 # 毛的遗产 · 人生档案
 
-2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.11.0**。
+2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.12.0**。
 
-[直接游玩](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.10.md)
+[直接游玩](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.12.md)
 
 ## 从源码运行
 
@@ -19,7 +19,7 @@ pnpm dev
 
 ## 开始与保存
 
-- **iPhone / iPad（iOS 15.4+）**：在Safari打开[主屏幕安装版](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site)，无需注册或登录，可直接分享链接；从分享菜单“添加到主屏幕”即可安装。安装后从主屏幕首次联网打开、等待“离线内容已就绪”，再设置API并开始人生。交付形式为PWA；完整说明见 [iPhone安装说明](docs/IOS.md)。
+- **iPhone / iPad（iOS 15.4+）**：在Safari打开[主屏幕安装版](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site)，无需注册或登录，可直接分享链接；从分享菜单“添加到主屏幕”即可安装。安装后从主屏幕首次联网打开、等待“离线内容已就绪”，再设置API并开始人生；地方地图首次查看需要联网，已查看区域会缓存。交付形式为PWA；完整说明见 [iPhone安装说明](docs/IOS.md)。
 - **Windows 10/11 x64**：构建产物为 `release/MaoLegacyLife-Windows-x64.zip`。完整解压后运行其中的 `MaoLegacyLife.exe`，保留其他文件。
 - **安卓 8.0 及以上**：构建产物为 `release/MaoLegacyLife-Android.apk`，由 Android System WebView 承载同一界面。
 - 每次打开先进入首页，即使已有档案也可先选 **DeepSeek、Gemini 或自定义 API**，再继续人生、新建或读取。点击左上角品牌可返回首页；切换服务不改动进度，月度请求进行时暂时不能切换。

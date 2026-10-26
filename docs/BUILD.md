@@ -6,7 +6,7 @@ iPhone主屏幕安装版独立使用`pnpm build:ios`，发布、离线与密钥�
 
 用户授权本人的原生包预填 DeepSeek 与本轮 Gemini 转发服务密钥。Vite 从 `.private/settings.json` 注入 `__DEFAULT_API_PROVIDERS__`；`.private/` 目录、兑换码与签名私钥不打包。公开网页构建保持空默认密钥，不能将普通 `dist` 发布到公开站点。文档、日志和截图不记录密钥。
 
-当前源码版本为1.7.0，Android目标版本为1.7.0 / versionCode 8。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.7.md](RELEASE-v1.7.md)。
+当前源码版本为1.12.0，Android目标版本为1.12.0 / versionCode 14。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.12.md](RELEASE-v1.12.md)。
 
 ## 前置环境
 

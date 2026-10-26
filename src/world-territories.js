@@ -1,71 +1,18 @@
-import atlas from './data/world-geography-index.json' with {type:'json'};
 import {regionContext,regionForPlace} from './regions.js';
 import {REGIMES} from './regime-rules.js';
-import * as OpenCC from 'opencc-js';
+import {getCountryContext} from './countries.js';
+import {geographyUnits,getGeographyUnit,resolveTerritoryTargets,geographyAncestors} from './geography.js';
+export {geographyUnits,geographySources,getGeographyUnit,resolveTerritoryTargets,searchGeographyUnits,geographyAncestors} from './geography.js';
 
-const simplify=OpenCC.Converter({from:'tw',to:'cn'});
-const clean=value=>simplify(String(value||'')).toLowerCase().replace(/[\s·・,，。]/g,'');
 const PLACES={china:'中国大陆',taiwan:'中国台湾',japan:'日本',korea:'韩国',hongkong:'香港',macau:'澳门'};
 const COUNTRY_REGIONS={CHN:'china',TWN:'taiwan',JPN:'japan',KOR:'korea',HKG:'hongkong',MAC:'macau'};
-const COUNTRY_ALIASES={CHN:['中国大陆','大陆','中国'],TWN:['中国台湾','台湾','台灣'],JPN:['日本'],KOR:['韩国','韓國'],HKG:['香港'],MAC:['澳门','澳門'],USA:['美国'],PRK:['朝鲜'],RUS:['俄罗斯'],IND:['印度']};
-const SOURCES=new Map(atlas.sources.map(row=>[row.id,row]));
-export const geographyUnits=atlas.units.map(row=>({id:row.id,name:row.n,aliases:row.a||[],country:row.c,region:row.r,level:row.l,parent:row.p||'',center:row.z,bounds:row.b,source:SOURCES.get(row.l)}));
 const UNIT_INDEX=new Map(geographyUnits.map(row=>[row.id,row]));
-const NAME_INDEX=new Map();
-for(const unit of geographyUnits){
-  const names=[unit.name,...unit.aliases,...(unit.id.startsWith('country:')?COUNTRY_ALIASES[unit.country]||[]:[])];
-  for(const name of names){const key=clean(name);if(key.length<2)continue;const rows=NAME_INDEX.get(key)||[];if(!rows.includes(unit))rows.push(unit);NAME_INDEX.set(key,rows);}
-}
-export const geographySources=atlas.sources;
-export const getGeographyUnit=id=>UNIT_INDEX.get(id)||null;
-
-/** Returns unambiguous geographic targets. A bare duplicate district name is
- * deliberately not guessed; a parent name or explicit region can disambiguate. */
-export function resolveTerritoryTargets(text,{region}={}){
-  const value=clean(text);if(!value)return [];
-  const clauseValue=simplify(String(text||'')).toLowerCase().replace(/\s/g,'');
-  if(UNIT_INDEX.has(text))return [UNIT_INDEX.get(text)];
-  const namedCountries=Object.entries(COUNTRY_ALIASES).filter(([,names])=>names.some(name=>value.includes(clean(name)))).map(([id])=>id);
-  // "中国台湾" contains the mainland alias "中国"; the longer region wins.
-  if(value.includes('中国台湾')&&namedCountries.includes('CHN'))namedCountries.splice(namedCountries.indexOf('CHN'),1);
-  const found=[];
-  for(const [name,units] of NAME_INDEX){
-    if(!value.includes(name))continue;
-    let candidates=region?units.filter(row=>row.region===region):units;
-    if(candidates.length>1&&namedCountries.length===1){const local=candidates.filter(row=>row.country===namedCountries[0]);if(local.length)candidates=local;}
-    if(candidates.length>1){const canonical=candidates.filter(row=>clean(row.name)===name);if(canonical.length===1)candidates=canonical;}
-    if(candidates.length>1){const parents=candidates.filter(row=>row.parent&&value.includes(clean(row.parent)));if(parents.length)candidates=parents;}
-    if(candidates.length!==1)continue;
-    found.push({unit:candidates[0],length:name.length,match:name});
-  }
-  found.sort((a,b)=>b.length-a.length);
-  const result=[];
-  for(const {unit,match} of found){
-    if(result.some(row=>row.id===unit.id))continue;
-    if(found.some(other=>other.unit.id!==unit.id&&other.unit.parent&&value.includes(clean(other.unit.parent))&&clean(other.unit.parent).includes(match)&&other.unit.region!==unit.region))continue;
-    // "台湾板桥区" identifies the district, not a second transfer of all Taiwan.
-    if((unit.id.startsWith('country:')||unit.id.startsWith('province:'))&&result.some(row=>row.country===unit.country&&(!unit.id.startsWith('province:')||row.parent===unit.name)))continue;
-    if(unit.id.startsWith('country:')||unit.id.startsWith('province:')){
-      const aliases=[unit.name,...unit.aliases,...(COUNTRY_ALIASES[unit.country]||[])].map(clean).filter(Boolean);
-      const specificButUnresolved=aliases.some(name=>{const at=clauseValue.indexOf(name);if(at<0)return false;const tail=clauseValue.slice(at+name.length).split(/[，。；;、,]/)[0];return !/^(?:全境|全岛|全国|全部|所有|整个|各地|各县|并|然后|之后|后|和|与|及)/.test(tail)&&/^[\u3400-\u9fff]{1,16}(?:县|市|区|乡|镇|村|旗|省)/.test(tail);});
-      if(specificButUnresolved)continue;
-    }
-    result.push(unit);
-  }
-  return result.slice(0,32);
-}
-
-/** Broader, read-only search may list ambiguous matches; ownership resolution
- * above always remains strict. */
-export function searchGeographyUnits(text,limit=16){
-  const query=clean(text);if(!query)return [];
-  return geographyUnits.filter(unit=>[unit.name,...unit.aliases,unit.parent?unit.parent+unit.name:''].some(value=>clean(value).includes(query))).slice(0,limit);
-}
+const REGION_COUNTRIES=new Map(geographyUnits.filter(unit=>unit.role==='country').map(unit=>[unit.region,unit.country]));
 
 function eventSet(state){return new Set([...(state.seenEvents||[]),...(state.seenNews||[]),...(state.newsHistory||[]).filter(e=>e.month<=state.month).map(e=>e.id),...(state.current?.majorId?[state.current.majorId]:[])]);}
 function knownContext(state,region,lore){
   if(PLACES[region])return regionContext({...state,location:PLACES[region]},lore);
-  return {...state.worldState?.[region],...state.worldOverrides?.[region],region,government:state.worldOverrides?.[region]?.government||state.worldState?.[region]?.government};
+  return {...getCountryContext(state,REGION_COUNTRIES.get(region)),region};
 }
 function currentWar(state,region,context,seen){
   const terminated=state.worldDynamics?.terminatedConflicts||[];
@@ -82,11 +29,12 @@ function baselineController(unit,context){
 }
 function overrideFor(state,unit){
   const store=state.territoryOverrides||{};
-  return {...store['country:'+unit.country],...store['region:'+unit.region],...(unit.parent?store['province:'+unit.parent]:{}),...store[unit.id]};
+  const parents=geographyAncestors(unit).slice(1).reverse().filter(parent=>parent.role!=='country').map(parent=>store[parent.id]);
+  return Object.assign({},store['country:'+unit.country],store['region:'+unit.region],unit.parent?store['province:'+unit.parent]:null,...parents,store[unit.id]);
 }
 export function createTerritoryContext(state,lore){
   const seen=eventSet(state),contexts={};
-  for(const region of new Set(geographyUnits.map(row=>row.region)))contexts[region]=knownContext(state,region,lore);
+  for(const region of REGION_COUNTRIES.keys())contexts[region]=knownContext(state,region,lore);
   const factionWars={};
   for(const [region,context] of Object.entries(contexts)){const conflict=currentWar(state,region,context,seen);factionWars[region]=conflict;if(context.factionId)factionWars[context.factionId]=conflict;}
   for(const [id,conflict] of Object.entries(state.factionConflicts||{}))factionWars[id]=typeof conflict==='string'?conflict:conflict?.conflict??null;
@@ -102,8 +50,9 @@ export function deriveTerritorySituation(state,feature,lore,prepared){
   const controller=patch.controller||base.controller,controllerId=patch.controllerId||(patch.controller?patch.controller:base.controllerId);
   let government=context.government||null,ideology=context.ideology||null;
   if(patch.controller||patch.controllerId){
-    const allContexts=prepared?.contexts||createTerritoryContext(state,lore).contexts;
-    const controllerContext=allContexts[controllerId]||Object.values(allContexts).find(row=>row.factionId===controllerId);
+    const controllerRegion=REGION_COUNTRIES.has(controllerId)?controllerId:Object.keys(state.worldOverrides||{}).find(key=>state.worldOverrides[key]?.factionId===controllerId);
+    const allContexts=prepared?.contexts;
+    const controllerContext=allContexts?(allContexts[controllerId]||Object.values(allContexts).find(row=>row.factionId===controllerId)):(controllerRegion?knownContext(state,controllerRegion,lore):null);
     const regime=REGIMES[controllerId];
     if(controllerContext){government=controllerContext.government||null;ideology=controllerContext.ideology||regime?.ideology||null;}
     else if(regime){government=`${controller}实际管治，地方制度安排尚待确认`;ideology=regime.ideology;}
@@ -111,7 +60,16 @@ export function deriveTerritorySituation(state,feature,lore,prepared){
   }
   let conflict=currentWar(state,unit.region,context,seen);
   if(Object.hasOwn(patch,'conflict'))conflict=patch.conflict;
-  const factionWars=prepared?.factionWars||createTerritoryContext(state,lore).factionWars;
+  // A monthly personal update needs only the controlling faction. Building all
+  // country dossiers is reserved for the map's shared rendering context.
+  let factionWars=prepared?.factionWars;
+  if(!factionWars){
+    const controllerRegion=REGION_COUNTRIES.has(controllerId)?controllerId:Object.keys(state.worldOverrides||{}).find(key=>state.worldOverrides[key]?.factionId===controllerId);
+    const factionContext=controllerId===base.controllerId?context:controllerRegion?knownContext(state,controllerRegion,lore):null;
+    factionWars={};
+    if(factionContext)factionWars[controllerId]=currentWar(state,controllerRegion||unit.region,factionContext,seen);
+    for(const [id,value] of Object.entries(state.factionConflicts||{}))factionWars[id]=typeof value==='string'?value:value?.conflict??null;
+  }
   if(Object.hasOwn(factionWars,controllerId)&&factionWars[controllerId])conflict=factionWars[controllerId];
   if(Object.hasOwn(state.factionConflicts||{},controllerId)&&state.factionConflicts[controllerId]===null)conflict=null;
   if(state.worldDynamics?.lastingPeace)conflict=null;
@@ -122,7 +80,8 @@ export function deriveTerritorySituation(state,feature,lore,prepared){
  * exposure; the engine decides and records actual monthly effects once. */
 export function territoryExposure(state,location=state.location,lore){
   const region=regionForPlace(location),candidates=resolveTerritoryTargets(location,{region:region==='global'?undefined:region});
-  let unit=candidates.length===1?candidates[0]:null;
+  let unit=state.position?.locationSnapshot===location?getGeographyUnit(state.position.unitId):null;
+  unit??=candidates.length===1?candidates[0]:null;
   if(!unit){const country=Object.keys(COUNTRY_REGIONS).find(id=>COUNTRY_REGIONS[id]===region);unit=UNIT_INDEX.get('country:'+country);}
   if(!unit)return {war:false,frontline:false,severity:0,controller:null,conflict:null,region,description:'当地没有已确认的战事消息。'};
   return deriveTerritorySituation(state,unit,lore);

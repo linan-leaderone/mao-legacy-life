@@ -5,6 +5,8 @@ release/
 .private/
 .cache/
 *.log
+__pycache__/
+*.pyc
 android/.gradle/
 android/build/
 android/app/build/

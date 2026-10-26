@@ -1,4 +1,5 @@
 import {relationshipBehaviorDelta} from './adult-relationships.js';
+import {countryRegionNames} from './countries.js';
 // Personal declarations are stored as world facts; narration cannot undo them.
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 export const monthOf=(year,month=1)=>(year-2020)*12+month-1;
@@ -20,13 +21,15 @@ export function affirmedClauses(text){
   }
   return clauses;
 }
-const regionalName={china:'中国',taiwan:'台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国',europe:'欧洲',global:'各地'};
+const regionalName={...countryRegionNames,china:'中国',taiwan:'台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国',europe:'欧洲',global:'各地'};
+const namedCountries=Object.entries(countryRegionNames).sort((a,b)=>b[1].length-a[1].length);
 function mentionedRegion(text,fallback){
-  if(/世界.*和平|永久和平|所有战争|大亚洲战争|美国内战|欧陆战争/.test(text))return 'global';
+  if(/世界.*和平|永久和平|所有战争|大亚洲战争|欧陆战争/.test(text))return 'global';
   if(/台湾|台海|民进党|国民党|基进党|郑村棋|赖清德|韩国瑜/.test(text))return 'taiwan';
   if(/日本|afterglow|丰川祥子|羽泽鸫|美竹兰/i.test(text))return 'japan';
   if(/中国|大陆|中华|中共|革命阵线|毛远新|韩东方|李作成/.test(text))return 'china';
   if(/香港/.test(text))return 'hongkong';if(/澳门/.test(text))return 'macau';if(/韩国/.test(text))return 'korea';
+  for(const [region,name] of namedCountries)if(name.length>1&&text.includes(name))return region;
   return fallback==='ocean'?'china':fallback;
 }
 const winners=[

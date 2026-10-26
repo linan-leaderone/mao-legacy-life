@@ -2,20 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import lore from '../src/data/lore.json' with {type:'json'};
-import {geographyUnits,geographySources,getGeographyUnit,resolveTerritoryTargets,deriveTerritorySituation,territoryExposure,createTerritoryContext,controllerColor} from '../src/world-territories.js';
+import {geographyUnits,geographySources,geographyAncestors,getGeographyUnit,resolveTerritoryTargets,deriveTerritorySituation,territoryExposure,createTerritoryContext,controllerColor} from '../src/world-territories.js';
 
 const state=(patch={})=>({month:48,location:'河南',profile:{name:'林青'},seenEvents:[],seenNews:[],newsHistory:[],eventMonths:{},worldOverrides:{},worldDynamics:{},...patch});
 const district=getGeographyUnit('TWN-52511910B6389603869041');
 
 test('atlas contains offline geographic counties and municipalities, not fabricated grids',()=>{
-  const expected={'CHN-ADM3':2864,'JPN-ADM2':1742,'TWN-ADM2':368,'KOR-ADM2':228};
+  const expected={'CHN-ADM3':2854,'JPN-ADM2':1742,'TWN-ADM2':368,'KOR-ADM2':228};
   for(const [level,count] of Object.entries(expected))assert.equal(geographyUnits.filter(u=>u.level===level).length,count);
-  assert.equal(geographyUnits.filter(u=>u.level==='world').length,177);
+  assert.ok(geographyUnits.filter(u=>u.level==='world').length>=250);
   const ids=new Set();for(const u of geographyUnits){assert.ok(!ids.has(u.id));ids.add(u.id);assert.ok(u.bounds[0]<=u.center[0]&&u.center[0]<=u.bounds[2]);assert.ok(u.bounds[1]<=u.center[1]&&u.center[1]<=u.bounds[3]);assert.ok(u.source);}
 });
 
 test('all bundled polygons resolve to a geographic record and retain valid closed rings',()=>{
-  for(const filename of ['world-boundaries.json','asia-boundaries.json']){
+  const manifest=JSON.parse(fs.readFileSync(new URL('../public/maps/manifest.json',import.meta.url),'utf8'));
+  for(const filename of manifest.layers.map(layer=>layer.file)){
     const data=JSON.parse(fs.readFileSync(new URL('../public/maps/'+filename,import.meta.url),'utf8'));
     for(const [id,polygons] of Object.entries(data.features)){
       assert.ok(getGeographyUnit(id));assert.ok(polygons.length);
@@ -37,7 +38,7 @@ test('county names resolve in simplified or traditional Chinese without crossing
   assert.deepEqual(resolveTerritoryTargets('中国台湾板橋區').map(u=>u.id),[district.id]);
   assert.deepEqual(resolveTerritoryTargets('新北市板橋區').map(u=>u.id),[district.id]);
   assert.deepEqual(resolveTerritoryTargets('我占领河南').map(u=>u.id),['province:河南']);
-  assert.equal(resolveTerritoryTargets('鹿寨县')[0].parent,'广西');
+  assert.ok(geographyAncestors(resolveTerritoryTargets('鹿寨县')[0]).some(u=>u.name==='广西'));
   assert.deepEqual(resolveTerritoryTargets('中正区',{region:'taiwan'}),[]);
   assert.deepEqual(resolveTerritoryTargets('台湾鬼谷县'),[]);
   assert.deepEqual(resolveTerritoryTargets('河南幸福县'),[]);

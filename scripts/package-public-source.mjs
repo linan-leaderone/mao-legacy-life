@@ -30,7 +30,7 @@ source_root = source_path.resolve(strict=True)
 entries = manifest.get('assets')
 if not isinstance(entries, list) or not entries:
     raise ValueError('Source manifest has no file entries.')
-excluded = re.compile(r'(?:^|/)(?:node_modules|\.git|\.private|\.cache|\.gradle|build|dist|dist-ios|release)(?:/|$)|(?:^|/)\.env(?:\.|$)|(?:^|/)local\.properties$|mod-corpus\.json$|\.(?:p12|pfx|pem|key|keystore|mobileprovision|log)$', re.I)
+excluded = re.compile(r'(?:^|/)(?:node_modules|__pycache__|\.git|\.private|\.cache|\.gradle|build|dist|dist-ios|release)(?:/|$)|(?:^|/)\.env(?:\.|$)|(?:^|/)local\.properties$|mod-corpus\.json$|\.(?:p12|pfx|pem|key|keystore|mobileprovision|pyc|log)$', re.I)
 names = []
 seen = set()
 for entry in entries:

@@ -9,7 +9,7 @@ const version=JSON.parse(await fs.readFile(path.join(root,'package.json'),'utf8'
 const output=path.join(root,'release',`public-source-${version}`);
 const roots=['src','public','tests','scripts','docs','android','desktop','.github'];
 const files=['.gitignore','AGENTS.md','README.md','package.json','pnpm-lock.yaml','pnpm-workspace.yaml','index.html','vite.config.js'];
-const excluded=/(?:^|\/)(?:node_modules|\.git|\.private|\.cache|\.gradle|build|dist|dist-ios|release)(?:\/|$)|(?:^|\/)\.env(?:\.|$)|(?:^|\/)local\.properties$|mod-corpus\.json$|\.(?:p12|pfx|pem|key|keystore|mobileprovision|log)$/i;
+const excluded=/(?:^|\/)(?:node_modules|__pycache__|\.git|\.private|\.cache|\.gradle|build|dist|dist-ios|release)(?:\/|$)|(?:^|\/)\.env(?:\.|$)|(?:^|\/)local\.properties$|mod-corpus\.json$|\.(?:p12|pfx|pem|key|keystore|mobileprovision|pyc|log)$/i;
 async function walk(dir){for(const e of await fs.readdir(path.join(root,dir),{withFileTypes:true})){const name=`${dir}/${e.name}`;if(excluded.test(name))continue;if(e.isSymbolicLink())throw Error(`Symlink excluded: ${name}`);if(e.isDirectory())await walk(name);else files.push(name);}}
 for(const dir of roots)try{await walk(dir);}catch(error){if(error.code!=='ENOENT')throw error;}
 let privateConfig={};try{privateConfig=JSON.parse((await fs.readFile(path.join(root,'.private/settings.json'),'utf8')).replace(/^\uFEFF/,''));}catch{}

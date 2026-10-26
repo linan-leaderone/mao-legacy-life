@@ -1,3 +1,5 @@
+import {movementFromAction,updatePlayerPosition,validatePlayerPosition} from './player-position.js';
+import {countryRegionNames} from './countries.js';
 import {territoryActionChanges,validateTerritorialState} from './territory-actions.js';
 import {territoryExposure,getGeographyUnit} from './world-territories.js';
 import {selectMonthlyPolicies} from './policies.js';
@@ -29,7 +31,7 @@ export const BACKGROUNDS = [
 ];
 export const STAT_NAMES={intelligence:'智力',family:'家境',fitness:'体力',appearance:'颜值',influence:'影响力',health:'健康',funds:'资金',connections:'人脉',stress:'压力',morality:'道德',promiscuity:'淫乱值',charisma:'魅力'};
 export const POINT_STATS=['intelligence','family','fitness','appearance'];
-export const REGIONS={china:'中国大陆',taiwan:'中国台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国',europe:'欧洲',global:'国际'};
+export const REGIONS={...countryRegionNames,china:'中国大陆',taiwan:'中国台湾',japan:'日本',hongkong:'香港',macau:'澳门',korea:'韩国',europe:'欧洲',global:'国际'};
 export const dateLabel=m=>`${2020+Math.floor(m/12)} 年 ${String(monthNumber(m)).padStart(2,'0')} 月`;
 export function currentAge(s){const a=s.person?.ageOverride;if(a){const months=Math.max(0,a.months+(s.turn??s.history?.length??0)-a.turn);return {years:Math.floor(months/12),months:months%12};}const exact=s.profile.birthDate?personaAge({birthDate:s.profile.birthDate},s.month):null;const months=Math.max(0,(s.profile.startAgeMonths??s.profile.age*12)+s.month);return exact||{years:Math.floor(months/12),months:months%12};}
 export const ageLabel=s=>{const a=currentAge(s);if(s.person?.ageOverride)return `${a.years} 岁 ${a.months} 个月`;if(isSpecialLife(s))return `距出生 ${a.years} 年${Number.isInteger(s.specialLife.bodyAge)?` · 身体约 ${s.specialLife.bodyAge} 岁`:''}`;return ['month','year','estimated'].includes(s.profile.birthDatePrecision)?`约 ${a.years} 岁`:`${a.years} 岁 ${a.months} 个月`;};
@@ -122,18 +124,8 @@ export function cleanDelta(raw){
   const d={};for(const k of Object.keys(STAT_NAMES))if(Number.isFinite(input[k]))d[k]=Math.round(clamp(input[k],k==='funds'?-100000:-10,k==='funds'?100000:10));return d;
 }
 function applyDelta(stats,delta,ledger=[],reason='日常变化',wide=false){for(const [k,v]of Object.entries(wide?delta:cleanDelta(delta))){if(!Object.hasOwn(STAT_NAMES,k)||!Number.isFinite(v))continue;const before=stats[k]||0;stats[k]=Math.round(clamp(before+v,k==='funds'?-1e12:0,k==='funds'?1e12:100));if(stats[k]!==before)ledger.push({key:k,amount:stats[k]-before,reason});}}
-function moveDestination(action){
-  if(action.passive)return null;
-  const aliases={台湾:'中国台湾',台北:'中国台湾',台南:'中国台湾',高雄:'中国台湾',东京:'日本',大阪:'日本',京都:'日本',横滨:'日本',名古屋:'日本',札幌:'日本',福冈:'日本',武汉:'湖北',郑州:'河南',广州:'广东',深圳:'广东',杭州:'浙江',南京:'江苏',苏州:'江苏',成都:'四川',西安:'陕西',济南:'山东',青岛:'山东',厦门:'福建',福州:'福建',长沙:'湖南',沈阳:'辽宁',大连:'辽宁',哈尔滨:'黑龙江',长春:'吉林',昆明:'云南',贵阳:'贵州',南宁:'广西',南昌:'江西',合肥:'安徽',太原:'山西',石家庄:'河北',兰州:'甘肃',西宁:'青海',银川:'宁夏',乌鲁木齐:'新疆',呼和浩特:'内蒙古',拉萨:'西藏',海口:'海南'};
-  const names=[...PLACES,...Object.keys(aliases),'美国','俄罗斯','德国','法国','英国','新加坡','韩国','印度','太平洋'].sort((a,b)=>b.length-a.length);
-  const destination=new RegExp(`(?:搬到|搬去|搬往|搬家到|迁居(?:到)?|移居(?:到)?|定居(?:在|到)?|前往|返回|回到|游到|游向|赴|去)(?:了|往)?\\s*(${names.join('|')})`);
-  let result=null;
-  for(const sentence of action.label.split(/[，。；,;\n]/)){
-    if(/不(?:再|想|会|打算)?(?:搬|迁|去|前往|出国)|(?:仍然?|继续|暂时)?(?:留在|住在)/.test(sentence)){result=null;continue;}
-    const match=sentence.match(destination);if(match)result=aliases[match[1]]||match[1];
-  }
-  return result;
-}
+function moveDestination(action,state){return movementFromAction(state,action)?.location||null;}
+
 function classifyAction(action){
   const text=action.label||'';
   if(/锻炼|运动|健身|跑步|体能|休息|休养|训练|医疗|照护/.test(text))return 'fitness';
@@ -145,7 +137,7 @@ function classifyAction(action){
 }
 export function resolveAction(s,action){
   if(!action?.label?.trim())throw new Error('请写下你的安排。');
-  const specialResult=resolveSpecialAction(s,action,moveDestination(action));if(specialResult)return {...specialResult,actionAge:currentAge(s)};
+  const specialResult=resolveSpecialAction(s,action,moveDestination(action,s));if(specialResult)return {...specialResult,actionAge:currentAge(s)};
   if(action.passive){
     const delta={stress:s.stats.stress>25?-1:0};
     if(age(s)>=18)delta.funds=Math.round((s.stats.family-40)*12);
@@ -188,7 +180,7 @@ export function resolveAction(s,action){
     if(/停战|和平|调停/.test(text))worldDelta.tension=-power;
     if(/罢工|经济制裁|封锁/.test(text))worldDelta.economy=-power;
   }
-  return {success,quality,playerLed,chance:Math.round(chance*100)/100,delta:cleanDelta(delta),summary:tidyLocalProse(success?(quality==='smooth'?`你照着“${text}”的安排开始做事，完成了其中的实际工作。已有的经验和联系派上了用场，接下来的安排有了依据。`:`你落实了“${text}”的安排。为把事情办成，你花了更多时间寻找资源、联系能提供帮助的人，原来的日常安排也跟着调整。`):`你尝试了“${text}”，已有条件还不足以完成全部工作。这个月已做的准备和得到的联系会保留下来，之后可以接着推进。`),scope,worldDelta,destination:success?moveDestination(action):null,actionAge:currentAge(s),implementation:playerLed?'realize-intent-with-causal-bridge':'resource-constrained'};
+  return {success,quality,playerLed,chance:Math.round(chance*100)/100,delta:cleanDelta(delta),summary:tidyLocalProse(success?(quality==='smooth'?`你照着“${text}”的安排开始做事，完成了其中的实际工作。已有的经验和联系派上了用场，接下来的安排有了依据。`:`你落实了“${text}”的安排。为把事情办成，你花了更多时间寻找资源、联系能提供帮助的人，原来的日常安排也跟着调整。`):`你尝试了“${text}”，已有条件还不足以完成全部工作。这个月已做的准备和得到的联系会保留下来，之后可以接着推进。`),scope,worldDelta,destination:success?moveDestination(action,s):null,actionAge:currentAge(s),implementation:playerLed?'realize-intent-with-causal-bridge':'resource-constrained'};
 }
 function canSwitch(s,from,to){const prior=new Set(happened(s)),nextIds=new Set(to.milestones.map(e=>e.id));return from.milestones.every(e=>!prior.has(e.id)||nextIds.has(e.id));}
 function adaptWorld(s,lore){
@@ -540,7 +532,7 @@ export function createGame(input,lore){
   const stats={...Object.fromEntries(POINT_STATS.map(k=>[k,p.points[k]*10])),influence,health:70+p.points.fitness*2,funds:startAge<16?100+p.points.family*100:Math.round(500+Math.pow(p.points.family,2)*300+bg.funds/4),connections:bg.connections,stress:18,morality:50,promiscuity:0,charisma:Math.round((p.points.appearance*10+bg.connections)/2),...(persona?.stats||{})};
   const s={version:1,timelineVersion:5,id:`life-${seed}`,seed,profile:p,person:initialPerson(p),location,month:0,turn:0,routes:chooseRoutes(lore,profile.routes,seed),calendar:{straitEnd:31+hash(seed+':strait-end')%3},eventMonths:{},seenEvents:[],seenNews:[],newsHistory:[],worldPressure:pressureDefaults(),worldState:{},worldOverrides:{},worldDynamics:{},territoryOverrides:{},factionConflicts:{},statChanges:[],stats,memories:[],pins:[],history:[],ended:false};
   s.routeSelectionExplicit=!!input.routes;s.npcPressure=pressureDefaults();
-  initializeSpecialLife(s,persona);applyOpeningScenario(s);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
+  initializeSpecialLife(s,persona);applyOpeningScenario(s);updatePlayerPosition(s);initializeEncounterState(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
 }
 export function actionEncounter(s,action){
   const plain={...action,meta:{...action.meta}};delete plain.meta.encounterGame;
@@ -596,6 +588,7 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   if(declarations&&plan.dateMonth!==null){relocateTime(temp,plan.dateMonth,lore);temp.person.ageOverride={months:current.years*12+current.months,turn:temp.turn};result.summary=`你已抵达${dateLabel(temp.month)}，保留出发时的身体年龄与记忆。当地的政治机构、人物职务和生活条件按这个年月重新展开，你需要用现有身份安排住处、联系与下一步行动。`;}
   else temp.month=s.month+1;
   if(declarations&&plan.ageMonths!==null){temp.person.ageOverride={months:plan.ageMonths,turn:temp.turn};if(temp.specialLife)temp.specialLife.bodyAge=Math.floor(plan.ageMonths/12);result.summary=`${plan.dateMonth!==null?`你已抵达${dateLabel(temp.month)}。`:''}你的身体已变为${Math.floor(plan.ageMonths/12)}岁，原有记忆、关系与已完成的事情继续保留。身边的人注意到了变化，你按照现在的身体条件重新安排活动，已有的职务与合作需要说明身份后继续处理。`;}
+  updatePlayerPosition(temp,result.success?movementFromAction(s,action):null);
   const personalNews=[];
   if(declarations){for(const change of territoryActionChanges(temp,action)){temp.territoryOverrides??={};temp.territoryOverrides[change.unitId]={...temp.territoryOverrides[change.unitId],...change.patch};const card=publishPersonalNews(temp,{id:`territory_${temp.turn}_${change.unitId}`,title:`${change.name}的控制与通行情况改变`,description:change.patch.controller?`${change.patch.controller}已实际接管${change.name}，当地通行与行政安排随之调整。`:`${change.name}${change.patch.frontline?'正在交战，通行与物资供应受到直接影响。':'已经停止交火，居民开始恢复出行。'}`,region:change.region,art:change.patch.frontline?'war':'politics',source:'personal_action'});if(card)personalNews.push(card);}}
   if(declarations){for(const [i,change]of plan.worldChanges.entries()){const card=changeWorld(temp,change,lore,i);if(card)personalNews.push(card);}
@@ -667,7 +660,7 @@ export function advance(s,action,response,major=null,lore){
   next.relationshipGraph=updateRelationshipGraph(next,{action,response,success:actionResult.success});
   if(!actionResult.specialTransition)mergePersonUpdate(next,identityUpdate,action);
   next.current={...response,location:next.location,news:translatedNews(news,response,next.profile.language),decision:response.options.length>0};
-  next.history.push({month:s.month,targetMonth:next.month,turn:next.turn,event:structuredClone(s.current),action:{label:action.label.slice(0,2000),...(action.displayLabel?{displayLabel:String(action.displayLabel).slice(0,2000)}:{}),custom:!!action.custom,passive:!!action.passive},consequence:response.consequence||actionResult.summary,delta:Object.fromEntries(next.statChanges.map(c=>[c.key,c.delta])),statChanges:structuredClone(next.statChanges),actionResult,stats:{...next.stats}});
+  next.history.push({month:s.month,targetMonth:next.month,turn:next.turn,position:structuredClone(next.position),event:structuredClone(s.current),action:{label:action.label.slice(0,2000),...(action.displayLabel?{displayLabel:String(action.displayLabel).slice(0,2000)}:{}),custom:!!action.custom,passive:!!action.passive},consequence:response.consequence||actionResult.summary,delta:Object.fromEntries(next.statChanges.map(c=>[c.key,c.delta])),statChanges:structuredClone(next.statChanges),actionResult,stats:{...next.stats}});
   if(response.memory)next.memories=[...next.memories,{month:s.month,text:response.memory}].slice(-80);
   delete next.pendingNews;delete next.actionResult;
   if(lifeEnded(next))next.ended=true;
@@ -727,7 +720,7 @@ export function importSave(text,lore){
   s.relationshipGraph=normalizeRelationshipGraph(s);
   s.profile.scenario??={id:'standard',version:1};
   if(!['standard','mao-april'].includes(s.profile.scenario.id)||s.profile.scenario.version!==1)throw new Error('这份档案的时代记录不完整。');
-  validateTerritorialState(s);syncGovernments(s,lore);
+  validateTerritorialState(s);validatePlayerPosition(s);syncGovernments(s,lore);
   if(!adultRelationshipsAllowed(s,currentAge(s).years*12+currentAge(s).months))s.stats.promiscuity=0;
   const c=lore.couplings;if(!s.playerChangedCoupling&&c?.chenChinaIds?.includes(s.routes.china)&&(!c.taiwanRoutes.includes(s.routes.taiwan)||s.routes.japan!==(s.routes.taiwan===c.taiwanLeftId?c.japanLeftId:c.japanRightId)))throw new Error('这份存档的海外记录互相矛盾。');
   return structuredClone(s);
