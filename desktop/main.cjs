@@ -21,21 +21,24 @@ app.whenReady().then(() => {
   const isGame = event => event.senderFrame?.url?.startsWith('app://game/');
   const apiRequests=new Map();
   const cancelWindowRequests=contentsId=>{
-    for(const [key,controller]of apiRequests)if(key.startsWith(contentsId+':')){controller.abort();apiRequests.delete(key);}
+    for(const [key,controller]of apiRequests)if(key.startsWith(contentsId+':')){controller.abort('cancelled');apiRequests.delete(key);}
   };
   ipcMain.handle('api-request',async(event,input)=>{
-    if(!isGame(event))return {error:'无法从此页面发起请求。'};
+    if(!isGame(event))return {error:'无法从此页面发起请求。',errorCode:'network'};
     let key,timer,controller;
     try{
       const validated=validateRequest(input);key=event.sender.id+':'+input.id;
-      if(apiRequests.has(key))return {error:'请求正在进行。'};
+      if(apiRequests.has(key))return {error:'请求正在进行。',errorCode:'network'};
       controller=new AbortController();apiRequests.set(key,controller);
-      timer=setTimeout(()=>controller.abort(),validated.timeoutMs);
+      timer=setTimeout(()=>controller.abort('timeout'),validated.timeoutMs);
       return await performRequest(input,controller.signal,(url,init)=>net.fetch(url,init));
-    }catch{return {error:'无法完成 API 请求，请检查网络和服务地址。'};}
+    }catch{
+      const errorCode=controller?.signal.aborted?(controller.signal.reason==='timeout'?'timeout':'cancelled'):'network';
+      return {error:({timeout:'API 请求等待超时。',cancelled:'API 请求已取消。',network:'无法完成 API 请求，请检查网络和服务地址。'})[errorCode],errorCode};
+    }
     finally{clearTimeout(timer);if(controller&&apiRequests.get(key)===controller)apiRequests.delete(key);}
   });
-  ipcMain.handle('api-cancel',(event,id)=>{if(isGame(event))apiRequests.get(event.sender.id+':'+String(id))?.abort();});
+  ipcMain.handle('api-cancel',(event,id)=>{if(isGame(event))apiRequests.get(event.sender.id+':'+String(id))?.abort('cancelled');});
   ipcMain.handle('read-local-settings', async event => {
     if (!isGame(event)) return null;
     const candidates = [path.join(app.getPath('appData'), 'MaoLegacyLife', 'settings.json')];

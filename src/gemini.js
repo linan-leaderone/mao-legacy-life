@@ -9,7 +9,7 @@ export const DEFAULT_MODEL=DEFAULT_MODELS.gemini;
 function connection(settings){
   const custom=settings.provider==='custom';
   const baseUrl=normalizeBaseUrl(settings.baseUrl||(custom?'':GEMINI_OFFICIAL_URL),'gemini');
-  return {baseUrl,label:custom?'自定义 Gemini 服务':baseUrl===GEMINI_RELAY_URL?'Gemini 转发服务':'Gemini',key:requireKey(settings.apiKey,custom?'自定义服务':'Gemini')};
+  return {baseUrl,label:custom?'自定义 Gemini 服务':baseUrl===GEMINI_RELAY_URL?'Gemini 转发服务':'Gemini',key:requireKey(settings.apiKey,custom?'自定义服务':'Gemini'),route:settings.route};
 }
 function modelPath(name){
   const model=requireModel(name).replace(/^models\//,'');
@@ -18,11 +18,15 @@ function modelPath(name){
 }
 
 export async function listModels(settings,signal){
-  const {baseUrl,label,key}=connection(settings),names=[],tokens=new Set();
+  const {baseUrl,label,key,route}=connection(settings),names=[],tokens=new Set();
+  const deadline=Date.now()+15000;
   let pageToken='';
   for(let page=0;page<50;page++){
+    if(signal?.aborted)throw Object.assign(new Error('请求已取消，可以重新查询模型。'),{code:'API_CANCELLED'});
+    const timeoutMs=deadline-Date.now();
+    if(timeoutMs<1000)throw Object.assign(new Error('查询模型的等待时间已用完，可直接填写模型名称。'),{code:'API_TIMEOUT'});
     const query=pageToken?'?pageToken='+encodeURIComponent(pageToken):'';
-    const response=await requestJSON(baseUrl+'/models'+query,{headers:{'x-goog-api-key':key},signal,label,modelQuery:true});
+    const response=await requestJSON(baseUrl+'/models'+query,{headers:{'x-goog-api-key':key},signal,label,modelQuery:true,timeoutMs,route});
     if(!Array.isArray(response.models))throw new Error('该服务未返回有效的 Gemini 模型列表，请直接填写模型名称。');
     // This relay's native /models omits capability metadata; verified text models remain usable.
     names.push(...response.models.filter(model=>(model?.supportedGenerationMethods?.includes('generateContent')||baseUrl===GEMINI_RELAY_URL&&model?.supportedGenerationMethods==null)&&typeof model?.name==='string').map(model=>model.name.replace(/^models\//,'')));
@@ -36,7 +40,9 @@ export async function listModels(settings,signal){
 }
 
 export async function generateMonth(s,action,lore,major,settings,signal){
-  const {baseUrl,label,key}=connection(settings),model=modelPath(settings.model||(settings.provider==='custom'?'':DEFAULT_MODEL));
+  // A prose repair shares this deadline; it does not grant another full wait.
+  const deadline=Date.now()+180000;
+  const {baseUrl,label,key,route}=connection(settings),model=modelPath(settings.model||(settings.provider==='custom'?'':DEFAULT_MODEL));
   const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major));
   const relay=baseUrl===GEMINI_RELAY_URL&&model==='gemini-4-argon';
   const generationConfig={maxOutputTokens:6000,responseMimeType:'application/json',...(relay?{thinkingConfig:{thinkingLevel:'low'}}:{})};
@@ -46,11 +52,11 @@ export async function generateMonth(s,action,lore,major,settings,signal){
   // Ordinary Gemini endpoints retain their native system/user separation.
   const userText=relay?`${prompt.system}\n\n下面是本次生活记录的输入资料：\n${prompt.user}\n\n请按上面的完整规则，只输出一个合法 JSON 对象。必须含 title、narrative、consequence、location、memory、actionDelta、options；actionDelta 为 {}，options 数量按 decision 决定。不要 Markdown、前言、列表或 JSON 之外的文字。`:prompt.user;
   const contents=[{role:'user',parts:[{text:userText}]}];
-  const deadline=relay?Date.now()+180000:null;
   for(let attempt=0;attempt<2;attempt++){
-    const timeoutMs=relay?deadline-Date.now():60000;
-    if(timeoutMs<1000)throw new Error('服务等待已超过 180 秒。本月未推进，可以重试。');
-    const response=await requestJSON(baseUrl+'/models/'+model+':generateContent',{headers:{'x-goog-api-key':key},body:{...(relay?{}:{systemInstruction:{parts:[{text:prompt.system}]}}),contents,generationConfig},signal,label,timeoutMs});
+    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+    const timeoutMs=deadline-Date.now();
+    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
+    const response=await requestJSON(baseUrl+'/models/'+model+':generateContent',{headers:{'x-goog-api-key':key},body:{...(relay?{}:{systemInstruction:{parts:[{text:prompt.system}]}}),contents,generationConfig},signal,label,timeoutMs,route});
     const candidate=response.candidates?.[0];
     if(candidate?.finishReason==='MAX_TOKENS')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');
     if(response.promptFeedback?.blockReason||candidate?.finishReason&&candidate.finishReason!=='STOP')throw new Error('服务没有返回可用文字，本月未推进。可以调整行动后重试。');

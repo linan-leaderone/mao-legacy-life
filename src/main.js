@@ -14,7 +14,7 @@ import './faction-display.css';
 import lore from './data/lore.json';
 import {PLACES,STAT_NAMES,dateLabel,ageLabel,currentAge,createGame,nextContext,localEvent,advance,exportSave,importSave,worldHistory,actionEncounter} from './engine.js';
 import {generateMonth,listModels} from './api.js';
-import {normalizeSettings,activeConnection,PROVIDERS,PROTOCOLS,DEFAULT_MODELS,normalizeBaseUrl,resetProviderConnection,GEMINI_RELAY_URL} from './api-settings.js';
+import {normalizeSettings,activeConnection,PROVIDERS,PROTOCOLS,DEFAULT_MODELS,normalizeBaseUrl,resetProviderConnection,canUseCompatibleRoute} from './api-settings.js';
 import {findPersona,lockPersonaProfile,personaAge,getPoliticalActors} from './personas.js';
 import {backgroundsFor,regionContext} from './regions.js';
 import {initializeIOSInstall,renderInstallCard,bindInstallCard} from './ios-install.js';
@@ -35,6 +35,7 @@ const apiDefaults=typeof __DEFAULT_API_PROVIDERS__==='object'?__DEFAULT_API_PROV
 const pointNames={intelligence:'智力',family:'家境',fitness:'体力',appearance:'颜值'};
 let game=null,view='home',savedSettings={};
 let busy=false,error='',pending=null,controller=null,toastTimer,draftAction='';
+let apiProgress=null,apiProgressTimer=null;
 try{savedSettings=JSON.parse(localStorage.getItem(SETTINGS)||'{}');}catch{}
 let settings=normalizeSettings(savedSettings,apiDefaults);
 try{localStorage.setItem(SETTINGS,JSON.stringify(settings));}catch{}
@@ -43,6 +44,29 @@ let language=normalizeLanguage(game?.profile?.language);
 try{language=normalizeLanguage(localStorage.getItem(LANGUAGE_KEY)||language);}catch{}
 let startupLanguage=language;
 const tr=text=>translateUI(text,language);
+function apiWaitingMarkup(){return `<div class="loading api-wait"><span class="spinner" aria-hidden="true"></span><div class="api-wait-copy"><strong data-api-phase role="status">${esc(tr('正在准备连接……'))}</strong><span data-api-elapsed aria-live="off"></span><small data-api-wait-note>${esc(tr('可以取消等待，刚才的安排会保留。'))}</small></div><button class="secondary" id="cancel">${esc(tr('取消等待'))}</button></div>`;}
+function updateApiProgress(){
+  if(!busy||!controller||!apiProgress)return;
+  const phase=$('[data-api-phase]'),elapsed=$('[data-api-elapsed]'),note=$('[data-api-wait-note]');if(!phase||!elapsed)return;
+  const labels={connecting:'正在建立连接……',waiting:'正在等待服务回复……',receiving:'正在接收内容……',done:'正在完成这次请求……'};
+  const routes={relay:'兼容连接',direct:'直接连接',native:'本机连接'};
+  const label=tr(labels[apiProgress.phase]||'正在准备连接……');if(phase.textContent!==label)phase.textContent=label;
+  const seconds=Math.max(0,Math.floor((performance.now()-apiProgress.startedAt)/1000));
+  elapsed.textContent=[routes[apiProgress.transport]?tr(routes[apiProgress.transport]):'',`${tr('已等待')} ${seconds} ${tr('秒')}`].filter(Boolean).join(' · ');
+  if(note)note.textContent=tr(apiProgress.phase==='done'?'正在确认本次结果。':seconds>=60?'仍在等待服务回复。可以继续等待，也可以取消。':'可以取消等待，刚才的安排会保留。');
+}
+function startApiProgress(){
+  clearInterval(apiProgressTimer);apiProgress={phase:'connecting',transport:'',startedAt:performance.now()};
+  apiProgressTimer=setInterval(updateApiProgress,1000);
+}
+function stopApiProgress(){clearInterval(apiProgressTimer);apiProgressTimer=null;apiProgress=null;}
+window.addEventListener('mao-api-progress',event=>{
+  const detail=event.detail;if(!busy||!controller||!apiProgress||!detail||detail.modelQuery)return;
+  if(detail.id){if(detail.phase==='connecting'||!apiProgress.requestId)apiProgress.requestId=detail.id;if(detail.id!==apiProgress.requestId)return;}
+  if(['connecting','waiting','receiving','done'].includes(detail.phase))apiProgress.phase=detail.phase;
+  if(['relay','direct','native'].includes(detail.transport))apiProgress.transport=detail.transport;
+  updateApiProgress();
+});
 function languagePanel(){return `<section class="language-setting"><div><label for="life-language">语言与文风</label><p>仅用于新的人生。开始后保持所选语言与文风，读取档案沿用其中的记录。</p></div><select id="life-language" data-no-translate>${LANGUAGE_OPTIONS.map(option=>`<option value="${esc(option.id)}" ${startupLanguage===option.id?'selected':''}>${esc(option.label)}</option>`).join('')}</select></section>`;}
 function bindLanguagePanel(root=document){const select=root.querySelector('#life-language');if(!select)return;select.onchange=()=>{if(busy)return;const api=root.querySelector('.api-panel');if(api?.commitApi&&!api.commitApi()){select.value=startupLanguage;return;}startupLanguage=normalizeLanguage(select.value);language=startupLanguage;try{localStorage.setItem(LANGUAGE_KEY,startupLanguage);}catch{}render();};}
 function identityFields(){return `<fieldset class="identity-fields"><legend>身份与归属</legend><div class="form-grid"><div><label class="field">性别<select name="sex">${SEX_OPTIONS.map(option=>`<option value="${option.id}">${option.label}</option>`).join('')}</select></label><label class="field identity-custom-label" data-sex-custom hidden>自行填写性别<input name="sexLabel" maxlength="80" placeholder="写下自己的性别"/></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="sexDescription"/>添加性别描述</label><textarea name="sexDescription" aria-label="性别描述" maxlength="1000" hidden placeholder="补充身体特征或你希望采用的设定"></textarea></div><div><label class="field">族裔<input name="ethnicity" maxlength="100" placeholder="自由填写，也可以是非人类族裔"/></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="ethnicityDescription"/>添加族裔描述</label><textarea name="ethnicityDescription" aria-label="族裔描述" maxlength="1000" hidden placeholder="文化、来历、身体特点与生活习惯"></textarea></div><div><label class="field">国籍 / 所属势力<input name="nationality" list="nationality-list" maxlength="100" placeholder="选择或填写国家、组织及其他势力"/><datalist id="nationality-list">${NATIONALITY_OPTIONS.map(name=>`<option value="${esc(name)}"></option>`).join('')}</datalist></label><label class="identity-description-toggle"><input type="checkbox" data-identity-description="nationalityDescription"/>添加势力描述</label><textarea name="nationalityDescription" aria-label="势力描述" maxlength="1000" hidden placeholder="制度、所在地、公民身份和你与它的关系"></textarea></div></div><p class="identity-caption">这些身份由你填写。国籍留空时沿用开局所在地国家；自行填写的国籍与身份描述会保留。</p></fieldset>`;}
@@ -112,14 +136,15 @@ function render(){
   $('#custom-form')?.addEventListener('submit',e=>{e.preventDefault();const text=$('#custom-action').value.trim();if(text)takeAction({label:text,custom:true});});
   $('#retry')?.addEventListener('click',()=>pending&&takeAction(pending));
   $('#offline-once')?.addEventListener('click',()=>pending&&takeAction(pending,true));
-  $('#cancel')?.addEventListener('click',()=>controller?.abort());
+  $('#api-error-settings')?.addEventListener('click',openSettings);
+  $('#cancel')?.addEventListener('click',()=>{const button=$('#cancel');if(button){button.disabled=true;button.textContent=tr('正在取消……');}controller?.abort();});
   $('#pin-form')?.addEventListener('submit',e=>{e.preventDefault();const text=$('#pin-input').value.trim();if(text&&(game.pins||[]).length<30){game.pins.push(text);persist();render();}});
   document.querySelectorAll('[data-unpin]').forEach(b=>b.onclick=()=>{if(!busy){game.pins.splice(Number(b.dataset.unpin),1);persist();render();}});
   $('#history-search')?.addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.history-entry').forEach(el=>el.hidden=!el.textContent.toLowerCase().includes(q));});
   attachImageFallbacks();
   document.querySelectorAll('.api-panel').forEach(bindApiPanel);
   bindInstallCard();
-  bindLanguagePanel();applyInterfaceLanguage($('#app'),language);document.documentElement.lang=LANGUAGE_OPTIONS.find(option=>option.id===language)?.locale||'zh-CN';
+  bindLanguagePanel();applyInterfaceLanguage($('#app'),language);document.documentElement.lang=LANGUAGE_OPTIONS.find(option=>option.id===language)?.locale||'zh-CN';updateApiProgress();
 }
 
 function welcomeScreen(){return `<section class="home-heading"><div><span class="eyebrow red">THE MAO LEGACY / 2020</span><h1>从 2020 年开始，过自己的人生。</h1><p>先选择连接方式，再开始或继续你的经历。</p></div></section>${renderInstallCard()}${languagePanel()}<div class="home-layout"><div>${apiPanel('home-api')}${error&&!game?`<p class="error">${esc(error)}</p>`:''}</div><aside class="home-start"><div class="home-cover"><img src="./art/cover.webp" alt="人生档案封面"/><div class="home-cover-caption"><span>毛的遗产</span><strong>一个人，一段时代。</strong></div>${stamp()}</div><div class="home-start-body">${game?`<span class="eyebrow">最近的记录</span><h2>${esc(game.profile.name)}</h2><p>${dateLabel(game.month)} · ${esc(getPlayerPosition(game).label||game.location)}<br>${esc(ageLabel(game))}</p><button id="continue-life" class="primary large">继续人生 <span>→</span></button>`:'<h2>第一份记录，从一月开始。</h2><p>家庭、成长经历和个人愿望，会影响此后的生活。</p>'}<button class="${game?'secondary':'primary large'}" id="begin">${game?'建立新的人生档案':'开始新人生'} <span>↗</span></button><button id="welcome-load" class="quiet">读取已有档案</button></div></aside></div>`;}
@@ -182,8 +207,8 @@ function playScreen(){
       ${!isOceanFish(game)&&game.employment?.monthlyIncome>0?`<button id="work-shift" class="secondary work-entry" ${busy?'disabled':''}>继续${esc(game.employment.kind)}的工作 <span>→</span></button>`:''}
       <div class="continue-row"><span>${options.length?'也可以照常过日子。':'日子一天天过去，生活继续。'}</span><button id="next-month" class="primary" ${busy?'disabled':''}>下个月 <span>→</span></button></div>
       <form id="custom-form" class="custom-choice"><label for="custom-action"><span>✎</span>写下这个月的安排</label><textarea id="custom-action" maxlength="2000" placeholder="例如：我打算去上海寻找工程师的工作，晚上继续自学，周末给家里写信……" ${busy?'disabled':''}>${esc(draftAction||pending?.custom&&pending.label||'')}</textarea><div><small>要去哪里，要见谁，要做些什么。</small><button class="primary" ${busy?'disabled':''}>就这样安排 <span>→</span></button></div></form>
-      ${busy?`<div class="loading" role="status"><span class="spinner"></span> ${settings.mode!=='offline'&&activeConnection(settings).baseUrl===GEMINI_RELAY_URL?'正在写下这段经历。可以随时暂缓。':'请稍候……'} <button class="quiet" id="cancel">暂缓</button></div>`:''}
-      ${error?`<div class="error" role="alert"><p>${esc(error)}</p><button id="retry" class="secondary">重试</button> <button id="offline-once" class="quiet">暂不联网，继续</button></div>`:''}
+      ${busy&&controller?apiWaitingMarkup():''}
+      ${error?`<div class="error" role="alert"><p>${esc(error)}</p><button id="retry" class="secondary">重试</button> <button id="api-error-settings" class="quiet">连接设置</button> <button id="offline-once" class="quiet">暂不联网，继续</button></div>`:''}
     </section>`}</section><aside class="right-column">${portraitCard()}<section class="notebook"><div class="eyebrow">人生的方向</div><h3>写给未来的自己</h3><p>${esc(game.profile.goal)}</p><div class="notebook-rule"></div><span class="tiny-label">来时的路</span><p class="small-copy">${esc(game.profile.backgroundText)}</p></section><section class="memory-card"><h3>不想被遗忘的事 <small>${pins.length}/30</small></h3><p class="muted small-copy">珍重的人，许下的诺言，心里的牵挂。</p>${pins.map((p,i)=>`<div class="pin"><span>${esc(p)}</span><button data-unpin="${i}" ${busy?'disabled':''} aria-label="移除这条记忆">×</button></div>`).join('')}<form id="pin-form"><textarea id="pin-input" maxlength="800" placeholder="例如：我的妹妹在东京读书。" ${busy?'disabled':''}></textarea><button class="secondary" ${busy||pins.length>=30?'disabled':''}>＋ 记住这件事</button></form></section></aside></div>`;
 }
 
@@ -332,6 +357,7 @@ function apiPanelBody(id){
     <div class="api-fields"><label class="field">API Key<input type="password" data-api-key autocomplete="off" spellcheck="false" aria-label="${esc(PROVIDERS.find(p=>p.id===settings.provider)?.label||'API')} 密钥" placeholder="填写此服务的 API Key"/></label>
     ${configurable?`<div class="api-custom-grid"><label class="field">接口地址 Base URL<input data-api-url type="url" autocomplete="off" spellcheck="false" value="${esc(connection.baseUrl||'')}" placeholder="https://api.example.com/v1"/></label><label class="field">接口协议<select data-api-protocol>${PROTOCOLS.filter(protocol=>custom||protocol.id!=='anthropic').map(protocol=>`<option value="${esc(protocol.id)}" ${connection.protocol===protocol.id?'selected':''}>${esc(protocol.label)}</option>`).join('')}</select></label></div>`:''}
     ${settings.provider==='shiwuyan'?`<p class="api-fixed-connection"><span>接口地址</span> <span>${esc(connection.baseUrl)}</span><span>Anthropic Messages</span></p>`:''}
+    ${['gemini','shiwuyan'].includes(settings.provider)?`<div class="api-route-field" data-api-route-field ${canUseCompatibleRoute(connection)?'':'hidden'}><label class="field">连接方式<select data-api-route><option value="auto" ${connection.route!=='direct'?'selected':''}>兼容连接（默认）</option><option value="direct" ${connection.route==='direct'?'selected':''}>直接连接</option></select></label><p class="api-route-note">兼容连接通过本站转发，直接连接由此设备访问服务商。</p></div>`:''}
     <label class="field">模型<input data-api-model autocomplete="off" spellcheck="false" list="${id}-models" value="${esc(connection.model||'')}" placeholder="${esc(DEFAULT_MODELS[settings.provider]||'填写服务商提供的模型名称')}"/><datalist id="${id}-models" data-api-models>${DEFAULT_MODELS[settings.provider]?`<option value="${esc(DEFAULT_MODELS[settings.provider])}"/>`:''}</datalist></label></div>
     <div class="api-actions"><button type="button" class="secondary" data-test-api>测试连接</button><button type="button" class="quiet" data-clear-api>清除此密钥</button><button type="button" class="quiet" data-reset-api>使用默认连接</button><button type="button" class="quiet" data-import-api>导入配置</button><input type="file" data-api-file accept=".json,application/json" hidden/></div><p data-api-status class="api-status" role="status">${offline?'当前不联网，将使用本地内容。':'开始或继续时会使用上方选中的服务。'}</p><p class="api-key-note">默认连接可直接使用。自行填写的配置保存在本机，人生档案不包含密钥。</p>`;
 }
@@ -342,6 +368,7 @@ function readApiPanel(panel){
   const next={...settings,provider,mode:panel.querySelector('[data-offline]').checked?'offline':'online',providers:{...settings.providers}};
   next.providers[provider]={...fields,apiKey:panel.querySelector('[data-api-key]').value.trim(),model:panel.querySelector('[data-api-model]').value.trim()};
   if(provider==='custom'||provider==='gemini'){next.providers[provider].baseUrl=panel.querySelector('[data-api-url]').value.trim();next.providers[provider].protocol=panel.querySelector('[data-api-protocol]').value;}
+  const route=panel.querySelector('[data-api-route]');if(route)next.providers[provider].route=route.value==='direct'?'direct':'auto';
   return next;
 }
 function refreshApiPanel(panel){panel.dataset.provider=settings.provider;panel.innerHTML=apiPanelBody(panel.id);bindApiPanel(panel);applyInterfaceLanguage(panel,language);}
@@ -355,14 +382,15 @@ function bindApiPanel(panel){
     const repaired=['baseUrl','protocol','model'].some(key=>draft.providers[id][key]!==next.providers[id][key]);
     const ok=writeApiSettings(next);
     // Keep the form and the request on the same connection after a recognized legacy repair.
-    for(const [selector,key] of [['[data-api-key]','apiKey'],['[data-api-url]','baseUrl'],['[data-api-protocol]','protocol'],['[data-api-model]','model']]){
+    for(const [selector,key] of [['[data-api-key]','apiKey'],['[data-api-url]','baseUrl'],['[data-api-protocol]','protocol'],['[data-api-model]','model'],['[data-api-route]','route']]){
       const input=query(selector);if(input&&input.value!==(next.providers[id][key]||''))input.value=next.providers[id][key]||'';
     }
+    const routeField=query('[data-api-route-field]');if(routeField)routeField.hidden=!canUseCompatibleRoute(activeConnection(next));
     status.classList.remove('api-failure');status.textContent=tr(ok?(repaired?'已更新指定服务的地址、协议和模型，并保存。':settings.mode==='offline'?'已自动保存。当前不联网。':'已自动保存。下次请求使用当前配置。'):'设置仍在当前页面，尚未写入设备。');return ok;
   };
   panel.commitApi=commit;
   panel.querySelectorAll('[data-api-key],[data-api-model],[data-api-url]').forEach(input=>{input.oninput=()=>commit(false);input.onchange=()=>commit();});
-  query('[data-api-protocol]')?.addEventListener('change',commit);query('[data-offline]').onchange=commit;
+  query('[data-api-protocol]')?.addEventListener('change',commit);query('[data-api-route]')?.addEventListener('change',commit);query('[data-offline]').onchange=commit;
   panel.querySelectorAll('[data-provider-choice]').forEach(input=>input.onchange=()=>{if(busy)return;if(!commit())return;writeApiSettings({...settings,provider:input.value});refreshApiPanel(panel);});
   query('[data-clear-api]').onclick=()=>{query('[data-api-key]').value='';commit();};
   query('[data-reset-api]').onclick=()=>{if(busy)return;revision++;if(writeApiSettings(resetProviderConnection(settings,panel.dataset.provider,apiDefaults))){refreshApiPanel(panel);panel.querySelector('[data-api-status]').textContent='已使用默认地址、协议和模型。密钥以当前版本提供的默认值为准。';}};
@@ -406,7 +434,7 @@ function prepareConnection(){
 function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;language=normalizeLanguage(game.profile.language);view='play';render();window.scrollTo(0,0);}
 function openSettings(){
   if(busy)return;
-  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.1</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
+  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.2</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
   const panel=m.querySelector('.api-panel');bindApiPanel(panel);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
   m.addEventListener('close',()=>{panel.commitApi();if(view==='home')render();});
 }
@@ -429,13 +457,13 @@ async function takeAction(action,offlineOnce=false){
       action={...action,meta:{...action.meta,encounterGame:encounter}};
     }
   }
-  busy=true;error='';pending=action;controller=new AbortController();render();
+  busy=true;error='';pending=action;controller=new AbortController();startApiProgress();render();
   try{
     const {state}=nextContext(game,lore,action);
     const result=settings.mode==='offline'||offlineOnce||state.stats.health===0?localEvent(state,lore,action,null):await generateMonth(game,action,lore,null,settings,controller.signal);
     game=advance(game,action,result,null,lore);persist();pending=null;draftAction='';window.scrollTo({top:0,behavior:'smooth'});
-  }catch(err){error=err.name==='AbortError'?'已暂缓。刚才的安排仍然保留。':redactApiError(err);}
-  finally{busy=false;controller=null;render();}
+  }catch(err){error=controller?.signal.aborted||err.name==='AbortError'||err.code==='API_CANCELLED'?'已取消等待。本月未推进，刚才的安排仍然保留。':redactApiError(err);}
+  finally{stopApiProgress();busy=false;controller=null;render();}
 }
 async function saveText(filename,text){
   try{

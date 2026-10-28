@@ -1,4 +1,4 @@
-# API 连接（1.17.1）
+# API 连接（1.17.2）
 
 进入首页即可在 ShiWuYan、DeepSeek、Gemini、自定义 API 中选择。四份密钥、模型和服务地址独立保存，切换服务不会把另一份密钥送给当前服务。设置保存在本机，人生存档及其导出文件不包含连接设置。个人 Windows/Android 构建从 `.private/settings.json` 注入用户指定的默认密钥，公开 iPhone 网页按作者最新授权内置DeepSeek、Gemini、ShiWuYan三组共享默认；公开GitHub源码不带任何密钥。本文不记录任何密钥、订单号或兑换码。
 
@@ -23,19 +23,25 @@
 
 四个选择共用 `deepseek.buildPrompt` 和 `engine.validateResponse`：使用当前年龄、行动日期、职业、地区制度、独立新闻影响与已经发生的 MOD 事实。Gemini 已替换旧版叙事逻辑，不再强制每月五个选项，也不重复结算模型返回的属性变化。模型切换只改变叙事服务，不改动人生状态或世界排程。
 
-行文、年龄或日期校验可自动请求修正一次；两次请求使用同一份预计算状态，不重新结算行动。结构错误、截断、服务拒绝、超时和取消不提交月份；不会悄悄切到其他服务或自动重试网络请求。错误提示不显示服务原始响应、密钥或完整请求地址。
+行文、年龄或日期校验可自动请求修正一次；两次请求使用同一份预计算状态，并共用180秒等待预算，不重新结算行动。所有生成入口复用 `src/prompt-compact.js` 压缩规则和上下文，保留实际状态与行动结果。结构错误、截断、服务拒绝、超时和取消不提交月份；不会悄悄切到其他服务或自动重试网络请求。错误提示不显示服务原始响应、密钥或完整请求地址。
 
 OpenAI 兼容请求默认只发送 `model`、`messages`、`max_tokens` 与 `stream:false`，依靠共有提示要求完整 JSON，不附加 DeepSeek 专属参数。Gemini 使用 `systemInstruction`、`contents` 与 JSON 响应类型；修正时保留服务给出的 thought signatures。指定转发站的完整请求曾在 `STOP` 状态返回 Markdown 散文，没有遵守原生系统指令及 JSON 响应类型；对此端点的 `gemini-4-argon` 将规则与 JSON 结构要求只放在用户消息中发送一次，使用实测接受的 `thinkingLevel: low`，保留 6,000 输出 token 上限。普通 Google 和其他 Gemini 端点保持系统、用户消息分离，不添加未验证的思考参数。Gemini 请求使用 `src/prompt-compact.js` 删除本月未启用的规则分支与完全重复的输入字段；当前身份、地区制度、全部已有世界历史、长期记忆、固定事实、金钱与行动结算均保留。关系提示保留最近联系人、当前行动/主线提到的人和最强的直接关系；完整图谱仍在存档中。Anthropic 使用独立 `system`、`messages`、`max_tokens`，发送 `x-api-key`、兼容版本 `anthropic-version: 2023-06-01` 以及浏览器直连标记，不发送 temperature。
 
 ## 请求通道
 
-`src/api-transport.js` 的 `requestJSON(url, options)` 为 Windows、Android 与浏览器提供相同超时和取消行为。Windows 优先 `window.desktopBridge.requestApi`，Android 优先 `window.NativeBridge.requestApi` 与 `window.__maoApiResponse` 回调。桥接失败不会再调用浏览器 fetch，避免重复请求。浏览器使用 fetch，不携带 Cookie 或页面来源，禁止跟随重定向。
+`src/api-transport.js` 的 `requestJSON(url, options)` 为 Windows、Android 与浏览器提供相同超时和取消行为。Windows 优先 `window.desktopBridge.requestApi`，Android 优先 `window.NativeBridge.requestApi` 与 `window.__maoApiResponse` 回调。原生桥直连供应商，失败不会再调用浏览器 fetch，避免重复请求。
+
+公开PWA的内置Gemini/ShiWuYan连接增加 `route: 'auto' | 'direct'`，保存在各自provider中，`providerRevision`仍为9。仅当主机准确为 `https://aiapi.shiwuyan.cn` 且根路径为 `/v1` 或 `/v1beta` 时，默认auto通过当前网站的 `/api/relay` 兼容连接。首页和设置可改为direct，浏览器直接访问原服务。DeepSeek官方、自定义入口、Gemini其他主机、普通开发构建和原生包保持直连；兼容连接失败不会自动重发到直连路径。浏览器不携带Cookie或Referer，所有路径均禁止跟随供应商重定向。
+
+`scripts/site-api-worker.mjs` 只代理固定供应商。目标host、生成/目录路径、分页参数和请求头有白名单，请求体上限1MiB、响应上限4MiB；不是任意目的地代理。Worker在请求期间使用内存，不写凭据、人生内容或应用日志，不使用数据库或持久存储，也不缓存请求/响应。上游错误仅返回状态，不回传任意错误正文。兼容通道使用NDJSON，每10秒发送等待心跳，最终仅返回一份结果；心跳不代表额外模型调用。浏览器取消会中止连接，Worker通过 `Request.signal` 和流取消信号中止上游请求。
 
 Windows 原生桥使用 Electron 的 Chromium 网络栈，采用系统代理配置及 PAC/WPAD；没有自行修改代理或证书验证。原生总超时、取消信号、禁止重定向和响应大小限制继续生效。接口单元测试可注入 fetch 实现，不要求启动桌面窗口。依据：[Electron net 文档](https://www.electronjs.org/docs/latest/api/net)。
 
-普通请求最长 60 秒；指定转发站的 `gemini-4-argon` 一次生成及可选的文风修正合计最长 180 秒，修正只使用剩余时间。取消会通知原生桥或中止 fetch，并丢弃迟到的响应。自定义服务可能采用不同字段或权限要求；当前兼容范围为上述三种标准文本接口，不包含任意供应商私有协议、工具调用、图片生成、流式界面或任意请求头编辑。
+所有服务的一次生成与可选文风修正合计最长180秒，修正只使用剩余时间；模型目录查询及分页合计最长15秒。等待界面显示真实经过秒数、连接阶段及所走通道，不显示虚构百分比。用户取消与等待超时分开提示；取消会通知原生桥或中止fetch，并丢弃迟到响应。自定义服务可能采用不同字段或权限要求；当前兼容范围为上述三种标准文本接口，不包含任意供应商私有协议、工具调用、图片生成、逐字流式叙事或任意请求头编辑。NDJSON只用于转发心跳与完整结果，不改变供应商的 `stream:false` 请求。
 
-## 转发服务实测
+这项改动针对浏览器跨域限制和长时间无响应的等待处理。尚未完成中国大陆运营商、地区与设备覆盖实测，不把部署健康或目录查询成功当作实际剧情生成速度的证明。
+
+## 历史转发服务实测（1.6）
 
 核验日期：2026-10-25。以下使用本轮用户授权的密钥请求指定服务，未兑换兑换码、访问订单或创建公共付费代理。
 
@@ -43,7 +49,7 @@ Windows 原生桥使用 Electron 的 Chromium 网络栈，采用系统代理配�
 
 教程明示的接口为OpenAI兼容`https://aiapi.shiwuyan.cn/v1`；本作采用的`/v1beta`原生兼容路径依据下面的实际请求确认。此次再次读取`/v1/models`与`/v1beta/models`，均返回HTTP 200，当前这把密钥的模型列表均只有`gemini-4-argon`。公开价格表中其他模型不代表此密钥有权限使用。本次复查只读取列表及CORS响应，没有追加剧情生成；此前完整月度生成的结果保留在下方记录。
 
-替换旧连接的操作是：首页选择Gemini → 使用默认连接 → 确认协议为Gemini原生、地址为`https://aiapi.shiwuyan.cn/v1beta`、模型为`gemini-4-argon` → 填写对应API Key → 测试连接，关闭“不联网”后继续。个人1.6原生包恢复默认时会带入已授权的预填密钥；公开网页恢复默认后密钥为空，需要本人填写。该操作只改变连接，不删除或重置人生存档。不能仅把新密钥填入旧Google官方地址。
+1.6时替换旧连接的操作是：首页选择Gemini → 使用默认连接 → 确认协议为Gemini原生、地址为`https://aiapi.shiwuyan.cn/v1beta`、模型为`gemini-4-argon` → 填写对应API Key → 测试连接，关闭“不联网”后继续。个人1.6原生包恢复默认时会带入已授权的预填密钥；当时公开网页恢复默认后密钥为空，需要本人填写。该历史策略已被1.17.1授权三组网页默认取代。该操作只改变连接，不删除或重置人生存档。不能仅把新密钥填入旧Google官方地址。
 
 - [公开价格表](https://aiapi.shiwuyan.cn/pricing) 对应的 `/api/pricing` 返回 HTTP 200，公开目录列出多种 Gemini 名称；账户 `/v1/models` 只返回 `gemini-4-argon`，因此采用这个已获授权的模型。
 - `/v1/chat/completions` 小请求返回 HTTP 200、`finish_reason: stop`，正文为要求的 `OK`。服务实际响应模型标记为 `gemini-argon-high`；这只确认转发服务接受该名称，不证明上游真实模型身份。
@@ -64,6 +70,8 @@ Windows 原生桥使用 Electron 的 Chromium 网络栈，采用系统代理配�
 - [Anthropic Messages](https://platform.claude.com/docs/en/api/messages/create) 与 [Models](https://platform.claude.com/docs/en/api/models/list)：消息结构、文本内容及列表分页。
 - [Anthropic 版本历史](https://platform.claude.com/docs/en/api/versioning)：保留 `2023-06-01` 兼容版本；新版本已移除 temperature 等采样参数，本适配也不发送这些参数。
 - [Anthropic 官方 TypeScript SDK](https://github.com/anthropics/anthropic-sdk-typescript/blob/main/src/client.ts)：浏览器请求使用 `anthropic-dangerous-direct-browser-access: true`。
+- [Cloudflare Static Assets 绑定](https://developers.cloudflare.com/workers/static-assets/binding/)：Worker使用 `ASSETS` 服务同站静态内容。
+- [Cloudflare Request.signal](https://developers.cloudflare.com/workers/runtime-apis/request/#properties) 与 [取消请求说明](https://developers.cloudflare.com/changelog/post/2025-05-22-handle-request-cancellation/)：开启 `enable_request_signal` 后监听访问者断开连接，取消上游请求。相关官方文档于2026-10-28核对。
 
 自动化验证覆盖旧 Google 凭据保留、默认转发配置、独立恢复默认、原生和 OpenAI 两种 Gemini 请求、请求隔离、错误与取消、文风修正共享超时等，共 34 项 API 测试通过。真实网络验证限于上述指定转发服务的小请求与一个完整时间旅行案例，不代表逐一验证所有第三方服务或所有剧情。实际构建与实测状态以 `docs/VERIFICATION.md` 为准。
 
@@ -90,3 +98,7 @@ OPTIONS预检返回204，允许来源及请求头为通配。Authorization是COR
 上一版由GET /v1/models成功推断Chat Completions也接受x-api-key，判断不成立。无剧情空请求确认：该生成路径的x-api-key返回401；Bearer通过鉴权。由于此站CORS通配不允许Authorization，ShiWuYan改用同站/v1/messages，发送x-api-key与anthropic-version:2023-06-01。使用新密钥与grok-4.7、故意缺少messages的格式探测返回field messages is required，确认请求通过鉴权与模型权限阶段；预检204与错误响应都允许公开站点跨域。没有发送有效生成输入或推进游戏。
 
 原DeepSeek和Gemini默认密钥只读模型列表均为200，分别有deepseek-flash/deepseek-v4-pro与gemini-4-argon。网页三组默认按本次授权一起预填，旧空配置一次迁移，用户自填连接保留。上文1.17中的OpenAI+x-api-key实现属于已修正的历史记录。
+
+## 1.17.2 兼容连接（2026-10-28）
+
+浏览器访问指定转发站的内置连接默认改走同源Worker，保留direct选项和三组原默认。所有生成共用180秒预算，目录查询共用15秒；原生桥、DeepSeek官方和自定义连接继续直连。Site保留原项目与public访问权限，静态内容通过ASSETS绑定继续提供，发布结构见 [IOS.md](IOS.md)。本轮不运行游戏测试或有效模型生成，只进行静态审查、构建封装及部署健康、只读模型目录诊断；实际完成情况单独记入验证文档。

@@ -49,7 +49,7 @@ function profile(provider,source={},defaults={}){
   // A user-entered Gemini host must never receive a bundled relay credential.
   const bundledHost=provider!=='gemini'||!explicitEndpoint||text(source.baseUrl??source.baseURL).replace(/\/+$/,'')===(text(defaults.baseUrl)||GEMINI_RELAY_URL).replace(/\/+$/,'');
   const bundledConnection=!['deepseek','gemini'].includes(provider)||isOldBlankDefault(provider,source,defaults);
-  const entry={apiKey:has(source,'apiKey')?text(source.apiKey):bundledHost&&bundledConnection?text(defaults.apiKey):'',model:has(source,'model')?text(source.model):legacyGoogle?'gemini-3.5-flash':text(defaults.model)||DEFAULT_MODELS[provider]};
+  const entry={apiKey:has(source,'apiKey')?text(source.apiKey):bundledHost&&bundledConnection?text(defaults.apiKey):'',model:has(source,'model')?text(source.model):legacyGoogle?'gemini-3.5-flash':text(defaults.model)||DEFAULT_MODELS[provider],route:source.route==='direct'?'direct':['gemini','shiwuyan'].includes(provider)?'auto':'direct'};
   if(provider==='gemini')Object.assign(entry,{baseUrl:legacyGoogle?GEMINI_OFFICIAL_URL:explicitEndpoint?text(source.baseUrl??source.baseURL):text(defaults.baseUrl)||GEMINI_RELAY_URL,protocol:legacyGoogle?'gemini':['gemini','openai'].includes(source.protocol)?source.protocol:['gemini','openai'].includes(defaults.protocol)?defaults.protocol:'gemini'});
   if(provider==='shiwuyan')Object.assign(entry,{baseUrl:SHIWUYAN_URL,protocol:'anthropic'});
   if(provider==='custom')Object.assign(entry,{baseUrl:text(source.baseUrl??source.baseURL??defaults.baseUrl),protocol:isProtocol(source.protocol)?source.protocol:isProtocol(defaults.protocol)?defaults.protocol:'openai'});
@@ -100,6 +100,11 @@ export function activeConnection(settings={}){
   // Also accept a single connection for scripts and imports.
   const normalized=normalizeSettings(settings),provider=normalized.provider;
   return {provider,mode:normalized.mode,...normalized.providers[provider],...(provider==='deepseek'?{protocol:'openai',baseUrl:'https://api.deepseek.com'}:{})};
+}
+export function canUseCompatibleRoute(connection={}){
+  if(typeof __IOS_PWA__==='undefined'||!__IOS_PWA__||typeof window!=='object'||window.desktopBridge||window.NativeBridge)return false;
+  if(!['gemini','shiwuyan'].includes(connection.provider))return false;
+  try{const url=new URL(connection.baseUrl||'');return url.origin==='https://aiapi.shiwuyan.cn'&&!url.username&&!url.password&&['/v1','/v1beta'].includes(url.pathname.replace(/\/+$/,''));}catch{return false;}
 }
 export function normalizeBaseUrl(value,protocol='openai'){
   let raw=text(value);

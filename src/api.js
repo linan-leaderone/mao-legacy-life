@@ -3,6 +3,7 @@ import {generateMonth as generateGemini,listModels as listGemini} from './gemini
 import {validateResponse} from './engine.js';
 import {activeConnection,normalizeBaseUrl} from './api-settings.js';
 import {requestJSON,requireModel,requireKey,parseNarrative,repairInstruction,requireModelList} from './api-transport.js';
+import {compactNarrativePrompt} from './prompt-compact.js';
 
 function customConnection(connection){
   const {protocol}=connection;
@@ -27,10 +28,14 @@ function headersFor(connection){
 }
 async function listCustom(connection,signal){
   const headers=headersFor(connection),names=[],cursors=new Set();
+  const deadline=Date.now()+15000;
   let after='';
   for(let page=0;page<50;page++){
+    if(signal?.aborted)throw Object.assign(new Error('请求已取消，可以重新查询模型。'),{code:'API_CANCELLED'});
+    const timeoutMs=deadline-Date.now();
+    if(timeoutMs<1000)throw Object.assign(new Error('查询模型的等待时间已用完，可直接填写模型名称。'),{code:'API_TIMEOUT'});
     const query=after?'?after_id='+encodeURIComponent(after):'';
-    const response=await requestJSON(connection.baseUrl+'/models'+query,{headers,signal,label:serviceLabel(connection),modelQuery:true});
+    const response=await requestJSON(connection.baseUrl+'/models'+query,{headers,signal,label:serviceLabel(connection),modelQuery:true,timeoutMs,route:connection.route});
     if(!Array.isArray(response.data))throw new Error('该服务未返回有效的模型列表，请直接填写模型名称。');
     names.push(...response.data.map(model=>model?.id));
     if(connection.protocol!=='anthropic'||!response.has_more)break;
@@ -58,12 +63,17 @@ export async function generateMonth(s,action,lore,major,settings,signal){
   if(connection.provider==='gemini'&&connection.protocol==='gemini')return generateGemini(s,action,lore,major,connection,signal);
   const custom=customConnection(connection);
   if(custom.protocol==='gemini')return generateGemini(s,action,lore,major,custom,signal);
-  const prompt=buildPrompt(s,action,lore,major),model=requireModel(custom.model),headers=headersFor(custom);
+  // A prose repair shares this deadline; it does not grant another full wait.
+  const deadline=Date.now()+180000;
+  const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major)),model=requireModel(custom.model),headers=headersFor(custom);
   const messages=[{role:'user',content:prompt.user}];
   for(let attempt=0;attempt<2;attempt++){
+    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+    const timeoutMs=deadline-Date.now();
+    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
     const anthropic=custom.protocol==='anthropic';
     const body=anthropic?{model,system:prompt.system,messages,max_tokens:6000,stream:false}:{model,messages:[{role:'system',content:prompt.system},...messages],max_tokens:6000,stream:false};
-    const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:serviceLabel(custom)});
+    const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:serviceLabel(custom),timeoutMs,route:custom.route});
     let text;
     if(anthropic){
       if(response.stop_reason==='max_tokens')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');

@@ -1,7 +1,18 @@
-const TIMEOUT_MS=60000;
-const MAX_RESPONSE_CHARS=4*1024*1024;
+const TIMEOUT_MS=180000,MODEL_TIMEOUT_MS=15000;
+const MAX_RESPONSE_BYTES=4*1024*1024,MAX_ENVELOPE_BYTES=8*1024*1024;
 const androidRequests=new Map();
-const cancelled=(timeoutMs=TIMEOUT_MS)=>new Error(`请求已取消或超过 ${Math.round(timeoutMs/1000)} 秒。本月未推进，可以重试。`);
+function stopError(reason,timeoutMs,modelQuery){
+  const timeout=reason==='timeout';
+  const message=timeout?`等待服务超过 ${Math.round(timeoutMs/1000)} 秒。${modelQuery?'可直接填写模型名称，或重新查询。':'本月未推进，可以重试或切换连接。'}`:`请求已取消。${modelQuery?'可以重新查询模型。':'本月未推进，刚才的安排已保留。'}`;
+  return Object.assign(new Error(message),{name:timeout?'TimeoutError':'AbortError',code:timeout?'API_TIMEOUT':'API_CANCELLED'});
+}
+function responseError(limit=false){
+  return Object.assign(new Error(limit?'服务返回的内容过长，本月未推进，可以重试。':'服务返回的格式不完整，本月未推进，可以重试。'),{code:limit?'API_RESPONSE_LIMIT':'API_INVALID_RESPONSE'});
+}
+function networkError(label,transport,modelQuery){
+  const message=transport==='relay'?`网站到 ${label} 的连接未完成。可切换直接连接或 DeepSeek。`:transport==='direct'?`无法连接 ${label}，可能是网络或跨域限制。可切换兼容连接或 DeepSeek。`:`无法连接 ${label}，请检查网络与服务地址。可切换 DeepSeek。`;
+  return Object.assign(new Error(message+(modelQuery?'也可直接填写模型名称。':'本月未推进。')),{code:'API_NETWORK'});
+}
 
 function installAndroidCallback(host){
   host.__maoApiResponse=(id,result)=>{
@@ -17,55 +28,131 @@ function httpError(status,label,modelQuery){
   return new Error(label+' '+detail+(modelQuery?'':' 本月未推进。'));
 }
 
-/** One transport for browser and both native shells; never retries a network request. */
-export async function requestJSON(url,{headers={},body,signal,label='API',modelQuery=false,timeoutMs=TIMEOUT_MS}={}){
-  const timeout=Number.isFinite(timeoutMs)?Math.max(1000,Math.min(180000,Math.round(timeoutMs))):TIMEOUT_MS;
-  if(signal?.aborted)throw cancelled(timeout);
+async function readLimitedBody(response,onChunk){
+  const reader=response.body?.getReader();if(!reader)return '';
+  const decoder=new TextDecoder();let text='',bytes=0,complete=false;
+  try{
+    while(true){
+      const {done,value}=await reader.read();if(done){complete=true;break;}
+      bytes+=value.byteLength;if(bytes>MAX_RESPONSE_BYTES)throw responseError(true);
+      onChunk();text+=decoder.decode(value,{stream:true});
+    }
+    return text+decoder.decode();
+  }finally{
+    if(!complete)try{await reader.cancel();}catch{}
+    reader.releaseLock();
+  }
+}
+async function readRelayBody(response,setPhase){
+  if(!/^application\/x-ndjson(?:\s*;|$)/i.test(response.headers.get('content-type')||''))throw responseError();
+  const reader=response.body?.getReader();if(!reader)throw responseError();
+  const decoder=new TextDecoder();let pending='',bytes=0,complete=false;
+  const record=line=>{
+    if(!line.trim())return null;
+    let item;try{item=JSON.parse(line);}catch{throw responseError();}
+    if(item?.type==='progress'&&item.phase==='waiting'){setPhase('waiting');return null;}
+    if(item?.type==='result'&&item.result&&typeof item.result==='object'&&!Array.isArray(item.result)){setPhase('receiving');return item.result;}
+    throw responseError();
+  };
+  try{
+    while(true){
+      const {done,value}=await reader.read();
+      if(done){complete=true;pending+=decoder.decode();const result=record(pending);if(result)return result;throw responseError();}
+      bytes+=value.byteLength;if(bytes>MAX_ENVELOPE_BYTES)throw responseError(true);
+      pending+=decoder.decode(value,{stream:true});
+      let newline;
+      while((newline=pending.indexOf('\n'))!==-1){
+        const line=pending.slice(0,newline);pending=pending.slice(newline+1);
+        const result=record(line);if(result)return result;
+      }
+    }
+  }finally{
+    if(!complete)try{await reader.cancel();}catch{}
+    reader.releaseLock();
+  }
+}
+
+/** One request per call. A relay failure never falls back by resending the prompt. */
+export async function requestJSON(url,{headers={},body,signal,label='API',modelQuery=false,timeoutMs,route='direct'}={}){
+  const fallbackTimeout=modelQuery?MODEL_TIMEOUT_MS:TIMEOUT_MS;
+  const timeout=Number.isFinite(timeoutMs)?Math.max(1000,Math.min(TIMEOUT_MS,Math.round(timeoutMs))):fallbackTimeout;
   const host=typeof window==='object'?window:null,desktop=host?.desktopBridge,android=host?.NativeBridge;
+  const native=typeof desktop?.requestApi==='function'?'desktop':typeof android?.requestApi==='function'?'android':null;
+  let relay=false;
+  if(!native&&route==='auto'&&typeof __IOS_PWA__!=='undefined'&&__IOS_PWA__)try{relay=new URL(url).origin==='https://aiapi.shiwuyan.cn';}catch{}
+  const transport=native?'native':relay?'relay':'direct';
   const id=globalThis.crypto?.randomUUID?.()||('api-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-  const abort=new AbortController();
-  const payload={id,url,method:body===undefined?'GET':'POST',headers:{...headers,...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)}),timeoutMs:timeout};
-  let finish,cancelNative;
-  const resultPromise=new Promise((resolve,reject)=>{finish={resolve,reject};});
-  const cancel=()=>{
-    abort.abort();
+  const abort=new AbortController(),startedAt=Date.now();
+  let finish,cancelNative,cancelReason,settled=false,phase='connecting',timer;
+  const progress=()=>{
+    if(typeof host?.dispatchEvent!=='function'||typeof host.CustomEvent!=='function')return;
+    host.dispatchEvent(new host.CustomEvent('mao-api-progress',{detail:{id,phase,transport,modelQuery,elapsedMs:Math.max(0,Date.now()-startedAt),timeoutMs:timeout}}));
+  };
+  const setPhase=value=>{if(phase!=='done'&&phase!==value){phase=value;progress();}};
+  const resultPromise=new Promise((resolve,reject)=>{
+    finish={resolve:value=>{if(!settled){settled=true;resolve(value);}},reject:error=>{if(!settled){settled=true;reject(error);}}};
+  });
+  const cancel=reason=>{
+    if(settled)return;
+    cancelReason=reason;abort.abort(reason);
     try{cancelNative?.();}catch{}
     androidRequests.delete(id);
-    finish.reject(cancelled(timeout));
+    finish.reject(stopError(reason,timeout,modelQuery));
   };
-  signal?.addEventListener('abort',cancel,{once:true});
-  const timer=setTimeout(cancel,timeout);
+  const onCancel=()=>cancel('cancelled');
+  const onFailure=error=>{
+    if(cancelReason)return finish.reject(stopError(cancelReason,timeout,modelQuery));
+    finish.reject(['API_RESPONSE_LIMIT','API_INVALID_RESPONSE'].includes(error?.code)?error:networkError(label,transport,modelQuery));
+  };
+  progress();const progressTimer=setInterval(progress,1000);
   try{
-    if(desktop&&typeof desktop.requestApi==='function'){
+    if(signal?.aborted)throw stopError('cancelled',timeout,modelQuery);
+    const payload={id,url,method:body===undefined?'GET':'POST',headers:{...headers,...(body===undefined?{}:{'Content-Type':'application/json'})},...(body===undefined?{}:{body:JSON.stringify(body)}),timeoutMs:timeout};
+    signal?.addEventListener('abort',onCancel,{once:true});
+    timer=setTimeout(()=>cancel('timeout'),timeout);
+    if(native==='desktop'){
       cancelNative=()=>desktop.cancelApi?.(id);
-      Promise.resolve().then(()=>abort.signal.aborted?{error:true}:desktop.requestApi(payload)).then(finish.resolve,()=>finish.resolve({error:true}));
-    }else if(android&&typeof android.requestApi==='function'){
+      Promise.resolve().then(()=>{
+        if(abort.signal.aborted)return {error:true,errorCode:cancelReason};
+        const request=desktop.requestApi(payload);setPhase('waiting');return request;
+      }).then(finish.resolve,onFailure);
+    }else if(native==='android'){
       installAndroidCallback(host);
       cancelNative=()=>android.cancelApi?.(id);
       androidRequests.set(id,finish.resolve);
-      try{android.requestApi(JSON.stringify(payload));}catch{finish.resolve({error:true});}
+      try{android.requestApi(JSON.stringify(payload));setPhase('waiting');}catch(error){onFailure(error);}
     }else{
       Promise.resolve().then(async()=>{
-        if(abort.signal.aborted)return {error:true};
-        const response=await fetch(url,{method:payload.method,headers:payload.headers,body:payload.body,signal:abort.signal,redirect:'error',credentials:'omit',referrerPolicy:'no-referrer'});
+        if(abort.signal.aborted)return {error:true,errorCode:cancelReason};
+        const request=relay?{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/x-ndjson'},body:JSON.stringify(payload)}:{method:payload.method,headers:payload.headers,body:payload.body};
+        const response=await fetch(relay?'/api/relay':url,{...request,signal:abort.signal,redirect:'error',credentials:relay?'same-origin':'omit',referrerPolicy:'no-referrer',cache:'no-store'});
+        setPhase('waiting');
         // Do not read HTTP error bodies or expose arbitrary server messages.
-        if(!response.ok)return {status:response.status,body:''};
-        return {status:response.status,body:await response.text()};
-      }).then(finish.resolve,()=>finish.resolve({error:true}));
+        if(!response.ok){try{await response.body?.cancel();}catch{}return {status:response.status,body:''};}
+        if(relay)return await readRelayBody(response,setPhase);
+        return {status:response.status,body:await readLimitedBody(response,()=>setPhase('receiving'))};
+      }).then(finish.resolve,onFailure);
     }
     const result=await resultPromise;
-    if(signal?.aborted||abort.signal.aborted)throw cancelled(timeout);
-    if(!result||result.error||!Number.isInteger(result.status))throw new Error('无法连接 '+label+'，请检查网络与服务地址。'+(modelQuery?'可直接填写模型名称。':'本月未推进。'));
+    if(signal?.aborted||abort.signal.aborted)throw stopError(cancelReason||'cancelled',timeout,modelQuery);
+    if(result?.error){
+      if(['timeout','cancelled'].includes(result.errorCode))throw stopError(result.errorCode,timeout,modelQuery);
+      throw networkError(label,transport,modelQuery);
+    }
+    if(!result||!Number.isInteger(result.status))throw networkError(label,transport,modelQuery);
     if(result.status<200||result.status>=300)throw httpError(result.status,label,modelQuery);
-    if(typeof result.body!=='string'||result.body.length>MAX_RESPONSE_CHARS)throw new Error('服务返回的内容过长或格式不完整，请重试。');
+    if(typeof result.body!=='string')throw responseError();
+    if(result.body.length>MAX_RESPONSE_BYTES||new TextEncoder().encode(result.body).byteLength>MAX_RESPONSE_BYTES)throw responseError(true);
     let parsed;
     try{parsed=JSON.parse(result.body);}catch{throw new Error(modelQuery?'该服务未返回有效的模型列表，请直接填写模型名称。':'服务返回的格式不完整，本月未推进，可以重试。');}
     if(!parsed||typeof parsed!=='object'||Array.isArray(parsed)||parsed.error)throw new Error(modelQuery?'该服务未返回有效的模型列表，请直接填写模型名称。':'服务没有返回可用文字，本月未推进，可以重试。');
     return parsed;
   }finally{
     clearTimeout(timer);
-    signal?.removeEventListener('abort',cancel);
+    clearInterval(progressTimer);
+    signal?.removeEventListener('abort',onCancel);
     androidRequests.delete(id);
+    setPhase('done');
   }
 }
 export function requireModel(model){

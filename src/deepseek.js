@@ -7,6 +7,7 @@ import {getModContext} from './mod-content.js';
 import {WRITING_RULES} from './narrative.js';
 import {normalizeLanguage,languageInstruction,writingRulesForLanguage} from './language.js';
 import {requestJSON} from './api-transport.js';
+import {compactNarrativePrompt} from './prompt-compact.js';
 import {specialPromptContext} from './special-lives.js';
 import {getPoliticalActors} from './personas.js';
 import {buildContinuityContext} from './continuity.js';
@@ -90,21 +91,26 @@ export function buildPrompt(s,action,lore,_major=null){
   return {system,user:JSON.stringify(payload),decision:context.decision,validationContext:{language,explicitCast,ageYears:presentAge.years,priorAgeYears:actionAge.years,name:s.profile.name,region:locality.region,occupation:target.person.occupation,month:target.month,priorMonth:s.month,specialLife,timeTravel,declarations,ageOverride:target.person.ageOverride,intimacyAllowed,canSuggestWorldUpdates,location:target.location,actionPassive:!!action.passive,continuation}};
 }
 
-async function request(path,key,body,signal){
+async function request(path,key,body,signal,timeoutMs,route){
   if(!key?.trim())throw new Error('请先在设置中填写 DeepSeek API Key。');
-  return requestJSON(`${ENDPOINT}/${path}`,{headers:{Authorization:`Bearer ${key.trim()}`},body,signal,label:'DeepSeek',modelQuery:path==='models'});
+  return requestJSON(`${ENDPOINT}/${path}`,{headers:{Authorization:`Bearer ${key.trim()}`},body,signal,label:'DeepSeek',modelQuery:path==='models',timeoutMs,route});
 }
 export async function listModels(settings,signal){
-  const response=await request('models',settings.apiKey,undefined,signal);
+  const response=await request('models',settings.apiKey,undefined,signal,15000,settings.route);
   return (response.data||[]).map(m=>m.id).filter(id=>typeof id==='string'&&/^deepseek-[a-zA-Z0-9._-]+$/.test(id));
 }
 export async function generateMonth(s,action,lore,major,settings,signal){
+  // A prose repair shares this deadline; it does not grant another full wait.
+  const deadline=Date.now()+180000;
   const model=settings.model||DEFAULT_MODEL;
   if(!/^deepseek-[a-zA-Z0-9._-]+$/.test(model))throw new Error('请使用有效的 DeepSeek 模型名称。');
-  const prompt=buildPrompt(s,action,lore,major);
+  const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major));
   const messages=[{role:'system',content:prompt.system},{role:'user',content:prompt.user}];
   for(let attempt=0;attempt<2;attempt++){
-    const response=await request('chat/completions',settings.apiKey,{model,messages,response_format:{type:'json_object'},thinking:{type:'disabled'},temperature:0.95,max_tokens:6000,stream:false},signal);
+    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+    const timeoutMs=deadline-Date.now();
+    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
+    const response=await request('chat/completions',settings.apiKey,{model,messages,response_format:{type:'json_object'},thinking:{type:'disabled'},temperature:0.95,max_tokens:6000,stream:false},signal,timeoutMs,settings.route);
     const choice=response.choices?.[0];
     if(choice?.finish_reason==='length')throw new Error('这段文字未能写完，时间仍停留在原处，请重试。');
     if(!choice?.message?.content||typeof choice.message.content!=='string')throw new Error('暂时没有收到完整文字，请重试。');

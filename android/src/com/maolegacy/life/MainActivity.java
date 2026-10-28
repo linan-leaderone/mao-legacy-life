@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -148,16 +149,18 @@ public final class MainActivity extends Activity {
                     if(destroyed||!isGamePage()||task.cancelled){apiTasks.remove(task.id,task);task.cancel();return;}
                     try{
                         task.attachDeadline(apiTimeouts.schedule(()->{
-                            if(apiTasks.remove(task.id,task)){task.cancel();apiReply(task.id,apiError());}
+                            if(apiTasks.remove(task.id,task)){task.cancel();apiReply(task.id,apiError("timeout"));}
                         },task.timeoutMs,TimeUnit.MILLISECONDS));
                         task.attachFuture(apiExecutor.submit(task));
-                    }catch(Exception error){apiTasks.remove(task.id,task);task.cancel();apiReply(task.id,apiError());}
+                    }catch(Exception error){
+                        if(apiTasks.remove(task.id,task)){task.cancel();apiReply(task.id,apiError());}
+                    }
                 });
             }catch(Exception error){apiReply(id,apiError());}
         }
         @JavascriptInterface public void cancelApi(String id) {
             if(id==null)return;
-            ApiTask task=apiTasks.remove(id);if(task!=null)task.cancel();
+            ApiTask task=apiTasks.remove(id);if(task!=null){task.cancel();apiReply(id,apiError("cancelled"));}
         }
         @JavascriptInterface public void saveText(String filename, String content) {
             if (content == null || content.length() > 10000000) return;
@@ -173,7 +176,15 @@ public final class MainActivity extends Activity {
             });
         }
     }
-    private static JSONObject apiError(){JSONObject result=new JSONObject();try{result.put("error","无法完成 API 请求，请检查网络和服务地址。");}catch(Exception ignored){}return result;}
+    private static JSONObject apiError(){return apiError("network");}
+    private static JSONObject apiError(String code){
+        JSONObject result=new JSONObject();
+        try{
+            result.put("errorCode",code);
+            result.put("error","timeout".equals(code)?"API 请求等待超时。":"cancelled".equals(code)?"API 请求已取消。":"无法完成 API 请求，请检查网络和服务地址。");
+        }catch(Exception ignored){}
+        return result;
+    }
     private void apiReply(String id,JSONObject result){
         runOnUiThread(()->{
             if(!destroyed&&!isFinishing()&&isGamePage())
@@ -208,9 +219,11 @@ public final class MainActivity extends Activity {
                 InputStream input=status>=200&&status<300?connection.getInputStream():null;
                 if(input!=null)try(InputStream stream=input){byte[] buffer=new byte[8192];int size;while((size=stream.read(buffer))!=-1){ensureActive();if(output.size()+size>2097152)throw new IllegalStateException();output.write(buffer,0,size);}}
                 result=new JSONObject();result.put("status",status);result.put("body",new String(output.toByteArray(),StandardCharsets.UTF_8));
-            }catch(Exception ignored){result=apiError();}
-            finally{finished=true;if(deadline!=null)deadline.cancel(false);if(connection!=null)connection.disconnect();apiTasks.remove(id,this);}
-            if(!cancelled)apiReply(id,result);
+            }catch(Exception error){result=apiError(error instanceof SocketTimeoutException?"timeout":cancelled?"cancelled":"network");}
+            finally{finished=true;if(deadline!=null)deadline.cancel(false);if(connection!=null)connection.disconnect();}
+            // Only the task still owning this id may reply; a deadline or cancellation
+            // already removed it and delivered its own result.
+            if(apiTasks.remove(id,this)&&!cancelled)apiReply(id,result);
         }
     }
     @Override protected void onActivityResult(int request, int result, Intent data) {
