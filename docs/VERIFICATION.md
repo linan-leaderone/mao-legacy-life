@@ -1,3 +1,17 @@
+# 1.17.1 鉴权修正、三组网页默认与弦卷心
+
+日期：2026-10-28。按用户要求，未运行游戏测试、模拟游玩、浏览器验收、设备测试或有效叙事生成请求。
+
+- 已定位旧 ShiWuYan Chat Completions 路径拒绝 `x-api-key`；同站 Messages 路径通过鉴权并在缺少 messages 时拒绝格式。只使用缺少生成输入的诊断请求、模型目录及 OPTIONS，不将此结果视为完整生成成功。诊断见 release/api-auth-v1.17.1.json。
+- ShiWuYan 固定采用 Anthropic Messages 格式；旧配置归一到同一协议。DeepSeek、Gemini 的默认密钥分别成功读取其模型目录。providerRevision 9 为旧网页识别出的空默认配置补齐一次，保留用户自填连接，后续主动清除仍保持空白。
+- pnpm build 与 pnpm build:ios 成功，91模块。PWA 标记 `db53c9792a2dd799`，2146项资源，预缓存50,118,433字节，按需地图与旗帜63,233,963字节。授权的三组默认已包含在网页编译文件中，其他私有凭据与私有文件排除检查通过。
+- 弦卷心新增像素头像和全身立绘，来源为用户提供的图二；参考图、改绘提示和资产散列记录在 docs/PIXEL-PORTRAITS-v1.17.1.json。头像用于圆形标记，全身像用于人物资料，显式出场限制保留。
+- Android 1.17.1 / code20：47,248,253字节；Windows ZIP：203,502,209字节。两包2145份网页资源与冻结dist一致，CRC、Android v2/v3签名与zipalign通过，沿用原证书；报告见 release/native-verification-v1.17.1.json。
+- 本次Android暂存目录清理被自动审批以 `blocked by policy` 拒绝，无详细原因。目录保留，未重试。
+- 网页部署见 [IOS-VERIFICATION.md](IOS-VERIFICATION.md)。公开源码继续排除全部密钥，提交包含 `[skip ci]`。实际联网叙事和游玩效果由人类验收。
+
+---
+
 # 1.17.0 默认连接与网页版预填
 
 日期：2026-10-28。按用户要求，没有游戏测试、模拟游玩、浏览器验收、设备测试或真实生成请求。

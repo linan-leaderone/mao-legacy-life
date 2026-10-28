@@ -39,7 +39,7 @@
 
 `src/personal-cast.js` 根据本人身份、背景、明确行动和已有接触确定是否允许她出现。未获明确引入时，模型上下文排除相关人物片段，并校验返回正文及新增关系；不能在普通月份自行点名。已允许出场时只发送开局身份与公开关系，不把未来 MOD 经历当作当前事实。
 
-`portraitReference` 只指向原 MOD 的 `gfx/MAOYUANXIN/xjx.png` 和 `TSU_KKR_xiao.png`；`interface/_TFR_HDQ.gfx:GFX_idea_TSU_xjx_hog` 也指向后者的优化版本。未复制、生成或直接展示这些图片。新档案有稳定的隐藏人物ID，既有头像模块会在没有改绘成品时返回缺图状态，不用普通随机像素头像替代她本人。
+1.15 时 `portraitReference` 只保存原 MOD 的 `gfx/MAOYUANXIN/xjx.png` 和 `TSU_KKR_xiao.png`，当时保持缺图。1.17.1 按用户提供的角色图新增二次元像素头像及独立全身立绘，保留金发、金眼、红白高帽、红黑金演出服。头像清单使用同一 `tsurumaki_kokoro` 身份，圆形关系头像及小游戏继续使用方形头像，人物卡使用 `standingSrc` 全身图。原 MOD 参考路径保留为出处，没有改动人物的 `explicit-only` 出场条件。生成记录见 `docs/PIXEL-PORTRAITS-v1.17.1.json`。
 
 ## 验证边界
 

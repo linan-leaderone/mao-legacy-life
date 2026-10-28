@@ -1,0 +1,38 @@
+{
+  "version": "1.17.1",
+  "identity": "tsurumaki_kokoro",
+  "tool": "Built-in image_gen (no fallback CLI)",
+  "source": "User-provided codex-clipboard-0370b3db-58dc-407d-b0c6-a4c3a711ab9a.png, 2026-10-28",
+  "sourceCopy": "public/portraits/tsurumaki-kokoro-reference.png",
+  "styleReference": "public/portraits/pixel-hazawa-tsugumi.webp",
+  "method": "User reference redrawn as separate square anime pixel-art avatar and full-body portrait. Character appearance policy remains explicit-only.",
+  "prompts": {
+    "avatar": "Use case: style-transfer. Asset type: square anime pixel-art game avatar for the hidden fictional character Kokoro Tsurumaki / 弦卷心. Input image 1 is the identity and costume reference; input image 2 is only the pixel-art finish reference and must NOT transfer her brown hair or clothing. Re-draw image 1 as one centered head-and-shoulders portrait. Preserve very long pale-golden blonde hair with side-swept bangs, bright golden-yellow eyes, joyous open smile, red-and-white tall cylindrical marching-band hat with golden band and black brim, and red/black/gold stage uniform with small black collar. She is a youthful anime schoolgirl; preserve her age and cheerful nonsexual appearance. The entire hat, hair silhouette and shoulders fit inside a square with 8 percent transparent margin; large clear face, suitable for a circular avatar crop. Authentic anime pixel-art technique matching image 2: crisp stepped outlines, compact palettes and small cel-shade clusters, no smooth painting, no blur. Transparent background. Do not reproduce any background typography, logos or watermark from image 1. Single character only. No text or border. Target 512 by 512 pixels if possible.",
+    "standing": "Use case: style-transfer. Asset type: full-body standing character illustration in an anime pixel-art life-simulation game. Image 1 is the identity, costume and pose reference for Kokoro Tsurumaki / 弦卷心. Image 2 is the matching generated avatar and is only a face/color/pixel-art reference. Create ONE full-body character with her whole hat, both hands, flowing hair and BOTH boots fully visible, with generous empty transparent margin on EVERY side. Frame from the top of the tall hat to the soles of the boots, use a vertical canvas. Preserve long golden-blonde hair, golden eyes, joyous open smile, red-and-white tall cylindrical hat with gold band and black brim, red and black gold-trimmed marching-band jacket, white ruffled skirt with black edge, and red black gold tall boots. Her costume must exactly follow image 1, cheerful modest stage outfit, same youthful nonsexual appearance. Similar energetic pose: one arm raised diagonally and the other hand near the hat, fully visible fingers. Crisp authentic anime pixel-art style with stair-step edges and small cel-shading clusters, matching image 2; no painterly blur, no realism, no extra props or people. Background fully transparent, no typography, no lettering, no watermark, no frame or floor. Do not copy any background writing from image 1. Target 512 by 768 pixels if possible; absolutely no cut-off body parts.",
+    "standingBackground": "Use case: background-extraction. Edit the supplied full-body pixel-art character image. Keep the character exactly the same: blonde hair, golden eyes, smiling face, red-white tall hat, full costume, red boots, pose, proportions and all body parts. Remove ALL blurred colored glow, ALL background haze, ALL floor or shadows and ALL dark background around and between the arms, hair strands and legs. Replace everything outside the actual opaque character silhouette with genuinely fully transparent pixels. No translucent mist, no soft halo, no checkerboard graphic. Character colors and details must stay opaque and sharply edged, original pixel-art finish. Do not crop; preserve entire hat, hands and boots in the canvas. The result must be a clean transparent game sprite of only this one character, no scene or text."
+  },
+  "postprocessing": "Lossless WebP encoding only. No crop, resize, programmatic illustration or identity changes. The encoder may discard RGB values of fully transparent pixels; every nonzero-alpha pixel and every alpha value were compared with the generated image and retained.",
+  "assets": [
+    {
+      "path": "public/portraits/pixel-tsurumaki-kokoro.webp",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "bytes": 1345588,
+      "sha256": "eb34f9058031554daaa680c100fedfe2bf6ac08ed3b2652199c850de80a84ed9",
+      "usage": "src: circular portraits and minigame markers"
+    },
+    {
+      "path": "public/portraits/pixel-tsurumaki-kokoro-standing.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "bytes": 798768,
+      "sha256": "04f3c7ad6c33a280dc8fce8a78881d8c0d208fb2bdcf4c131cc36311134382a8",
+      "usage": "standingSrc: full-body portrait card"
+    }
+  ],
+  "verification": "Visual inspection of generated image and final full-body WebP; file dimensions, alpha range and lossless encoding comparison only. No game tests, simulated months, browser gameplay or narrative-model calls."
+}

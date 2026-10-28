@@ -44,7 +44,7 @@ export function getPortrait(value = {}) {
     return {...base, src: './characters/deng-blobfish-pixel.webp', kind: 'special', sourceStatus: 'user-reference', body: life.body, artworkStyle:'anime-pixel', style:'image-rendering:pixelated;'};
   }
   if (custom) return {...base, src: custom.src, kind: 'custom', sourceStatus: 'user-upload', updatedAt: custom.updatedAt};
-  if (known?.src) return {...base, src: known.src, kind: 'character', sourceStatus: known.sourceType, reference: known.reference, portraitAge: known.portraitAge ?? null, artworkStyle:known.artworkStyle || '', style:known.artworkStyle === 'anime-pixel' ? 'image-rendering:pixelated;' : ''};
+  if (known?.src) return {...base, src: known.src, ...(known.standingSrc ? {standingSrc:known.standingSrc} : {}), kind: 'character', sourceStatus: known.sourceType, reference: known.reference, portraitAge: known.portraitAge ?? null, artworkStyle:known.artworkStyle || '', style:known.artworkStyle === 'anime-pixel' ? 'image-rendering:pixelated;' : ''};
   const hidden = !!(profile.lockedPersonaId || profile.persona?.id || profile.qid || profile.id || known);
   if (hidden) return {...base, src: null, kind: 'missing', sourceStatus: 'pending-reference'};
   const sex = profile.identity?.sex;

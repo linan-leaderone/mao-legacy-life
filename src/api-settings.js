@@ -46,13 +46,27 @@ function profile(provider,source={},defaults={}){
   const explicitEndpoint=has(source,'baseUrl')||has(source,'baseURL');
   // A stored pre-v5 Gemini key belongs to Google. Never silently forward it to a new host.
   const legacyGoogle=provider==='gemini'&&!explicitEndpoint&&Boolean(text(source.apiKey));
-  const entry={apiKey:has(source,'apiKey')?text(source.apiKey):text(defaults.apiKey),model:has(source,'model')?text(source.model):legacyGoogle?'gemini-3.5-flash':text(defaults.model)||DEFAULT_MODELS[provider]};
+  // A user-entered Gemini host must never receive a bundled relay credential.
+  const bundledHost=provider!=='gemini'||!explicitEndpoint||text(source.baseUrl??source.baseURL).replace(/\/+$/,'')===(text(defaults.baseUrl)||GEMINI_RELAY_URL).replace(/\/+$/,'');
+  const bundledConnection=!['deepseek','gemini'].includes(provider)||isOldBlankDefault(provider,source,defaults);
+  const entry={apiKey:has(source,'apiKey')?text(source.apiKey):bundledHost&&bundledConnection?text(defaults.apiKey):'',model:has(source,'model')?text(source.model):legacyGoogle?'gemini-3.5-flash':text(defaults.model)||DEFAULT_MODELS[provider]};
   if(provider==='gemini')Object.assign(entry,{baseUrl:legacyGoogle?GEMINI_OFFICIAL_URL:explicitEndpoint?text(source.baseUrl??source.baseURL):text(defaults.baseUrl)||GEMINI_RELAY_URL,protocol:legacyGoogle?'gemini':['gemini','openai'].includes(source.protocol)?source.protocol:['gemini','openai'].includes(defaults.protocol)?defaults.protocol:'gemini'});
-  if(provider==='shiwuyan')Object.assign(entry,{baseUrl:SHIWUYAN_URL,protocol:'openai'});
+  if(provider==='shiwuyan')Object.assign(entry,{baseUrl:SHIWUYAN_URL,protocol:'anthropic'});
   if(provider==='custom')Object.assign(entry,{baseUrl:text(source.baseUrl??source.baseURL??defaults.baseUrl),protocol:isProtocol(source.protocol)?source.protocol:isProtocol(defaults.protocol)?defaults.protocol:'openai'});
   return entry;
 }
-/** Keep credentials isolated by provider. Empty saved keys intentionally override defaults. */
+function isOldBlankDefault(provider,source={},defaults={}){
+  if(!source||typeof source!=='object'||text(source.apiKey))return false;
+  const model=text(source.model);
+  const knownModels=provider==='deepseek'?[DEFAULT_MODELS.deepseek,'deepseek-chat']:[DEFAULT_MODELS.gemini,'gemini-3.5-flash'];
+  if(model&&!knownModels.includes(model)&&model!==text(defaults.model))return false;
+  const endpoint=text(source.baseUrl??source.baseURL).replace(/\/+$/,'');
+  if(provider==='deepseek')return (!endpoint||['https://api.deepseek.com','https://api.deepseek.com/v1'].includes(endpoint))&&(!source.protocol||source.protocol==='openai');
+  // Only factory Gemini endpoints may be repaired together with their blank key.
+  // A custom host, path, protocol or model remains the user's own connection.
+  return (!endpoint||[GEMINI_RELAY_URL,GEMINI_OFFICIAL_URL].includes(endpoint))&&(!source.protocol||source.protocol==='gemini');
+}
+/** Keep credentials isolated by provider; revision 9 preserves subsequent explicit clears. */
 export function normalizeSettings(saved={},defaults={}){
   if(!saved||typeof saved!=='object'||Array.isArray(saved))saved={};
   if(!defaults||typeof defaults!=='object')defaults={};
@@ -62,16 +76,18 @@ export function normalizeSettings(saved={},defaults={}){
   if(!saved.providers&&['apiKey','model','baseUrl','baseURL'].some(k=>has(saved,k))){
     providers[provider]=profile(provider,saved,defaults[provider]);
   }
+  // Older web releases persisted empty factory profiles. The owner requested all
+  // three web defaults; fill those recognized blank connections once, without
+  // changing the selected service or touching visitor-supplied credentials.
+  if(Number(saved.providerRevision||0)<9){
+    for(const id of ['deepseek','gemini']){
+      const source=saved.providers?.[id]??(!saved.providers&&provider===id?saved:null);
+      if(text(defaults[id]?.apiKey)&&isOldBlankDefault(id,source,defaults[id]))providers[id]=profile(id,{},defaults[id]);
+    }
+  }
   const fresh=!saved.providers&&!isProvider(saved.provider)&&!isProvider(saved.mode)&&!['apiKey','model','baseUrl','baseURL'].some(k=>has(saved,k));
-  const webDefaults=!text(defaults.deepseek?.apiKey)&&!text(defaults.gemini?.apiKey);
-  // Before revision 8, the web build stored blank profiles even on a first visit.
-  // Upgrade that unavailable default once; explicit clears in this version stay empty.
-  const selected=providers[provider];
-  const defaultEndpoint=provider==='deepseek'||provider==='gemini'&&[GEMINI_RELAY_URL,GEMINI_OFFICIAL_URL].includes(selected.baseUrl?.replace(/\/+$/,''));
-  const defaultModel=!selected.model||[DEFAULT_MODELS[provider],'deepseek-chat','gemini-3.5-flash'].includes(selected.model);
-  const oldBlankWeb=webDefaults&&Number(saved.providerRevision||0)<8&&['deepseek','gemini'].includes(provider)&&!selected.apiKey&&defaultEndpoint&&defaultModel;
-  if(text(defaults.shiwuyan?.apiKey)&&saved.mode!=='offline'&&(fresh||oldBlankWeb))provider='shiwuyan';
-  return {provider,mode:saved.mode==='offline'?'offline':'online',providers,providerRevision:8};
+  if(text(defaults.shiwuyan?.apiKey)&&saved.mode!=='offline'&&fresh)provider='shiwuyan';
+  return {provider,mode:saved.mode==='offline'?'offline':'online',providers,providerRevision:9};
 }
 /** An explicit UI action can replace a preserved legacy connection with today's default. */
 export function resetProviderConnection(settings,provider,defaults={}){

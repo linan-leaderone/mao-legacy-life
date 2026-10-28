@@ -1,10 +1,10 @@
-# API 连接（1.17.0）
+# API 连接（1.17.1）
 
-进入首页即可在 ShiWuYan、DeepSeek、Gemini、自定义 API 中选择。四份密钥、模型和服务地址独立保存，切换服务不会把另一份密钥送给当前服务。设置保存在本机，人生存档及其导出文件不包含连接设置。个人 Windows/Android 构建从 `.private/settings.json` 注入用户指定的默认密钥，公开 iPhone 网页按作者本次明确授权内置新的ShiWuYan共享默认，其他默认密钥仍为空；公开GitHub源码不带任何密钥。本文不记录任何密钥、订单号或兑换码。
+进入首页即可在 ShiWuYan、DeepSeek、Gemini、自定义 API 中选择。四份密钥、模型和服务地址独立保存，切换服务不会把另一份密钥送给当前服务。设置保存在本机，人生存档及其导出文件不包含连接设置。个人 Windows/Android 构建从 `.private/settings.json` 注入用户指定的默认密钥，公开 iPhone 网页按作者最新授权内置DeepSeek、Gemini、ShiWuYan三组共享默认；公开GitHub源码不带任何密钥。本文不记录任何密钥、订单号或兑换码。
 
 | 选择 | 默认模型 / 协议 | 接口 |
 | --- | --- | --- |
-| ShiWuYan | `grok-4.7` / OpenAI兼容 | 固定 `https://aiapi.shiwuyan.cn/v1`，使用 `x-api-key` |
+| ShiWuYan | `grok-4.7` / Anthropic Messages兼容 | 固定 `https://aiapi.shiwuyan.cn/v1/messages`，使用 `x-api-key` 与 `anthropic-version` |
 | DeepSeek | `deepseek-flash` | 固定 `https://api.deepseek.com`，Chat Completions |
 | Gemini | `gemini-4-argon` | 默认 `https://aiapi.shiwuyan.cn/v1beta`，Gemini Generate Content；可编辑地址并选择 Gemini 原生或 OpenAI 兼容 |
 | 自定义 API | 手动填写模型；OpenAI 兼容、Gemini 原生或 Anthropic Messages | 用户填写 HTTPS 服务地址；本机服务支持 loopback HTTP |
@@ -17,7 +17,7 @@
 
 `providerRevision: 5` 为 Gemini 增加 `baseUrl` 与 `protocol`。新安装默认使用用户指定的转发站。旧存储只有 Gemini 密钥、没有地址时，仍使用 Google 官方地址和原有模型：不能把一个可能由用户自行填写的 Google 密钥自动发送给第三方。原有显式空密钥、模型和自定义地址均保留。
 
-首页或设置中的“使用默认连接”是显式更换当前服务配置的入口。它只替换选中的服务，保留其他服务和不联网偏好；个人包采用新的本地默认密钥，公开网页ShiWuYan恢复授权的共享默认，其他服务不带默认密钥。使用转发站时默认模型须为该账户列表中实际授权的名称，不能凭其他供应商目录猜测。
+首页或设置中的“使用默认连接”是显式更换当前服务配置的入口。它只替换选中的服务，保留其他服务和不联网偏好；个人包采用新的本地默认密钥，公开网页三项内置服务均恢复各自授权的共享默认。使用转发站时默认模型须为该账户列表中实际授权的名称，不能凭其他供应商目录猜测。
 
 ## 叙事与错误处理
 
@@ -84,3 +84,9 @@ Windows 原生桥使用 Electron 的 Chromium 网络栈，采用系统代理配�
 新密钥的GET /v1/models实际返回HTTP200，仅列出grok-4.7。它作为独立ShiWuYan入口加入，未替换原Gemini密钥或模型。网页不再清空这项授权默认，新访问者默认选中；旧空连接一次迁移到新默认，自填连接保留。主动清除后的空值继续保留，可用“使用默认连接”恢复。
 
 OPTIONS预检返回204，允许来源及请求头为通配。Authorization是CORS非通配头，因此此provider限定使用x-api-key；该头GET /v1/models确认200与grok-4.7列表，响应允许来源为通配。没有进行生成调用、浏览器游玩或游戏测试，完整叙事效果待人类验证。以前章节中的网页空默认策略是历史版本记录。
+
+## 1.17.1鉴权更正（2026-10-28）
+
+上一版由GET /v1/models成功推断Chat Completions也接受x-api-key，判断不成立。无剧情空请求确认：该生成路径的x-api-key返回401；Bearer通过鉴权。由于此站CORS通配不允许Authorization，ShiWuYan改用同站/v1/messages，发送x-api-key与anthropic-version:2023-06-01。使用新密钥与grok-4.7、故意缺少messages的格式探测返回field messages is required，确认请求通过鉴权与模型权限阶段；预检204与错误响应都允许公开站点跨域。没有发送有效生成输入或推进游戏。
+
+原DeepSeek和Gemini默认密钥只读模型列表均为200，分别有deepseek-flash/deepseek-v4-pro与gemini-4-argon。网页三组默认按本次授权一起预填，旧空配置一次迁移，用户自填连接保留。上文1.17中的OpenAI+x-api-key实现属于已修正的历史记录。

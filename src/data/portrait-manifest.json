@@ -1,6 +1,25 @@
 {
-  "version": 2,
+  "version": 3,
   "people": {
+    "tsurumaki_kokoro": {
+      "name": "弦卷心",
+      "aliases": [
+        "弦卷 心",
+        "弦巻心",
+        "弦巻こころ",
+        "弦巻 こころ",
+        "つるまきこころ",
+        "Tsurumaki Kokoro",
+        "Kokoro Tsurumaki"
+      ],
+      "src": "./portraits/pixel-tsurumaki-kokoro.webp",
+      "standingSrc": "./portraits/pixel-tsurumaki-kokoro-standing.webp",
+      "sourceType": "user-reference",
+      "reference": "用户于2026-10-28提供的弦卷心角色图",
+      "portraitAge": 16,
+      "originalSrc": "./portraits/tsurumaki-kokoro-reference.png",
+      "artworkStyle": "anime-pixel"
+    },
     "hazawa_tsugumi": {
       "name": "羽泽鸫",
       "aliases": [

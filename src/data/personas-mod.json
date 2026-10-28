@@ -438,7 +438,7 @@
         "官方设定确认富裕家庭独生女；富可敌国的家族规模采用用户指定的模组适配。个人可调动资金不等同家族总资产。",
         "具体出生城市、亲属姓名和精确家庭资产未详，不编造这些字段。",
         "米歇尔是奥泽美咲的舞台身份，不新增一个独立的现实亲属或乐队成员；心在原作对应阶段对两者身份的理解有限。",
-        "立绘保留缺图状态；MOD参考素材仅留作出处，不自动替代已改绘的二次元像素头像。"
+          "头像与立绘按用户提供的本人角色图改绘，保留金发、金眼、红白高帽和红黑金演出服；MOD参考素材继续保留为出处。"
       ],
       "modLore": {
         "scope": "source-metadata-only",
@@ -476,7 +476,10 @@
         "characterKey": "TSU_xjx",
         "path": "gfx/MAOYUANXIN/xjx.png",
         "alternatePath": "gfx/MAOYUANXIN/TSU_KKR_xiao.png",
-        "displayPolicy": "pending-pixel-redraw"
+          "displayPolicy": "user-reference-pixel-redraw",
+          "userReference": "./portraits/tsurumaki-kokoro-reference.png",
+          "avatar": "./portraits/pixel-tsurumaki-kokoro.webp",
+          "standing": "./portraits/pixel-tsurumaki-kokoro-standing.webp"
       },
       "sourceRefs": [
         {"file": "common/characters/TFR_MAO.txt", "key": "TSU_xjx"},

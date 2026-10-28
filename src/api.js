@@ -12,9 +12,13 @@ function customConnection(connection){
 const serviceLabel=connection=>connection.provider==='gemini'?'Gemini 转发服务':connection.provider==='shiwuyan'?'ShiWuYan 转发服务':'自定义服务';
 function headersFor(connection){
   const key=connection.apiKey?.trim();
-  // This fixed relay supports x-api-key in browser CORS requests. Authorization
-  // is not covered by its wildcard preflight allow-list.
-  if(connection.provider==='shiwuyan'){requireKey(key,'ShiWuYan 转发服务');return {'x-api-key':key};}
+  // The relay only accepts x-api-key for Messages, not Chat Completions.
+  // Its /models endpoint accepts both, so a model listing cannot select auth.
+  if(connection.provider==='shiwuyan'){
+    requireKey(key,'ShiWuYan 转发服务');
+    if(connection.protocol!=='anthropic')throw new Error('ShiWuYan 连接需要使用 Messages 兼容接口，请恢复默认连接。');
+    return {'x-api-key':key,'anthropic-version':'2023-06-01'};
+  }
   if(connection.provider==='gemini')requireKey(key,'Gemini 转发服务');
   // Local services such as Ollama may intentionally have no API key.
   if(connection.protocol==='openai')return key?{Authorization:'Bearer '+key}:{};
