@@ -107,3 +107,6 @@ html.ios-device #toast{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
 }
 
 .portrait-missing .portrait-frame{height:175px}.right-column>.portrait-card{margin-bottom:0}
+.provider-choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+.api-fixed-connection{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:15px 0 0;color:#81906f;font-size:11px;line-height:1.8;overflow-wrap:anywhere}
+.api-fixed-connection>span:nth-child(2){min-width:0}

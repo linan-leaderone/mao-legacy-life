@@ -1,11 +1,11 @@
 # 项目事实
 
 - 本目录是独立游戏，不修改相邻 `TFR-xinzuo-rebuild`。MOD 剧情来源见 `docs/LORE-SOURCES.md`，配图来源见 `docs/ART-SOURCES.md`。
-- 当前源码版本1.15.0，`timelineVersion: 5`、`providerRevision: 7`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
+- 当前源码版本1.17.0，`timelineVersion: 5`、`providerRevision: 8`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
 - 用户只有iPhone，iOS交付采用Safari“添加到主屏幕”的PWA（iOS/iPadOS 15.4+），不是原生IPA或TestFlight。`pnpm build:ios`单独输出`dist-ios`，不改变既有Windows/Android产物。`src/ios-install.js`只在`__IOS_PWA__`构建启用；`src/file-export.js`在iPhone使用支持JSON文件的系统分享面板，否则回退下载，原生导出优先级保留。核心离线缓存成功才显示就绪，地方地图按查看范围加载并校验缓存，首次查看未缓存地区需要联网，更新不强制刷新当前人生。
-- iOS发布副本为相邻`mao-legacy-life-ios-site`，Site身份在其`.openai/hosting.json`，必须沿用。这个目录只同步已经移除默认密钥的`dist-ios`内容，不能复制整个游戏目录、`.private`、原始查询缓存或完整MOD审计索引。iOS网页禁止内置个人默认密钥，手机自行填写并保存在当地浏览器/主屏幕存储中。用户于2026-10-24明确要求免注册登录分享，Site已设为public；后续更新保留公开访问，使用普通保存/部署流程，不得调用会要求owner-only的私有部署操作。发布方式和验证边界见`docs/IOS.md`。
-- 每次启动先显示首页 API 卡，包括有存档时；支持 DeepSeek、Gemini、自定义 API 三选一，以及不联网、继续、新人生和读取。品牌入口返回首页，切换连接不丢失进度，请求进行中不得切换。首页和设置共用连接表单，编辑自动保存，开始和继续前提交当前表单；测试连接必须使用当前草稿，迟到结果不能覆盖已修改配置。
-- `src/api-settings.js` 使用 `providers.deepseek/gemini/custom` 分别保存密钥与模型，不能跨服务串用。DeepSeek默认`deepseek-flash`；Gemini新默认为用户指定转发站`https://aiapi.shiwuyan.cn/v1beta`、Gemini原生协议与`gemini-4-argon`，也允许配置OpenAI兼容协议。只有最早版本随包的原默认Google密钥按固定指纹识别并在升级时替换整个Gemini连接（私有包使用新默认，公共包清空旧密钥）；用户自填Google密钥或自定义地址保留，不能把用户旧密钥自动发给新主机。旧flat配置迁移到对应服务，保留不联网和显式空密钥；空值不能被默认值覆盖。自定义支持OpenAI兼容、Gemini原生、Anthropic Messages，可手填模型、允许匿名本机服务，测试模型列表可暂不填模型。
+- iOS发布副本为相邻`mao-legacy-life-ios-site`，Site身份在其`.openai/hosting.json`，必须沿用。这个目录只同步按当前凭据发布策略构建的`dist-ios`内容，不能复制整个游戏目录、`.private`、原始查询缓存或完整MOD审计索引。2026-10-28用户明确要求网页版补齐默认API，当前网页仅注入新ShiWuYan共享默认密钥；其他旧默认仍只用于原生包。公开GitHub源码继续排除全部密钥。用户于2026-10-24明确要求免注册登录分享，Site已设为public；后续更新保留公开访问，使用普通保存/部署流程，不得调用会要求owner-only的私有部署操作。发布方式和验证边界见`docs/IOS.md`。
+- 每次启动先显示首页 API 卡，包括有存档时；支持 ShiWuYan、DeepSeek、Gemini、自定义 API 四选一，以及不联网、继续、新人生和读取。品牌入口返回首页，切换连接不丢失进度，请求进行中不得切换。首页和设置共用连接表单，编辑自动保存，开始和继续前提交当前表单；测试连接必须使用当前草稿，迟到结果不能覆盖已修改配置。
+- `src/api-settings.js` 使用 `providers.shiwuyan/deepseek/gemini/custom` 分别保存密钥与模型，不能跨服务串用。DeepSeek默认`deepseek-flash`；Gemini新默认为用户指定转发站`https://aiapi.shiwuyan.cn/v1beta`、Gemini原生协议与`gemini-4-argon`，也允许配置OpenAI兼容协议。只有最早版本随包的原默认Google密钥按固定指纹识别并在升级时替换整个Gemini连接（私有包使用新默认，公共包清空旧密钥）；用户自填Google密钥或自定义地址保留，不能把用户旧密钥自动发给新主机。旧flat配置迁移到对应服务，保留不联网和显式空密钥；空值不能被默认值覆盖。自定义支持OpenAI兼容、Gemini原生、Anthropic Messages，可手填模型、允许匿名本机服务，测试模型列表可暂不填模型。
 - `src/api-transport.js` 优先使用 Windows `desktopBridge.requestApi` 或 Android `NativeBridge.requestApi`，通过原生 HTTP 请求避免 WebView CORS 限制；普通浏览器使用 fetch。只允许 HTTPS 或 loopback HTTP，禁止重定向；取消、超时与迟到响应规则在各端保持一致。原生请求失败不能偷偷再发浏览器请求。协议、模型查询和桥接契约见 `docs/API-PROVIDERS.md`。
 - 初始20点分配到智力、家境、体力、颜值，每项0–10；影响力根据背景、身份、家境与年龄推导。现有动态数值另含道德、淫乱值和魅力，意识形态偏好保存在`person.ideology`。未成年人或未成年特殊身体的淫乱值为0；只有明确成年的人形身体可涉及自愿、非露骨的成人关系，数值不代表他人同意。`statChanges`展示各项实际净变化与原因，`monthlyLedger`记录劳动收入和开支；就业收入逐月结算，辞职停止工资。模型`actionDelta`不直接结算。
 - 每四个月为一组，按种子随机安排1–2个抉择月，提供3–5项选择；其余月份使用57条个人事件各自的 `diary` 或当前职业生活记述。所有月份都保留“下个月”和手动安排。新闻与宏观事件独立呈现，同月可有多条，查看不消耗行动；图片画框统一16:9，影响只在首次进入月份时应用。
@@ -23,8 +23,8 @@
 - 新闻 `exposure` 分为 direct、indirect、remote、none。远方报道不自动在本地造成灾害、封控、拘押或收入损失；大陆政治和办事机构不套到台日港澳韩。地区环境只应用已经发生的制度变化。
 - 面向人物的正文、选项与新闻必须沉浸式，不插入开发者、玩家、本局、触发节点、路线锁定、属性加成等局外说明。来源、适配说明和隐藏分支仅保留在数据元信息与文档，不能拼入叙事或提前透露终局。
 - `src/narrative.js` 管理简洁文风与可识别错龄校验；各叙事服务最多自动重写一次，不在重写时推进月份或重算行动。格式错误、再次不合格或网络失败交由界面重试或本地叙事。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
-- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.16.0；Android versionCode 18；Windows目录`release/MaoLegacyLife-1.16.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
-- 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，默认选择DeepSeek。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA一律空默认密钥。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
+- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.17.0；Android versionCode 19；Windows目录`release/MaoLegacyLife-1.17.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
+- 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，全新配置默认选择ShiWuYan（本次模型目录为grok-4.7）。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA仅注入用户本次明确授权的ShiWuYan共享默认，不能同时暴露旧DeepSeek/Gemini默认。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
 - 修改核心行为后运行相应测试并完成 `pnpm test`；构建用 `pnpm build`，原生包需重新封装后才能交付。实际验证边界与最终测试结果在 `docs/VERIFICATION.md`，不得把源码更新直接写成已交付新包。
 
 - 1.7新增 `src/continuity.js`，本地与联网叙事均承接上一行动、具体收支、伤势与未完成事项，主页面合并行动后果与本月生活，不再使用独立“上月回响”框。提示禁止把零捕获写成进化，或把零差错工作写成失误；联网错误仍最多修订一次。
@@ -54,3 +54,5 @@
 - 1.15 economy 保存本人已完成收支，短期就业按经历次数到期，长期就业才继续发薪；旧档按原始行动迁移，不补算历史余额。personal-health 保存诊断、待检、照护与知情联系人，正文继续承接身体变化，未告知亲友不自动知道。political-actors 约束活动的实际职权；PAL适配社会民主主义并保留原思想来源。personal-cast 限制弦卷心只在本人选择或主动引入后出现，不把MOD未来经历当作开局事实。
 
 - 1.16 继续遵守用户不进行游戏测试的指令，只静态审查、编译封装和发布，GitHub使用`[skip ci]`。war-dynamics在nextContext副本按月推进持久战役，写territoryOverrides来源war_dynamics，地图和生活共用；advance提交，读取只验证与停战对齐不推进。显式玩家接管、停火及自然终局优先；地理邻接是现有中心/包围范围的抽象模拟。life-rhythm记录近期题材、短期待办与办结事项，本月新事件传入模型；被动过月不由稳定职业/病情/旧项目永久覆盖。详见docs/RELEASE-v1.16.md。
+
+- 1.17 新增ShiWuYan独立连接，固定OpenAI兼容地址https://aiapi.shiwuyan.cn/v1、模型grok-4.7，网页与原生新开局均可使用默认。网页旧版本空的DeepSeek/Gemini选择可一次迁至新默认，其他自填配置与不联网偏好保留；revision8之后显式清空继续保留。此站采用x-api-key鉴权，元数据查询成功；Authorization不受该站CORS通配允许，不能在浏览器回退发送Bearer。用户授权的共享密钥只注入发行产物，公开源码仍完整脱敏。构建与元数据查询不代替真实模型或游戏测试。

@@ -19,7 +19,7 @@ assert flag_bytes < 5_000_000, "Flag artwork and its manifest exceed the indepen
 private_settings = root / ".private/settings.json"
 settings = json.loads(private_settings.read_text(encoding="utf-8-sig")) if private_settings.exists() else {}
 included_providers = []
-for provider in ["deepseek", "gemini"]:
+for provider in ["deepseek", "gemini", "shiwuyan"]:
     key = settings.get("providers", {}).get(provider, {}).get("apiKey", "").encode()
     if key:
         assert any(key in data for name, data in assets.items() if name.endswith(".js")), f"Default credential missing: {provider}"

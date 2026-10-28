@@ -1,10 +1,10 @@
 # 毛的遗产 · 人生档案
 
-2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.16.0**。
+2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.17.0**。
 
-本版更新：[月度战线推进与生活事件变化](docs/RELEASE-v1.16.md)。本轮按用户要求不运行游戏测试，编译和封装记录见 [验证记录](docs/VERIFICATION.md)。
+本版更新：[新增默认连接与网页版预填](docs/RELEASE-v1.17.md)。本轮按用户要求不运行游戏测试，编译和封装记录见 [验证记录](docs/VERIFICATION.md)。
 
-[直接游玩](https://mao-legacy-life-iphone.linanna.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.16.md)
+[直接游玩](https://mao-legacy-life-iphone.linanna.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.17.md)
 
 ## 从源码运行
 
@@ -21,13 +21,13 @@ pnpm dev
 
 ## 开始与保存
 
-- **iPhone / iPad（iOS 15.4+）**：在Safari打开[主屏幕安装版](https://mao-legacy-life-iphone.linanna.chatgpt.site)，无需注册或登录，可直接分享链接；从分享菜单“添加到主屏幕”即可安装。安装后从主屏幕首次联网打开、等待“离线内容已就绪”，再设置API并开始人生；地方地图首次查看需要联网，已查看区域会缓存。交付形式为PWA；完整说明见 [iPhone安装说明](docs/IOS.md)。
+- **iPhone / iPad（iOS 15.4+）**：在Safari打开[主屏幕安装版](https://mao-legacy-life-iphone.linanna.chatgpt.site)，无需注册或登录，可直接分享链接；从分享菜单“添加到主屏幕”即可安装。安装后从主屏幕首次联网打开、等待“离线内容已就绪”，使用默认连接或自行设置API后开始人生；地方地图首次查看需要联网，已查看区域会缓存。交付形式为PWA；完整说明见 [iPhone安装说明](docs/IOS.md)。
 - **Windows 10/11 x64**：构建产物为 `release/MaoLegacyLife-Windows-x64.zip`。完整解压后运行其中的 `MaoLegacyLife.exe`，保留其他文件。
 - **安卓 8.0 及以上**：构建产物为 `release/MaoLegacyLife-Android.apk`，由 Android System WebView 承载同一界面。
-- 每次打开先进入首页，即使已有档案也可先选 **DeepSeek、Gemini 或自定义 API**，再继续人生、新建或读取。点击左上角品牌可返回首页；切换服务不改动进度，月度请求进行时暂时不能切换。
-- 默认选择 **DeepSeek**，模型为 `deepseek-flash`；Gemini 默认模型为 `gemini-4-argon`。每项服务分别保存密钥与模型，输入后自动保存。支持测试连接、手填模型、导入连接配置和“不联网”；自定义服务可选 **OpenAI 兼容、Gemini 原生、Anthropic Messages** 三种协议。
-- 连接配置使用 `providerRevision: 7` 和独立的 `providers` 对象。旧版单份配置迁移到对应服务，保留不联网偏好；清除密钥后会保留空值，重启不会重新填入默认密钥。Windows、Android 通过原生 HTTP 桥请求接口，避免 WebView 的跨域限制；普通浏览器仍受服务端 CORS 设置约束。连接细节见 `docs/API-PROVIDERS.md`。
-- 作者本机的个人Windows、Android构建可按授权预填DeepSeek、Gemini密钥，由构建时的 `.private/settings.json` 注入；本公开仓库不含此配置，下载源码构建时默认密钥为空；私有配置文件本身与签名私钥不打包。iPhone网页不含个人默认密钥，需在手机填写。人生存档不包含密钥，界面可分别替换或清除。叙事请求失败或取消时仍停留在原月，可重试或使用一次本地叙事。
+- 每次打开先进入首页，即使已有档案也可先选 **ShiWuYan、DeepSeek、Gemini 或自定义 API**，再继续人生、新建或读取。点击左上角品牌可返回首页；切换服务不改动进度，月度请求进行时暂时不能切换。
+- 发行版的新配置默认选择 **ShiWuYan**，模型为 `grok-4.7`；DeepSeek 保持 `deepseek-flash`，Gemini 保持 `gemini-4-argon`。每项服务分别保存密钥与模型，输入后自动保存。支持测试连接、手填模型、导入连接配置和“不联网”；自定义服务可选 **OpenAI 兼容、Gemini 原生、Anthropic Messages** 三种协议。
+- 连接配置使用 `providerRevision: 8` 和独立的 `providers` 对象。旧版单份配置迁移到对应服务，保留不联网偏好；清除密钥后会保留空值，重启不会重新填入默认密钥。Windows、Android 通过原生 HTTP 桥请求接口，避免 WebView 的跨域限制；普通浏览器仍受服务端 CORS 设置约束。连接细节见 `docs/API-PROVIDERS.md`。
+- 作者本机的个人Windows、Android构建可按授权预填DeepSeek、Gemini密钥，由构建时的 `.private/settings.json` 注入；本公开仓库不含此配置，下载源码构建时默认密钥为空；私有配置文件本身与签名私钥不打包。网页版按作者授权内置新ShiWuYan共享默认连接，无需手填；旧DeepSeek/Gemini默认密钥仍排除。这个共享连接的使用次数共用。人生存档不包含密钥，界面可分别替换或清除。叙事请求失败或取消时仍停留在原月，可重试或使用一次本地叙事。
 - 进行中可通过“保存”“读取”使用 **三个可命名的保存位置**，也可导入、导出 JSON 文件。自动保存独立存在；读取另一份档案或开始新人生前保留上一份备份。Windows、安卓与iPhone共用存档格式。旧版存档保留既有人生历史，当前页按新版改为个人生活与独立新闻。Safari与主屏幕App的数据可能分开保存，应先安装再游玩，已有进度通过JSON转移。
 
 上述路径是打包脚本的输出位置；实际包版本与验证记录见 `docs/BUILD.md`、`docs/VERIFICATION.md`。

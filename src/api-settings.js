@@ -1,9 +1,11 @@
 export const GEMINI_RELAY_URL='https://aiapi.shiwuyan.cn/v1beta';
 export const GEMINI_OFFICIAL_URL='https://generativelanguage.googleapis.com/v1beta';
-export const DEFAULT_MODELS={deepseek:'deepseek-flash',gemini:'gemini-4-argon',custom:''};
+export const SHIWUYAN_URL='https://aiapi.shiwuyan.cn/v1';
+export const DEFAULT_MODELS={deepseek:'deepseek-flash',gemini:'gemini-4-argon',shiwuyan:'grok-4.7',custom:''};
 export const PROVIDERS=[
   {id:'deepseek',label:'DeepSeek',description:'使用 DeepSeek 官方服务'},
   {id:'gemini',label:'Gemini',description:'使用 ShiWuYan 转发服务'},
+  {id:'shiwuyan',label:'ShiWuYan',description:'使用默认转发服务'},
   {id:'custom',label:'自定义 API',description:'填写其他服务的地址与模型'}
 ];
 export const PROTOCOLS=[
@@ -32,7 +34,7 @@ export function migrateBundledGemini(saved,defaults={},legacyFingerprints=['1834
     catch{return saved;}
   }
   // Keep an authorized relay key pasted into the old Google form while replacing its
-  // address, protocol and model together. Public builds still contain no default key.
+  // address, protocol and model together. This migration only touches Gemini.
   const replacement=relay?profile('gemini',{apiKey:key,baseUrl:GEMINI_RELAY_URL,protocol:'gemini',model:DEFAULT_MODELS.gemini}):profile('gemini',{},defaults.gemini);
   const upgraded={...saved,providers:{...saved.providers,gemini:replacement}};
   if(!saved.providers){upgraded.provider='gemini';delete upgraded.apiKey;delete upgraded.model;delete upgraded.baseUrl;delete upgraded.baseURL;delete upgraded.protocol;}
@@ -46,6 +48,7 @@ function profile(provider,source={},defaults={}){
   const legacyGoogle=provider==='gemini'&&!explicitEndpoint&&Boolean(text(source.apiKey));
   const entry={apiKey:has(source,'apiKey')?text(source.apiKey):text(defaults.apiKey),model:has(source,'model')?text(source.model):legacyGoogle?'gemini-3.5-flash':text(defaults.model)||DEFAULT_MODELS[provider]};
   if(provider==='gemini')Object.assign(entry,{baseUrl:legacyGoogle?GEMINI_OFFICIAL_URL:explicitEndpoint?text(source.baseUrl??source.baseURL):text(defaults.baseUrl)||GEMINI_RELAY_URL,protocol:legacyGoogle?'gemini':['gemini','openai'].includes(source.protocol)?source.protocol:['gemini','openai'].includes(defaults.protocol)?defaults.protocol:'gemini'});
+  if(provider==='shiwuyan')Object.assign(entry,{baseUrl:SHIWUYAN_URL,protocol:'openai'});
   if(provider==='custom')Object.assign(entry,{baseUrl:text(source.baseUrl??source.baseURL??defaults.baseUrl),protocol:isProtocol(source.protocol)?source.protocol:isProtocol(defaults.protocol)?defaults.protocol:'openai'});
   return entry;
 }
@@ -54,12 +57,21 @@ export function normalizeSettings(saved={},defaults={}){
   if(!saved||typeof saved!=='object'||Array.isArray(saved))saved={};
   if(!defaults||typeof defaults!=='object')defaults={};
   saved=migrateBundledGemini(saved,defaults);
-  const provider=selectedProvider(saved);
+  let provider=selectedProvider(saved);
   const providers=Object.fromEntries(PROVIDERS.map(({id})=>[id,profile(id,saved.providers?.[id],defaults[id])]));
   if(!saved.providers&&['apiKey','model','baseUrl','baseURL'].some(k=>has(saved,k))){
     providers[provider]=profile(provider,saved,defaults[provider]);
   }
-  return {provider,mode:saved.mode==='offline'?'offline':'online',providers,providerRevision:7};
+  const fresh=!saved.providers&&!isProvider(saved.provider)&&!isProvider(saved.mode)&&!['apiKey','model','baseUrl','baseURL'].some(k=>has(saved,k));
+  const webDefaults=!text(defaults.deepseek?.apiKey)&&!text(defaults.gemini?.apiKey);
+  // Before revision 8, the web build stored blank profiles even on a first visit.
+  // Upgrade that unavailable default once; explicit clears in this version stay empty.
+  const selected=providers[provider];
+  const defaultEndpoint=provider==='deepseek'||provider==='gemini'&&[GEMINI_RELAY_URL,GEMINI_OFFICIAL_URL].includes(selected.baseUrl?.replace(/\/+$/,''));
+  const defaultModel=!selected.model||[DEFAULT_MODELS[provider],'deepseek-chat','gemini-3.5-flash'].includes(selected.model);
+  const oldBlankWeb=webDefaults&&Number(saved.providerRevision||0)<8&&['deepseek','gemini'].includes(provider)&&!selected.apiKey&&defaultEndpoint&&defaultModel;
+  if(text(defaults.shiwuyan?.apiKey)&&saved.mode!=='offline'&&(fresh||oldBlankWeb))provider='shiwuyan';
+  return {provider,mode:saved.mode==='offline'?'offline':'online',providers,providerRevision:8};
 }
 /** An explicit UI action can replace a preserved legacy connection with today's default. */
 export function resetProviderConnection(settings,provider,defaults={}){

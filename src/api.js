@@ -9,8 +9,12 @@ function customConnection(connection){
   if(!['openai','anthropic','gemini'].includes(protocol))throw new Error('请选择支持的 API 协议。');
   return {...connection,baseUrl:normalizeBaseUrl(connection.baseUrl,protocol)};
 }
+const serviceLabel=connection=>connection.provider==='gemini'?'Gemini 转发服务':connection.provider==='shiwuyan'?'ShiWuYan 转发服务':'自定义服务';
 function headersFor(connection){
   const key=connection.apiKey?.trim();
+  // This fixed relay supports x-api-key in browser CORS requests. Authorization
+  // is not covered by its wildcard preflight allow-list.
+  if(connection.provider==='shiwuyan'){requireKey(key,'ShiWuYan 转发服务');return {'x-api-key':key};}
   if(connection.provider==='gemini')requireKey(key,'Gemini 转发服务');
   // Local services such as Ollama may intentionally have no API key.
   if(connection.protocol==='openai')return key?{Authorization:'Bearer '+key}:{};
@@ -22,7 +26,7 @@ async function listCustom(connection,signal){
   let after='';
   for(let page=0;page<50;page++){
     const query=after?'?after_id='+encodeURIComponent(after):'';
-    const response=await requestJSON(connection.baseUrl+'/models'+query,{headers,signal,label:connection.provider==='gemini'?'Gemini 转发服务':'自定义服务',modelQuery:true});
+    const response=await requestJSON(connection.baseUrl+'/models'+query,{headers,signal,label:serviceLabel(connection),modelQuery:true});
     if(!Array.isArray(response.data))throw new Error('该服务未返回有效的模型列表，请直接填写模型名称。');
     names.push(...response.data.map(model=>model?.id));
     if(connection.protocol!=='anthropic'||!response.has_more)break;
@@ -55,7 +59,7 @@ export async function generateMonth(s,action,lore,major,settings,signal){
   for(let attempt=0;attempt<2;attempt++){
     const anthropic=custom.protocol==='anthropic';
     const body=anthropic?{model,system:prompt.system,messages,max_tokens:6000,stream:false}:{model,messages:[{role:'system',content:prompt.system},...messages],max_tokens:6000,stream:false};
-    const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:custom.provider==='gemini'?'Gemini 转发服务':'自定义服务'});
+    const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:serviceLabel(custom)});
     let text;
     if(anthropic){
       if(response.stop_reason==='max_tokens')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');
@@ -71,7 +75,7 @@ export async function generateMonth(s,action,lore,major,settings,signal){
     const parsed=parseNarrative(text);
     try{
       const valid=validateResponse(parsed,{decision:prompt.decision,context:prompt.validationContext});
-      return {...valid,actionDelta:{},source:custom.provider==='gemini'?'gemini':'custom'};
+      return {...valid,actionDelta:{},source:['gemini','shiwuyan'].includes(custom.provider)?custom.provider:'custom'};
     }catch(error){
       if(error.code!=='PROSE_REPAIR'||attempt===1)throw error;
       messages.push({role:'assistant',content:JSON.stringify(parsed)},{role:'user',content:repairInstruction(error)});

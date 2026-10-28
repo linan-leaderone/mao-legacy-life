@@ -328,11 +328,12 @@ function apiPanel(id){return `<section class="api-panel" id="${id}" data-provide
 function apiPanelBody(id){
   const connection=activeConnection(settings),custom=settings.provider==='custom',configurable=custom||settings.provider==='gemini',offline=settings.mode==='offline';
   return `<div class="api-panel-heading"><div><span class="eyebrow">API CONNECTION</span><h2>连接服务</h2></div><label class="offline-switch"><input type="checkbox" data-offline ${offline?'checked':''}/><span>不联网</span></label></div><p class="api-intro">配置会自动保存。每项服务分别保留自己的密钥与模型。</p>
-    <fieldset class="provider-choices"><legend class="sr-only">选择 API 服务</legend>${PROVIDERS.map(provider=>`<label class="provider-choice ${settings.provider===provider.id?'selected':''}"><input type="radio" name="${id}-provider" data-provider-choice value="${esc(provider.id)}" ${settings.provider===provider.id?'checked':''}/><span class="provider-mark">${{deepseek:'D',gemini:'G',custom:'↗'}[provider.id]||'A'}</span><strong>${esc(provider.label)}</strong><small>${esc(provider.description)}</small><span class="provider-selected" aria-hidden="true">✓</span></label>`).join('')}</fieldset>
+    <fieldset class="provider-choices"><legend class="sr-only">选择 API 服务</legend>${PROVIDERS.map(provider=>`<label class="provider-choice ${settings.provider===provider.id?'selected':''}"><input type="radio" name="${id}-provider" data-provider-choice value="${esc(provider.id)}" ${settings.provider===provider.id?'checked':''}/><span class="provider-mark">${{deepseek:'D',gemini:'G',shiwuyan:'S',custom:'↗'}[provider.id]||'A'}</span><strong>${esc(provider.label)}</strong><small>${esc(provider.description)}</small><span class="provider-selected" aria-hidden="true">✓</span></label>`).join('')}</fieldset>
     <div class="api-fields"><label class="field">API Key<input type="password" data-api-key autocomplete="off" spellcheck="false" aria-label="${esc(PROVIDERS.find(p=>p.id===settings.provider)?.label||'API')} 密钥" placeholder="填写此服务的 API Key"/></label>
     ${configurable?`<div class="api-custom-grid"><label class="field">接口地址 Base URL<input data-api-url type="url" autocomplete="off" spellcheck="false" value="${esc(connection.baseUrl||'')}" placeholder="https://api.example.com/v1"/></label><label class="field">接口协议<select data-api-protocol>${PROTOCOLS.filter(protocol=>custom||protocol.id!=='anthropic').map(protocol=>`<option value="${esc(protocol.id)}" ${connection.protocol===protocol.id?'selected':''}>${esc(protocol.label)}</option>`).join('')}</select></label></div>`:''}
+    ${settings.provider==='shiwuyan'?`<p class="api-fixed-connection"><span>接口地址</span> <span>${esc(connection.baseUrl)}</span><span>OpenAI 兼容</span></p>`:''}
     <label class="field">模型<input data-api-model autocomplete="off" spellcheck="false" list="${id}-models" value="${esc(connection.model||'')}" placeholder="${esc(DEFAULT_MODELS[settings.provider]||'填写服务商提供的模型名称')}"/><datalist id="${id}-models" data-api-models>${DEFAULT_MODELS[settings.provider]?`<option value="${esc(DEFAULT_MODELS[settings.provider])}"/>`:''}</datalist></label></div>
-    <div class="api-actions"><button type="button" class="secondary" data-test-api>测试连接</button><button type="button" class="quiet" data-clear-api>清除此密钥</button><button type="button" class="quiet" data-reset-api>使用默认连接</button><button type="button" class="quiet" data-import-api>导入配置</button><input type="file" data-api-file accept=".json,application/json" hidden/></div><p data-api-status class="api-status" role="status">${offline?'当前不联网，将使用本地内容。':'开始或继续时会使用上方选中的服务。'}</p><p class="api-key-note">密钥仅保存在本机配置中，人生档案不包含密钥。</p>`;
+    <div class="api-actions"><button type="button" class="secondary" data-test-api>测试连接</button><button type="button" class="quiet" data-clear-api>清除此密钥</button><button type="button" class="quiet" data-reset-api>使用默认连接</button><button type="button" class="quiet" data-import-api>导入配置</button><input type="file" data-api-file accept=".json,application/json" hidden/></div><p data-api-status class="api-status" role="status">${offline?'当前不联网，将使用本地内容。':'开始或继续时会使用上方选中的服务。'}</p><p class="api-key-note">默认连接可直接使用。自行填写的配置保存在本机，人生档案不包含密钥。</p>`;
 }
 function redactApiError(error){let message=String(error?.message||'连接未能完成，请检查配置后重试。');for(const provider of Object.values(settings.providers||{})){if(provider.apiKey)message=message.split(provider.apiKey).join('[密钥已隐藏]');}return message;}
 function writeApiSettings(next){settings=next;try{localStorage.setItem(SETTINGS,JSON.stringify(next));return true;}catch{notify('连接设置暂时无法保存，请检查设备存储空间。');return false;}}
@@ -393,8 +394,8 @@ function bindApiPanel(panel){
 function validateConnection(configuration,requireModel=true){
   const connection=activeConnection(configuration);
   if(requireModel&&!connection.model?.trim())throw new Error('请填写模型名称。');
-  if(configuration.provider==='custom'||configuration.provider==='gemini')normalizeBaseUrl(connection.baseUrl,connection.protocol);
-  if(configuration.provider!=='custom'&&!connection.apiKey?.trim())throw new Error('请填写此服务的 API Key，或选择不联网。');
+  if(connection.provider!=='deepseek')normalizeBaseUrl(connection.baseUrl,connection.protocol);
+  if(connection.provider!=='custom'&&!connection.apiKey?.trim())throw new Error('请填写此服务的 API Key，或选择不联网。');
 }
 function prepareConnection(){
   const panel=$('#modal .api-panel')||$('#home-api');
@@ -405,7 +406,7 @@ function prepareConnection(){
 function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;language=normalizeLanguage(game.profile.language);view='play';render();window.scrollTo(0,0);}
 function openSettings(){
   if(busy)return;
-  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.11.0</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
+  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.0</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
   const panel=m.querySelector('.api-panel');bindApiPanel(panel);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
   m.addEventListener('close',()=>{panel.commitApi();if(view==='home')render();});
 }
