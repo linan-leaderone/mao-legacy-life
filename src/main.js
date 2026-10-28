@@ -54,15 +54,21 @@ function redactKnownSecrets(value){
 }
 function clearReceivedNarrative(){receivedNarrative=null;}
 function currentReceivedNarrative(){return receivedNarrative?.game===game&&receivedNarrative?.action===pending?receivedNarrative:null;}
+function receivedNarrativeIssues(draft){return Array.isArray(draft?.issues)?draft.issues.filter(issue=>typeof issue==='string'&&issue.trim()).slice(0,8).map(issue=>redactKnownSecrets(issue.trim()).slice(0,200)):[];}
+function receivedValidationSummary(draft){
+  const summary=draft?.validationSummary;if(!summary||typeof summary!=='object'||Array.isArray(summary))return null;
+  const flag=value=>typeof value==='boolean'?value:null,number=value=>Number.isFinite(value)?value:null;
+  return {language:typeof summary.language==='string'?redactKnownSecrets(summary.language).slice(0,80):null,decision:flag(summary.decision),month:number(summary.month),priorMonth:number(summary.priorMonth),ageYears:number(summary.ageYears),priorAgeYears:number(summary.priorAgeYears),intimacyAllowed:flag(summary.intimacyAllowed)};
+}
 function narrativeErrorMarkup(){
   if(!error)return '';
-  const received=currentReceivedNarrative(),repair=received?.draft.canRepair===true,disabled=busy?'disabled':'';
-  return `<div class="error" role="alert"><p>${esc(error)}</p>${received?`<p class="small-copy">已收到的内容暂存在本页，关闭页面后不会保留。${repair?'整理会额外调用一次当前选中的服务，使用这份回复和原有事实，不重新生成整个月。':''}</p>${repair?`<button id="repair-received" class="secondary" ${busy||settings.mode==='offline'?'disabled':''}>整理已收到的内容</button> `:''}<button id="download-received" class="quiet" ${disabled}>下载本次返回诊断</button><p class="small-copy">诊断文件可能包含人生内容，只在你点击后导出，不会自动上传。${repair&&settings.mode==='offline'?'连接服务后可以整理内容。':''}</p>`:''}<button id="retry" class="secondary" ${disabled}>重新生成（新调用）</button> <button id="api-error-settings" class="quiet" ${disabled}>连接设置</button> <button id="offline-once" class="quiet" ${disabled}>暂不联网，继续</button></div>`;
+  const received=currentReceivedNarrative(),repair=received?.draft.canRepair===true,disabled=busy?'disabled':'',issues=receivedNarrativeIssues(received?.draft);
+  return `<div class="error" role="alert"><p>${esc(error)}</p>${issues.length?`<details class="small-copy" open><summary>需要调整的内容</summary><ul>${issues.map(issue=>`<li>${esc(issue)}</li>`).join('')}</ul></details>`:''}${received?`<p class="small-copy">已收到的内容暂存在本页，关闭页面后不会保留。${repair?'整理会额外调用一次当前选中的服务，使用这份回复和原有事实，不重新生成整个月。':''}</p>${repair?`<button id="repair-received" class="secondary" ${busy||settings.mode==='offline'?'disabled':''}>整理已收到的内容</button> `:''}<button id="download-received" class="quiet" ${disabled}>下载本次返回诊断</button><p class="small-copy">诊断文件可能包含人生内容，只在你点击后导出，不会自动上传。${repair&&settings.mode==='offline'?'连接服务后可以整理内容。':''}</p>`:''}<button id="retry" class="secondary" ${disabled}>重新生成（新调用）</button> <button id="api-error-settings" class="quiet" ${disabled}>连接设置</button> <button id="offline-once" class="quiet" ${disabled}>暂不联网，继续</button></div>`;
 }
 async function downloadReceivedNarrative(){
   if(busy)return;const received=currentReceivedNarrative();if(!received)return;
-  const metadata=received.draft.metadata||{},safeText=value=>redactKnownSecrets(String(value??'').slice(0,300)),tokens=value=>Number.isFinite(value)&&value>=0?value:null;
-  const diagnostic={format:'mao-life-narrative-diagnostic',version:1,appVersion:'1.17.3',exportedAt:new Date().toISOString(),provider:safeText(metadata.provider),model:safeText(metadata.model),finishReason:safeText(metadata.finishReason),inputTokens:tokens(metadata.inputTokens),outputTokens:tokens(metadata.outputTokens),errorCode:safeText(received.errorCode),receivedText:redactKnownSecrets(received.draft.receivedText)};
+  const metadata=received.draft.metadata||{},safeText=value=>redactKnownSecrets(String(value??'')).slice(0,300),tokens=value=>Number.isFinite(value)&&value>=0?value:null;
+  const diagnostic={format:'mao-life-narrative-diagnostic',version:2,appVersion:'1.17.4',exportedAt:new Date().toISOString(),provider:safeText(metadata.provider),model:safeText(metadata.model),finishReason:safeText(metadata.finishReason),inputTokens:tokens(metadata.inputTokens),outputTokens:tokens(metadata.outputTokens),errorCode:safeText(received.errorCode),issues:receivedNarrativeIssues(received.draft),validationSummary:receivedValidationSummary(received.draft),receivedText:redactKnownSecrets(received.draft.receivedText)};
   await saveText(`人生档案-返回诊断-${Date.now()}.json`,JSON.stringify(diagnostic,null,2));
 }
 function apiWaitingMarkup(){return `<div class="loading api-wait"><span class="spinner" aria-hidden="true"></span><div class="api-wait-copy"><strong data-api-phase role="status">${esc(tr('正在准备连接……'))}</strong><span data-api-elapsed aria-live="off"></span><small data-api-wait-note>${esc(tr('可以取消等待，刚才的安排会保留。'))}</small></div><button class="secondary" id="cancel">${esc(tr('取消等待'))}</button></div>`;}
@@ -457,7 +463,7 @@ function prepareConnection(){
 function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;language=normalizeLanguage(game.profile.language);view='play';render();window.scrollTo(0,0);}
 function openSettings(){
   if(busy)return;
-  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.3</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
+  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.4</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
   const panel=m.querySelector('.api-panel');bindApiPanel(panel);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
   m.addEventListener('close',()=>{panel.commitApi();if(view==='home'||currentReceivedNarrative())render();});
 }

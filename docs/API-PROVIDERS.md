@@ -1,4 +1,4 @@
-# API 连接（1.17.3）
+# API 连接（1.17.4）
 
 进入首页即可在 ShiWuYan、DeepSeek、Gemini、自定义 API 中选择。四份密钥、模型和服务地址独立保存，切换服务不会把另一份密钥送给当前服务。设置保存在本机，人生存档及其导出文件不包含连接设置。个人 Windows/Android 构建从 `.private/settings.json` 注入用户指定的默认密钥，公开 iPhone 网页按作者最新授权内置DeepSeek、Gemini、ShiWuYan三组共享默认；公开GitHub源码不带任何密钥。本文不记录任何密钥、订单号或兑换码。
 
@@ -29,7 +29,9 @@
 
 格式或校验失败时，完整且不超过256KiB的原文、原prompt与有限元数据仅作为当前页临时草稿，不进入人生存档、应用日志或服务器持久记录，不后台上传。只有当前人生与原安排未变，且本人明确点击“整理已收到的内容”，才发送额外一个请求，沿用原prompt、预计算事实和已收到的文字。整理成功并通过校验后才提交原行动；整理断线或取消保留草稿。供应商标记截断或block的回复不提供整理，只允许主动下载诊断或手动重新生成。刷新、关页会丢失临时草稿，不会改变原存档。
 
-诊断下载仅在本人操作时生成，只含脱敏的响应正文及白名单元数据；不含prompt、action、state、key、请求头或完整请求地址。普通报错不回显原文。诊断用于查明格式问题，服务记账或模型目录成功不等于内容可通过游戏校验。
+1.17.4的`src/narrative-style.js`只对有限中文显示措辞进行本地机械整理，不追加模型调用。原话、名字、事实字段和选项label保持原样；consequence包含economicUpdates证据时也不改动。整理后先核对fixedFacts所保留的结构及可识别现金事实，再执行完整validateResponse，年龄、同意、内容和事实校验继续生效。无法安全整理或仍不合格时继续拒绝提交，并显示具体原因。
+
+诊断下载仅在本人操作时生成，只含脱敏响应正文及白名单元数据；不含prompt、action、state、npc、key、请求头或完整请求地址。v2新增issues和validationSummary：issues与错误框共用最多8条、每条200字符的限制，先脱敏再截断，界面另做HTML转义；validationSummary仅允许language、decision、month、priorMonth、ageYears、priorAgeYears、intimacyAllowed七字段及基本类型，未知值为null。普通报错不直接回显完整原文。诊断用于区分格式与内容校验失败，服务记账或模型目录成功不等于内容可通过游戏校验。
 
 OpenAI 兼容请求默认只发送 `model`、`messages`、`max_tokens` 与 `stream:false`，依靠共有提示要求完整 JSON，不附加 DeepSeek 专属参数。DeepSeek保留JSON mode及原有参数。Gemini使用 `systemInstruction`、`contents` 与JSON响应类型；主动整理使用原始提示和失败原文，不自动延续第二次付费请求。指定转发站的完整请求曾在 `STOP` 状态返回 Markdown 散文，没有遵守原生系统指令及 JSON 响应类型；对此端点的 `gemini-4-argon` 将规则与 JSON 结构要求只放在用户消息中发送一次，使用实测接受的 `thinkingLevel: low`，保留 6,000 输出 token 上限。普通 Google 和其他 Gemini 端点保持系统、用户消息分离，不添加未验证的思考参数。Gemini 请求使用 `src/prompt-compact.js` 删除本月未启用的规则分支与完全重复的输入字段；当前身份、地区制度、全部已有世界历史、长期记忆、固定事实、金钱与行动结算均保留。关系提示保留最近联系人、当前行动/主线提到的人和最强的直接关系；完整图谱仍在存档中。普通Anthropic兼容连接使用独立 `system`、`messages`、`max_tokens`，发送 `x-api-key`、兼容版本 `anthropic-version: 2023-06-01` 以及浏览器直连标记，不发送temperature。ShiWuYan例外：完整原system规则与输入放入同一user消息，末尾再次约束完整JSON，以减少转发转换忽略system字段时丢失规则的影响；端点、模型与鉴权头不变。所有服务的格式约束都保留原行动与世界事实，不能用简单演示提示替换实际输入。
 
@@ -79,7 +81,7 @@ Windows 原生桥使用 Electron 的 Chromium 网络栈，采用系统代理配�
 - [Cloudflare Static Assets 绑定](https://developers.cloudflare.com/workers/static-assets/binding/)：Worker使用 `ASSETS` 服务同站静态内容。
 - [Cloudflare Request.signal](https://developers.cloudflare.com/workers/runtime-apis/request/#properties) 与 [取消请求说明](https://developers.cloudflare.com/changelog/post/2025-05-22-handle-request-cancellation/)：开启 `enable_request_signal` 后监听访问者断开连接，取消上游请求。相关官方文档于2026-10-28核对。
 
-历史自动化验证（不代表1.17.3的检查结果）覆盖旧 Google 凭据保留、默认转发配置、独立恢复默认、原生和 OpenAI 两种 Gemini 请求、请求隔离、错误与取消、文风修正共享超时等，共 34 项 API 测试通过。真实网络验证限于上述指定转发服务的小请求与一个完整时间旅行案例，不代表逐一验证所有第三方服务或所有剧情。实际构建与实测状态以 `docs/VERIFICATION.md` 为准。
+历史自动化验证（不代表1.17.4的检查结果）覆盖旧 Google 凭据保留、默认转发配置、独立恢复默认、原生和 OpenAI 两种 Gemini 请求、请求隔离、错误与取消、文风修正共享超时等，共 34 项 API 测试通过。真实网络验证限于上述指定转发服务的小请求与一个完整时间旅行案例，不代表逐一验证所有第三方服务或所有剧情。实际构建与实测状态以 `docs/VERIFICATION.md` 为准。
 
 ## 1.7默认连接升级
 
@@ -111,4 +113,10 @@ OPTIONS预检返回204，允许来源及请求头为通配。Authorization是COR
 
 ## 1.17.3 返回内容与显式整理
 
-本节及上方当前错误处理规则覆盖历史版本的自动修订约定。用户截图显示客户端格式失败且服务侧已有计费，尚未取得失败响应原文，因此没有证据确认这一次究竟是围栏、散文、截断还是其他结构问题。当前改动加强本地完整对象识别、保留临时草稿与主动脱敏诊断，并取消隐藏的第二次调用；没有据此宣称具体失败内容已复现或实际生成实测通过。继续遵守本轮不进行游戏测试、模拟用例和模型调用的要求。
+本节及上方当前错误处理规则覆盖历史版本的自动修订约定。1.17.3实施时仅有用户截图显示客户端失败且服务侧已有计费，当时尚未取得失败响应原文，不能确定是哪一种格式或校验原因。该版加强本地完整对象识别、保留临时草稿与主动脱敏诊断，并取消隐藏的第二次调用。之后收到的v1诊断结论见下节；不把历史缺少原文的状态当作当前结论。
+
+## 1.17.4 本地措辞整理与诊断摘要
+
+用户提供的v1诊断显示JSON完整、finishReason为end_turn，errorCode为PROSE_REPAIR；至少可以明确禁用措辞“进一步”触发了校验。这份旧诊断没有issues或校验年龄，不能断定只有这一项问题，也不能据此认定角色成年。项目文档只保留这些中性结论，不收录用户的原始剧情、行动或亲密内容。
+
+本版增加有边界的本地措辞整理、具体issues显示及v2诊断摘要，完整结果仍须通过原有校验。单次生成、本人主动追加整理、原稿临时内存和存档兼容规则不变。继续遵守不运行游戏测试、模拟用例或有效模型生成的要求；本节不声明部署或验证已完成。

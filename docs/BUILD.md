@@ -6,7 +6,7 @@ iPhone主屏幕安装版独立使用`pnpm build:ios`，发布、离线与密钥�
 
 用户授权原生包预填DeepSeek、Gemini及新ShiWuYan密钥，并在1.17.1明确要求网页提供三组共享默认。Vite 从 `.private/settings.json` 注入 `__DEFAULT_API_PROVIDERS__`；`.private/` 目录、兑换码与签名私钥不打包。公开网页构建按授权注入DeepSeek、Gemini、ShiWuYan三组共享默认；不能将普通 `dist` 发布到公开站点。文档、日志和截图不记录密钥。
 
-当前源码版本为1.17.3，Android目标版本为1.17.3 / versionCode 22。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.17.3.md](RELEASE-v1.17.3.md)。
+当前源码版本为1.17.4，Android目标版本为1.17.4 / versionCode 23，providerRevision仍为9。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.17.4.md](RELEASE-v1.17.4.md)。
 
 ## 前置环境
 
@@ -29,7 +29,7 @@ Android 脚本首次运行从 Google 官方仓库下载 API 35 与 Build Tools 3
 
 ## 交付文件
 
-- `release/MaoLegacyLife-Windows-x64.zip`：内含版本目录 `MaoLegacyLife-1.17.3-Windows-x64/`，完整解压后运行其中的 `MaoLegacyLife.exe`；不要单独移动 EXE。
+- `release/MaoLegacyLife-Windows-x64.zip`：内含版本目录 `MaoLegacyLife-1.17.4-Windows-x64/`，完整解压后运行其中的 `MaoLegacyLife.exe`；不要单独移动 EXE。
 - `release/MaoLegacyLife-Android.apk`：Android 8.0+；通过系统文件管理器安装，需要为安装来源启用系统安装许可。
 
 Windows 便携应用未做商业代码签名。APK 使用本地生成的独立签名证书，且 `debuggable=false`。保留 `.private/android-signing.p12` 与对应密码文件，以便后续 APK 覆盖更新；丢失后无法用相同签名升级。它们不应加入版本控制或分发包。
@@ -53,6 +53,8 @@ Android 的 `<input type="file">` 使用系统文档选择器。远程网页不�
 联网请求由 `src/api-transport.js` 统一调度：Windows 使用 `window.desktopBridge.requestApi` / `cancelApi`，Android 使用 `window.NativeBridge.requestApi` / `cancelApi` 和 `window.__maoApiResponse` 回调。原生桥保持直连，失败时不会再发送一份浏览器请求。每次生成仅一个请求，等待上限180秒，模型目录与分页共用15秒；取消会中止请求并丢弃迟到响应。公开PWA内置Gemini/ShiWuYan采用同源兼容转发，具体部署与直连适用范围见 [IOS.md](IOS.md) 和 [API-PROVIDERS.md](API-PROVIDERS.md)。
 
 1.17.3取消格式或文风失败后的自动二次调用。三种适配器共用本地响应解析和恢复流程；限内失败原文与原提示仅暂存在当前页面内存。本人点击“整理已收到的内容”才会追加一个请求，仍以原人生和安排为准，断线或取消保留草稿。主动导出的脱敏诊断只含响应正文及白名单元数据，不含提示、行动、状态、密钥或请求头；关闭页面会清除临时草稿。详见 [API-PROVIDERS.md](API-PROVIDERS.md)。
+
+1.17.4增加`src/narrative-style.js`，仅在本地机械整理有限中文显示措辞；跳过原话、名字、事实字段、选项label，以及带economicUpdates证据的consequence。整理后先核对fixedFacts中的结构和现金事实，再执行完整validateResponse，年龄、同意、内容与事实约束保持。错误框展示受限具体issues；诊断v2新增同样受限的issues及七字段validationSummary，文本先脱敏再截断。原有显式调用、等待上限和存档兼容不变。
 
 原生桥仍支持读取位于 `%APPDATA%/MaoLegacyLife/settings.json` 的本机配置。新版页面使用构建默认值与自己的已保存设置，不自动读取该文件；需要时可在首页或设置中选择文件导入。导入接受旧版 `apiKey`、`model`、`mode` 单份配置或新版 `providers` 配置。该文件位于分发目录以外，两种构建脚本都不会复制它。
 
@@ -84,6 +86,6 @@ node scripts/build-mod-corpus.mjs '--mod=D:\资料\TFR-xinzuo-rebuild'
 
 自定义 API 支持 OpenAI 兼容、Gemini 原生、Anthropic Messages 三种协议，模型名称可手动填写。测试连接读取模型列表，允许先留空自定义模型；实际联网叙事前要求模型名称与有效地址。自定义服务可不填密钥，以支持匿名本机服务。远程地址要求 HTTPS，本机服务允许 `localhost`、`127.0.0.1`、`[::1]` 的 HTTP；Android 使用 `@xml/network_security_config` 仅为这些 loopback 地址放行明文请求，`usesCleartextTraffic=false` 保留。页面 CSP 的连接范围为 HTTPS 与 loopback HTTP，不开放任意远程 HTTP。
 
-Android 目标版本1.17.3 / versionCode 22，保持原 package 与签名，以支持覆盖旧版安装。`drawable-nodpi/launcher_art.png` 是按用户参考图生成的方形画面；Android 8+ 使用自适应图标和12dp内缩保护构图。
+Android 目标版本1.17.4 / versionCode 23，保持原 package 与签名，以支持覆盖旧版安装。`drawable-nodpi/launcher_art.png` 是按用户参考图生成的方形画面；Android 8+ 使用自适应图标和12dp内缩保护构图。
 
-Windows 打包目录带版本号：`release/MaoLegacyLife-1.17.3-Windows-x64/`。ZIP名称保持不变。旧版本运行中时不覆盖其可执行文件；请从新版目录启动。源码版本不代表原生包自动更新，修改网页或原生桥后必须重新执行构建与封装。
+Windows 打包目录带版本号：`release/MaoLegacyLife-1.17.4-Windows-x64/`。ZIP名称保持不变。旧版本运行中时不覆盖其可执行文件；请从新版目录启动。源码版本不代表原生包自动更新，修改网页或原生桥后必须重新执行构建与封装。

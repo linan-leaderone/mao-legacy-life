@@ -72,7 +72,7 @@ async function relay(request){
 export default {
   async fetch(request,env){
     const url=new URL(request.url);
-    if(url.pathname==='/api/health')return json({version:'1.17.3',relay:true,assets:!!env.ASSETS});
+    if(url.pathname==='/api/health')return json({version:'1.17.4',relay:true,assets:!!env.ASSETS});
     if(url.pathname==='/api/relay')return relay(request);
     if(url.pathname.startsWith('/api/'))return json({error:'not_found'},404);
     if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405});

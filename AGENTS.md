@@ -1,7 +1,7 @@
 # 项目事实
 
 - 本目录是独立游戏，不修改相邻 `TFR-xinzuo-rebuild`。MOD 剧情来源见 `docs/LORE-SOURCES.md`，配图来源见 `docs/ART-SOURCES.md`。
-- 当前源码版本1.17.3，`timelineVersion: 5`、`providerRevision: 9`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
+- 当前源码版本1.17.4，`timelineVersion: 5`、`providerRevision: 9`。`src/engine.js` 控制年月、路线排程、属性、行动结果、人物状态和存档提交，`src/agency.js` 解析肯定行动、时间/年龄/世界变更与就业收支；`src/regions.js` 提供地区制度与新闻影响。`src/api.js` 分发 DeepSeek、Gemini、自定义请求，所有服务共用提示与结果校验。叙事成功并校验后才提交一次行动；失败或取消不提交预先计算的副本。
 - 用户只有iPhone，iOS交付采用Safari“添加到主屏幕”的PWA（iOS/iPadOS 15.4+），不是原生IPA或TestFlight。`pnpm build:ios`单独输出`dist-ios`，不改变既有Windows/Android产物。`src/ios-install.js`只在`__IOS_PWA__`构建启用；`src/file-export.js`在iPhone使用支持JSON文件的系统分享面板，否则回退下载，原生导出优先级保留。核心离线缓存成功才显示就绪，地方地图按查看范围加载并校验缓存，首次查看未缓存地区需要联网，更新不强制刷新当前人生。
 - iOS发布副本为相邻`mao-legacy-life-ios-site`，Site身份在其`.openai/hosting.json`，必须沿用。这个目录只组装按当前凭据发布策略构建的`dist-ios`与指定的Site Worker，不复制整个游戏目录、`.private`、原始查询缓存或完整MOD审计索引。2026-10-28用户明确要求网页版补齐默认API，用户再次明确要求网页DeepSeek、Gemini也显示默认密钥；当前网页注入DeepSeek、Gemini、ShiWuYan三组授权默认。公开GitHub源码继续排除全部密钥。用户于2026-10-24明确要求免注册登录分享，Site已设为public；后续更新保留公开访问，使用普通保存/部署流程，不得调用会要求owner-only的私有部署操作。发布方式和验证边界见`docs/IOS.md`。
 - 每次启动先显示首页 API 卡，包括有存档时；支持 ShiWuYan、DeepSeek、Gemini、自定义 API 四选一，以及不联网、继续、新人生和读取。品牌入口返回首页，切换连接不丢失进度，请求进行中不得切换。首页和设置共用连接表单，编辑自动保存，开始和继续前提交当前表单；测试连接必须使用当前草稿，迟到结果不能覆盖已修改配置。
@@ -22,8 +22,8 @@
 - `nextContext` 先结算明确且成功的迁居（支持主要城市与省份别名），再结算下个月所在地新闻与影响；模型返回的地点不能直接替换人物所在地。
 - 新闻 `exposure` 分为 direct、indirect、remote、none。远方报道不自动在本地造成灾害、封控、拘押或收入损失；大陆政治和办事机构不套到台日港澳韩。地区环境只应用已经发生的制度变化。
 - 面向人物的正文、选项与新闻必须沉浸式，不插入开发者、玩家、本局、触发节点、路线锁定、属性加成等局外说明。来源、适配说明和隐藏分支仅保留在数据元信息与文档，不能拼入叙事或提前透露终局。
-- `src/narrative.js` 管理简洁文风与可识别错龄校验；1.17.3起各叙事服务不再自动重写。src/narrative-response.js与src/narrative-recovery.js共用本地解析、校验和临时恢复，只有用户明确点击整理才另发一个请求，沿用原始提示和已结算事实，不推进月份或重算行动。失败保留原月。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
-- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.17.3；Android versionCode 22；Windows目录`release/MaoLegacyLife-1.17.3-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
+- `src/narrative.js` 管理简洁文风与可识别错龄校验；1.17.3起各叙事服务不再自动重写。src/narrative-response.js与src/narrative-recovery.js共用本地解析、校验和临时恢复；1.17.4的src/narrative-style.js仅机械修正有限中文显示措辞，跳过原话、名字、事实字段、选项label和带economicUpdates证据的consequence。修正后先核对fixedFacts的结构与现金事实，再完整validateResponse；年龄、同意、内容与事实校验不能绕过。只有用户明确点击整理才另发一个请求，沿用原始提示和已结算事实，不推进月份或重算行动。失败保留原月并展示受限具体issues。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
+- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.17.4；Android versionCode 23；Windows目录`release/MaoLegacyLife-1.17.4-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
 - 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，全新配置默认选择ShiWuYan（本次模型目录为grok-4.7）。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA按用户最新指令注入三组授权默认，公开GitHub源码继续全部脱敏。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
 - 修改核心行为后运行相应测试并完成 `pnpm test`；构建用 `pnpm build`，原生包需重新封装后才能交付。实际验证边界与最终测试结果在 `docs/VERIFICATION.md`，不得把源码更新直接写成已交付新包。
 
@@ -61,4 +61,6 @@
 
 - 1.17.2增加网页同源兼容连接。`scripts/site-api-worker.mjs`固定host/路径/头白名单，不跟重定向、不重发、不缓存，只在内存处理本次凭据与叙事，不写应用日志或持久记录；NDJSON每10秒发送等待心跳，终局返回一份完整结果。启用`enable_request_signal`监听取消并中止上游。`scripts/prepare-ios-site.mjs`沿用既有Site项目与public权限，迁移静态资源到`dist/client`，复制`dist-ios`，写`dist/server/index.js`和wrangler的ASSETS绑定，移除manifest.static以启用Worker；清单变更本身不删除资产。组装默认保留旧散列，但发布资源超限时可按当前dist-ios/assets清单清理不再引用的历史哈希JS/CSS，不清理当前资源、地图或立绘。旧PWA关闭所有相关窗口后重开激活，不强制刷新行动。生成入口均复用compact，UI显示实际等待阶段/秒数、明确取消，失败保留原月与安排。本轮只静态/构建/封装和部署健康、只读models诊断，不游戏/有效生成测试，GitHub提交`[skip ci]`；不得宣称大陆速度实测或所有运营商可用，最终证据由验证文档记录。
 
-- 1.17.3以本条覆盖历史段落中的自动重写/自动PROSE_REPAIR规则：每次生成只发一个请求，格式或语义校验失败不自动追加调用。narrative-response仅解析完整且无歧义的JSON对象，兼容围栏、前后说明、BOM、双重编码、完整前置think标签及无损语法整理，不补截断剧情。narrative-recovery将不超过256KiB的失败原文与原prompt仅保留在当前页内存，不进存档、日志或服务器持久记录；只有当前game/action未变且用户明确点击“整理已收到的内容”才额外发一次请求，沿用原prompt/事实，断线或取消保留草稿。供应商标记截断或block的回复不提供整理；仅可下载诊断或明确重生成。诊断由用户主动导出，仅含脱敏响应正文与白名单元数据，排除prompt/action/state/key/header。ShiWuYan在同一user消息发送完整原system规则、输入与末尾JSON约束；DeepSeek JSON mode、Gemini JSON MIME及180秒/同源relay规则保留。当前只有用户截图证明计费及格式失败，没有取得失败响应原文，不能宣称已复现具体原文或完成实际生成实测；继续不运行游戏测试/模拟用例/模型调用，发布记录由验证文档单独确认。
+- 1.17.3以本条覆盖历史段落中的自动重写/自动PROSE_REPAIR规则：每次生成只发一个请求，格式或语义校验失败不自动追加调用。narrative-response仅解析完整且无歧义的JSON对象，兼容围栏、前后说明、BOM、双重编码、完整前置think标签及无损语法整理，不补截断剧情。narrative-recovery将不超过256KiB的失败原文与原prompt仅保留在当前页内存，不进存档、日志或服务器持久记录；只有当前game/action未变且用户明确点击“整理已收到的内容”才额外发一次请求，沿用原prompt/事实，断线或取消保留草稿。供应商标记截断或block的回复不提供整理；仅可下载诊断或明确重生成。诊断由用户主动导出，仅含脱敏响应正文与白名单元数据，排除prompt/action/state/key/header。ShiWuYan在同一user消息发送完整原system规则、输入与末尾JSON约束；DeepSeek JSON mode、Gemini JSON MIME及180秒/同源relay规则保留。该版实施时仅有截图，未取得失败响应原文；现在已收到用户v1诊断，后续结论以下条为准。继续不运行游戏测试/模拟用例/模型调用，发布记录由验证文档单独确认。
+
+- 1.17.4用户v1诊断显示JSON完整、end_turn、errorCode PROSE_REPAIR；至少明确禁用措辞“进一步”触发校验。旧诊断没有issues或age，不能认定只有该项或角色成年。只保留中性结论，禁止把用户原始剧情、行动、亲密内容复制到项目文档或fixtures。本地narrative-style只处理有限中文显示措辞，保留事实与完整校验；无法安全修正继续拒绝。UI展开“需要调整的内容”，issues脱敏/转义/最多8条且每条200字符。诊断v2/appVersion1.17.4只新增受限issues和七字段validationSummary（language、decision、month、priorMonth、ageYears、priorAgeYears、intimacyAllowed），仅基本类型或null，文本先脱敏再截断，不复制prompt/state/action/npc/key/header。原有临时草稿、单请求、显式额外整理与存档兼容不变；不运行游戏测试或有效模型生成，发布及实际检查仍由验证文档独立记录。

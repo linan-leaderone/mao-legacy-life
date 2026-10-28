@@ -1,6 +1,7 @@
 import {parseNarrative} from './narrative-response.js';
 import {validateResponse} from './engine.js';
 import {parseEconomicText} from './economy.js';
+import {minimallyTidyNarrative} from './narrative-style.js';
 
 const MAX_DRAFT_BYTES=256*1024;
 
@@ -18,9 +19,15 @@ function fixedFacts(parsed,original=parsed){
     cashFacts:parseEconomicText(String(parsed.consequence||''),{source:'response'}).map(({kind,category,amount})=>({kind,category,amount})).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)))};
 }
 function canonical(value){return JSON.stringify(value,(_key,item)=>item&&typeof item==='object'&&!Array.isArray(item)?Object.fromEntries(Object.entries(item).sort(([a],[b])=>a.localeCompare(b))):item);}
+function validationSummary(prompt){
+  const context=prompt?.validationContext||{};
+  const integer=value=>Number.isInteger(value)?value:null;
+  return {language:typeof context.language==='string'?context.language:null,decision:typeof prompt?.decision==='boolean'?prompt.decision:null,
+    month:integer(context.month),priorMonth:integer(context.priorMonth),ageYears:integer(context.ageYears),priorAgeYears:integer(context.priorAgeYears),intimacyAllowed:typeof context.intimacyAllowed==='boolean'?context.intimacyAllowed:null};
+}
 function attachDraft(error,text,prompt,metadata,canRepair,originalParsed){
   if(typeof text==='string'&&text.trim()&&new TextEncoder().encode(text).byteLength<=MAX_DRAFT_BYTES){
-    Object.defineProperty(error,'narrativeDraft',{value:{receivedText:text,prompt,metadata,issues:Array.isArray(error.issues)?error.issues:['输出必须是完整JSON对象，并保留原有叙事与输入事实。'],canRepair,...(originalParsed?{originalParsed}:{})},enumerable:false});
+    Object.defineProperty(error,'narrativeDraft',{value:{receivedText:text,prompt,metadata,validationSummary:validationSummary(prompt),issues:Array.isArray(error.issues)?error.issues:['输出必须是完整JSON对象，并保留原有叙事与输入事实。'],canRepair,...(originalParsed?{originalParsed}:{})},enumerable:false});
   }
   return error;
 }
@@ -30,11 +37,16 @@ export function acceptNarrative(text,prompt,source,metadata={},recovery=null){
   try{
     parsed=parseNarrative(text);
     if(recovery?.originalParsed&&canonical(fixedFacts(parsed,recovery.originalParsed))!==canonical(fixedFacts(recovery.originalParsed)))throw Object.assign(new Error('整理结果改变了原回复中的收支或人物、世界事实，本月未推进。原有事实仍保留，可重新整理。'),{code:'API_NARRATIVE_FACTS',issues:['仅整理格式和行文，originalFacts里的地点、人物状态、经济记录、公共事件、人物关系及正文收支必须保持原样。']});
+    const tidied=minimallyTidyNarrative(parsed,prompt.validationContext||{});
+    // A local wording edit must not change recognized cash or structured facts.
+    // The full age, continuity and content checks below still apply afterwards.
+    if(tidied.changed&&canonical(fixedFacts(tidied.response,parsed))===canonical(fixedFacts(parsed)))parsed=tidied.response;
     const valid=validateResponse(parsed,{decision:prompt.decision,context:prompt.validationContext});
     return {...valid,actionDelta:{},source};
   }catch(error){
     const failure=error instanceof Error?error:new Error('收到的内容无法读取。');
     failure.code||='API_NARRATIVE_SCHEMA';
+    if(failure.code==='PROSE_REPAIR')failure.message='服务回复已完整收到，但部分内容未符合当前人物经历或行文要求。具体原因见下方，本月未推进。';
     if(failure.code==='API_NARRATIVE_FORMAT')failure.message=typeof text==='string'&&text.trim()&&new TextEncoder().encode(text).byteLength<=MAX_DRAFT_BYTES?'已收到服务回复，但文字格式无法完整读取。本月未推进，回复已暂存在当前页面。':'服务没有返回可读取的完整文字。本月未推进。';
     throw attachDraft(failure,text,prompt,metadata,true,recovery?.originalParsed||parsed);
   }
