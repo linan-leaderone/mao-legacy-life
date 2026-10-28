@@ -1,10 +1,3 @@
-# 毛的遗产 · 人生档案
-
-2020 年 1 月开始记录的一生。参考 [AI 人生重开手帐](https://re.maa-ai.com/) 的自由背景与叙事形式，依据本机 `../TFR-xinzuo-rebuild` 的本地化独立实现，不修改原 MOD。当前源码版本为 **1.17.4**。
-
-本版更新：[本地措辞整理与具体校验原因](docs/RELEASE-v1.17.4.md)。本轮按用户要求不运行游戏测试或有效模型生成；构建、封装及部署诊断结果见 [验证记录](docs/VERIFICATION.md)。
-
-[直接游玩](https://mao-legacy-life-iphone.linanna.chatgpt.site/) · [公开源码](https://github.com/linan-leaderone/mao-legacy-life) · [本次更新](docs/RELEASE-v1.17.4.md)
 
 ## 从源码运行
 
