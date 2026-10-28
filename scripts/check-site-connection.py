@@ -2,7 +2,8 @@
 import json, pathlib, time, urllib.request, urllib.error, sys
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SITE = 'https://mao-legacy-life-iphone.linanna.chatgpt.site'
-report = {'version': '1.17.2', 'gameTestsRun': False, 'effectiveGenerationRequests': 0, 'observations': []}
+VERSION = json.loads((ROOT / 'package.json').read_text(encoding='utf-8-sig'))['version']
+report = {'version': VERSION, 'gameTestsRun': False, 'effectiveGenerationRequests': 0, 'observations': []}
 site_token = ''
 if '--read-token-stdin' in sys.argv:
     print('Ready for existing Site token on stdin (input hidden).', flush=True)
@@ -45,7 +46,7 @@ except Exception:
 report['observations'].append(health)
 for path in ['/', '/maps/world-boundaries.json', '/portraits/pixel-tsurumaki-kokoro.webp']:
     report['observations'].append(request(path, 'HEAD')[0])
-if health.get('relay') and health.get('status') == 200:
+if health.get('relay') and health.get('status') == 200 and '--skip-models' not in sys.argv:
     settings = json.loads((ROOT / '.private/settings.json').read_text(encoding='utf-8-sig'))
     for provider in ['shiwuyan', 'gemini']:
         key = settings['providers'][provider]['apiKey']
@@ -65,6 +66,6 @@ if health.get('relay') and health.get('status') == 200:
         except Exception:
             result['envelopeParsed'] = False
         report['observations'].append(result)
-output = ROOT / 'release/site-connection-v1.17.2.json'
+output = ROOT / f'release/site-connection-v{VERSION}.json'
 output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(json.dumps(report, ensure_ascii=False))

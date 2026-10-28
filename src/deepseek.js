@@ -1,13 +1,14 @@
 import {enactedPolicyContext} from './policies.js';
 import {adultRelationshipsAllowed,unsafeIntimacyContext} from './adult-relationships.js';
 import {scenarioContext} from './scenario.js';
-import {dateLabel,currentAge,validateResponse,worldHistory,nextContext,localEvent} from './engine.js';
+import {dateLabel,currentAge,worldHistory,nextContext,localEvent} from './engine.js';
 import {regionContext,culturalContext} from './regions.js';
 import {getModContext} from './mod-content.js';
 import {WRITING_RULES} from './narrative.js';
 import {normalizeLanguage,languageInstruction,writingRulesForLanguage} from './language.js';
 import {requestJSON} from './api-transport.js';
 import {compactNarrativePrompt} from './prompt-compact.js';
+import {narrativeUserMessage,acceptNarrative,incompleteNarrative,narrativeMetadata} from './narrative-recovery.js';
 import {specialPromptContext} from './special-lives.js';
 import {getPoliticalActors} from './personas.js';
 import {buildContinuityContext} from './continuity.js';
@@ -99,29 +100,16 @@ export async function listModels(settings,signal){
   const response=await request('models',settings.apiKey,undefined,signal,15000,settings.route);
   return (response.data||[]).map(m=>m.id).filter(id=>typeof id==='string'&&/^deepseek-[a-zA-Z0-9._-]+$/.test(id));
 }
-export async function generateMonth(s,action,lore,major,settings,signal){
-  // A prose repair shares this deadline; it does not grant another full wait.
-  const deadline=Date.now()+180000;
+export async function generateMonth(s,action,lore,major,settings,signal,recovery=null){
   const model=settings.model||DEFAULT_MODEL;
   if(!/^deepseek-[a-zA-Z0-9._-]+$/.test(model))throw new Error('请使用有效的 DeepSeek 模型名称。');
-  const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major));
-  const messages=[{role:'system',content:prompt.system},{role:'user',content:prompt.user}];
-  for(let attempt=0;attempt<2;attempt++){
-    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
-    const timeoutMs=deadline-Date.now();
-    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
-    const response=await request('chat/completions',settings.apiKey,{model,messages,response_format:{type:'json_object'},thinking:{type:'disabled'},temperature:0.95,max_tokens:6000,stream:false},signal,timeoutMs,settings.route);
-    const choice=response.choices?.[0];
-    if(choice?.finish_reason==='length')throw new Error('这段文字未能写完，时间仍停留在原处，请重试。');
-    if(!choice?.message?.content||typeof choice.message.content!=='string')throw new Error('暂时没有收到完整文字，请重试。');
-    let parsed;
-    try{parsed=JSON.parse(choice.message.content.trim().replace(/^```(?:json)?\s*|\s*```$/g,''));}catch{throw new Error('收到的文字格式不完整，时间仍停留在原处。');}
-    try{
-      const valid=validateResponse(parsed,{decision:prompt.decision,context:prompt.validationContext});
-      return {...valid,actionDelta:{},source:'deepseek'};
-    }catch(error){
-      if(error.code!=='PROSE_REPAIR'||attempt===1)throw error;
-      messages.push({role:'assistant',content:JSON.stringify(parsed)},{role:'user',content:'请只修正下面的问题并重新输出完整JSON。不要推进时间、重算行动或改变已给出的结果：'+error.issues.join(' ')+' 保持原来的选项数量，遵守全部行文要求。'});
-    }
-  }
+  const prompt=recovery?.prompt||compactNarrativePrompt(buildPrompt(s,action,lore,major));
+  const messages=[{role:'system',content:prompt.system},{role:'user',content:narrativeUserMessage(prompt,recovery)}];
+  if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+  const response=await request('chat/completions',settings.apiKey,{model,messages,response_format:{type:'json_object'},thinking:{type:'disabled'},temperature:0.95,max_tokens:6000,stream:false},signal,180000,settings.route);
+  const choice=response.choices?.[0],text=typeof choice?.message?.content==='string'?choice.message.content:'';
+  const metadata=narrativeMetadata({...settings,model},response,choice?.finish_reason);
+  if(choice?.finish_reason==='length')throw incompleteNarrative(text,prompt,metadata);
+  if(choice?.message?.refusal||choice?.finish_reason&&choice.finish_reason!=='stop')throw incompleteNarrative(text,prompt,metadata,true);
+  return acceptNarrative(text,prompt,'deepseek',metadata,recovery);
 }

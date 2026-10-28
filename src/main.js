@@ -36,14 +36,35 @@ const pointNames={intelligence:'智力',family:'家境',fitness:'体力',appeara
 let game=null,view='home',savedSettings={};
 let busy=false,error='',pending=null,controller=null,toastTimer,draftAction='';
 let apiProgress=null,apiProgressTimer=null;
+let receivedNarrative=null;
+const knownAPIKeys=new Set();
 try{savedSettings=JSON.parse(localStorage.getItem(SETTINGS)||'{}');}catch{}
 let settings=normalizeSettings(savedSettings,apiDefaults);
+rememberAPIKeys(savedSettings);rememberAPIKeys(settings);rememberAPIKeys({providers:apiDefaults});
 try{localStorage.setItem(SETTINGS,JSON.stringify(settings));}catch{}
 try{const raw=localStorage.getItem(KEY);if(raw)game=importSave(raw,lore);}catch{error='本地档案暂时无法读取，请从保存的文件或备份恢复。';}
 let language=normalizeLanguage(game?.profile?.language);
 try{language=normalizeLanguage(localStorage.getItem(LANGUAGE_KEY)||language);}catch{}
 let startupLanguage=language;
 const tr=text=>translateUI(text,language);
+function rememberAPIKeys(configuration){for(const provider of [configuration,...Object.values(configuration?.providers||{})]){if(typeof provider?.apiKey==='string'&&provider.apiKey.trim())knownAPIKeys.add(provider.apiKey.trim());}}
+function redactKnownSecrets(value){
+  let text=String(value??'');for(const key of [...knownAPIKeys].sort((a,b)=>b.length-a.length))text=text.split(key).join('[密钥已隐藏]');
+  return text.replace(/\bsk[-_][A-Za-z0-9._-]{8,}\b/g,'[密钥已隐藏]').replace(/\bAIza[A-Za-z0-9_-]{20,}\b/g,'[密钥已隐藏]').replace(/\bAQ\.[A-Za-z0-9_-]{20,}\b/g,'[密钥已隐藏]').replace(/\beyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b/g,'[令牌已隐藏]').replace(/\b(Bearer|Basic)\s+[A-Za-z0-9+/_=.-]{8,}/gi,'$1 [令牌已隐藏]').replace(/((?:api[ _-]?key|access[ _-]?token|auth[ _-]?token|authorization|token)["']?\s*[:=]\s*["']?)[A-Za-z0-9+/_=.-]{8,}/gi,'$1[令牌已隐藏]');
+}
+function clearReceivedNarrative(){receivedNarrative=null;}
+function currentReceivedNarrative(){return receivedNarrative?.game===game&&receivedNarrative?.action===pending?receivedNarrative:null;}
+function narrativeErrorMarkup(){
+  if(!error)return '';
+  const received=currentReceivedNarrative(),repair=received?.draft.canRepair===true,disabled=busy?'disabled':'';
+  return `<div class="error" role="alert"><p>${esc(error)}</p>${received?`<p class="small-copy">已收到的内容暂存在本页，关闭页面后不会保留。${repair?'整理会额外调用一次当前选中的服务，使用这份回复和原有事实，不重新生成整个月。':''}</p>${repair?`<button id="repair-received" class="secondary" ${busy||settings.mode==='offline'?'disabled':''}>整理已收到的内容</button> `:''}<button id="download-received" class="quiet" ${disabled}>下载本次返回诊断</button><p class="small-copy">诊断文件可能包含人生内容，只在你点击后导出，不会自动上传。${repair&&settings.mode==='offline'?'连接服务后可以整理内容。':''}</p>`:''}<button id="retry" class="secondary" ${disabled}>重新生成（新调用）</button> <button id="api-error-settings" class="quiet" ${disabled}>连接设置</button> <button id="offline-once" class="quiet" ${disabled}>暂不联网，继续</button></div>`;
+}
+async function downloadReceivedNarrative(){
+  if(busy)return;const received=currentReceivedNarrative();if(!received)return;
+  const metadata=received.draft.metadata||{},safeText=value=>redactKnownSecrets(String(value??'').slice(0,300)),tokens=value=>Number.isFinite(value)&&value>=0?value:null;
+  const diagnostic={format:'mao-life-narrative-diagnostic',version:1,appVersion:'1.17.3',exportedAt:new Date().toISOString(),provider:safeText(metadata.provider),model:safeText(metadata.model),finishReason:safeText(metadata.finishReason),inputTokens:tokens(metadata.inputTokens),outputTokens:tokens(metadata.outputTokens),errorCode:safeText(received.errorCode),receivedText:redactKnownSecrets(received.draft.receivedText)};
+  await saveText(`人生档案-返回诊断-${Date.now()}.json`,JSON.stringify(diagnostic,null,2));
+}
 function apiWaitingMarkup(){return `<div class="loading api-wait"><span class="spinner" aria-hidden="true"></span><div class="api-wait-copy"><strong data-api-phase role="status">${esc(tr('正在准备连接……'))}</strong><span data-api-elapsed aria-live="off"></span><small data-api-wait-note>${esc(tr('可以取消等待，刚才的安排会保留。'))}</small></div><button class="secondary" id="cancel">${esc(tr('取消等待'))}</button></div>`;}
 function updateApiProgress(){
   if(!busy||!controller||!apiProgress)return;
@@ -135,11 +156,13 @@ function render(){
   $('#custom-action')?.addEventListener('input',e=>{draftAction=e.target.value;});
   $('#custom-form')?.addEventListener('submit',e=>{e.preventDefault();const text=$('#custom-action').value.trim();if(text)takeAction({label:text,custom:true});});
   $('#retry')?.addEventListener('click',()=>pending&&takeAction(pending));
+  $('#repair-received')?.addEventListener('click',()=>{const received=currentReceivedNarrative();if(received?.draft.canRepair&&!busy)perform(received.action,false,received.draft);});
+  $('#download-received')?.addEventListener('click',downloadReceivedNarrative);
   $('#offline-once')?.addEventListener('click',()=>pending&&takeAction(pending,true));
   $('#api-error-settings')?.addEventListener('click',openSettings);
   $('#cancel')?.addEventListener('click',()=>{const button=$('#cancel');if(button){button.disabled=true;button.textContent=tr('正在取消……');}controller?.abort();});
-  $('#pin-form')?.addEventListener('submit',e=>{e.preventDefault();const text=$('#pin-input').value.trim();if(text&&(game.pins||[]).length<30){game.pins.push(text);persist();render();}});
-  document.querySelectorAll('[data-unpin]').forEach(b=>b.onclick=()=>{if(!busy){game.pins.splice(Number(b.dataset.unpin),1);persist();render();}});
+  $('#pin-form')?.addEventListener('submit',e=>{e.preventDefault();if(busy)return;const text=$('#pin-input').value.trim();if(text&&(game.pins||[]).length<30){clearReceivedNarrative();game.pins.push(text);persist();render();}});
+  document.querySelectorAll('[data-unpin]').forEach(b=>b.onclick=()=>{if(!busy){clearReceivedNarrative();game.pins.splice(Number(b.dataset.unpin),1);persist();render();}});
   $('#history-search')?.addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('.history-entry').forEach(el=>el.hidden=!el.textContent.toLowerCase().includes(q));});
   attachImageFallbacks();
   document.querySelectorAll('.api-panel').forEach(bindApiPanel);
@@ -208,7 +231,7 @@ function playScreen(){
       <div class="continue-row"><span>${options.length?'也可以照常过日子。':'日子一天天过去，生活继续。'}</span><button id="next-month" class="primary" ${busy?'disabled':''}>下个月 <span>→</span></button></div>
       <form id="custom-form" class="custom-choice"><label for="custom-action"><span>✎</span>写下这个月的安排</label><textarea id="custom-action" maxlength="2000" placeholder="例如：我打算去上海寻找工程师的工作，晚上继续自学，周末给家里写信……" ${busy?'disabled':''}>${esc(draftAction||pending?.custom&&pending.label||'')}</textarea><div><small>要去哪里，要见谁，要做些什么。</small><button class="primary" ${busy?'disabled':''}>就这样安排 <span>→</span></button></div></form>
       ${busy&&controller?apiWaitingMarkup():''}
-      ${error?`<div class="error" role="alert"><p>${esc(error)}</p><button id="retry" class="secondary">重试</button> <button id="api-error-settings" class="quiet">连接设置</button> <button id="offline-once" class="quiet">暂不联网，继续</button></div>`:''}
+      ${narrativeErrorMarkup()}
     </section>`}</section><aside class="right-column">${portraitCard()}<section class="notebook"><div class="eyebrow">人生的方向</div><h3>写给未来的自己</h3><p>${esc(game.profile.goal)}</p><div class="notebook-rule"></div><span class="tiny-label">来时的路</span><p class="small-copy">${esc(game.profile.backgroundText)}</p></section><section class="memory-card"><h3>不想被遗忘的事 <small>${pins.length}/30</small></h3><p class="muted small-copy">珍重的人，许下的诺言，心里的牵挂。</p>${pins.map((p,i)=>`<div class="pin"><span>${esc(p)}</span><button data-unpin="${i}" ${busy?'disabled':''} aria-label="移除这条记忆">×</button></div>`).join('')}<form id="pin-form"><textarea id="pin-input" maxlength="800" placeholder="例如：我的妹妹在东京读书。" ${busy?'disabled':''}></textarea><button class="secondary" ${busy||pins.length>=30?'disabled':''}>＋ 记住这件事</button></form></section></aside></div>`;
 }
 
@@ -323,12 +346,12 @@ function openNew(){
   $('#life-name').addEventListener('input',updatePersona);$('#life-name').addEventListener('change',updatePersona);
   form.onsubmit=e=>{
     e.preventDefault();let fields=Object.fromEntries(new FormData(e.target));fields.points=Object.fromEntries(Object.keys(pointNames).map(key=>[key,Number($(`#point-${key}`).value)]));fields.narrative=fields.freedom==='grounded'?'balanced':'player';fields=lockPersonaProfile(fields);
-    try{if(!locked)Object.assign(fields,birthplace.read());form.querySelectorAll('[data-identity-description]').forEach(toggle=>{if(!toggle.checked)fields[toggle.dataset.identityDescription]='';});fields.identity=characterIdentityFromForm(fields);fields.language=startupLanguage;const fresh=createGame(fields,lore);const prior=localStorage.getItem(KEY);if(prior)localStorage.setItem(KEY+'-backup',prior);game=fresh;language=normalizeLanguage(game.profile.language);pending=null;draftAction='';error='';view='play';persist();m.close();render();window.scrollTo(0,0);}catch(err){notify(err.message);}
+    try{if(!locked)Object.assign(fields,birthplace.read());form.querySelectorAll('[data-identity-description]').forEach(toggle=>{if(!toggle.checked)fields[toggle.dataset.identityDescription]='';});fields.identity=characterIdentityFromForm(fields);fields.language=startupLanguage;const fresh=createGame(fields,lore);const prior=localStorage.getItem(KEY);if(prior)localStorage.setItem(KEY+'-backup',prior);clearReceivedNarrative();game=fresh;language=normalizeLanguage(game.profile.language);pending=null;draftAction='';error='';view='play';persist();m.close();render();window.scrollTo(0,0);}catch(err){notify(err.message);}
   };
 }
 
 function readSlots(){const value=JSON.parse(localStorage.getItem(SLOTS)||'[]');if(!Array.isArray(value))throw new Error('保存位置无法读取，请先导出当前档案。');return value.slice(0,3);}
-function restoreGame(raw,dialog){const fresh=importSave(raw,lore);if(game)localStorage.setItem(KEY+'-backup',exportSave(game));game=fresh;language=normalizeLanguage(game.profile.language);try{localStorage.setItem(LANGUAGE_KEY,language);}catch{}persist();pending=null;draftAction='';error='';view='play';dialog?.close();render();window.scrollTo(0,0);notify('档案已读取。');}
+function restoreGame(raw,dialog){const fresh=importSave(raw,lore);if(game)localStorage.setItem(KEY+'-backup',exportSave(game));clearReceivedNarrative();game=fresh;language=normalizeLanguage(game.profile.language);try{localStorage.setItem(LANGUAGE_KEY,language);}catch{}persist();pending=null;draftAction='';error='';view='play';dialog?.close();render();window.scrollTo(0,0);notify('档案已读取。');}
 function bindImport(dialog){
   $('#import-save').onclick=()=>$('#save-file').click();
   $('#save-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>15000000)throw new Error('档案不能超过 15 MB。');restoreGame(await file.text(),dialog);}catch(err){notify(err.message);}};
@@ -361,8 +384,8 @@ function apiPanelBody(id){
     <label class="field">模型<input data-api-model autocomplete="off" spellcheck="false" list="${id}-models" value="${esc(connection.model||'')}" placeholder="${esc(DEFAULT_MODELS[settings.provider]||'填写服务商提供的模型名称')}"/><datalist id="${id}-models" data-api-models>${DEFAULT_MODELS[settings.provider]?`<option value="${esc(DEFAULT_MODELS[settings.provider])}"/>`:''}</datalist></label></div>
     <div class="api-actions"><button type="button" class="secondary" data-test-api>测试连接</button><button type="button" class="quiet" data-clear-api>清除此密钥</button><button type="button" class="quiet" data-reset-api>使用默认连接</button><button type="button" class="quiet" data-import-api>导入配置</button><input type="file" data-api-file accept=".json,application/json" hidden/></div><p data-api-status class="api-status" role="status">${offline?'当前不联网，将使用本地内容。':'开始或继续时会使用上方选中的服务。'}</p><p class="api-key-note">默认连接可直接使用。自行填写的配置保存在本机，人生档案不包含密钥。</p>`;
 }
-function redactApiError(error){let message=String(error?.message||'连接未能完成，请检查配置后重试。');for(const provider of Object.values(settings.providers||{})){if(provider.apiKey)message=message.split(provider.apiKey).join('[密钥已隐藏]');}return message;}
-function writeApiSettings(next){settings=next;try{localStorage.setItem(SETTINGS,JSON.stringify(next));return true;}catch{notify('连接设置暂时无法保存，请检查设备存储空间。');return false;}}
+function redactApiError(error){return redactKnownSecrets(error?.message||'连接未能完成，请检查配置后重试。');}
+function writeApiSettings(next){rememberAPIKeys(settings);rememberAPIKeys(next);settings=next;try{localStorage.setItem(SETTINGS,JSON.stringify(next));return true;}catch{notify('连接设置暂时无法保存，请检查设备存储空间。');return false;}}
 function readApiPanel(panel){
   const provider=panel.dataset.provider,fields=settings.providers[provider];
   const next={...settings,provider,mode:panel.querySelector('[data-offline]').checked?'offline':'online',providers:{...settings.providers}};
@@ -434,13 +457,14 @@ function prepareConnection(){
 function enterLife(){if(busy)return;if(!game){view='home';render();return;}if(!prepareConnection())return;language=normalizeLanguage(game.profile.language);view='play';render();window.scrollTo(0,0);}
 function openSettings(){
   if(busy)return;
-  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.2</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
+  const m=modal('连接设置',`${apiPanel('dialog-api')}<div class="api-modal-footer"><span>毛的遗产 · 人生档案 1.17.3</span><button class="primary" id="close-api-settings">完成</button></div>`,true);
   const panel=m.querySelector('.api-panel');bindApiPanel(panel);$('#close-api-settings').onclick=()=>{if(panel.commitApi())m.close();};
-  m.addEventListener('close',()=>{panel.commitApi();if(view==='home')render();});
+  m.addEventListener('close',()=>{panel.commitApi();if(view==='home'||currentReceivedNarrative())render();});
 }
 
 async function takeAction(action,offlineOnce=false){
   if(busy||!game||game.ended)return;
+  if(action!==pending)clearReceivedNarrative();
   if(!action.custom&&typeof action.originalLabel==='string'&&action.originalLabel.trim())action={...action,displayLabel:action.displayLabel||action.label,label:action.originalLabel};
   if(wantsFishGame(game,action)){
     busy=true;render();let harvest;
@@ -457,12 +481,28 @@ async function takeAction(action,offlineOnce=false){
       action={...action,meta:{...action.meta,encounterGame:encounter}};
     }
   }
+  return perform(action,offlineOnce);
+}
+async function perform(action,offlineOnce=false,recovery=null){
+  if(busy||!game||game.ended)return;
+  const received=currentReceivedNarrative();
+  if(recovery&&(received?.draft!==recovery||received.action!==action||recovery.canRepair!==true)){notify('这份回复已不对应当前安排，请重新选择。');return;}
+  if(recovery&&settings.mode==='offline'){notify('请先选择联网服务，再整理已收到的内容。');return;}
+  if(action!==pending)clearReceivedNarrative();
+  const sourceGame=game;
   busy=true;error='';pending=action;controller=new AbortController();startApiProgress();render();
   try{
-    const {state}=nextContext(game,lore,action);
-    const result=settings.mode==='offline'||offlineOnce||state.stats.health===0?localEvent(state,lore,action,null):await generateMonth(game,action,lore,null,settings,controller.signal);
-    game=advance(game,action,result,null,lore);persist();pending=null;draftAction='';window.scrollTo({top:0,behavior:'smooth'});
-  }catch(err){error=controller?.signal.aborted||err.name==='AbortError'||err.code==='API_CANCELLED'?'已取消等待。本月未推进，刚才的安排仍然保留。':redactApiError(err);}
+    let result;
+    if(recovery)result=await generateMonth(sourceGame,action,lore,null,settings,controller.signal,recovery);
+    else{const {state}=nextContext(sourceGame,lore,action);result=settings.mode==='offline'||offlineOnce||state.stats.health===0?localEvent(state,lore,action,null):await generateMonth(sourceGame,action,lore,null,settings,controller.signal);}
+    if(controller.signal.aborted)throw Object.assign(new Error('已取消等待。'),{code:'API_CANCELLED'});
+    if(game!==sourceGame||pending!==action)throw new Error('当前人生或安排已经变化，这份回复未写入。');
+    game=advance(sourceGame,action,result,null,lore);clearReceivedNarrative();persist();pending=null;draftAction='';window.scrollTo({top:0,behavior:'smooth'});
+  }catch(err){
+    const draft=err.narrativeDraft;
+    if(game===sourceGame&&pending===action&&draft&&typeof draft.receivedText==='string'&&draft.receivedText.trim())receivedNarrative={game:sourceGame,action,draft,errorCode:String(err.code||'NARRATIVE_INVALID_RESPONSE')};
+    error=controller?.signal.aborted||err.name==='AbortError'||err.code==='API_CANCELLED'?'已取消等待。本月未推进，刚才的安排仍然保留。':redactApiError(err);
+  }
   finally{stopApiProgress();busy=false;controller=null;render();}
 }
 async function saveText(filename,text){

@@ -163,11 +163,7 @@ export function requireKey(key,label){
   if(typeof key!=='string'||!key.trim())throw new Error('请先填写 '+label+' API Key。');
   return key.trim();
 }
-export function parseNarrative(text){
-  if(typeof text!=='string'||!text.trim())throw new Error('暂时没有收到完整文字，本月未推进，请重试。');
-  try{return JSON.parse(text.trim().replace(/^```(?:json)?\s*|\s*```$/g,''));}
-  catch{throw new Error('收到的文字格式不完整，本月未推进，可以重试。');}
-}
+export {parseNarrative} from './narrative-response.js';
 export function repairInstruction(error){
   return '请只修正下面的问题并重新输出完整JSON。不要推进时间、重算行动或改变已给出的结果：'+error.issues.join(' ')+' 保持原来的选项数量，遵守全部行文要求。';
 }

@@ -1,9 +1,9 @@
 import {generateMonth as generateDeepSeek,listModels as listDeepSeek,buildPrompt} from './deepseek.js';
 import {generateMonth as generateGemini,listModels as listGemini} from './gemini.js';
-import {validateResponse} from './engine.js';
 import {activeConnection,normalizeBaseUrl} from './api-settings.js';
-import {requestJSON,requireModel,requireKey,parseNarrative,repairInstruction,requireModelList} from './api-transport.js';
+import {requestJSON,requireModel,requireKey,requireModelList} from './api-transport.js';
 import {compactNarrativePrompt} from './prompt-compact.js';
+import {narrativeUserMessage,acceptNarrative,incompleteNarrative,narrativeMetadata} from './narrative-recovery.js';
 
 function customConnection(connection){
   const {protocol}=connection;
@@ -56,44 +56,28 @@ export async function listModels(settings,signal){
   return custom.protocol==='gemini'?listGemini(custom,signal):listCustom(custom,signal);
 }
 
-export async function generateMonth(s,action,lore,major,settings,signal){
+export async function generateMonth(s,action,lore,major,settings,signal,recovery=null){
   const connection=activeConnection(settings);
   if(connection.mode==='offline')throw new Error('当前使用本地叙事，请切换在线服务后再连接模型。');
-  if(connection.provider==='deepseek')return generateDeepSeek(s,action,lore,major,connection,signal);
-  if(connection.provider==='gemini'&&connection.protocol==='gemini')return generateGemini(s,action,lore,major,connection,signal);
+  if(connection.provider==='deepseek')return generateDeepSeek(s,action,lore,major,connection,signal,recovery);
+  if(connection.provider==='gemini'&&connection.protocol==='gemini')return generateGemini(s,action,lore,major,connection,signal,recovery);
   const custom=customConnection(connection);
-  if(custom.protocol==='gemini')return generateGemini(s,action,lore,major,custom,signal);
-  // A prose repair shares this deadline; it does not grant another full wait.
-  const deadline=Date.now()+180000;
-  const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major)),model=requireModel(custom.model),headers=headersFor(custom);
-  const messages=[{role:'user',content:prompt.user}];
-  for(let attempt=0;attempt<2;attempt++){
-    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
-    const timeoutMs=deadline-Date.now();
-    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
-    const anthropic=custom.protocol==='anthropic';
-    const body=anthropic?{model,system:prompt.system,messages,max_tokens:6000,stream:false}:{model,messages:[{role:'system',content:prompt.system},...messages],max_tokens:6000,stream:false};
-    const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:serviceLabel(custom),timeoutMs,route:custom.route});
-    let text;
-    if(anthropic){
-      if(response.stop_reason==='max_tokens')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');
-      if(response.stop_reason&&response.stop_reason!=='end_turn'&&response.stop_reason!=='stop_sequence')throw new Error('服务没有返回完整文字，本月未推进，请重试。');
-      text=Array.isArray(response.content)?response.content.filter(part=>part.type==='text').map(part=>part.text||'').join(''):'';
-    }else{
-      const choice=response.choices?.[0];
-      if(choice?.finish_reason==='length')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');
-      if(choice?.finish_reason&&choice.finish_reason!=='stop')throw new Error('服务没有返回完整文字，本月未推进，请重试。');
-      const content=choice?.message?.content;
-      text=typeof content==='string'?content:Array.isArray(content)?content.filter(part=>part.type==='text').map(part=>part.text||'').join(''):'';
-    }
-    const parsed=parseNarrative(text);
-    try{
-      const valid=validateResponse(parsed,{decision:prompt.decision,context:prompt.validationContext});
-      return {...valid,actionDelta:{},source:['gemini','shiwuyan'].includes(custom.provider)?custom.provider:'custom'};
-    }catch(error){
-      if(error.code!=='PROSE_REPAIR'||attempt===1)throw error;
-      messages.push({role:'assistant',content:JSON.stringify(parsed)},{role:'user',content:repairInstruction(error)});
-    }
-  }
+  if(custom.protocol==='gemini')return generateGemini(s,action,lore,major,custom,signal,recovery);
+  if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+  const prompt=recovery?.prompt||compactNarrativePrompt(buildPrompt(s,action,lore,major));
+  const model=requireModel(custom.model),headers=headersFor(custom),anthropic=custom.protocol==='anthropic';
+  const userText=narrativeUserMessage(prompt,recovery),relay=custom.provider==='shiwuyan';
+  // Keep the bundled relay's entire instruction in one user message. Some
+  // upstream protocol conversions omit the separate system field.
+  const messages=[{role:'user',content:relay?`${prompt.system}\n\n${userText}`:userText}];
+  const body=anthropic?{model,...(relay?{}:{system:prompt.system}),messages,max_tokens:6000,stream:false}:{model,messages:[{role:'system',content:prompt.system},...messages],max_tokens:6000,stream:false};
+  const response=await requestJSON(custom.baseUrl+'/'+(anthropic?'messages':'chat/completions'),{headers,body,signal,label:serviceLabel(custom),timeoutMs:180000,route:custom.route});
+  const choice=response.choices?.[0],finishReason=anthropic?response.stop_reason:choice?.finish_reason;
+  const content=anthropic?response.content:choice?.message?.content;
+  const text=typeof content==='string'?content:Array.isArray(content)?content.filter(part=>part?.type==='text'&&typeof part.text==='string').map(part=>part.text).join(''):'';
+  const metadata=narrativeMetadata(custom,response,finishReason);
+  if(['max_tokens','length'].includes(finishReason))throw incompleteNarrative(text,prompt,metadata);
+  if(!anthropic&&choice?.message?.refusal||finishReason&&!(anthropic?['end_turn','stop_sequence']:['stop']).includes(finishReason))throw incompleteNarrative(text,prompt,metadata,true);
+  return acceptNarrative(text,prompt,['gemini','shiwuyan'].includes(custom.provider)?custom.provider:'custom',metadata,recovery);
 }
 

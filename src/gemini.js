@@ -1,8 +1,8 @@
 import {buildPrompt,responseSchema} from './deepseek.js';
-import {validateResponse} from './engine.js';
 import {normalizeBaseUrl,DEFAULT_MODELS,GEMINI_RELAY_URL,GEMINI_OFFICIAL_URL} from './api-settings.js';
-import {requestJSON,requireModel,requireKey,parseNarrative,repairInstruction,requireModelList} from './api-transport.js';
+import {requestJSON,requireModel,requireKey,requireModelList} from './api-transport.js';
 import {compactNarrativePrompt} from './prompt-compact.js';
+import {narrativeUserMessage,acceptNarrative,incompleteNarrative,narrativeMetadata} from './narrative-recovery.js';
 
 export {buildPrompt,responseSchema};
 export const DEFAULT_MODEL=DEFAULT_MODELS.gemini;
@@ -39,36 +39,24 @@ export async function listModels(settings,signal){
   return requireModelList(names);
 }
 
-export async function generateMonth(s,action,lore,major,settings,signal){
-  // A prose repair shares this deadline; it does not grant another full wait.
-  const deadline=Date.now()+180000;
+export async function generateMonth(s,action,lore,major,settings,signal,recovery=null){
   const {baseUrl,label,key,route}=connection(settings),model=modelPath(settings.model||(settings.provider==='custom'?'':DEFAULT_MODEL));
-  const prompt=compactNarrativePrompt(buildPrompt(s,action,lore,major));
+  const prompt=recovery?.prompt||compactNarrativePrompt(buildPrompt(s,action,lore,major));
   const relay=baseUrl===GEMINI_RELAY_URL&&model==='gemini-4-argon';
   const generationConfig={maxOutputTokens:6000,responseMimeType:'application/json',...(relay?{thinkingConfig:{thinkingLevel:'low'}}:{})};
   // This relay's native conversion can omit systemInstruction and JSON mode.
   // Send the rules once in its user message. Repeating the whole system text
   // wastes input and can make the relay reason over the same constraints twice.
   // Ordinary Gemini endpoints retain their native system/user separation.
-  const userText=relay?`${prompt.system}\n\n下面是本次生活记录的输入资料：\n${prompt.user}\n\n请按上面的完整规则，只输出一个合法 JSON 对象。必须含 title、narrative、consequence、location、memory、actionDelta、options；actionDelta 为 {}，options 数量按 decision 决定。不要 Markdown、前言、列表或 JSON 之外的文字。`:prompt.user;
+  const content=narrativeUserMessage(prompt,recovery);
+  const userText=relay?`${prompt.system}\n\n下面是本次生活记录的输入资料：\n${content}`:content;
   const contents=[{role:'user',parts:[{text:userText}]}];
-  for(let attempt=0;attempt<2;attempt++){
-    if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
-    const timeoutMs=deadline-Date.now();
-    if(timeoutMs<1000)throw Object.assign(new Error('本次请求的等待时间已用完。本月未推进，可以重试。'),{code:'API_TIMEOUT'});
-    const response=await requestJSON(baseUrl+'/models/'+model+':generateContent',{headers:{'x-goog-api-key':key},body:{...(relay?{}:{systemInstruction:{parts:[{text:prompt.system}]}}),contents,generationConfig},signal,label,timeoutMs,route});
-    const candidate=response.candidates?.[0];
-    if(candidate?.finishReason==='MAX_TOKENS')throw new Error('这段文字未能写完，本月未推进，请重试或更换模型。');
-    if(response.promptFeedback?.blockReason||candidate?.finishReason&&candidate.finishReason!=='STOP')throw new Error('服务没有返回可用文字，本月未推进。可以调整行动后重试。');
-    const parts=candidate?.content?.parts;
-    const parsed=parseNarrative(Array.isArray(parts)?parts.filter(part=>!part.thought&&typeof part.text==='string').map(part=>part.text).join(''):'');
-    try{
-      const valid=validateResponse(parsed,{decision:prompt.decision,context:prompt.validationContext});
-      return {...valid,actionDelta:{},source:settings.provider==='custom'?'custom':'gemini'};
-    }catch(error){
-      if(error.code!=='PROSE_REPAIR'||attempt===1)throw error;
-      // Preserve thought signatures supplied by Gemini when continuing the conversation.
-      contents.push({role:'model',parts},{role:'user',parts:[{text:repairInstruction(error)}]});
-    }
-  }
+  if(signal?.aborted)throw Object.assign(new Error('请求已取消。本月未推进。'),{code:'API_CANCELLED'});
+  const response=await requestJSON(baseUrl+'/models/'+model+':generateContent',{headers:{'x-goog-api-key':key},body:{...(relay?{}:{systemInstruction:{parts:[{text:prompt.system}]}}),contents,generationConfig},signal,label,timeoutMs:180000,route});
+  const candidate=response.candidates?.[0],parts=candidate?.content?.parts;
+  const text=Array.isArray(parts)?parts.filter(part=>!part.thought&&typeof part.text==='string').map(part=>part.text).join(''):'';
+  const metadata=narrativeMetadata({...settings,model},response,candidate?.finishReason);
+  if(candidate?.finishReason==='MAX_TOKENS')throw incompleteNarrative(text,prompt,metadata);
+  if(response.promptFeedback?.blockReason||candidate?.finishReason&&candidate.finishReason!=='STOP')throw incompleteNarrative(text,prompt,metadata,true);
+  return acceptNarrative(text,prompt,settings.provider==='custom'?'custom':'gemini',metadata,recovery);
 }
