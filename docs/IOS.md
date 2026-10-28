@@ -1,10 +1,10 @@
 # iPhone 主屏幕安装版
 
-本版针对只有iPhone的使用方式，通过Safari添加到主屏幕，以独立窗口运行，支持iOS/iPadOS 15.4及以上。1.7.0构建共用本项目源码，共用9,074份人物档案、新闻配图、自由行动与JSON存档；当前线上部署版本及匿名访问验收见[iOS验证记录](IOS-VERIFICATION.md)。交付形式为PWA，尚未生成Apple签名的原生IPA，也没有提交TestFlight或App Store。
+本版针对只有iPhone的使用方式，通过Safari添加到主屏幕，以独立窗口运行，支持iOS/iPadOS 15.4及以上。1.15.0构建共用本项目源码，共用9,075份人物档案、新闻配图、自由行动与JSON存档；当前线上部署版本及匿名访问验收见[iOS验证记录](IOS-VERIFICATION.md)。交付形式为PWA，尚未生成Apple签名的原生IPA，也没有提交TestFlight或App Store。
 
 ## 安装
 
-安装入口：[毛的遗产 · 人生档案](https://mao-legacy-life-iphone.shady-shell-6921.chatgpt.site)。网站已公开，任何人都能通过链接打开，无需注册或登录。
+安装入口：[毛的遗产 · 人生档案](https://mao-legacy-life-iphone.linanna.chatgpt.site)。网站已公开，任何人都能通过链接打开，无需注册或登录。
 
 1. 在iPhone的Safari打开上面的安装入口。
 2. 点击分享按钮，选择“添加到主屏幕”。如果出现“作为网页App打开”，保持开启，再点“添加”。
@@ -17,7 +17,7 @@ Safari与主屏幕App的数据可能分开保存；Safari里已有的密钥、�
 
 新人生可选择三种行动自由度，游玩中显示本月属性净变化、收入与开支。时间旅行使用目的年月，返老还童后的身体年龄继续随实际经历推进；旧档案仍可导入。邓小平海洋身体的捕食可打开触屏小游戏，结束后的收获随本月行动保存，取消会回到原有进度。1.7另加入丧尸战斗与四类工作小游戏、持续伤势和装备、人物立绘，详情见[更新说明](RELEASE-v1.7.md)。
 
-此前1.6完整自动检查235项通过；当前1.7的最终测试与产物校验见[验证记录](VERIFICATION.md)。本机浏览器实测了捕食1条鱼后一次提交至次月，以及变成人、穿越至1976年1月并返老还童至18岁的连续操作，世界局势显示对应年代的中台日制度。界面截图与原生安装包核验见[本轮验证记录](VERIFICATION.md)。本轮没有iPhone或Android实机测试，主屏幕安装、系统分享与软键盘仍未在设备上验收。
+此前1.6完整自动检查235项通过；历史1.7的测试与产物校验见[验证记录](VERIFICATION.md)。本机浏览器实测了捕食1条鱼后一次提交至次月，以及变成人、穿越至1976年1月并返老还童至18岁的连续操作，世界局势显示对应年代的中台日制度。界面截图与原生安装包核验见[本轮验证记录](VERIFICATION.md)。本轮没有iPhone或Android实机测试，主屏幕安装、系统分享与软键盘仍未在设备上验收。
 
 ## 构建与发布
 
@@ -40,3 +40,7 @@ pnpm exec vite preview --mode ios --host 127.0.0.1 --port 4174
 - [WebKit：Safari 15.4的新功能](https://webkit.org/blog/12445/new-webkit-features-in-safari-15-4/)
 - [WebKit：存储隔离](https://webkit.org/tracking-prevention/)
 - [WebKit：Safari 17.2主屏幕App只复制Cookie，不复制其他本地存储](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/)
+
+## 1.15 更新的验收边界
+
+1.15按用户要求不运行游戏测试或浏览器游玩。仅完成静态审查、公开构建与发布流程；最终部署状态见IOS-VERIFICATION.md，人类实际游玩后再确认行为。

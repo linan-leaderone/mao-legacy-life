@@ -51,7 +51,7 @@ function foreignProseIssues(response,context){
     if(statedMonth&&!allowed.some(value=>statedYear===2020+Math.floor(value/12)&&statedMonth===((value%12)+12)%12+1))issues.push(`${field}必须使用已经落实的当前年月：${2020+Math.floor(expected/12)}年${((expected%12)+12)%12+1}月。`);
   }
   const continuation=context.continuation;
-  if(continuation?.income>0&&/you (?:are still |remain |are )?unemployed|you (?:did not|didn't|have not|haven't) (?:receive|earn|get) (?:any )?(?:wages|pay|income)|あなたは(?:まだ)?失業中|給料を(?:全く)?受け取っていません|당신은 여전히 실업|급여를 받지 못했습니다/i.test(narrative))issues.push('本月工资已到账且工作继续，用所选语言承接这份实际工作与收入。');
+  if(continuation?.income>0&&continuation.employment?.monthlyIncome>0&&/you (?:are still |remain |are )?unemployed|you (?:did not|didn't|have not|haven't) (?:receive|earn|get) (?:any )?(?:wages|pay|income)|あなたは(?:まだ)?失業中|給料を(?:全く)?受け取っていません|당신은 여전히 실업|급여를 받지 못했습니다/i.test(narrative))issues.push('本月工资已到账且工作继续，用所选语言承接这份实际工作与收入。');
   if(continuation?.encounterState?.infected&&/your infection (?:has )?(?:disappeared|cleared|healed)|you (?:are|remain) (?:completely )?infection[ -]free|感染は(?:完全に)?(?:治った|消えた|消失した)|감염이 (?:완전히 )?(?:사라졌|치유되었)/i.test(all))issues.push('感染仍在，不能用另一种语言撤销已有感染。');
   if(continuation?.encounter?.damageTaken>0&&/you (?:were |are |remain |escaped )?(?:unharmed|uninjured|unscathed)|あなたは(?:まったく|全く)?無傷|당신은 (?:완전히 )?무사히|상처 하나 없/i.test(all))issues.push('交锋已经造成伤势，保留实际受伤情况。');
   if(continuation?.fishHarvest?.eaten===0&&/you (?:caught|ate|devoured) (?:many|several|dozens|[1-9]\d*)|your body (?:has )?(?:grew|grown|became larger)|(?:沢山|たくさん|大量)の(?:小魚|魚)を(?:捕らえ|捕まえ|食べ)|身体が大きくなった|많은 물고기를 (?:잡았|먹었)|몸이 (?:크게 )?자랐/i.test(all))issues.push('本次捕食没有收获与成长，不能用所选语言虚构捕获或身体长大。');

@@ -1,5 +1,6 @@
 import {relationshipBehaviorDelta} from './adult-relationships.js';
 import {countryRegionNames} from './countries.js';
+import {economicActionPlan,parseEmploymentAction,settleEconomicAction} from './economy.js';
 // Personal declarations are stored as world facts; narration cannot undo them.
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
 export const monthOf=(year,month=1)=>(year-2020)*12+month-1;
@@ -69,7 +70,7 @@ function isFactionRole(title){
   return /afterglow|乐队|公司|组织|势力|社团|政党|党(?:的)?(?:主席|领袖|领导人|负责人|总书记)|民进党|国民党|基进党|自民党|工会|联盟|联合军|军队|阵线|委员会|协会/i.test(title);
 }
 export function declarationPlan(s,action,{region='china',ageMonths=216}={}){
-  const plan={facts:[],worldChanges:[],relationships:[],delta:{},ageMonths:null,dateMonth:null,occupation:null,ideology:null,employment:null,explicitFunds:null};
+  const plan={facts:[],worldChanges:[],relationships:[],delta:{},ageMonths:null,dateMonth:null,occupation:null,ideology:null,employment:null,economy:economicActionPlan(action)};
   if(!action?.custom||action.passive)return plan;
   const clauses=affirmedClauses(action.label),text=clauses.join('，');
   if(!text)return plan;
@@ -106,24 +107,8 @@ export function declarationPlan(s,action,{region='china',ageMonths=216}={}){
     const relations=clause.match(/(?:与|和)([\u4e00-\u9fa5A-Za-z·]{2,12})(?:成为朋友|结为盟友|合作|结盟)/);
     if(relations)plan.relationships.push(`${relations[1]}：已与本人建立合作关系`);
   }
-  for(const clause of clauses){
-    const stop=/(?:辞职|离职|停止工作|不再(?:打工|工作|上班|兼职))/.test(clause);
-    if(stop){plan.employment={kind:'暂未就业',monthlyIncome:0,monthlyExpenses:0};plan.occupation='暂未就业';continue;}
-    const previous=plan.employment||s.employment;
-    const profession=clause.match(/(?:成为|担任|入职|应聘|找到.{0,6})(?:了|一名|一位)?(工程师|教师|医生|护士|记者|工人|程序员|歌手|演员|公务员|研究员|配送员|快递员)/)?.[1];
-    const salary=clause.match(/(?:月薪|月工资|月收入|每月(?:工资|收入|挣|赚))[^\d]{0,3}(\d+(?:\.\d+)?)\s*(万|千|亿)?/);
-    const work=/打工|兼职|上班|务工|务农|送外卖|送快递|接单|工作赚钱|继续工作|正常工作|参加工作|开始工作|找到工作|做工|挣工资|赚工资|领工资/.test(clause);
-    if(!work&&!salary&&!profession)continue;
-    const knownRole=plan.occupation&&plan.occupation!=='暂未就业'?plan.occupation:/(?:工程师|教师|医生|护士|记者|工人|程序员|歌手|演员|公务员|研究员|配送员|快递员|Afterglow成员)/.test(s.person?.occupation||'')?s.person.occupation:null;
-    const specifiedJob=/外卖|送餐/.test(clause)?'外卖配送员':/快递|送货|派送/.test(clause)?'快递员':/餐饮|餐厅|饭店|服务员|咖啡|奶茶|厨师/.test(clause)?'餐饮服务员':/工厂|流水线|质检|零件|分拣/.test(clause)?'工厂工作人员':/会计|文员|办公|校对|录入/.test(clause)?'办公室职员':/务农|农场|采摘/.test(clause)?'务农':null;
-    const kind=profession||specifiedJob||(/兼职/.test(clause)?'兼职工作者':previous?.monthlyIncome>0?previous.kind:knownRole||'受雇工作者');
-    const income=salary?Number(salary[1])*({万:10000,千:1000,亿:1e8}[salary[2]]||1):previous?.monthlyIncome>0&&!profession&&(!specifiedJob||specifiedJob===previous.kind)?previous.monthlyIncome:1800+Math.round((s.stats.intelligence+s.stats.fitness)*13);
-    const preserved=!salary&&previous?.monthlyIncome>0&&kind===previous.kind;
-    plan.employment={kind,monthlyIncome:clamp(Math.round(income),0,1e12),monthlyExpenses:preserved?previous.monthlyExpenses:Math.min(1800,Math.round(income*0.3))};
-    if(!/主席|总统|首相/.test(plan.occupation||s.person?.occupation||''))plan.occupation=kind;
-  }
-  const money=text.match(/(?:赚(?:到|得)?了?|挣(?:到|得)?了?|获得收入|收入|领取工资|得到报酬|赚取)\s*(\d+(?:\.\d+)?)\s*(万|千|亿)?(?:元|块|日元|新台币|港币)?/);
-  if(money)plan.explicitFunds=clamp(Math.round(Number(money[1])*(money[2]==='亿'?1e8:money[2]==='万'?1e4:money[2]==='千'?1e3:1)),0,1e12);
+  plan.employment=parseEmploymentAction(s,action,{occupation:plan.occupation});
+  if(plan.employment&&!/主席|总统|首相/.test(plan.occupation||s.person?.occupation||''))plan.occupation=plan.employment.active?plan.employment.kind:plan.employment.previousOccupation||'暂未就业';
   if(/帮助|救助|捐赠|救援|赈灾|守约|偿还|道歉/.test(text))plan.delta.morality=2;
   if(/贪污|侵吞|诈骗|背叛|欺骗|抢劫/.test(text))plan.delta.morality=-3;
   if(/演出|演讲|表演|唱歌|化妆|交际|沟通|安慰/.test(text))plan.delta.charisma=2;
@@ -132,12 +117,7 @@ export function declarationPlan(s,action,{region='china',ageMonths=216}={}){
   return plan;
 }
 export function settlementPlan(s,action,plan,success){
-  const entries=[],job=success&&plan.employment?plan.employment:s.employment;
-  if(s.specialLife&&s.specialLife.body!=='human')return {job,entries};
-  if(success&&plan.explicitFunds!==null){entries.push({label:'本月劳动与收入',amount:plan.explicitFunds});}
-  else if(job?.monthlyIncome>0){entries.push({label:`${job.kind}收入`,amount:job.monthlyIncome});}
-  if(job?.monthlyExpenses>0)entries.push({label:'本月日常开支',amount:-job.monthlyExpenses});
-  return {job,entries};
+  return settleEconomicAction(s,action,plan,success);
 }
 export function validateAgencyRecord(s){
   const boundedMonth=m=>Number.isInteger(m)&&m>=monthOf(100)&&m<=monthOf(9999,12);

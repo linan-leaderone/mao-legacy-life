@@ -4,7 +4,7 @@
   "scope": "mod-fiction",
   "notes": [
     "人物政治倾向与战时言行属于架空模组；不得作为现实人物指控。",
-    "人物开局生日资料沿用已核实数据库；六名虚构人物缺少完整出生日期，年龄为本作时序适配。",
+    "人物开局生日资料沿用已核实数据库；七名虚构人物缺少完整出生日期，年龄为本作时序适配。",
     "阶段事件未发生时不导出未来阵营、职位与关系。"
   ],
   "personas": [
@@ -357,6 +357,141 @@
       ],
       "sourceUrls": [],
       "statsBasis": "用于虚构人物经历的初始估值，家庭资金与能力不代表原作给出的精确数值。"
+    },
+    {
+      "id": "tsurumaki_kokoro",
+      "name": "弦卷心",
+      "aliases": [
+        "弦卷 心",
+        "弦巻心",
+        "弦巻こころ",
+        "弦巻 こころ",
+        "つるまきこころ",
+        "Tsurumaki Kokoro",
+        "Kokoro Tsurumaki"
+      ],
+      "fictional": true,
+      "appearancePolicy": "explicit-only",
+      "birthDate": "",
+      "birthDatePrecision": "estimated",
+      "birthdayMonthDay": "08-08",
+      "openingAgeEstimate": 16,
+      "birthPlace": "日本（具体出生地未详）",
+      "place": "日本",
+      "startLocation": "日本",
+      "background": "custom",
+      "backgroundLabel": "弦卷家独生女与Hello, Happy World!主唱",
+      "occupation": "花咲川女子学园学生、Hello, Happy World!主唱",
+      "status": "在日本上学，与乐队伙伴安排排练、演出和日常活动",
+      "familyBackground": "你是富裕的弦卷家的独生女。父亲和母亲支持你的日常生活与音乐活动。亲属姓名、具体职业与近况尚未详明。弦卷家能够调动庞大的资金、工作人员和企业资源。",
+      "backgroundText": "你叫弦卷心，在日本的花咲川女子学园读书，也是Hello, Happy World!的主唱。你和濑田薰、北泽育美、松原花音、奥泽美咲一起排练，喜欢策划能让听众开心的演出。遇到新鲜事，你常会直接提出想法，找伙伴商量怎样做。你是弦卷家的独生女，家族财力足以与国家相比，能够为你的项目安排场地、交通、设备和工作人员。你习惯把这些资源用在自己的点子和身边人的需要上。",
+      "personality": {
+        "traits": ["好奇心强", "乐于尝试新点子", "表达直接", "重视别人的笑容", "习惯主动组织活动"],
+        "motivation": "让身边的人和观众开心，并把感兴趣的事情付诸行动。",
+        "everydayInterests": ["寻找有趣的活动", "歌唱与舞台表演", "与乐队伙伴一起安排演出"],
+        "communication": "语气明快，直接说出自己的想法；会认真听取眼前的具体困难，再寻找资源和帮手。"
+      },
+      "relationships": [
+        {
+          "name": "濑田薰",
+          "type": "bandmate",
+          "detail": "Hello, Happy World!的吉他手，与你一起排练和演出。"
+        },
+        {
+          "name": "北泽育美",
+          "type": "bandmate",
+          "detail": "Hello, Happy World!的贝斯手，与你一起参加乐队活动。"
+        },
+        {
+          "name": "松原花音",
+          "type": "bandmate",
+          "detail": "Hello, Happy World!的鼓手，与你一起准备演出。"
+        },
+        {
+          "name": "奥泽美咲",
+          "type": "bandmate",
+          "detail": "一起参加Hello, Happy World!活动的伙伴，常帮忙处理演出安排。"
+        }
+      ],
+      "modPolitics": {
+        "ideology": "尚未形成明确的政治纲领",
+        "stages": []
+      },
+      "points": {
+        "intelligence": 7,
+        "family": 10,
+        "fitness": 6,
+        "appearance": 8
+      },
+      "stats": {
+        "influence": 45,
+        "connections": 85,
+        "funds": 50000000,
+        "health": 90,
+        "stress": 8,
+        "morality": 70,
+        "promiscuity": 0,
+        "charisma": 88
+      },
+      "notes": [
+        "官方生日为8月8日，未公开出生年份。2020年初采用约16岁作为本作校园时序适配，不能据此倒推官方出生年份。",
+        "官方设定确认富裕家庭独生女；富可敌国的家族规模采用用户指定的模组适配。个人可调动资金不等同家族总资产。",
+        "具体出生城市、亲属姓名和精确家庭资产未详，不编造这些字段。",
+        "米歇尔是奥泽美咲的舞台身份，不新增一个独立的现实亲属或乐队成员；心在原作对应阶段对两者身份的理解有限。",
+        "立绘保留缺图状态；MOD参考素材仅留作出处，不自动替代已改绘的二次元像素头像。"
+      ],
+      "modLore": {
+        "scope": "source-metadata-only",
+        "openingPoliticalOffice": null,
+        "characterKey": "TSU_xjx",
+        "laterIdeology": {
+          "id": "technocracy",
+          "localizationKey": "TSU_technocracy",
+          "name": "闪耀未来主义",
+          "summary": "日本革命后的模组分支：生产资料公有、产业规划和劳动者再分配，重视科技、青年参与、公共福利与制度试验。",
+          "sourceRefs": [
+            {"file": "common/characters/TFR_MAO.txt", "key": "TSU_xjx"},
+            {"file": "localisation/simp_chinese/replace/_yuzedong_idealeader_l_simp_chinese.yml", "key": "TSU_technocracy_desc"}
+          ]
+        },
+        "laterRelationships": [
+          {"name": "羽泽鸫", "role": "组织联络与资源协作", "sourceEvent": "PRC_MAO5.61", "openingFact": false},
+          {"name": "华城绫女", "role": "革命组织之间的联络", "sourceEvent": "PRC_MAO5.91", "openingFact": false},
+          {"name": "丰川祥子", "role": "战后另一次演出中的接触", "sourceEvent": "PRC_MAO6.59", "openingFact": false}
+        ],
+        "laterEvents": [
+          {"id": "PRC_MAO5.61", "summary": "通过场地、资金与联络协助日共内的激进青年加入革命联合阵线。"},
+          {"id": "PRC_MAO6.5", "option": "PRC_MAO6.5.g", "summary": "革命后的领导人选举存在弦卷心胜选选项，原MOD该选项ai_chance为0。"},
+          {"id": "PRC_MAO6.50", "summary": "特定执政分支公开弦卷财团的技术与设施。"},
+          {"id": "PRC_MAO6.52", "summary": "推动财团财富与产业的重新分配。"},
+          {"id": "PRC_MAO6.54", "summary": "特定分支揭示米歇尔机甲技术。"},
+          {"id": "PRC_MAO6.56", "summary": "推进共同养育及相应公共服务。"},
+          {"id": "PRC_MAO6.57", "summary": "特定分支涉及弦卷财团的火星设施。"}
+        ],
+        "focusRefs": ["TSU_TWW_FOCUS_42", "TSU_TWW_FOCUS_90", "TSU_TWW_FOCUS_91", "TSU_TWW_FOCUS_93", "TSU_TWW_FOCUS_98", "TSU_TWW_FOCUS_100"],
+        "activationNote": "这里只保存MOD证据，不注册自动事件，不赋予开局政府职位；玩家明确引入后，政治身份仍以本轮已经发生的事实为准。"
+      },
+      "portraitReference": {
+        "sourceType": "mod-reference",
+        "characterKey": "TSU_xjx",
+        "path": "gfx/MAOYUANXIN/xjx.png",
+        "alternatePath": "gfx/MAOYUANXIN/TSU_KKR_xiao.png",
+        "displayPolicy": "pending-pixel-redraw"
+      },
+      "sourceRefs": [
+        {"file": "common/characters/TFR_MAO.txt", "key": "TSU_xjx"},
+        {"file": "events/TFR_MAO6_EVENT.txt", "key": "PRC_MAO6.5.g"},
+        {"file": "common/national_focus/TFR_national_focus_TSU.txt", "key": "TSU_TWW_FOCUS_42"},
+        {"file": "localisation/simp_chinese/replace/_yuzedong_event_l_simp_chinese.yml", "key": "PRC_MAO5.61.d"},
+        {"file": "localisation/simp_chinese/replace/_yuzedong_idealeader_l_simp_chinese.yml", "key": "TSU_technocracy_desc"}
+      ],
+      "sourceUrls": [
+        "https://www.mobimon.com.tw/bang-dream/character/tsurumaki-kokoro/index.aspx",
+        "https://bang-dream-gbp-en.bushiroad.com/character/hello-happy-world/tsurumaki-kokoro/",
+        "https://bang-dream.com/artist/hello-happy-world/tsurumaki-kokoro/",
+        "https://anime.bang-dream.com/2nd/character/hello-happy-world/"
+      ],
+      "statsBasis": "本作虚构开局估值。资金表示叙事中可调动的项目与个人资源，不是官方公布的家族资产；年龄和能力数值不冒充原作精确数据。"
     }
   ],
   "actors": [

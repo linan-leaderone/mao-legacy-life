@@ -3,6 +3,7 @@ import specialData from './data/personas-special.json' with {type:'json'};
 import curatedData from './data/personas-curated-v15.json' with {type:'json'};
 import catalogData from './data/personas-catalog.json' with {type:'json'};
 import modData from './data/personas-mod.json' with {type:'json'};
+import {declaredActorRegion,politicalActorContext,describePoliticalAuthority,politicalPlayerRegion} from './political-actors.js';
 
 const normalized=value=>String(value??'').normalize('NFKC').toLocaleLowerCase().replace(/[\s·・._—-]+/g,'');
 const DEFAULT_POINTS={intelligence:5,family:5,fitness:5,appearance:5};
@@ -63,24 +64,26 @@ export function findPersona(name){
 /** Only publicly reached stages belong in narration; route selection never reveals a future leader. */
 export function getPoliticalActors(state={}){
   const month=Number(state.month)||0;if(month<0)return [];
-  const known=new Set([...(state.seenEvents||[]),...(state.seenNews||[]),...(state.newsHistory||[]).filter(e=>e.month<=month).map(e=>e.id)]);
-  const april=state.profile?.scenario?.id==='mao-april',activeLeader=[...Object.values(state.worldOverrides||{}).map(x=>x.leader).filter(Boolean),...(april?['薄熙来','赖清德']:[])].join(' ');
-  const local=String(state.location||state.profile?.place||'');
-  const region=/台湾|台灣|台北|高雄|新竹/.test(local)?'taiwan':/日本|东京|大阪/.test(local)?'japan':/香港/.test(local)?'hongkong':/澳门/.test(local)?'macau':'china';
-  const all=[];
+  const known=new Set([...(state.seenEvents||[]),...(state.seenNews||[]),...(state.current?.majorId?[state.current.majorId]:[])].filter(id=>!Number.isFinite(state.eventMonths?.[id])||state.eventMonths[id]<=month));
+  for(const event of state.newsHistory||[])if(event.month<=month)known.add(event.id);
+  const april=state.profile?.scenario?.id==='mao-april',activeLeader=[...Object.values(state.worldOverrides||{}).filter(x=>x&&(!Number.isFinite(x.month)||x.month<=month)).flatMap(x=>[x.leader,x.headOfGovernment]).filter(Boolean),...(april?['薄熙来','赖清德']:[])].join(' ');
+  const region=politicalPlayerRegion(state),all=[],contexts=new Map();
   for(const actor of modData.actors){
+    // Hidden identities never become randomly published autonomous politicians.
+    if(actor.hiddenOnly)continue;
     if(actor.name===state.profile?.name)continue;
     if(april&&(['习近平','蔡英文'].includes(actor.name)||(state.person?.bodyIdentity==='赖清德'&&actor.name==='赖清德')))continue;
     if((actor.inactiveAfter||[]).some(id=>known.has(id))&&!activeLeader.includes(actor.name))continue;
     const stages=(actor.stages||[]).filter(s=>(s.requires||[]).every(id=>known.has(id))&&!(s.blockAfter||[]).some(id=>known.has(id)));
     const stage=stages.at(-1);if(!stage&&!activeLeader.includes(actor.name))continue;
     const merged={...actor,...stage};
+    merged.region=declaredActorRegion(state,merged);
     if((merged.blockAfter||[]).some(id=>known.has(id))&&!activeLeader.includes(actor.name))continue;
     // A completed player transfer overrides the incumbent without overwriting their personality.
     const override=state.worldOverrides?.[merged.region];
-    if(merged.incumbent&&override?.leader&&!override.leader.includes(actor.name))continue;
+    if(merged.incumbent&&override?.leader&&(!Number.isFinite(override.month)||override.month<=month)&&![override.leader,override.headOfGovernment].some(value=>value?.includes(actor.name)))continue;
     const relationships=(actor.relationships||[]).filter(r=>(r.requires||[]).every(id=>known.has(id)));
-    const explicitPoliticalRole=activeLeader.includes(actor.name)||(state.newsHistory||[]).some(e=>e.source==='player'&&e.month<=month&&`${e.actor||''} ${e.description||''}`.includes(actor.name)&&/任命|担任|领导|率领|组建.*(?:政府|军|政党)/.test(e.description||''));
+    const explicitPoliticalRole=activeLeader.includes(actor.name)||(state.newsHistory||[]).some(e=>['player','personal_action'].includes(e.source)&&e.month<=month&&`${e.actor||''} ${e.description||''}`.includes(actor.name)&&/任命|担任|领导|率领|组建.*(?:政府|军|政党)/.test(e.description||''));
     const civilWar=known.has('jp_hazawa_toyokawa_war')||known.has('world_japan_civil')||known.has('jp_hazawa_end')||/内战/.test(state.worldOverrides?.japan?.conflict||'');
     const isBand=BAND_MEMBERS.has(actor.id),toyokawa=actor.id==='toyokawa_sakiko';
     const autonomyEligible=isBand?(civilWar||explicitPoliticalRole):toyokawa?(known.has('jp_toyokawa_rise')||known.has('jp_emergency_committee')||explicitPoliticalRole):true;
@@ -93,7 +96,9 @@ export function getPoliticalActors(state={}){
       if(actor.name==='薄熙来'){role='中国国家主席';ideology='市场毛主义与太子党主席独裁';influence=95;}
       if(actor.name==='赖清德'){role='毛泽东借魂的台湾执政者';ideology='群众政治与毛主义';influence=90;}
     }
-    all.push({id:actor.id,name:actor.name,region:merged.region,ideology,role,priorities:merged.priorities||actor.priorities,relationships,influence,sourceRefs:merged.sourceRefs||actor.sourceRefs,local:merged.region===region,autonomyEligible,activityScope:scope});
+    if(!contexts.has(merged.region))contexts.set(merged.region,politicalActorContext(state,merged.region));
+    const current={id:actor.id,name:actor.name,region:merged.region,ideology,role,party:merged.party,jurisdiction:merged.jurisdiction,formerOffice:merged.formerOffice,officeStartMonth:merged.officeStartMonth,officeEndMonth:merged.officeEndMonth,priorities:merged.priorities||actor.priorities,relationships,influence,sourceRefs:merged.sourceRefs||actor.sourceRefs,local:merged.region===region,autonomyEligible,activityScope:scope};
+    all.push({...current,...describePoliticalAuthority(state,{...current,openingIdeology:actor.ideology},contexts.get(merged.region))});
   }
   return all.sort((a,b)=>Number(b.local)-Number(a.local)||b.influence-a.influence).slice(0,12).map(x=>structuredClone(x));
 }

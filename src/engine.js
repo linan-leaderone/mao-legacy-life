@@ -21,6 +21,10 @@ import {normalizeCharacterIdentity} from './character-identity.js';
 import {normalizeLanguage,localizeEvent,localizeNews} from './language.js';
 import {normalizeRelationshipGraph,updateRelationshipGraph,normalizeRelationshipUpdates,isValidRelationshipGraph} from './relationships.js';
 import {initializeOpeningRelationships} from './opening-relationships.js';
+import {initializePersonalHealth,recordPersonalHealth} from './personal-health.js';
+import {uninvitedHiddenCharacter} from './personal-cast.js';
+import {buildPoliticalActivityNews} from './political-actors.js';
+import {migrateEmployment,normalizeEconomicUpdates,ECONOMY_VERSION} from './economy.js';
 export const PLACES = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆','香港','澳门','中国台湾','日本'];
 export const BACKGROUNDS = [
   {id:'ordinary',name:'普通家庭',detail:'在城市与乡镇之间，寻找自己的位置。',funds:8000,knowledge:40,connections:35},
@@ -296,10 +300,11 @@ function politicalActivity(s){
   if(!actors.length)return [];
   const actor=actors[hash(s.seed+':actor:'+s.turn)%actors.length],priorities=actor.priorities||[];
   const concern=String(priorities[hash(s.seed+':priority:'+s.turn)%Math.max(1,priorities.length)]||'公共服务与地方事务');
+  const report=buildPoliticalActivityNews(s,actor,concern);if(!report)return [];
   const left=/社会|工人|劳工|共产|毛主义|左翼/.test(actor.ideology),conservative=/保守|专制|威权|极权|民族|主席独裁/.test(actor.ideology),key=left?'left':conservative?'stability':'reform';
-  const power=0.5+Math.min(80,actor.influence||30)/40;s.npcPressure??=pressureDefaults();s.npcPressure[key]=clamp(s.npcPressure[key]+power,-100,100);
-  const card=publishPersonalNews(s,{id:`npc_public_${s.turn}_${actor.id}`,title:`${actor.name}提出新的公共安排`,description:`${actor.name}围绕${concern}与相关人员开展磋商。支持者开始整理诉求和联系人，持不同意见的人要求说明资源来源及落实办法。这些活动正在改变当地的组织联系。`,region:actor.region||'china',source:'political_actor',actor:actor.name,ideology:actor.ideology});
-  s.npcActivity=[...(s.npcActivity||[]),{actor:actor.name,month:s.month,ideology:actor.ideology,pressure:key,delta:power}].slice(-30);
+  const power=(0.5+Math.min(80,actor.influence||30)/40)*(report.pressureScale??1);s.npcPressure??=pressureDefaults();if(report.pressureRegion==='china')s.npcPressure[key]=clamp(s.npcPressure[key]+power,-100,100);
+  const card=publishPersonalNews(s,{id:`npc_public_${s.turn}_${actor.id}`,...report});
+  s.npcActivity=[...(s.npcActivity||[]),{actor:actor.name,month:s.month,ideology:actor.ideology,region:report.pressureRegion,pressure:key,delta:report.pressureRegion==='china'?power:0}].slice(-30);
   return card?[card]:[];
 }
 function settleTerritoryEffects(s,lore){
@@ -540,7 +545,7 @@ export function createGame(input,lore){
   s.routeSelectionExplicit=!!input.routes;s.npcPressure=pressureDefaults();
   initializeSpecialLife(s,persona);applyOpeningScenario(s);
   if(birthplace&&s.location===location)s.position={unitId:openingUnit.id,label:birthplaceLabel(openingUnit),coordinates:[...openingUnit.center],precision:openingUnit.role,month:0,source:'opening',locationSnapshot:location};
-  updatePlayerPosition(s);initializeEncounterState(s);initializeOpeningRelationships(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
+  updatePlayerPosition(s);initializeEncounterState(s);initializeOpeningRelationships(s);initializePersonalHealth(s);s.pendingNews=enterMonth(s,lore);s.relationshipGraph=normalizeRelationshipGraph(s);s.current=localEvent(s,lore);delete s.pendingNews;return s;
 }
 export function actionEncounter(s,action){
   const plain={...action,meta:{...action.meta}};delete plain.meta.encounterGame;
@@ -550,6 +555,7 @@ export function actionEncounter(s,action){
 export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   const temp=structuredClone(s),result=resolveAction(s,action),current=currentAge(s),mode=freedomMode(s);
   delete temp._territorySettlement;temp.turn=(s.turn??s.history.length)+1;temp.timelineVersion=5;temp._statLedger=[];
+  initializePersonalHealth(temp,{legacy:true});
   const prepared=actionEncounter(s,action);temp.encounterState=prepared.state.encounterState;
   let encounterEffect=null,encounterResult=null;
   if(action.meta?.encounterGame){
@@ -561,14 +567,16 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   const plan=declarationPlan(s,action,{region:placeRegion(s.location),ageMonths:current.years*12+current.months});
   if(mode==='grounded'){plan.dateMonth=null;plan.ageMonths=null;if(s.stats.influence<65)plan.worldChanges=[];}
   const settlement=settlementPlan(s,action,plan,result.success);
-  if(settlement.entries.length&&(action.passive||classifyAction(action)==='family'))delete result.delta.funds;
+  if(settlement.moneyDeclared||settlement.entries.length&&(action.passive||classifyAction(action)==='family'))delete result.delta.funds;
   applyDelta(temp.stats,result.delta,temp._statLedger,'本月行动');
-  if(result.success){applyDelta(temp.stats,plan.delta,temp._statLedger,'行为与人际变化');if(plan.employment)temp.employment=settlement.job;}
+  if(result.success)applyDelta(temp.stats,plan.delta,temp._statLedger,'行为与人际变化');
+  temp.employment=settlement.job;temp.economyVersion=ECONOMY_VERSION;
+  result.settledEmployment=settlement.settledEmployment;result.employmentExpired=settlement.employmentExpired;
   for(const entry of settlement.entries)applyDelta(temp.stats,{funds:entry.amount},temp._statLedger,entry.label,true);
   temp.monthlyLedger=[...settlement.entries];
   if(encounterEffect){
     applyDelta(temp.stats,encounterEffect.delta,temp._statLedger,['zombie','combat'].includes(encounterResult.kind)?'遭遇与伤势':'工作中的表现',true);
-    if(encounterEffect.incomeBonus){applyDelta(temp.stats,{funds:encounterEffect.incomeBonus},temp._statLedger,'本月工作奖金',true);temp.monthlyLedger.push({label:'本月工作奖金',amount:encounterEffect.incomeBonus});}
+    if(encounterEffect.incomeBonus&&!(result.success&&(plan.economy?.transactions||[]).some(e=>['bonus','income-total'].includes(e.category)))){applyDelta(temp.stats,{funds:encounterEffect.incomeBonus},temp._statLedger,'本月工作奖金',true);temp.monthlyLedger.push({label:'本月工作奖金',amount:encounterEffect.incomeBonus,kind:'income',category:'bonus',source:'encounter'});}
     temp.encounterState={...temp.encounterState,...encounterEffect.encounterState};
     if(temp.encounterState.infected&&!s.encounterState?.infected)temp.encounterState.infectionTurn=temp.turn;
     result.encounterGame=encounterResult;result.encounterSummary=encounterEffect.summary;
@@ -579,6 +587,9 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
   if(infection.summary)result.summary+=' '+infection.summary;
   if(result.destination)temp.location=result.destination;
   if(!result.specialTransition)updatePersonFromAction(temp,action,result);
+  const personalHealth=recordPersonalHealth(temp,{action,success:result.success,month:s.month,turn:temp.turn});
+  applyDelta(temp.stats,personalHealth.delta,temp._statLedger,'确诊后的生活压力');
+  if(personalHealth.summary)result.summary+=' '+personalHealth.summary;
   advanceSpecialLife(temp,result,action);
   if(result.specialTransition&&temp.specialLife?.body==='human'){
     const priorOccupation=temp.person.occupation;updatePersonFromAction(temp,action,result);
@@ -606,8 +617,13 @@ export function nextContext(s,lore,action={label:'照常生活',passive:true}){
       const card=publishPersonalNews(temp,{id:`personal_achievement_${temp.turn}_${hash(action.label)}`,title:`${s.profile.name}的新行动受到关注`,description:`${plan.facts.join('；')}。消息已传到与此事相关的人群中，后续合作、质疑和资源安排围绕已经发生的结果展开。`,region:placeRegion(temp.location)==='ocean'?'global':placeRegion(temp.location),art:'science',source:'personal_action'});if(card)personalNews.push(card);
     }
   }
-  if(settlement.entries.length&&!encounterEffect)result.summary+=` 本月收入${settlement.entries.filter(e=>e.amount>0).reduce((n,e)=>n+e.amount,0)}，日常开支${-settlement.entries.filter(e=>e.amount<0).reduce((n,e)=>n+e.amount,0)}，已记入现有资金。`;
+  if(settlement.entries.length&&!encounterEffect)result.summary+=` 本次资金增加${settlement.entries.filter(e=>e.amount>0).reduce((n,e)=>n+e.amount,0)}、减少${-settlement.entries.filter(e=>e.amount<0).reduce((n,e)=>n+e.amount,0)}，具体收支已记入现有资金。`;
   result.declarations=declarations?plan:null;result.freedom=mode;
+  if(settlement.employmentExpired&&settlement.settledEmployment){
+    const job=settlement.settledEmployment;
+    temp.person.occupation=job.previousOccupation||'暂未固定就业';
+    temp.person.status=job.previousStatus||'上一份工作已经结清，接下来的安排尚待确定';
+  }
   adaptWorld(temp,lore);temp.actionResult=result;
   const reports=enterMonth(temp,lore);syncPublicIdentity(temp);
   temp.pendingNews=[...personalNews,...reports,...publicReactions(temp,s,lore),...politicalActivity(temp)];
@@ -631,13 +647,14 @@ function normalizeWorldUpdates(raw){
   });
 }
 export function validateResponse(r,{legacy=false,decision,context}={}){
+  if(!legacy&&uninvitedHiddenCharacter(r||{},context?.explicitCast)){const error=new Error('这一页出现了尚未相识的人物，请重新整理。');error.code='PROSE_REPAIR';error.issues=['未由本人选择或主动引入弦卷心，本次不得让她自行出场；保留已有熟人及实际经历。'];throw error;}
   const optionsValid=Array.isArray(r?.options)&&(legacy?r.options.length<=5:decision===false?r.options.length===0:decision===true?r.options.length>=3&&r.options.length<=5:r.options.length===0||(r.options.length>=3&&r.options.length<=5));
   if(!r||typeof r.title!=='string'||!r.title.trim()||typeof r.narrative!=='string'||r.narrative.trim().length<20||!optionsValid)throw new Error('这一页未能完整写下，请重试。时间仍停留在原处。');
   if(!legacy&&[r.title,r.narrative,r.consequence||'',r.memory||'',...r.options.flatMap(o=>[o.label||'',o.description||'']),...Object.values(r.personUpdate||{}).flat()].some(t=>typeof t==='string'&&META_LANGUAGE.test(t))){const error=new Error('这一页的文字未能接续当前经历，请重试。');error.code='PROSE_REPAIR';error.issues=['删除局外规则说明，把正文和身份记录改为人物实际经历。'];throw error;}
   if(!legacy){const issues=proseIssues(r,context||{});if(issues.length){const error=new Error('这段文字需要重新整理，时间仍停留在原处。');error.code='PROSE_REPAIR';error.issues=issues;throw error;}}
   const options=r.options.map(o=>{if(typeof o.label!=='string'||!o.label.trim())throw new Error('这份安排不完整，请重试。');const originalLabel=typeof o.originalLabel==='string'&&o.originalLabel.trim()?o.originalLabel.slice(0,140):undefined;const check={stat:Object.hasOwn(STAT_NAMES,o.check?.stat)?o.check.stat:classifyAction(originalLabel?{...o,label:originalLabel}:o),difficulty:clamp(Number.isFinite(o.check?.difficulty)?o.check.difficulty:45,10,95)};return {label:o.label.slice(0,140),...(originalLabel?{originalLabel}:{}),description:String(o.description||'').slice(0,400),delta:cleanDelta(o.delta),check};});
   if(new Set(options.map(o=>o.label)).size!==options.length)throw new Error('这份安排出现了重复，请重试。');
-  return {title:r.title.slice(0,100),narrative:r.narrative.slice(0,6000),consequence:String(r.consequence||'').slice(0,2000),options,memory:String(r.memory||'').slice(0,1000),actionDelta:{},location:typeof r.location==='string'?r.location.slice(0,100):null,decision:options.length>0,personUpdate:r.personUpdate&&typeof r.personUpdate==='object'?r.personUpdate:{},worldUpdates:normalizeWorldUpdates(r.worldUpdates),relationshipUpdates:normalizeRelationshipUpdates(r.relationshipUpdates),newsTranslations:cleanNewsTranslations(r.newsTranslations),source:'deepseek'};
+  return {title:r.title.slice(0,100),narrative:r.narrative.slice(0,6000),consequence:String(r.consequence||'').slice(0,2000),options,memory:String(r.memory||'').slice(0,1000),actionDelta:{},location:typeof r.location==='string'?r.location.slice(0,100):null,decision:options.length>0,personUpdate:r.personUpdate&&typeof r.personUpdate==='object'?r.personUpdate:{},economicUpdates:Array.isArray(r.economicUpdates)?r.economicUpdates.slice(0,12).filter(e=>e&&typeof e==='object').map(e=>({kind:e.kind,category:e.category,amount:e.amount,label:String(e.label||'').slice(0,100),evidence:String(e.evidence||'').slice(0,1200)})):[],worldUpdates:normalizeWorldUpdates(r.worldUpdates),relationshipUpdates:normalizeRelationshipUpdates(r.relationshipUpdates),newsTranslations:cleanNewsTranslations(r.newsTranslations),source:'deepseek'};
 }
 function cleanNewsTranslations(raw){return Array.isArray(raw)?raw.slice(0,30).filter(row=>row&&typeof row.id==='string'&&typeof row.title==='string'&&typeof row.description==='string').map(row=>({id:row.id.slice(0,160),title:row.title.slice(0,160),description:row.description.slice(0,4000)})):[];}
 function translatedNews(news,response,language){
@@ -660,13 +677,18 @@ export function advance(s,action,response,major=null,lore){
     }
   }
   settleTerritoryEffects(next,lore);syncGovernments(next,lore);delete next._territorySettlement;
-  const extraLedger=next._statLedger||[];delete next._statLedger;
-  next.statChanges=Object.keys(STAT_NAMES).filter(k=>next.stats[k]!==s.stats[k]).map(k=>({key:k,label:STAT_NAMES[k],before:s.stats[k]??0,after:next.stats[k],delta:next.stats[k]-(s.stats[k]??0),reasons:[...new Set([...(next.statChanges.find(c=>c.key===k)?.reasons||[]),...extraLedger.filter(e=>e.key===k).map(e=>e.reason)])]}));
   const newPublicChange=(next.person.publicChanges||[]).some(id=>!s.person.publicChanges?.includes(id));
   const fixedIdentity=newPublicChange||!!actionResult.declarations?.occupation||!!next.person.authorityOverride;
-  const identityUpdate=fixedIdentity?{...response.personUpdate,occupation:undefined,status:undefined}:response.personUpdate;
+  const identityUpdate=fixedIdentity||actionResult.employmentExpired?{...response.personUpdate,occupation:undefined,status:undefined}:response.personUpdate;
   next.relationshipGraph=updateRelationshipGraph(next,{action,response,success:actionResult.success});
   if(!actionResult.specialTransition)mergePersonUpdate(next,identityUpdate,action);
+  const extraMoney=normalizeEconomicUpdates(response.economicUpdates,{action,response,existingEntries:next.monthlyLedger||[]});
+  for(const entry of extraMoney){applyDelta(next.stats,{funds:entry.amount},next._statLedger??=[],entry.label,true);next.monthlyLedger.push(entry);}
+  actionResult.economicUpdates=extraMoney;
+  const healthOutcome=recordPersonalHealth(next,{action,response,source:'response',month:s.month,turn:next.turn});
+  applyDelta(next.stats,healthOutcome.delta,next._statLedger??=[],'确诊后的生活压力');
+  const extraLedger=next._statLedger||[];delete next._statLedger;
+  next.statChanges=Object.keys(STAT_NAMES).filter(k=>next.stats[k]!==s.stats[k]).map(k=>({key:k,label:STAT_NAMES[k],before:s.stats[k]??0,after:next.stats[k],delta:next.stats[k]-(s.stats[k]??0),reasons:[...new Set([...(next.statChanges.find(c=>c.key===k)?.reasons||[]),...extraLedger.filter(e=>e.key===k).map(e=>e.reason)])]}));
   next.current={...response,location:next.location,news:translatedNews(news,response,next.profile.language),decision:response.options.length>0};
   next.history.push({month:s.month,targetMonth:next.month,turn:next.turn,position:structuredClone(next.position),event:structuredClone(s.current),action:{label:action.label.slice(0,2000),...(action.displayLabel?{displayLabel:String(action.displayLabel).slice(0,2000)}:{}),custom:!!action.custom,passive:!!action.passive},consequence:response.consequence||actionResult.summary,delta:Object.fromEntries(next.statChanges.map(c=>[c.key,c.delta])),statChanges:structuredClone(next.statChanges),actionResult,stats:{...next.stats}});
   if(response.memory)next.memories=[...next.memories,{month:s.month,text:response.memory}].slice(-80);
@@ -728,6 +750,8 @@ export function importSave(text,lore){
   if(!isValidRelationshipGraph(s.relationshipGraph))throw new Error('这份档案的人物关系记录不完整。');
   initializeOpeningRelationships(s,{legacy:true});
   s.relationshipGraph=normalizeRelationshipGraph(s);
+  initializePersonalHealth(s,{legacy:true});
+  migrateEmployment(s);
   s.profile.scenario??={id:'standard',version:1};
   if(!['standard','mao-april'].includes(s.profile.scenario.id)||s.profile.scenario.version!==1)throw new Error('这份档案的时代记录不完整。');
   validateTerritorialState(s);validatePlayerPosition(s);syncGovernments(s,lore);

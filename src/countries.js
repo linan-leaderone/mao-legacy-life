@@ -21,6 +21,14 @@ export function countryByIso(iso,state){return getCountryContext(state||{},iso);
 const CURRENT_FIELDS=['leader','headOfState','headOfGovernment','government','governmentTypeId','ideology','ideologyId','ideologyGroup','rulingParty','parties','capital','stage','factionId','cosmeticTag','conflict','regionalConflict','institutions','terms','economy','economyId','alliance','subjectOf','nationalSpirits','focusTreeIds','laws','ministers'];
 function datedPatch(value,month){return value&&typeof value==='object'&&!Array.isArray(value)&&(!Number.isFinite(value.month)||value.month<=month)?value:null;}
 function copyCurrent(target,patch){if(!patch)return;for(const key of CURRENT_FIELDS)if(Object.hasOwn(patch,key))target[key]=clone(patch[key]);}
+// Repair only an unchanged, automatically retained opening snapshot. Explicit
+// worldOverrides and later governments keep their declared political choices.
+function openingIdeologySnapshot(patch,baseline){
+ if(!patch||baseline.ideologyAdaptation?.id!=='palestine-social-democracy'||patch.source==='player'||patch.source==='personal_action')return patch;
+ if(patch.leader!==baseline.leader||patch.government!==baseline.government||patch.ideology!==baseline.modIdeology)return patch;
+ if(patch.ideologyGroup&&patch.ideologyGroup!==baseline.ideologyGroup||patch.ideologyId&&patch.ideologyId!==baseline.modIdeologyId)return patch;
+ return {...patch,ideology:baseline.ideology,ideologyId:baseline.ideologyId,ideologyGroup:baseline.ideologyGroup};
+}
 /** Static MOD evidence remains in baseline. Only public state and explicit changes
  * become current facts; future/releasable TAGs never replace the opening country. */
 export function getCountryContext(state={},query){
@@ -32,7 +40,7 @@ export function getCountryContext(state={},query){
  const month=Number(state.month)||0;
  if(month<0){for(const key of CURRENT_FIELDS)result[key]=['nationalSpirits','focusTreeIds','parties','institutions','terms'].includes(key)?[]:null;result.stage='historical';result.factionId=identity.region;result.government=`${2020+Math.floor(month/12)}年的当地管治体系`;result.summary='当地制度与生活条件以抵达年代已经确认的情况为准。';result.currentSource='historical-unknown';}
  const candidate=datedPatch(state.worldState?.[identity.region]||state.worldState?.[identity.iso],month);
- const current=candidate&&CURRENT_FIELDS.some(key=>Object.hasOwn(candidate,key))?candidate:null;
+ const current=candidate&&CURRENT_FIELDS.some(key=>Object.hasOwn(candidate,key))?openingIdeologySnapshot(candidate,baseline):null;
  const declared=datedPatch(state.worldOverrides?.[identity.region]||state.worldOverrides?.[identity.iso],month);
  const patch=normalizedGovernmentOverride(identity.region,declared);
  if(current||patch){copyCurrent(result,current);copyCurrent(result,patch);result.currentSource='dynamic';
