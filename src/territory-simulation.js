@@ -1,5 +1,5 @@
 import openingData from './data/opening-control.json' with {type:'json'};
-import {getGeographyUnit,geographyAncestors} from './geography.js';
+import {getGeographyUnit,geographyAncestors,geographyUnits} from './geography.js';
 import {getOpeningFaction} from './opening-control.js';
 import {countryByTag} from './countries.js';
 import {REGIMES} from './regime-rules.js';
@@ -10,7 +10,8 @@ const VERSION=1;
 const hash=value=>{let h=2166136261;for(const c of String(value)){h^=c.codePointAt(0);h=Math.imul(h,16777619);}h^=h>>>16;return h>>>0;};
 const random=value=>(hash(value)+1)/4294967297;
 const lifeSeed=state=>String(state.seed??state.id??'legacy-territory-control-v1');
-const isLocal=unit=>unit&&!['country','province'].includes(unit.role);
+const administrativeParents=new Set(geographyUnits.map(unit=>unit.parentId).filter(Boolean));
+const isLocal=unit=>unit&&unit.role!=='country'&&(unit.role!=='province'||!administrativeParents.has(unit.id));
 const cell=(unit,size=1)=>`${unit.country}:${Math.floor((unit.center?.[0]||0)/size)}:${Math.floor((unit.center?.[1]||0)/size)}`;
 const anchors=new Map();
 const dividedCountries=new Set();
@@ -103,6 +104,7 @@ function extraCivilActors(state,unit){
     actors.set(id,{id,tag:tag||known?.tag||null,name:name||known?.name||id,leader:known?.leader||null,government:known?.government||`${name||known?.name||id}地方管治`,ideology:known?.ideology||null,region:unit.region,currentSource:'civil-war',weight:1.35});
   };
   for(const [id,patch] of Object.entries(state.territoryOverrides||{})){
+    if(patch.source==='war_dynamics')continue;
     const place=getGeographyUnit(id);if((place?.region!==unit.region&&id!==`region:${unit.region}`)||Number.isFinite(patch.month)&&patch.month>state.month)continue;
     add(patch.controllerId||patch.ownerId||patch.controller,patch.controller||patch.ownerName,patch.ownerTag);
     add(patch.attackerId,patch.attackerName,patch.attackerTag);

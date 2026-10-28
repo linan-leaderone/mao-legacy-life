@@ -150,7 +150,7 @@ export function territoryExposure(state,location=state.location,lore){
 export function controllerColor(id){
   const fixed={china:'#bc7261',taiwan:'#70a285',japan:'#7f95b9',korea:'#ad93b4',hongkong:'#b49d62',macau:'#92a47c',AFG:'#598bb6',TAL:'#b6864b',SYR:'#b56a64',ROJ:'#d1b14b',HTS:'#5e9b78',FSA:'#9373b4',YEM:'#5793b5',HOU:'#b56a74',AAS:'#b89545',USA:'#b66b65',USB:'#5d8db7',taiwan_left:'#bc665f',taiwan_dpp:'#66a385',taiwan_kmt:'#5b8bbd',taiwan_revanchist:'#bc9650',japan_left:'#bd675e',japan_toyokawa:'#6586b2'};
   const raw=String(id||''),key=raw.replace(/^faction:/,'');
-  const aliases={afg:'AFG',syr:'SYR',yem:'YEM',SDF:'ROJ'};
+  const aliases={afg:'AFG',syr:'SYR',yem:'YEM',SDF:'ROJ',china_initial:'china',taiwan_takeover:'china',china_leftfront:'taiwan_left'};
   if(fixed[aliases[key]||key])return fixed[aliases[key]||key];if(raw.startsWith('contested:'))return '#a59f93';
   let hash=0;for(const c of String(id))hash=(Math.imul(hash,31)+c.charCodeAt(0))|0;
   return `hsl(${Math.abs(hash)%360} 30% 63%)`;

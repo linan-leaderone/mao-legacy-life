@@ -1,4 +1,5 @@
 import {personalHealthContext,healthFollowup} from './personal-health.js';
+import {lifeRhythmContext,lifeTaskIssues,completedLifeTasks} from './life-rhythm.js';
 const clean=value=>String(value||'').replace(/\s+/g,' ').trim();
 const short=(value,max=180)=>clean(value).slice(0,max);
 const last=value=>Array.isArray(value)?value.at(-1):undefined;
@@ -7,16 +8,14 @@ const choice=(state,items)=>items[((state.turn??state.month??0)%items.length+ite
 
 function activeThread(state,action){
   if(action&&!action.passive)return short(action.label,400);
-  // A quiet month follows the most recent unfinished work instead of choosing a new biography.
-  const history=state.history||[];
-  for(let i=history.length-1;i>=Math.max(0,history.length-3);i--){
-    if(!history[i].action?.passive)return short(history[i].action?.label,400);
-  }
-  return short(last(state.person?.projects)||state.employment?.kind||state.person?.occupation,400);
+  const now=state.turn??state.history?.length??0;
+  // Persistent identity is not an instruction to repeat its last errand forever.
+  return short(state.lifeRhythm?.openThreads?.find(t=>t.expiresTurn>=now&&now-t.turn<=2)?.text,400);
 }
 
-export function buildContinuityContext(source,target,action,resolution=target.actionResult){
+export function buildContinuityContext(source,target,action,resolution=target.actionResult,nextEvent=null){
   const previous=last(source.history),income=(target.monthlyLedger||[]).filter(e=>e.amount>0&&['wages','wage','salary','bonus','work'].includes(e.category||e.kind)).reduce((n,e)=>n+e.amount,0);
+  const rhythm=lifeRhythmContext(source,target,action,nextEvent);
   return {
     thread:activeThread(source,action),action:short(action?.label,800),passive:!!action?.passive,language:target.profile?.language||'zh-CN',
     outcome:short(resolution?.summary,1200),success:resolution?.success!==false,
@@ -26,7 +25,7 @@ export function buildContinuityContext(source,target,action,resolution=target.ac
     recentFacts:(target.person?.facts||[]).slice(-4),employment:target.employment||null,settledEmployment:resolution?.settledEmployment||null,personalHealth:personalHealthContext(target),income,
     encounter:resolution?.encounterGame||null,encounterSummary:short(resolution?.encounterSummary,800),
     encounterState:target.encounterState||null,fishHarvest:action?.meta?.fishGame?target.specialLife?.lastFishGame||null:null,
-    nextStep:'承接刚完成的行动，写一件由其结果带来的具体后续事务，再写已有资源、关系、身体状况或所在地怎样影响处理。不得重复上一段过程，不另起无关生活。'
+    rhythm,nextStep:rhythm.instruction
   };
 }
 
@@ -96,7 +95,15 @@ function encounterFollowup(state,resolution){
 export function continuityNarrative(state,action,resolution=state.actionResult,baseEvent={}){
   if(!action||state.person?.deceased)return baseEvent;
   const text=activeThread(state,action),person=state.person||{},plan=resolution?.declarations;
-  let result=encounterFollowup(state,resolution)||healthFollowup(state,action);
+  const healthChanged=state.personalHealth?.recentChanges?.some(c=>['diagnosis','disclosure'].includes(c.kind));
+  const healthAction=!action.passive&&/病|医院|治疗|服药|检查|复查|身体|感染|HIV/i.test(action.label||'');
+  let result=encounterFollowup(state,resolution)||((healthChanged||healthAction)?healthFollowup(state,action):null);
+  // Passing a month brings the selected new event. Employment, a former errand,
+  // a stable diagnosis or a military identity cannot overwrite every future draw.
+  if(action.passive&&!result)return {...baseEvent,continuity:false};
+  // The consequence already tells how a short errand was completed. Continue
+  // with new life rather than inventing missing paperwork for the same batch.
+  if(!result&&completedLifeTasks(baseEvent.consequence||resolution?.summary).length)return {...baseEvent,continuity:false};
   if(!result&&state.specialLife?.kind==='deng_ocean'&&state.specialLife.stage<4)result=oceanFollowup(state,action,resolution);
   if(!result&&plan?.dateMonth!==null&&Number.isInteger(plan?.dateMonth))result={title:'抵达之后的安排',narrative:`你在${date(state.month)}的${state.location}确认眼前的生活条件，按照已经抵达的年月辨认道路、住处和能够取得的消息。出发前的记忆与已经完成的身体变化保留下来，你先处理安顿和联系的问题，原有计划需要用这里能找到的物资继续落实。`};
   if(!result&&state.specialLife?.kind==='deng_ocean'&&state.specialLife.stage===4&&/上岸|登陆|海岸|人形|化形/.test(text))result={title:'岸边留下的安排',narrative:state.specialLife.body==='human'?`你在${state.location}沿着刚才找到的落脚处安排生活，先确认能取得衣物、食物和消息的地方。已经完成的人形变化保留下来，原有记忆帮助你与附近的人交流。海中的经历没有消失，你把眼前需要办理的身份与生活事项记下来，接下来从这里继续。`:`你停留在${state.location}的岸边，沿刚才确认过的潮间带寻找遮蔽物。身体已经能够离开水面，觅食和休息仍需顾及现有呼吸与移动能力。你留意附近道路和行人的动静，先记住回到海里的通道，再决定接下来向哪里移动。`};
@@ -123,14 +130,14 @@ export function continuityNarrative(state,action,resolution=state.actionResult,b
   if(!result&&state.encounterState?.infected===true)result={title:baseEvent.title,narrative:baseEvent.narrative};
   if(!result)return baseEvent;
   if(state.encounterState?.infected===true&&!['zombie','combat'].includes(resolution?.encounterGame?.kind))result.narrative+='此前受到的感染仍未解除，你把查看身体变化和寻找照护也留在接下来的安排里。';
-  // Existing choices remain available, but at least the first two follow the same personal thread.
-  const options=!state.specialLife&&baseEvent.options?.length?baseEvent.options.map((option,index)=>index<2?(index===0?{label:'继续处理这件事的后续',description:'按照已经完成的部分，处理眼前仍需落实的安排。',delta:{},check:{stat:'intelligence',difficulty:35}}:{label:'检查现有资源和身体情况',description:'先检查这件事留下的开支、装备或身体负担，再安排下一步。',delta:{stress:-1},check:{stat:'intelligence',difficulty:25}}):option):baseEvent.options;
-  return {...baseEvent,...result,options,continuity:true};
+  // Keep the new month's alternatives instead of repeatedly offering the same
+  // generic follow-up option, which previously trapped later turns in one topic.
+  return {...baseEvent,...result,continuity:true};
 }
 
 export function continuityIssues(response,context){
   if(!context)return [];
-  const narrative=clean(response.narrative),issues=[];
+  const narrative=clean(response.narrative),issues=lifeTaskIssues(response,context);
   if(context.income>0&&context.employment?.monthlyIncome>0&&/你(?:这个月|本月)?(?:一直|仍然|依旧|还)?(?:没有工作|没找到工作|尚未就业)|你(?:这个月|本月)(?:没有|未能|没能)\s*(?:拿到|领到|获得|收到)(?:任何)?工资/.test(narrative))issues.push('工资已经入账且工作继续，请承接实际工作、收入与交接事项，不能退回未就业或宣称没有工资。');
   if(context.employment?.active===false&&/(?:下个?月|今后|以后|往后|每个?月)[^。！？]{0,16}(?:照常|继续|仍然|依旧|按月)[^。！？]{0,8}(?:送外卖|配送|上班|领(?:取)?工资|发(?:放)?工资)/.test(narrative))issues.push('这份工作的约定已经结束，下一阶段不能自行延续排班或工资；承接结算、休息或寻找新安排。');
   const physical=[narrative,clean(response.consequence)].join(' ');

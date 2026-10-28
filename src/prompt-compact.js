@@ -37,6 +37,6 @@ export function compactNarrativePrompt(prompt){
     if(line.startsWith('decision=false时')&&!data.decision)return ['decision=false，options必须是空数组[]，无需制造待决定的悬念。'];
     return [line];
   }).join('\n');
-  const concise='先按actionDate和action.label写consequence：必须包括本人这次实际做的事，不能把约定在下个月做的事情提前当成本次行动结果。narrative只用短段写targetDate的一项新后果，不再重复行动过程、领款与既有约定；本人本次行动占正文主要篇幅。只返回所需的最小完整JSON：personUpdate只写确实改变的字段，未变时{}；memory只写新增长期事实，无则空字符串；没有新关系时relationshipUpdates为[]。不要复述输入资料，不另写分析或解释。';
+  const concise='本人指定行动时，按actionDate和action.label写consequence，重点交代实际行为、结果与影响；narrative短写targetDate的新后果，不重复行动、领款或约定。action.passive=true时，用nextPersonalEvent写本月的新经历，旧工作与关系作为背景，已办结事项不能重新变成待办；不得反复续写上月同一件琐事。标题按targetDate命名。只返回所需的最小完整JSON：personUpdate只写确实改变的字段，未变时{}；memory只写新增长期事实，无则空字符串；没有新关系时relationshipUpdates为[]。不要复述输入资料，不另写分析或解释。';
   return {...prompt,system:system+'\n'+concise,user:JSON.stringify(data)};
 }

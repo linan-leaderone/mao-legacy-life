@@ -16,12 +16,20 @@ function tagRecord(tag){if(!tagRecords.has(tag))tagRecords.set(tag,countryByTag(
 export function territorialPatchFor(state,unit){
   const store=state.territoryOverrides||{};
   const current=row=>row&&(!Number.isFinite(row.month)||row.month<=(Number(state.month)||0))?row:null;
-  return Object.assign({},...[store[`country:${unit.country}`],store[`region:${unit.region}`],unit.parent?store[`province:${unit.parent}`]:null,...geographyAncestors(unit).slice(1).reverse().filter(row=>row.role!=='country').map(row=>store[row.id]),store[unit.id]].map(current));
+  const rows=[store[`country:${unit.country}`],store[`region:${unit.region}`],unit.parent?store[`province:${unit.parent}`]:null,...geographyAncestors(unit).slice(1).reverse().filter(row=>row.role!=='country').map(row=>store[row.id]),store[unit.id]].map(current).filter(Boolean);
+  // A whole-province/country intervention also governs its counties. Monthly
+  // war progress cannot silently override it just by using a more specific ID.
+  return Object.assign({},...rows.filter(row=>row.source==='war_dynamics'),...rows.filter(row=>row.source!=='war_dynamics'));
 }
 /** A known later national transition replaces its opening baseline. A local
  * takeover is applied separately and always wins over these opening facts. */
 export function openingAdministration(state,unit,context={}){
   if(!unit||Number(state.month)<0||state.profile?.scenario?.id==='mao-april'&&['china','taiwan'].includes(unit.region))return null;
+  const recorded=territorialPatchFor(state,unit);
+  if(recorded.source==='war_dynamics'&&recorded.controllerId){
+    const info=controllerContext(state,recorded.controllerId)||{};
+    return {controller:recorded.controller||info.name,controllerId:recorded.controllerId,controllerTag:recorded.ownerTag||info.tag,tag:recorded.ownerTag||info.tag,factionId:recorded.controllerId,name:recorded.controller||info.name,country:unit.country,geographicCountry:unit.country,leader:info.leader||null,government:info.government||null,ideology:info.ideology||null,conflict:recorded.conflict,frontline:recorded.frontline,uncertain:false,mixedControllers:[],mapping:'monthly-war-control',info};
+  }
   const civil=simulateCivilWarControl(state,unit,context);
   if(civil){
     if(Object.hasOwn(state.factionConflicts||{},civil.controllerId))civil.conflict=state.factionConflicts[civil.controllerId];
@@ -68,6 +76,13 @@ export function controllerContext(state,id){
     if(Object.hasOwn(state.factionConflicts||{},value))result.conflict=state.factionConflicts[value];
     if(state.worldOverrides?.[region]?.conflict===null||state.worldDynamics?.lastingPeace||state.worldDynamics?.terminatedConflicts?.includes(region))result.conflict=null;
     return result;
+  }
+  // Some current regional administrations have no standalone country TAG.
+  // Their campaign dossier supplies the same local authority to prose and map.
+  for(const campaign of Object.values(state.warDynamics?.campaigns||{})){
+    const actor=campaign?.actors?.find?.(row=>row.id===value);if(!actor||explicit)continue;
+    const declared=state.worldOverrides?.[value];
+    return {...actor,...declared,region:actor.region||campaign.region,controllerId:value,factionId:value,controllerTag:actor.tag,conflict:campaign.status==='active'?campaign.name:null,currentSource:'monthly-war-control'};
   }
   if(!explicit){const country=resolveCountry(value);if(country)return getCountryContext(state,country.iso);}
   const tag=explicit||factionAliases.get(aliasKey(value))||(/^[A-Z0-9]{3}$/.test(value)&&tagRecord(value)?value:null);

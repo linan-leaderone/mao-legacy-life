@@ -61,7 +61,7 @@ function foreignProseIssues(response,context){
 
 export const WRITING_RULES=`使用现代汉语日常书面语，像人在交代实际经历，句子完整连贯。不要古文、网文腔、故作深奥、华丽辞藻、密集比喻和类比，不用单词或两三个字反复断成短句。
 禁用“很沉”“很轻”“变轻”“脸上写着”；不用“而且、并且、不仅、不但、甚至、况且、何况、更何况、再者、此外、进而、进一步、更重要的是”等递进表达。禁用“不是…而是”“不是…是”“不是…不是…而是”“不是…也不是…”及“，却…”的转折句式。直写做了什么、遇到谁、得到什么结果，不在结尾升华人生。
-每月只写两段连贯正文。consequence用100–180字重点写刚完成的行动过程、结果和实际影响，narrative只用40–80字写由此产生的一项新后续，不能另起无关生活。照常生活时两段合计100–180字延续已有工作、项目、关系和身体状况。本月的主要篇幅必须落在本人行动上，第二段不能再做一遍第一段的工作、再领一遍工资或再说一次约定，只写新的反馈、阻碍、联系或待办。可以少于上限，不凑字数，不罗列新闻。`;
+每月最多写两段连贯正文。本人指定行动时，consequence用100–180字重点写行动过程、结果和实际影响，narrative用40–80字写一项新后续。只按下个月时，两段合计100–180字，以本月选出的新事件为中心；已有工作、项目、关系和身体状况作为背景，不每月反复办理同一件琐事。第二段不能再做一遍第一段的工作、再领一遍工资或再说一次约定，已办结事项保持办结。可以少于上限，不凑字数，不罗列新闻。`;
 
 const forbidden=[
   /很沉|很轻|变轻|脸上写着/,
@@ -99,7 +99,7 @@ export function proseIssues(originalResponse,{language='zh-CN',ageYears,priorAge
     const sentences=String(text||'').split(/[。！？]/).map(s=>s.trim()).filter(Boolean);
     if(sentences.length>=5&&sentences.filter(s=>s.length<8).length>sentences.length/2)issues.push('合并碎句，使用完整连贯的日常书面语。');
   }
-  for(const [field,expected]of [['narrative',month],['consequence',priorMonth]]){
+  for(const [field,expected]of [['title',month],['narrative',month],['consequence',priorMonth]]){
     if(!Number.isInteger(expected))continue;
     const first=String(response[field]||'').split(/[。！？]/)[0];
     const match=first.match(/^(?:(?:进入|到了|你在|你到|你于|在)\s*)?(?:(\d{3,4})\s*年\s*)?(十一|十二|[一二三四五六七八九十]|0?[1-9]|1[0-2])\s*月/);

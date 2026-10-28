@@ -4,7 +4,7 @@ $ProgressPreference = 'SilentlyContinue'
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $cacheRoot = Join-Path $projectRoot '.cache'
 $sdkRoot = Join-Path $cacheRoot 'android-sdk'
-$buildRoot = Join-Path $cacheRoot 'android-build'
+$buildRoot = Join-Path $cacheRoot ('android-build-' + [Guid]::NewGuid().ToString('N'))
 $privateRoot = Join-Path $projectRoot '.private'
 $releaseRoot = Join-Path $projectRoot 'release'
 if (-not $JavaHome) {
@@ -37,9 +37,9 @@ foreach ($package in $packages) {
 }
 $toolsRoot = Join-Path $sdkRoot 'android-15'
 $platform = Join-Path $sdkRoot 'android-35\android.jar'
-# Verify the absolute target before removing only our generated staging folder.
+# Each invocation uses a new staging folder; existing build directories are retained.
 if ([IO.Path]::GetDirectoryName($buildRoot) -ne $cacheRoot) { throw 'Invalid staging directory' }
-if (Test-Path -LiteralPath $buildRoot) { Remove-Item -LiteralPath $buildRoot -Recurse -Force }
+if (Test-Path -LiteralPath $buildRoot) { throw 'Staging directory unexpectedly exists' }
 New-Item -ItemType Directory -Force $buildRoot,(Join-Path $buildRoot 'classes'),(Join-Path $buildRoot 'dex'),(Join-Path $buildRoot 'assets') | Out-Null
 Copy-Item -LiteralPath (Join-Path $projectRoot 'dist') -Destination (Join-Path $buildRoot 'assets\web') -Recurse
 $compiled = Join-Path $buildRoot 'resources.zip'

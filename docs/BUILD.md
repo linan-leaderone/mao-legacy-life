@@ -6,7 +6,7 @@ iPhone主屏幕安装版独立使用`pnpm build:ios`，发布、离线与密钥�
 
 用户授权本人的原生包预填 DeepSeek 与本轮 Gemini 转发服务密钥。Vite 从 `.private/settings.json` 注入 `__DEFAULT_API_PROVIDERS__`；`.private/` 目录、兑换码与签名私钥不打包。公开网页构建保持空默认密钥，不能将普通 `dist` 发布到公开站点。文档、日志和截图不记录密钥。
 
-当前源码版本为1.13.0，Android目标版本为1.13.0 / versionCode 15。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.13.md](RELEASE-v1.13.md)。
+当前源码版本为1.16.0，Android目标版本为1.16.0 / versionCode 18。下列路径描述打包脚本的输出约定，不表示安装包已经构建或验收；实际交付状态见 [VERIFICATION.md](VERIFICATION.md)，本轮行为变化见 [RELEASE-v1.16.md](RELEASE-v1.16.md)。
 
 ## 前置环境
 
@@ -29,7 +29,7 @@ Android 脚本首次运行从 Google 官方仓库下载 API 35 与 Build Tools 3
 
 ## 交付文件
 
-- `release/MaoLegacyLife-Windows-x64.zip`：内含版本目录 `MaoLegacyLife-1.15.0-Windows-x64/`，完整解压后运行其中的 `MaoLegacyLife.exe`；不要单独移动 EXE。
+- `release/MaoLegacyLife-Windows-x64.zip`：内含版本目录 `MaoLegacyLife-1.16.0-Windows-x64/`，完整解压后运行其中的 `MaoLegacyLife.exe`；不要单独移动 EXE。
 - `release/MaoLegacyLife-Android.apk`：Android 8.0+；通过系统文件管理器安装，需要为安装来源启用系统安装许可。
 
 Windows 便携应用未做商业代码签名。APK 使用本地生成的独立签名证书，且 `debuggable=false`。保留 `.private/android-signing.p12` 与对应密码文件，以便后续 APK 覆盖更新；丢失后无法用相同签名升级。它们不应加入版本控制或分发包。
@@ -82,6 +82,6 @@ node scripts/build-mod-corpus.mjs '--mod=D:\资料\TFR-xinzuo-rebuild'
 
 自定义 API 支持 OpenAI 兼容、Gemini 原生、Anthropic Messages 三种协议，模型名称可手动填写。测试连接读取模型列表，允许先留空自定义模型；实际联网叙事前要求模型名称与有效地址。自定义服务可不填密钥，以支持匿名本机服务。远程地址要求 HTTPS，本机服务允许 `localhost`、`127.0.0.1`、`[::1]` 的 HTTP；Android 使用 `@xml/network_security_config` 仅为这些 loopback 地址放行明文请求，`usesCleartextTraffic=false` 保留。页面 CSP 的连接范围为 HTTPS 与 loopback HTTP，不开放任意远程 HTTP。
 
-Android 目标版本1.15.0 / versionCode 17，保持原 package 与签名，以支持覆盖旧版安装。`drawable-nodpi/launcher_art.png` 是按用户参考图生成的方形画面；Android 8+ 使用自适应图标和12dp内缩保护构图。
+Android 目标版本1.16.0 / versionCode 18，保持原 package 与签名，以支持覆盖旧版安装。`drawable-nodpi/launcher_art.png` 是按用户参考图生成的方形画面；Android 8+ 使用自适应图标和12dp内缩保护构图。
 
-Windows 打包目录带版本号：`release/MaoLegacyLife-1.15.0-Windows-x64/`。ZIP名称保持不变。旧版本运行中时不覆盖其可执行文件；请从新版目录启动。源码版本不代表原生包自动更新，修改网页或原生桥后必须重新执行构建与封装。
+Windows 打包目录带版本号：`release/MaoLegacyLife-1.16.0-Windows-x64/`。ZIP名称保持不变。旧版本运行中时不覆盖其可执行文件；请从新版目录启动。源码版本不代表原生包自动更新，修改网页或原生桥后必须重新执行构建与封装。

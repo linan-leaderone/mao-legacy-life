@@ -23,7 +23,7 @@
 - 新闻 `exposure` 分为 direct、indirect、remote、none。远方报道不自动在本地造成灾害、封控、拘押或收入损失；大陆政治和办事机构不套到台日港澳韩。地区环境只应用已经发生的制度变化。
 - 面向人物的正文、选项与新闻必须沉浸式，不插入开发者、玩家、本局、触发节点、路线锁定、属性加成等局外说明。来源、适配说明和隐藏分支仅保留在数据元信息与文档，不能拼入叙事或提前透露终局。
 - `src/narrative.js` 管理简洁文风与可识别错龄校验；各叙事服务最多自动重写一次，不在重写时推进月份或重算行动。格式错误、再次不合格或网络失败交由界面重试或本地叙事。实际 DeepSeek 接口样例见 `docs/DEEPSEEK-SAMPLES-v1.3.json`；样例不是其他供应商或全场景的证明。
-- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.15.0；Android versionCode 17；Windows目录`release/MaoLegacyLife-1.15.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
+- 共享页面经Vite构建到`dist`，Electron和Android包装同一构建。目标1.16.0；Android versionCode 18；Windows目录`release/MaoLegacyLife-1.16.0-Windows-x64/`，ZIP名称保持不变。人物扩展库进入本地构建，原始查询缓存和完整MOD审计索引不进入。实际打包、上线与验证以`docs/VERIFICATION.md`为准，源码版本不代表交付已完成。
 - 用户授权本人的APK/ZIP预填DeepSeek密钥及本轮新的Gemini转发服务密钥，默认选择DeepSeek。Vite从`.private/settings.json`注入，私有目录与签名文件本身不打包；公开PWA一律空默认密钥。不要在日志、截图、测试输出或文档回显凭据；兑换码和订单信息不作为API配置。UI保持密码输入，允许替换/清除，存档不含密钥。
 - 修改核心行为后运行相应测试并完成 `pnpm test`；构建用 `pnpm build`，原生包需重新封装后才能交付。实际验证边界与最终测试结果在 `docs/VERIFICATION.md`，不得把源码更新直接写成已交付新包。
 
@@ -52,3 +52,5 @@
 - 1.15 本轮用户明确要求不运行游戏测试，测试交由人类完成。此指令优先于上面的默认测试约定；本轮仅静态审查、编译封装与发布，不进行测试脚本、模拟游玩、浏览器验收或真实模型调用。GitHub 本轮提交使用 [skip ci] 避免自动游戏测试。
 
 - 1.15 economy 保存本人已完成收支，短期就业按经历次数到期，长期就业才继续发薪；旧档按原始行动迁移，不补算历史余额。personal-health 保存诊断、待检、照护与知情联系人，正文继续承接身体变化，未告知亲友不自动知道。political-actors 约束活动的实际职权；PAL适配社会民主主义并保留原思想来源。personal-cast 限制弦卷心只在本人选择或主动引入后出现，不把MOD未来经历当作开局事实。
+
+- 1.16 继续遵守用户不进行游戏测试的指令，只静态审查、编译封装和发布，GitHub使用`[skip ci]`。war-dynamics在nextContext副本按月推进持久战役，写territoryOverrides来源war_dynamics，地图和生活共用；advance提交，读取只验证与停战对齐不推进。显式玩家接管、停火及自然终局优先；地理邻接是现有中心/包围范围的抽象模拟。life-rhythm记录近期题材、短期待办与办结事项，本月新事件传入模型；被动过月不由稳定职业/病情/旧项目永久覆盖。详见docs/RELEASE-v1.16.md。

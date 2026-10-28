@@ -44,8 +44,8 @@ export function languageInstruction(value){
 export function writingRulesForLanguage(language,baseRules){
   const mode=normalizeLanguage(language);
   if(mode==='zh-CN'||mode==='zh-TW'||mode==='martian')return baseRules;
-  if(mode==='shuihu')return '每月写两段连贯的古白话正文。consequence用100–180字重点交代刚完成行动、结果和影响，narrative只用40–90字续写一项因果相连的新进展，不重复上段。以通俗说书口吻写具体事情，不堆典故，不将现代生活改造成宋代制度。';
-  return '每月两段连贯正文，以所选语言自然书写。consequence说明刚完成的行动、结果和影响，narrative接着写有因果联系的下一步，不大段复述。英语每段约45–100词；日语每段约100–220字；韩语每段约100–240字。可以少于上限，不凑字数。避免空泛抒情、密集比喻、故作深奥和单词碎句。中文范例只表示数据结构，不能据此把输出改回中文。';
+  if(mode==='shuihu')return '每月最多写两段连贯的古白话正文。本人指定行动时，consequence用100–180字重点交代行动、结果和影响，narrative用40–90字续写一项新进展，不重复上段。只按下个月时围绕本月抽出的新事件写经历，旧身份作为背景，办完的同一件小事不反复续写。以通俗说书口吻写具体事情，不堆典故，不将现代生活改造成宋代制度。';
+  return '每月最多两段连贯正文，以所选语言自然书写。本人指定行动时consequence说明行动、结果和影响，narrative写相关新进展，不大段复述。只按下个月时采用本月新事件，已有身份、关系和病情作为背景，已办结的小事不反复续写。英语每段约45–100词；日语每段约100–220字；韩语每段约100–240字。可以少于上限，不凑字数。避免空泛抒情、密集比喻、故作深奥和单词碎句。中文范例只表示数据结构，不能据此把输出改回中文。';
 }
 
 // Exact UI phrases only. Never run word replacement over names or user text.

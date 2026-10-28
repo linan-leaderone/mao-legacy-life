@@ -1,6 +1,6 @@
 # iPhone 主屏幕安装版
 
-本版针对只有iPhone的使用方式，通过Safari添加到主屏幕，以独立窗口运行，支持iOS/iPadOS 15.4及以上。1.15.0构建共用本项目源码，共用9,075份人物档案、新闻配图、自由行动与JSON存档；当前线上部署版本及匿名访问验收见[iOS验证记录](IOS-VERIFICATION.md)。交付形式为PWA，尚未生成Apple签名的原生IPA，也没有提交TestFlight或App Store。
+本版针对只有iPhone的使用方式，通过Safari添加到主屏幕，以独立窗口运行，支持iOS/iPadOS 15.4及以上。1.16.0构建共用本项目源码，共用9,075份人物档案、新闻配图、自由行动与JSON存档；当前线上部署版本及匿名访问验收见[iOS验证记录](IOS-VERIFICATION.md)。交付形式为PWA，尚未生成Apple签名的原生IPA，也没有提交TestFlight或App Store。
 
 ## 安装
 
@@ -41,6 +41,6 @@ pnpm exec vite preview --mode ios --host 127.0.0.1 --port 4174
 - [WebKit：存储隔离](https://webkit.org/tracking-prevention/)
 - [WebKit：Safari 17.2主屏幕App只复制Cookie，不复制其他本地存储](https://webkit.org/blog/14787/webkit-features-in-safari-17-2/)
 
-## 1.15 更新的验收边界
+## 1.16 更新的验收边界
 
-1.15按用户要求不运行游戏测试或浏览器游玩。仅完成静态审查、公开构建与发布流程；最终部署状态见IOS-VERIFICATION.md，人类实际游玩后再确认行为。
+1.16按用户要求不运行游戏测试或浏览器游玩。仅完成静态审查、公开构建与发布流程；最终部署状态见IOS-VERIFICATION.md，人类实际游玩后再确认行为。

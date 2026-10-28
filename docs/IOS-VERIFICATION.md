@@ -1,3 +1,22 @@
+# iPhone 网页 1.16.0：战线推进与月度生活
+
+2026-10-28 12:12:15 UTC，Sites返回部署成功；站点读取确认public、版本18、当前公开地址。本轮不进行游戏测试、浏览器验收、匿名HTTP探针或真实模型调用。
+
+| 项目 | 值 |
+| --- | --- |
+| 应用版本 | 1.16.0 |
+| PWA标记 | 84b92c21ea313a15 |
+| Site源码提交 | 4a105e548680b5e7f795789c0ca284b335bb857a |
+| Site版本 | appgprj_6adcc793ef4481918148a8ce82d7832d~appgver_d17f4a2a1a048191958c783f0f6896df（版本18） |
+| 部署 | appgdep_6ae1e68921d481919e3ca49757c1cb26 |
+| 核心预缓存 | 47,754,499字节 |
+| 按需地图与旗帜 | 63,233,963字节 |
+| 发布归档 | 221,286,400字节 |
+
+[公开入口](https://mao-legacy-life-iphone.linanna.chatgpt.site/)沿用1.15的linanna地址。若仍在历史shady-shell-6921页面使用旧档，应先导出JSON再转入新地址；不同来源不共享浏览器存储。记录为 `release/site-v1.16-deployment.json`。部署成功和public权限由Sites结果确认，实际iPhone游玩效果待人类验收。
+
+---
+
 # iPhone 网页 1.15.0：收支与持续生活后果
 
 2026-10-28 10:31:03 UTC，Sites返回部署成功；再次读取站点确认 audience=public、版本17。本轮没有游戏测试、浏览器验收或真实模型调用。
